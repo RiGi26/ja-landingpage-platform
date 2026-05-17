@@ -6,9 +6,12 @@ import {
 import LmsNavbar from '@/components/LmsNavbar'
 import LmsFaq    from '@/components/LmsFaq'
 
-const LMS_URL    = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanarenacorp.com'
-const WA_NUMBER  = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
-const JASTIP_URL = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
+const clean = (val: string | undefined, fallback: string) =>
+  (val ?? fallback).replace(/^﻿/, '').trim()
+
+const LMS_URL    = clean(process.env.NEXT_PUBLIC_LMS_URL,    'https://ja-lms-platform.vercel.app')
+const WA_NUMBER  = clean(process.env.NEXT_PUBLIC_WA_NUMBER,  '6281296917963')
+const JASTIP_URL = clean(process.env.NEXT_PUBLIC_JASTIP_URL, 'https://ja-jastip-platform.vercel.app')
 
 const waLink = (msg?: string): string => {
   const base = `https://wa.me/${WA_NUMBER}`

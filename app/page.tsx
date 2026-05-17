@@ -528,79 +528,60 @@ function SegmenSection() {
       emoji: '🎓',
       label: 'Portal LMS',
       comingSoon: false,
-      segments: ['Kursus & Bimbel', 'Sekolah & LPK', 'Bisnis & Korporat (Training Internal)'],
-      pain: 'Administrasi manual, data siswa/karyawan tersebar, laporan makan waktu',
-      solve: 'Portal siswa/karyawan + absensi digital + invoice otomatis + laporan per kelas/departemen',
-      cta: 'Coba Demo Gratis →',
+      description: 'Untuk kursus, bimbel, sekolah, dan training karyawan',
+      segments: ['Kursus & Bimbel', 'Sekolah & LPK', 'Bisnis & Korporat'],
+      cta: 'Coba Demo LMS →',
       ctaHref: `${LMS_URL}/demo`,
-      waMsg: '',
+      waMsg: null,
       accent: {
         light: 'bg-blue-50',
         border: 'border-blue-100',
-        badgeLive: 'bg-blue-100 text-blue-700',
-        bullet: 'bg-blue-400',
+        badge: 'bg-blue-100 text-blue-700',
+        bullet: 'bg-blue-500',
         btn: 'bg-blue-600 hover:bg-blue-700',
         heading: 'text-blue-700',
-      },
-    },
-    {
-      emoji: '🏥',
-      label: 'Portal Klinik & Medis',
-      comingSoon: true,
-      segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
-      pain: 'Reservasi manual, rekam medis tidak terpusat, reminder pasien sering lupa',
-      solve: 'Jadwal reservasi digital + rekam medis + notifikasi WA otomatis ke pasien',
-      cta: 'Tanya via WA →',
-      ctaHref: '',
-      waMsg: 'Halo, saya tertarik dengan Portal Klinik dari Japan Arena Platform. Bisa minta info lebih lanjut?',
-      accent: {
-        light: 'bg-emerald-50',
-        border: 'border-emerald-100',
-        badgeLive: 'bg-emerald-100 text-emerald-700',
-        bullet: 'bg-emerald-400',
-        btn: 'bg-emerald-600 hover:bg-emerald-700',
-        heading: 'text-emerald-700',
       },
     },
     {
       emoji: '🇯🇵',
       label: 'Portal Jastip Jepang',
       comingSoon: false,
-      segments: ['Smart Calculator Otomatis', 'Support Luxury & Branded', 'Estimasi 5–9 Hari'],
-      pain: 'Biaya jastip tidak transparan, susah estimasi ongkir, takut kena biaya tak terduga',
-      solve: 'Hitung biaya realtime — berat, dimensi, kategori, layanan — langsung dapat total estimasi akurat',
+      description: 'Untuk bisnis jasa titip barang dari Jepang',
+      segments: [
+        'Kalkulator Ongkir Otomatis',
+        'Support Barang Branded & Luxury',
+        'Estimasi Pengiriman Akurat',
+      ],
       cta: 'Coba Calculator →',
       ctaHref: JASTIP_URL,
-      waMsg: '',
+      waMsg: null,
       accent: {
         light: 'bg-red-50',
         border: 'border-red-100',
-        badgeLive: 'bg-green-100 text-green-700',
-        bullet: 'bg-red-400',
+        badge: 'bg-green-100 text-green-700',
+        bullet: 'bg-red-500',
         btn: 'bg-red-600 hover:bg-red-700',
         heading: 'text-red-700',
       },
     },
-    // Portal Website & Landing Page — coming soon, uncomment when ready
-    // {
-    //   emoji: '🌐',
-    //   label: 'Portal Website & Landing Page',
-    //   comingSoon: true,
-    //   segments: ['UMKM & Toko Online', 'Jasa Titip (Jastip)', 'Penulis & Blogger'],
-    //   pain: 'Tidak punya kehadiran digital, promosi cuma lewat WA & IG, susah dipercaya pelanggan baru',
-    //   solve: 'Website profesional + fitur sesuai bisnis + domain sendiri + setup 1–3 hari',
-    //   cta: 'Tanya via WA →',
-    //   ctaHref: '',
-    //   waMsg: 'Halo, saya tertarik dengan Portal Website dari Japan Arena Platform. Bisa minta info lebih lanjut?',
-    //   accent: {
-    //     light: 'bg-violet-50',
-    //     border: 'border-violet-100',
-    //     badgeLive: 'bg-violet-100 text-violet-700',
-    //     bullet: 'bg-violet-400',
-    //     btn: 'bg-violet-600 hover:bg-violet-700',
-    //     heading: 'text-violet-700',
-    //   },
-    // },
+    {
+      emoji: '🏥',
+      label: 'Portal Klinik & Medis',
+      comingSoon: true,
+      description: 'Untuk klinik umum, spesialis, dan praktik dokter mandiri',
+      segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
+      cta: 'Tanya via WA →',
+      ctaHref: null,
+      waMsg: 'Halo, saya tertarik dengan Portal Klinik dari Japan Arena Platform. Bisa minta info lebih lanjut?',
+      accent: {
+        light: 'bg-emerald-50',
+        border: 'border-emerald-100',
+        badge: 'bg-gray-100 text-gray-500',
+        bullet: 'bg-emerald-500',
+        btn: 'bg-emerald-600 hover:bg-emerald-700',
+        heading: 'text-emerald-700',
+      },
+    },
   ]
 
   return (
@@ -616,10 +597,9 @@ function SegmenSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PORTALS.map(portal => {
-            const waHref = portal.waMsg
+            const href = portal.waMsg
               ? waLink(portal.waMsg)
-              : portal.ctaHref
-            const href = portal.comingSoon ? waHref : portal.ctaHref
+              : portal.ctaHref ?? undefined
 
             return (
               <div
@@ -642,7 +622,7 @@ function SegmenSection() {
                     {portal.emoji}
                   </div>
                   {!portal.comingSoon && (
-                    <span className={`text-[11px] font-black px-2.5 py-1 rounded-full flex items-center gap-1 ${portal.accent.badgeLive}`}>
+                    <span className={`text-[11px] font-black px-2.5 py-1 rounded-full flex items-center gap-1 ${portal.accent.badge}`}>
                       <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
                       Live Demo
                     </span>
@@ -663,14 +643,7 @@ function SegmenSection() {
                 </ul>
 
                 <div className="border-t border-gray-100 pt-4 mb-4 flex-1">
-                  <div className="flex items-start gap-2 mb-3">
-                    <X size={13} className="text-red-400 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs text-gray-400 leading-relaxed">{portal.pain}</p>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Check size={13} className="text-green-500 flex-shrink-0 mt-0.5" />
-                    <p className="text-xs text-gray-600 font-medium leading-relaxed">{portal.solve}</p>
-                  </div>
+                  <p className="text-xs text-gray-500 leading-relaxed">{portal.description}</p>
                 </div>
 
                 {/* CTA */}

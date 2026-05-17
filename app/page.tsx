@@ -683,132 +683,236 @@ function SegmenSection() {
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 
+const PLANS = [
+  {
+    id: 'starter',
+    badge: 'Starter',
+    name: 'Starter',
+    price: '299rb',
+    period: '/bulan',
+    desc: 'Untuk bisnis kecil yang baru mulai digitalisasi',
+    highlight: false,
+    popular: false,
+    features: [
+      '1 portal aktif (LMS atau Jastip)',
+      'Siswa / pelanggan hingga 50 akun',
+      'Kalkulator & invoice dasar',
+      'Notifikasi WA manual',
+      'Laporan bulanan sederhana',
+      'Support via WA (jam kerja)',
+    ],
+    cta: 'Mulai Gratis 14 Hari →',
+    ctaStyle: 'border',
+    waMsg: 'Halo, saya tertarik dengan paket Starter Japan Arena Platform. Bisa minta info lebih lanjut?',
+  },
+  {
+    id: 'pro',
+    badge: 'Pro',
+    name: 'Pro',
+    price: '599rb',
+    period: '/bulan',
+    desc: 'Untuk bisnis aktif yang butuh otomasi & laporan lengkap',
+    highlight: false,
+    popular: false,
+    features: [
+      'Semua fitur Starter',
+      'Siswa / pelanggan unlimited',
+      'WA notifikasi & reminder otomatis',
+      'Invoice PDF otomatis via WA',
+      'Laporan keuangan otomatis',
+      'Try Out / Mock test',
+      'Support prioritas via WA',
+    ],
+    cta: 'Pilih Pro →',
+    ctaStyle: 'border',
+    waMsg: 'Halo, saya tertarik dengan paket Pro Japan Arena Platform. Bisa minta info lebih lanjut?',
+  },
+  {
+    id: 'premium',
+    badge: 'Premium',
+    name: 'Premium',
+    price: '999rb',
+    period: '/bulan',
+    desc: 'Untuk bisnis yang ingin semua proses berjalan otomatis',
+    highlight: true,
+    popular: true,
+    features: [
+      'Semua fitur Pro',
+      'Akses semua portal (LMS + Jastip + Klinik)',
+      'Multi-admin dengan delegasi akses',
+      'Flashcard & bank kata',
+      'Pengaturan branding warna & nama',
+      'Laporan analitik lengkap',
+      'Onboarding & panduan setup dibantu',
+      'SLA response 1×24 jam',
+    ],
+    cta: 'Pilih Premium →',
+    ctaStyle: 'solid',
+    waMsg: 'Halo, saya tertarik dengan paket Premium Japan Arena Platform. Bisa minta info lebih lanjut?',
+  },
+  {
+    id: 'whitelabel',
+    badge: 'White-label',
+    name: 'White-label',
+    price: '2jt',
+    period: 'setup',
+    priceSub: '+ 1,5jt/bulan' as string | undefined,
+    desc: 'Platform dengan identitas brand Anda sendiri, tanpa jejak Japan Arena',
+    highlight: false,
+    popular: false,
+    features: [
+      'Semua fitur Premium',
+      'Branding & logo bisnis sendiri',
+      'Domain khusus bisnis Anda',
+      'Hapus semua atribusi Japan Arena',
+      'Request fitur custom',
+      'Prioritas support & maintenance',
+      'SLA response 1×12 jam',
+    ],
+    cta: 'Diskusi Kebutuhan →',
+    ctaStyle: 'border',
+    waMsg: 'Halo, saya tertarik dengan paket White-label Japan Arena Platform. Bisa minta info lebih lanjut?',
+  },
+]
+
 function PricingSection() {
   return (
     <section id="harga" className="bg-white py-20 lg:py-28 px-4">
       <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <div className="text-center mb-14">
           <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Investasi</p>
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
             Harga transparan, tanpa biaya tersembunyi
           </h2>
-          <p className="text-gray-400 text-lg">Coba gratis 14 hari, lanjut sesuai kebutuhan bisnis Anda.</p>
+          <p className="text-gray-400 text-lg">
+            Coba gratis 14 hari tanpa kartu kredit — lanjut sesuai kebutuhan bisnis Anda.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-5 items-start">
-
-          {/* Trial */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-7" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Coba Dulu</p>
-            <p className="text-4xl font-black text-gray-900 mb-1">Gratis</p>
-            <p className="text-sm text-gray-400 mb-2">14 hari · tidak perlu kartu kredit</p>
-            <p className="text-xs text-gray-400 mb-6 pb-6 border-b border-gray-100">
-              Akses semua fitur Premium selama 14 hari. Setelah itu upgrade atau akun terkunci.
-            </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                'Semua fitur Premium aktif',
-                'Setup & onboarding dibantu',
-                'Tidak perlu kartu kredit',
-                'Bisa langsung pakai hari ini',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
-                  <Check size={14} className="text-green-500 flex-shrink-0" /> {f}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center py-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all"
+        {/* Grid 4 kartu */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
+          {PLANS.map(plan => (
+            <div
+              key={plan.id}
+              className={`rounded-2xl p-6 relative flex flex-col h-full ${
+                plan.highlight
+                  ? 'bg-blue-600 shadow-xl shadow-blue-200 lg:scale-[1.03]'
+                  : 'bg-white border border-gray-200'
+              }`}
+              style={!plan.highlight ? { boxShadow: '0 2px 12px rgba(0,0,0,0.04)' } : {}}
             >
-              Mulai Trial Gratis →
-            </a>
-          </div>
+              {plan.popular && (
+                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-md">
+                  ⭐ Paling Populer
+                </span>
+              )}
 
-          {/* Premium */}
-          <div className="bg-blue-600 rounded-2xl p-7 relative md:scale-[1.03] shadow-xl shadow-blue-200">
-            <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-md">
-              ⭐ Paling Populer
-            </span>
-            <p className="text-xs font-black text-blue-200 uppercase tracking-widest mb-3">Premium</p>
-            <p className="text-4xl font-black text-white mb-1">1,5jt</p>
-            <p className="text-sm text-blue-200 mb-2">/bulan</p>
-            <p className="text-xs text-blue-200/70 mb-6 pb-6 border-b border-white/15">
-              Untuk bisnis yang ingin semua proses berjalan otomatis
-            </p>
-            <ul className="space-y-3 mb-8">
-              {[
-                'Semua fitur Basic (siswa unlimited)',
-                'WA notifikasi & reminder otomatis',
-                'Invoice PDF otomatis via WA',
-                'Flashcard & bank kata',
-                'Try Out / Mock test',
-                'Laporan keuangan otomatis',
-                'Onboarding & panduan setup',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2.5 text-sm text-white/85">
-                  <Check size={14} className="text-blue-200 flex-shrink-0" /> {f}
-                </li>
-              ))}
-            </ul>
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center py-3 rounded-xl bg-white text-blue-600 text-sm font-black hover:bg-blue-50 transition-all"
-            >
-              Pilih Premium →
-            </a>
-          </div>
+              <p className={`text-[10px] font-black uppercase tracking-widest mb-3 ${
+                plan.highlight ? 'text-blue-200' : 'text-gray-400'
+              }`}>
+                {plan.badge}
+              </p>
 
-          {/* Custom */}
-          <div className="bg-white border border-gray-200 rounded-2xl p-7" style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}>
-            <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Custom / White-label</p>
-            <div className="mb-1">
-              <span className="text-4xl font-black text-gray-900">3jt</span>
-              <span className="text-sm text-gray-400 ml-1">setup</span>
+              <div className="mb-1">
+                <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>
+                  {plan.price}
+                </span>
+                <span className={`text-sm ml-1 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                  {plan.period}
+                </span>
+              </div>
+              {'priceSub' in plan && plan.priceSub && (
+                <p className={`text-xs mb-2 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
+                  {plan.priceSub}
+                </p>
+              )}
+
+              <p className={`text-xs pb-5 mb-5 border-b ${
+                plan.highlight
+                  ? 'text-blue-200/70 border-white/15'
+                  : 'text-gray-400 border-gray-100'
+              }`}>
+                {plan.desc}
+              </p>
+
+              <ul className="space-y-2.5 mb-7 flex-1">
+                {plan.features.map(f => (
+                  <li key={f} className={`flex items-start gap-2 text-xs leading-relaxed ${
+                    plan.highlight ? 'text-white/85' : 'text-gray-600'
+                  }`}>
+                    <Check size={13} className={`flex-shrink-0 mt-0.5 ${
+                      plan.highlight ? 'text-blue-200' : 'text-green-500'
+                    }`} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={waLink(plan.waMsg)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`block text-center py-3 rounded-xl text-sm font-black transition-all ${
+                  plan.ctaStyle === 'solid'
+                    ? 'bg-white text-blue-600 hover:bg-blue-50'
+                    : plan.highlight
+                    ? 'border border-white/30 text-white hover:bg-white/10'
+                    : 'border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
+                }`}
+              >
+                {plan.cta}
+              </a>
             </div>
-            <p className="text-sm text-gray-400 mb-2">+ 2jt/bulan maintenance</p>
-            <p className="text-xs text-gray-400 mb-6 pb-6 border-b border-gray-100">
-              Platform dengan identitas brand Anda sendiri, tanpa jejak Japan Arena Platform
-            </p>
-            <ul className="space-y-3 mb-8">
+          ))}
+        </div>
+
+        {/* Tabel perbandingan ringkas */}
+        <div className="mt-12 bg-gray-50 rounded-2xl p-6 overflow-x-auto">
+          <p className="text-sm font-black text-gray-700 mb-4 text-center">Perbandingan Cepat</p>
+          <table className="w-full text-xs text-gray-600 min-w-[480px]">
+            <thead>
+              <tr className="text-gray-400 border-b border-gray-200">
+                <th className="text-left py-2 font-semibold">Fitur</th>
+                <th className="text-center py-2 font-semibold">Starter</th>
+                <th className="text-center py-2 font-semibold">Pro</th>
+                <th className="text-center py-2 font-bold text-blue-600">Premium</th>
+                <th className="text-center py-2 font-semibold">White-label</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
               {[
-                'Semua fitur Premium',
-                'Branding & logo sendiri',
-                'Domain khusus bisnis Anda',
-                'Hapus semua atribusi Japan Arena Platform',
-                'Request fitur custom',
-                'Prioritas support & maintenance',
-                'SLA response 1×24 jam',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2.5 text-sm text-gray-600">
-                  <Check size={14} className="text-green-500 flex-shrink-0" /> {f}
-                </li>
+                ['Jumlah portal', '1', '1', 'Semua', 'Semua'],
+                ['Jumlah akun pengguna', '50', 'Unlimited', 'Unlimited', 'Unlimited'],
+                ['Notifikasi WA otomatis', '—', '✅', '✅', '✅'],
+                ['Invoice PDF otomatis', '—', '✅', '✅', '✅'],
+                ['Multi-admin & delegasi', '—', '—', '✅', '✅'],
+                ['Branding kustom', '—', '—', 'Warna & nama', 'Full white-label'],
+                ['Domain sendiri', '—', '—', '—', '✅'],
+                ['SLA support', 'Jam kerja', 'Prioritas', '1×24 jam', '1×12 jam'],
+              ].map(([fitur, ...cols]) => (
+                <tr key={fitur}>
+                  <td className="py-2.5 text-gray-700 font-medium">{fitur}</td>
+                  {cols.map((val, i) => (
+                    <td key={i} className={`text-center py-2.5 ${i === 2 ? 'font-bold text-blue-600' : ''}`}>
+                      {val}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </ul>
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block text-center py-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-600 hover:border-blue-300 hover:text-blue-600 transition-all"
-            >
-              Diskusi Kebutuhan →
-            </a>
-          </div>
+            </tbody>
+          </table>
         </div>
 
         <p className="text-center text-gray-400 text-sm mt-8">
-          Semua paket sudah termasuk onboarding & panduan penggunaan. Ada pertanyaan?{' '}
+          Semua paket sudah termasuk onboarding & panduan penggunaan gratis. Masih ragu?{' '}
           <a
-            href={waLink()}
+            href={waLink('Halo, saya ingin konsultasi paket Japan Arena Platform yang cocok untuk bisnis saya.')}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-700 font-bold"
           >
-            Tanya via WA →
+            Konsultasi gratis via WA →
           </a>
         </p>
       </div>

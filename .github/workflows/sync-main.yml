@@ -1,0 +1,21 @@
+name: Sync master to main
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push master to main
+        run: |
+          git checkout master
+          git push origin master:main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

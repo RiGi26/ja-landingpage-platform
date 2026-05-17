@@ -53,6 +53,8 @@ function HeroSection() {
               </a>
               <a
                 href={`${LMS_URL}/demo`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 border border-gray-200 text-gray-600 font-bold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all text-base"
               >
                 Lihat Demo Platform →
@@ -674,8 +676,8 @@ function SegmenSection() {
                 {/* CTA */}
                 <a
                   href={href}
-                  target={portal.comingSoon ? '_blank' : undefined}
-                  rel={portal.comingSoon ? 'noopener noreferrer' : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-white text-sm font-bold transition-all ${portal.accent.btn}`}
                 >
                   {portal.cta}
@@ -1010,6 +1012,8 @@ function CtaSection() {
             </a>
             <a
               href={`${LMS_URL}/demo`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 hover:bg-white/10 text-white font-bold text-base rounded-xl transition-all"
             >
               Lihat Demo Dulu →
@@ -1064,7 +1068,7 @@ function Footer() {
               >
                 WhatsApp Kami
               </a>
-              <a href={`${LMS_URL}/demo`} className="block hover:text-white/70 transition-colors">
+              <a href={`${LMS_URL}/demo`} target="_blank" rel="noopener noreferrer" className="block hover:text-white/70 transition-colors">
                 Lihat Demo
               </a>
             </div>

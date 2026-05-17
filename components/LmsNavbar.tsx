@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react'
 import { Menu, X } from 'lucide-react'
 import Image from 'next/image'
 
+const WA_NUMBER = process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963'
+const waUrl = `https://wa.me/${WA_NUMBER}`
+
 const NAV_LINKS = [
   { label: 'Fitur',   href: '#fitur'   },
   { label: 'Segmen',  href: '#segmen'  },
@@ -53,7 +56,7 @@ export default function LmsNavbar() {
         </nav>
 
         <a
-          href="https://wa.me/6281296917963"
+          href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden md:inline-flex px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-sm font-black text-white transition-all hover:scale-[1.02] shadow-sm shadow-blue-200"
@@ -82,7 +85,7 @@ export default function LmsNavbar() {
             </a>
           ))}
           <a
-            href="https://wa.me/6281296917963"
+            href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="block text-center px-4 py-2.5 rounded-lg border border-gray-300 text-sm font-bold text-gray-700"

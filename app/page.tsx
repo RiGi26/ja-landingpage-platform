@@ -6,7 +6,14 @@ import {
 import LmsNavbar from '@/components/LmsNavbar'
 import LmsFaq    from '@/components/LmsFaq'
 
-const LMS_URL = process.env.NEXT_PUBLIC_LMS_URL ?? 'https://app.japanarenacorp.com'
+const LMS_URL    = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanarenacorp.com'
+const WA_NUMBER  = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
+const JASTIP_URL = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
+
+const waLink = (msg?: string): string => {
+  const base = `https://wa.me/${WA_NUMBER}`
+  return msg ? `${base}?text=${encodeURIComponent(msg)}` : base
+}
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 
@@ -37,7 +44,7 @@ function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="https://wa.me/6281296917963"
+                href={waLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl transition-all hover:scale-[1.02] text-base shadow-lg shadow-blue-200"
@@ -498,7 +505,7 @@ function CaraKerjaSection() {
 
         <div className="text-center mt-12">
           <a
-            href="https://wa.me/6281296917963"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl transition-all hover:scale-[1.02] text-base shadow-lg shadow-blue-200"
@@ -561,7 +568,7 @@ function SegmenSection() {
       pain: 'Biaya jastip tidak transparan, susah estimasi ongkir, takut kena biaya tak terduga',
       solve: 'Hitung biaya realtime — berat, dimensi, kategori, layanan — langsung dapat total estimasi akurat',
       cta: 'Coba Calculator →',
-      ctaHref: 'https://ja-jastip-platform.vercel.app',
+      ctaHref: JASTIP_URL,
       waMsg: '',
       accent: {
         light: 'bg-red-50',
@@ -608,7 +615,7 @@ function SegmenSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PORTALS.map(portal => {
             const waHref = portal.waMsg
-              ? `https://wa.me/6281296917963?text=${encodeURIComponent(portal.waMsg)}`
+              ? waLink(portal.waMsg)
               : portal.ctaHref
             const href = portal.comingSoon ? waHref : portal.ctaHref
 
@@ -681,7 +688,7 @@ function SegmenSection() {
         <p className="text-center text-gray-400 text-sm mt-8">
           Bisnis Anda tidak ada di sini?{' '}
           <a
-            href="https://wa.me/6281296917963"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-700 font-bold"
@@ -731,7 +738,7 @@ function PricingSection() {
               ))}
             </ul>
             <a
-              href="https://wa.me/6281296917963"
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center py-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all"
@@ -767,7 +774,7 @@ function PricingSection() {
               ))}
             </ul>
             <a
-              href="https://wa.me/6281296917963"
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center py-3 rounded-xl bg-white text-blue-600 text-sm font-black hover:bg-blue-50 transition-all"
@@ -803,7 +810,7 @@ function PricingSection() {
               ))}
             </ul>
             <a
-              href="https://wa.me/6281296917963"
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="block text-center py-3 rounded-xl border border-gray-200 text-sm font-bold text-gray-600 hover:border-blue-300 hover:text-blue-600 transition-all"
@@ -816,7 +823,7 @@ function PricingSection() {
         <p className="text-center text-gray-400 text-sm mt-8">
           Semua paket sudah termasuk onboarding & panduan penggunaan. Ada pertanyaan?{' '}
           <a
-            href="https://wa.me/6281296917963"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-700 font-bold"
@@ -927,7 +934,7 @@ function TestimonialSection() {
           <p className="text-white font-black text-lg mb-2">Mau hasil yang sama untuk bisnis Anda?</p>
           <p className="text-blue-200 text-sm mb-6">Konsultasi gratis, kami bantu analisis kebutuhan spesifik bisnis Anda.</p>
           <a
-            href="https://wa.me/6281296917963"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-blue-50 text-blue-600 font-black rounded-xl transition-all text-sm"
@@ -956,7 +963,7 @@ function FaqSection() {
         <p className="text-center mt-8 text-gray-400 text-sm">
           Pertanyaan lain?{' '}
           <a
-            href="https://wa.me/6281296917963"
+            href={waLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-700 font-bold"
@@ -994,7 +1001,7 @@ function CtaSection() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a
-              href="https://wa.me/6281296917963"
+              href={waLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-blue-50 text-blue-700 font-black text-base rounded-xl transition-all shadow-lg"
@@ -1050,7 +1057,7 @@ function Footer() {
             <p className="text-white/70 font-bold text-sm mb-4">Kontak</p>
             <div className="space-y-2.5 text-sm">
               <a
-                href="https://wa.me/6281296917963"
+                href={waLink()}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block hover:text-white/70 transition-colors"

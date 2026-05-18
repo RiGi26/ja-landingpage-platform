@@ -13,6 +13,7 @@ const clean = (val: string | undefined, fallback: string): string => {
 
 const WA_NUMBER  = clean(process.env.NEXT_PUBLIC_WA_NUMBER,  '6281296917963')
 const JASTIP_URL = clean(process.env.NEXT_PUBLIC_JASTIP_URL, 'https://ja-jastip-platform.vercel.app')
+const CLINIC_URL  = clean(process.env.NEXT_PUBLIC_CLINIC_URL,  'https://ja-clinic-platform.vercel.app/auth/login')
 const LMS_URL    = clean(process.env.NEXT_PUBLIC_LMS_URL,    'https://ja-lms-platform.vercel.app')
 
 const waLink = (msg?: string): string => {
@@ -572,16 +573,16 @@ function SegmenSection() {
     {
       emoji: '🏥',
       label: 'Portal Klinik & Medis',
-      comingSoon: true,
+      comingSoon: false,
       description: 'Untuk klinik umum, spesialis, dan praktik dokter mandiri',
       segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
-      cta: 'Tanya via WA →',
-      ctaHref: null,
-      waMsg: 'Halo, saya tertarik dengan Portal Klinik dari Japan Arena Platform. Bisa minta info lebih lanjut?',
+      cta: 'Buka Portal Klinik →',
+      ctaHref: CLINIC_URL,
+      waMsg: null,
       accent: {
         light: 'bg-emerald-50',
         border: 'border-emerald-100',
-        badge: 'bg-gray-100 text-gray-500',
+        badge: 'bg-emerald-100 text-emerald-700',
         bullet: 'bg-emerald-500',
         btn: 'bg-emerald-600 hover:bg-emerald-700',
         heading: 'text-emerald-700',

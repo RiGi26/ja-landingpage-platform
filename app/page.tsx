@@ -17,7 +17,8 @@ const clean = (val: string | undefined, fallback: string): string => {
 const WA_NUMBER  = clean(process.env.NEXT_PUBLIC_WA_NUMBER,  '6281296917963')
 const JASTIP_URL = clean(process.env.NEXT_PUBLIC_JASTIP_URL, 'https://ja-jastip-platform.vercel.app')
 const CLINIC_URL      = clean(process.env.NEXT_PUBLIC_CLINIC_URL,  'https://ja-clinic-platform.vercel.app/auth/login')
-const CLINIC_DEMO_URL = `${CLINIC_URL.replace('/auth/login', '')}/demo`
+const CLINIC_BASE_URL = CLINIC_URL.replace('/auth/login', '')
+const CLINIC_DEMO_URL = `${CLINIC_BASE_URL}/demo`
 const LMS_URL    = clean(process.env.NEXT_PUBLIC_LMS_URL,    'https://ja-lms-platform.vercel.app')
 
 const waLink = (msg?: string): string => {
@@ -701,7 +702,8 @@ const PLANS = [
     ],
     cta: 'Mulai Gratis 14 Hari →',
     ctaStyle: 'border',
-    waMsg: 'Halo, saya tertarik dengan paket Starter Japan Arena Platform. Bisa minta info lebih lanjut?',
+    registerHref: `${CLINIC_BASE_URL}/register`,
+    waMsg: null,
   },
   {
     id: 'pro',
@@ -721,9 +723,10 @@ const PLANS = [
       'Try Out / Mock test',
       'Support prioritas via WA',
     ],
-    cta: 'Pilih Pro →',
+    cta: 'Coba Pro Gratis 14 Hari →',
     ctaStyle: 'border',
-    waMsg: 'Halo, saya tertarik dengan paket Pro Japan Arena Platform. Bisa minta info lebih lanjut?',
+    registerHref: `${CLINIC_BASE_URL}/register`,
+    waMsg: null,
   },
   {
     id: 'premium',
@@ -847,20 +850,36 @@ function PricingSection() {
                 ))}
               </ul>
 
-              <a
-                href={waLink(plan.waMsg)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`block text-center py-3 rounded-xl text-sm font-black transition-all ${
-                  plan.ctaStyle === 'solid'
-                    ? 'bg-white text-blue-600 hover:bg-blue-50'
-                    : plan.highlight
-                    ? 'border border-white/30 text-white hover:bg-white/10'
-                    : 'border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
-                }`}
-              >
-                {plan.cta}
-              </a>
+              {'registerHref' in plan && plan.registerHref ? (
+                <div>
+                  <a
+                    href={plan.registerHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-center py-3 rounded-xl text-sm font-black transition-all bg-emerald-600 hover:bg-emerald-700 text-white"
+                  >
+                    {plan.cta}
+                  </a>
+                  <p className="text-xs text-gray-400 text-center mt-2">
+                    ✓ Gratis 14 hari&nbsp;&nbsp;✓ Tanpa kartu kredit&nbsp;&nbsp;✓ Langsung aktif
+                  </p>
+                </div>
+              ) : (
+                <a
+                  href={waLink(plan.waMsg ?? undefined)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block text-center py-3 rounded-xl text-sm font-black transition-all ${
+                    plan.ctaStyle === 'solid'
+                      ? 'bg-white text-blue-600 hover:bg-blue-50'
+                      : plan.highlight
+                      ? 'border border-white/30 text-white hover:bg-white/10'
+                      : 'border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -1091,7 +1110,7 @@ function CtaSection() {
               💬 Konsultasi Gratis via WA <ArrowRight size={16} />
             </a>
             <a
-              href={`${LMS_URL}/demo`}
+              href={CLINIC_DEMO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 hover:bg-white/10 text-white font-bold text-base rounded-xl transition-all"

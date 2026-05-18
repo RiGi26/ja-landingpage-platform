@@ -1,4 +1,4 @@
-name: Sync master to main
+name: Deploy to Vercel Production
 
 on:
   push:
@@ -6,16 +6,16 @@ on:
       - master
 
 jobs:
-  sync:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Push master to main
-        run: |
-          git checkout master
-          git push origin master:main
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Deploy to Production
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERCEL_ORG_ID: team_MGLKh5XmYFCwtCh6CjyaaL6f
+          VERCEL_PROJECT_ID: prj_BjUvWyOuoXPu3FQ72xvFGhYI0LWp

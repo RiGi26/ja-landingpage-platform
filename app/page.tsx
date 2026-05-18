@@ -528,7 +528,7 @@ function SegmenSection() {
       comingSoon: false,
       description: 'Untuk kursus, bimbel, sekolah, dan training karyawan',
       segments: ['Kursus & Bimbel', 'Sekolah & LPK', 'Bisnis & Korporat'],
-      cta: 'Coba Demo LMS →',
+      cta: 'Mulai Demo LMS →',
       ctaHref: `${LMS_URL}/demo`,
       waMsg: null,
       accent: {
@@ -550,7 +550,7 @@ function SegmenSection() {
         'Support Barang Branded & Luxury',
         'Estimasi Pengiriman Akurat',
       ],
-      cta: 'Coba Calculator →',
+      cta: 'Hitung Ongkir Sekarang →',
       ctaHref: JASTIP_URL,
       waMsg: null,
       accent: {
@@ -568,7 +568,7 @@ function SegmenSection() {
       comingSoon: false,
       description: 'Untuk klinik umum, spesialis, dan praktik dokter mandiri',
       segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
-      cta: 'Buka Portal Klinik →',
+      cta: 'Lihat Demo Klinik →',
       ctaHref: CLINIC_URL,
       waMsg: null,
       accent: {

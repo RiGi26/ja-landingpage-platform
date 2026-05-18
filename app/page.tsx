@@ -57,14 +57,6 @@ function HeroSection() {
               >
                 Konsultasi Gratis Sekarang <ArrowRight size={16} />
               </a>
-              <a
-                href={`${LMS_URL}/demo`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 border border-gray-200 text-gray-600 font-bold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all text-base"
-              >
-                Lihat Demo Platform →
-              </a>
             </div>
 
             <div className="flex flex-wrap gap-4 text-sm text-gray-400 pt-1">

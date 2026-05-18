@@ -17,7 +17,7 @@ const clean = (val: string | undefined, fallback: string): string => {
 const WA_NUMBER  = clean(process.env.NEXT_PUBLIC_WA_NUMBER,  '6281296917963')
 const JASTIP_URL = clean(process.env.NEXT_PUBLIC_JASTIP_URL, 'https://ja-jastip-platform.vercel.app')
 const CLINIC_URL      = clean(process.env.NEXT_PUBLIC_CLINIC_URL,  'https://ja-clinic-platform.vercel.app/auth/login')
-const CLINIC_DEMO_URL = `${CLINIC_URL.replace('/auth/login', '')}/api/demo-clinic-login`
+const CLINIC_DEMO_URL = `${CLINIC_URL.replace('/auth/login', '')}/demo`
 const LMS_URL    = clean(process.env.NEXT_PUBLIC_LMS_URL,    'https://ja-lms-platform.vercel.app')
 
 const waLink = (msg?: string): string => {
@@ -524,52 +524,6 @@ function CaraKerjaSection() {
 
 // ─── Segmen ───────────────────────────────────────────────────────────────────
 
-function ClinicDemoButton({ demoHref, cta, btnClass }: {
-  demoHref: string
-  cta: string
-  btnClass: string
-}) {
-  const [loading, setLoading] = useState(false)
-  const [error,   setError]   = useState('')
-
-  async function handleClick() {
-    setLoading(true)
-    setError('')
-    try {
-      const res  = await fetch(demoHref, { method: 'POST' })
-      const data = await res.json() as { success?: boolean; redirectTo?: string; error?: string }
-      if (data.success && data.redirectTo) {
-        window.location.href = data.redirectTo
-      } else {
-        setError('Gagal memuat demo. Hubungi kami via WA.')
-      }
-    } catch {
-      setError('Gagal memuat demo. Hubungi kami via WA.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <div>
-      <button
-        onClick={handleClick}
-        disabled={loading}
-        className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-white text-sm font-bold transition-all disabled:opacity-70 ${btnClass}`}
-      >
-        {loading ? (
-          <>
-            <span className="inline-block w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin flex-shrink-0" />
-            Menyiapkan demo...
-          </>
-        ) : cta}
-      </button>
-      {error && (
-        <p className="text-red-500 text-xs mt-1.5 text-center font-medium">{error}</p>
-      )}
-    </div>
-  )
-}
 
 function SegmenSection() {
   const PORTALS = [
@@ -620,8 +574,7 @@ function SegmenSection() {
       description: 'Untuk klinik umum, spesialis, dan praktik dokter mandiri',
       segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
       cta: 'Lihat Demo Klinik →',
-      ctaHref: null,
-      demoHref: CLINIC_DEMO_URL,
+      ctaHref: CLINIC_DEMO_URL,
       waMsg: null,
       accent: {
         light: 'bg-emerald-50',
@@ -650,7 +603,6 @@ function SegmenSection() {
             const href = portal.waMsg
               ? waLink(portal.waMsg)
               : portal.ctaHref ?? undefined
-            const demoHref = 'demoHref' in portal ? portal.demoHref : undefined
 
             return (
               <div
@@ -698,22 +650,14 @@ function SegmenSection() {
                 </div>
 
                 {/* CTA */}
-                {demoHref ? (
-                  <ClinicDemoButton
-                    demoHref={demoHref}
-                    cta={portal.cta}
-                    btnClass={portal.accent.btn}
-                  />
-                ) : (
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-white text-sm font-bold transition-all ${portal.accent.btn}`}
-                  >
-                    {portal.cta}
-                  </a>
-                )}
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-white text-sm font-bold transition-all ${portal.accent.btn}`}
+                >
+                  {portal.cta}
+                </a>
               </div>
             )
           })}

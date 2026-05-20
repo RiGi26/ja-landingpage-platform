@@ -225,7 +225,9 @@ function GlobalFeatures() {
 
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
-import { BarChart2 } from 'lucide-react'
+import { 
+  BarChart2, Facebook, Twitter, Instagram, Linkedin, Github, Mail, MapPin, Phone
+} from 'lucide-react'
 
 export default function LandingPage() {
   return (
@@ -241,19 +243,86 @@ export default function LandingPage() {
         {/* Placeholder for FAQ / Footer which remains standard */}
         <section id="harga" className="py-24 bg-white border-t border-black/5">
             <div className="max-w-4xl mx-auto text-center px-4">
-                <h2 className="text-3xl font-black mb-6">Mulai Transformasi Bisnis Anda Hari Ini</h2>
-                <a href={waLink()} className="inline-block bg-[#0071E3] text-white px-10 py-4 rounded-full font-black shadow-lg hover:scale-105 transition-all">Hubungi Sales Specialist</a>
+                <h2 className="text-4xl font-black mb-6 tracking-tight text-gray-900 sf-display-heavy">Mulai Transformasi Bisnis Anda Hari Ini</h2>
+                <p className="text-gray-500 mb-10 text-lg">Bergabunglah dengan puluhan bisnis yang telah mengotomasi operasional mereka bersama kami.</p>
+                <a href={waLink('Halo Japan Arena Corp, saya ingin mendiskusikan implementasi sistem untuk bisnis saya.')} className="inline-block bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button">Hubungi Sales Specialist</a>
             </div>
         </section>
       </main>
 
-      <footer className="bg-[#1D1D1F] text-white py-12 px-4">
-          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-              <div className="flex items-center gap-3">
-                  <Image src="/images/Icon.png" alt="Logo" width={32} height={32} className="invert brightness-0" />
-                  <span className="font-bold">Japan Arena Corp</span>
+      <footer className="bg-[#F5F5F7] border-t border-black/5 pt-20 pb-10 px-4">
+          <div className="max-w-6xl mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-12 gap-12 mb-16">
+                  {/* Brand Column */}
+                  <div className="col-span-full md:col-span-4 space-y-6">
+                      <div className="flex items-center gap-3">
+                          <Image src="/images/Icon.png" alt="Japan Arena Corp" width={40} height={40} className="object-contain" />
+                          <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
+                      </div>
+                      <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
+                          Penyedia solusi infrastruktur digital dan ekosistem SaaS terintegrasi untuk bisnis modern di Indonesia dan Jepang.
+                      </p>
+                      <div className="flex gap-4">
+                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>
+                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Twitter size={18} /></a>
+                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Instagram size={18} /></a>
+                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Linkedin size={18} /></a>
+                      </div>
+                  </div>
+
+                  {/* Product Links */}
+                  <div className="col-span-1 md:col-span-2 space-y-5">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</h4>
+                      <ul className="space-y-3 text-sm text-gray-500">
+                          <li><a href="https://ja-lms-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
+                          <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
+                          <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
+                          <li><a href="https://ja-websitebuilder.vercel.app" className="hover:text-[#0071E3] transition-colors">Website Builder</a></li>
+                      </ul>
+                  </div>
+
+                  {/* Company Links */}
+                  <div className="col-span-1 md:col-span-2 space-y-5">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</h4>
+                      <ul className="space-y-3 text-sm text-gray-500">
+                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Tentang Kami</a></li>
+                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Karir</a></li>
+                          <li><a href="/blog" className="hover:text-[#0071E3] transition-colors">Blog Edukasi</a></li>
+                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Partner Kami</a></li>
+                      </ul>
+                  </div>
+
+                  {/* Contact Info */}
+                  <div className="col-span-full md:col-span-4 space-y-5">
+                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Hubungi Kami</h4>
+                      <ul className="space-y-4 text-sm text-gray-500">
+                          <li className="flex gap-3">
+                              <MapPin size={18} className="text-[#0071E3] shrink-0" />
+                              <span>Jakarta, Indonesia • Tokyo, Japan</span>
+                          </li>
+                          <li className="flex gap-3">
+                              <Mail size={18} className="text-[#0071E3] shrink-0" />
+                              <span>contact@japanarena.com</span>
+                          </li>
+                          <li className="flex gap-3">
+                              <Phone size={18} className="text-[#0071E3] shrink-0" />
+                              <span>+62 812-9691-7963</span>
+                          </li>
+                      </ul>
+                  </div>
               </div>
-              <p className="text-gray-500 text-xs">© {new Date().getFullYear()} Japan Arena. All rights reserved.</p>
+
+              {/* Bottom Copyright */}
+              <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                  <p className="text-[12px] text-gray-400 font-medium">
+                      © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
+                  </p>
+                  <div className="flex gap-8 text-[12px] text-gray-400 font-medium">
+                      <a href="#" className="hover:text-gray-900 transition-colors">Kebijakan Privasi</a>
+                      <a href="#" className="hover:text-gray-900 transition-colors">Syarat & Ketentuan</a>
+                      <a href="#" className="hover:text-gray-900 transition-colors">Cookie Policy</a>
+                  </div>
+              </div>
           </div>
       </footer>
     </div>

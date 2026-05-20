@@ -40,7 +40,7 @@ export default function LmsNavbar() {
               className="w-8 h-8 object-contain"
               priority
             />
-            <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block">Japan Arena</span>
+            <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">Japan Arena Corp</span>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

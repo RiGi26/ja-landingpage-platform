@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Menu, X, LogIn } from 'lucide-react'
+import { useState, useEffect, useCallback } from 'react'
+import { Menu, X, LogIn, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
 import PortalPickerModal from './PortalPickerModal'
+import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
   { label: 'Fitur',   href: '#fitur'   },
@@ -12,16 +13,23 @@ const NAV_LINKS = [
 ]
 
 export default function LmsNavbar() {
-  const [open, setOpen]       = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [open,         setOpen]         = useState(false)
+  const [scrolled,     setScrolled]     = useState(false)
   const [isPickerOpen, setIsPickerOpen] = useState(false)
+  const [isMenuOpen,   setIsMenuOpen]   = useState(false)
 
+  const closeMenu = useCallback(() => setIsMenuOpen(false), [])
+
+  // Scroll listener — close mega menu on scroll + detect scrolled state
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 20)
+    const fn = () => {
+      setScrolled(window.scrollY > 20)
+      if (window.scrollY > 20) closeMenu()
+    }
     fn()
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
-  }, [])
+  }, [closeMenu])
 
   return (
     <>
@@ -31,6 +39,7 @@ export default function LmsNavbar() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-16">
+          {/* Logo */}
           <a href="#" className="flex items-center gap-2">
             <Image
               src="/images/Icon.png"
@@ -40,14 +49,42 @@ export default function LmsNavbar() {
               className="w-8 h-8 object-contain"
               priority
             />
-            <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">Japan Arena Corp</span>
+            <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">
+              Japan Arena Corp
+            </span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-6">
+            {/* Home */}
+            <a
+              href="#"
+              className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              Home
+            </a>
+
+            {/* Layanan — mega menu trigger */}
+            <button
+              onClick={() => setIsMenuOpen(v => !v)}
+              className={`flex items-center gap-1 text-sm font-semibold transition-colors ${
+                isMenuOpen ? 'text-[#0071E3]' : 'text-gray-500 hover:text-blue-600'
+              }`}
+            >
+              Layanan
+              <ChevronDown
+                size={14}
+                strokeWidth={2.5}
+                className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            {/* Regular nav links */}
             {NAV_LINKS.map(l => (
               <a
                 key={l.href}
                 href={l.href}
+                onClick={closeMenu}
                 className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
               >
                 {l.label}
@@ -55,6 +92,7 @@ export default function LmsNavbar() {
             ))}
           </nav>
 
+          {/* Right actions */}
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsPickerOpen(true)}
@@ -73,9 +111,13 @@ export default function LmsNavbar() {
           </div>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Mobile Drawer */}
         {open && (
-          <div className="md:hidden border-t border-black/5 bg-white/95 backdrop-blur-xl px-4 py-6 space-y-4 shadow-2xl">
+          <div className="md:hidden border-t border-black/5 bg-white/95 backdrop-blur-xl px-4 py-6 space-y-4 shadow-2xl overflow-y-auto max-h-[80vh]">
+            {/* Regular links */}
+            <a href="#" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
+              Home
+            </a>
             {NAV_LINKS.map(l => (
               <a
                 key={l.href}
@@ -86,17 +128,49 @@ export default function LmsNavbar() {
                 {l.label}
               </a>
             ))}
+
+            {/* Layanan — flat list by column */}
+            <div className="pt-2 border-t border-black/5">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#0071E3] mb-3">
+                Modul Layanan
+              </p>
+              {COLUMNS.map(col => (
+                <div key={col.title} className="mb-4">
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
+                    {col.emoji} {col.title}
+                  </p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {col.items.map(item => (
+                      <a
+                        key={item.label}
+                        href={item.href}
+                        target={item.href.startsWith('http') ? '_blank' : undefined}
+                        rel="noopener noreferrer"
+                        onClick={() => setOpen(false)}
+                        className="text-xs font-semibold text-gray-700 hover:text-[#0071E3] py-1 truncate transition-colors"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div className="pt-4 border-t border-black/5">
-                <button
-                    onClick={() => { setOpen(false); setIsPickerOpen(true); }}
-                    className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black"
-                >
-                    <LogIn size={18} /> Masuk ke Portal
-                </button>
+              <button
+                onClick={() => { setOpen(false); setIsPickerOpen(true) }}
+                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black"
+              >
+                <LogIn size={18} /> Masuk ke Portal
+              </button>
             </div>
           </div>
         )}
       </header>
+
+      {/* Mega Menu (desktop only) */}
+      <ServiceMegaMenu isOpen={isMenuOpen} onClose={closeMenu} />
 
       <PortalPickerModal isOpen={isPickerOpen} onClose={() => setIsPickerOpen(false)} />
     </>

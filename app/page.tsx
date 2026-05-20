@@ -4,147 +4,99 @@ import { useState } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
-  X, Star, ChevronRight, Video, HardDrive, Globe2,
+  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn,
 } from 'lucide-react'
-import LmsNavbar from '@/components/LmsNavbar'
-import LmsFaq    from '@/components/LmsFaq'
+import Navbar from '@/components/LmsNavbar'
+import LmsFaq from '@/components/LmsFaq'
+import Image from 'next/image'
 
-const clean = (val: string | undefined, fallback: string): string => {
-  const s = (val ?? fallback).trim()
-  return s.charCodeAt(0) === 0xFEFF ? s.slice(1) : s
-}
-
-const WA_NUMBER  = clean(process.env.NEXT_PUBLIC_WA_NUMBER,  '6281296917963')
-const JASTIP_URL = clean(process.env.NEXT_PUBLIC_JASTIP_URL, 'https://ja-jastip-platform.vercel.app')
-const CLINIC_URL      = clean(process.env.NEXT_PUBLIC_CLINIC_URL,  'https://ja-clinic-platform.vercel.app/auth/login')
-const CLINIC_BASE_URL = CLINIC_URL.replace('/auth/login', '')
-const CLINIC_DEMO_URL = `${CLINIC_BASE_URL}/demo`
-const LMS_URL    = clean(process.env.NEXT_PUBLIC_LMS_URL,    'https://ja-lms-platform.vercel.app')
+const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 
 const waLink = (msg?: string): string => {
   const base = `https://wa.me/${WA_NUMBER}`
   return msg ? `${base}?text=${encodeURIComponent(msg)}` : base
 }
 
-// ─── Hero ────────────────────────────────────────────────────────────────────
+// ─── Sections ───────────────────────────────────────────────────────────────
 
 function HeroSection() {
   return (
-    <section className="relative bg-gradient-to-b from-blue-50 to-white pt-28 pb-20 px-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section className="relative bg-[#F5F5F7] pt-32 pb-24 px-4 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-3xl -mr-64 -mt-64 opacity-60" />
+      
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Left — copy */}
-          <div className="space-y-7">
-            <div className="inline-flex items-center gap-2 bg-blue-100 border border-blue-200 text-blue-700 text-xs font-bold px-4 py-2 rounded-full">
+          <div className="space-y-8 animate-fade-up">
+            <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Sistem Manajemen Bisnis by Japan Arena Corp
+              Satu Platform, Berbagai Solusi Bisnis
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight tracking-tight">
-              Stop Urus Administrasi.<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500">
-                Fokus ke Bisnis Anda.
-              </span>
+            <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
+              Otomasi Bisnis Anda.<br />
+              <span className="text-[#0071E3]">Tanpa Ribet.</span>
             </h1>
 
-            <p className="text-lg text-gray-500 leading-relaxed">
-              Sistem LMS siap pakai — portal, invoice otomatis, notifikasi WA,
-              absensi, hingga laporan keuangan. Setup 1–3 hari, langsung jalan.
+            <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
+              Solusi SaaS manajemen operasional untuk LMS, Klinik, dan Jastip. 
+              Satu dashboard untuk mengelola seluruh aspek bisnis Anda.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href={waLink()}
+                href="#segmen"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] shadow-lg glow-button"
+              >
+                Pilih Produk & Demo <ArrowRight size={18} />
+              </a>
+              <a
+                href={waLink('Halo Japan Arena, saya ingin konsultasi sistem bisnis.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl transition-all hover:scale-[1.02] text-base shadow-lg shadow-blue-200"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 apple-shadow"
               >
-                Konsultasi Gratis Sekarang <ArrowRight size={16} />
+                Konsultasi WA
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-4 text-sm text-gray-400 pt-1">
-              <span className="flex items-center gap-1.5"><Check size={13} className="text-green-500" /> Setup 1–3 hari kerja</span>
-              <span className="flex items-center gap-1.5"><Check size={13} className="text-green-500" /> Tanpa coding</span>
-              <span className="flex items-center gap-1.5"><Check size={13} className="text-green-500" /> Support via WA</span>
-              <span className="flex items-center gap-1.5"><Check size={13} className="text-green-500" /> Tidak perlu server sendiri</span>
+            <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-400 font-medium">
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Setup 1–3 hari</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Enterprise Security</span>
             </div>
           </div>
 
-          {/* Right — dashboard mockup + floating cards */}
-          <div className="relative">
-            {/* Floating card top-right */}
-            <div className="absolute -top-4 -right-2 bg-white rounded-xl shadow-xl border border-gray-100 px-3.5 py-2.5 z-10 animate-bounce">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-green-500 rounded-full flex items-center justify-center text-white font-black text-[10px] flex-shrink-0">
-                  87%
-                </div>
-                <p className="text-xs font-bold text-gray-700 leading-tight">Hemat Waktu<br />Administrasi</p>
-              </div>
-            </div>
-
-            {/* Floating card bottom-left */}
-            <div className="absolute -bottom-4 -left-2 bg-white rounded-xl shadow-xl border border-gray-100 px-3.5 py-2.5 z-10">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 bg-blue-500 rounded-full flex items-center justify-center text-white font-black text-[10px] flex-shrink-0">
-                  3hr
-                </div>
-                <p className="text-xs font-bold text-gray-700 leading-tight">Setup<br />Selesai</p>
-              </div>
-            </div>
-
-            {/* Dashboard mockup */}
-            <div className="bg-white rounded-2xl border border-gray-200 p-5 shadow-xl shadow-gray-100">
-              <div className="flex items-center gap-2 mb-5 pb-4 border-b border-gray-100">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <div className="flex-1 mx-3 bg-gray-50 rounded-md px-3 py-1 text-[11px] text-gray-400 font-mono border border-gray-100">
-                  dashboard.bisnis-anda.com/admin
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-                {[
-                  { label: 'Total User',      val: '127',   color: 'text-blue-600',   bg: 'bg-blue-50',   border: 'border-blue-100'   },
-                  { label: 'Aktif Bulan Ini', val: '89',    color: 'text-green-600',  bg: 'bg-green-50',  border: 'border-green-100'  },
-                  { label: 'Pemasukan',        val: '42jt',  color: 'text-blue-600',   bg: 'bg-blue-50',   border: 'border-blue-100'   },
-                  { label: 'WA Terkirim',      val: '1.2rb', color: 'text-orange-600', bg: 'bg-orange-50', border: 'border-orange-100' },
-                ].map(s => (
-                  <div key={s.label} className={`${s.bg} border ${s.border} rounded-xl p-3`}>
-                    <p className={`text-xl font-black ${s.color} mb-0.5`}>{s.val}</p>
-                    <p className="text-[10px] text-gray-400 font-medium">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="bg-gray-50 border border-gray-100 rounded-xl p-4">
-                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Siswa Terbaru</p>
-                  {['Budi Santoso · Kelas A · Aktif', 'Rina Wahyu · Kelas B · Aktif', 'Ahmad Fauzi · Kelas A · Lunas'].map(s => (
-                    <div key={s} className="flex items-center gap-2.5 mb-2">
-                      <div className="w-6 h-6 rounded-full bg-blue-100 flex-shrink-0" />
-                      <span className="text-[11px] text-gray-500">{s}</span>
-                      <span className="ml-auto w-1.5 h-1.5 rounded-full bg-green-400" />
+          {/* Device Mockup Visualization */}
+          <div className="relative animate-fade-up" style={{animationDelay: '100ms'}}>
+            <div className="bg-white rounded-[40px] border-[12px] border-black shadow-2xl overflow-hidden aspect-[4/3] relative">
+                <div className="absolute inset-0 bg-[#F5F5F7] p-6">
+                    {/* Header Mockup */}
+                    <div className="flex justify-between items-center mb-6">
+                        <div className="flex gap-2">
+                            <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                            <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                        </div>
+                        <div className="bg-white rounded-lg px-4 py-1 text-[10px] font-mono text-gray-400 border border-black/5">dashboard.yourbusiness.com</div>
                     </div>
-                  ))}
+                    {/* Content Mockup */}
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                        {[1,2,3].map(i => <div key={i} className="h-16 bg-white rounded-2xl apple-shadow border border-black/5" />)}
+                    </div>
+                    <div className="h-32 bg-white rounded-[24px] apple-shadow border border-black/5 p-4 flex items-center justify-center text-gray-300">
+                        <BarChart2 size={32} />
+                    </div>
                 </div>
-                <div className="space-y-2">
-                  <div className="bg-blue-50 border border-blue-100 rounded-xl p-3">
-                    <p className="text-[10px] text-blue-700 font-black">📲 WA Invoice Terkirim</p>
-                    <p className="text-[11px] text-gray-400 mt-0.5">Budi Santoso · Rp 2.500.000 · Lunas</p>
-                  </div>
-                  <div className="bg-green-50 border border-green-100 rounded-xl p-3">
-                    <p className="text-[10px] text-green-700 font-black">✅ Absensi Otomatis Tercatat</p>
-                    <p className="text-[11px] text-gray-400 mt-0.5">Kelas A · Pertemuan 12 · 23 hadir</p>
-                  </div>
-                  <div className="bg-blue-50 border border-blue-100 rounded-xl p-3">
-                    <p className="text-[10px] text-blue-700 font-black">📊 Laporan Keuangan Siap</p>
-                    <p className="text-[11px] text-gray-400 mt-0.5">Mei 2026 · Pemasukan Rp 42jt</p>
-                  </div>
+            </div>
+            {/* Notifications overlay */}
+            <div className="absolute -right-6 top-1/4 bg-white p-4 rounded-2xl apple-shadow border border-black/5 flex items-center gap-3 animate-bounce">
+                <div className="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center text-white"><MessageCircle size={16}/></div>
+                <div>
+                    <p className="text-[10px] font-bold text-gray-900">WA Notifikasi</p>
+                    <p className="text-[9px] text-gray-400">Invoice terkirim otomatis</p>
                 </div>
-              </div>
             </div>
           </div>
 
@@ -153,1055 +105,157 @@ function HeroSection() {
     </section>
   )
 }
-
-// ─── Social Proof Bar ─────────────────────────────────────────────────────────
 
 function SocialProofBar() {
-  return (
-    <section className="bg-gray-50 border-y border-gray-100 py-4 px-4">
-      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Dipercaya oleh</p>
-        <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded bg-blue-100 flex items-center justify-center">
-            <GraduationCap size={13} className="text-blue-600" />
+    return (
+      <section className="bg-white border-y border-black/5 py-6 px-4">
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-50 grayscale">
+          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Dipercaya oleh</p>
+          <div className="flex items-center gap-2">
+            <GraduationCap size={20} />
+            <span className="text-sm font-bold">Academy Japan</span>
           </div>
-          <span className="text-sm font-bold text-gray-700">Japan Arena Academy</span>
-          <span className="bg-green-100 text-green-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-green-200">AKTIF</span>
-        </div>
-        <div className="flex items-center gap-1.5 text-gray-400 text-sm italic">
-          <span>+ bisnis lainnya sedang onboarding...</span>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Problem Section ──────────────────────────────────────────────────────────
-
-function ProblemSection() {
-  const problems = [
-    { icon: '😩', text: 'Absensi lewat grup WA — berantakan, susah direkap' },
-    { icon: '🕐', text: 'Buat invoice manual satu per satu — buang waktu berjam-jam' },
-    { icon: '📊', text: 'Data progress siswa di Excel — tidak real-time, sering salah' },
-    { icon: '📁', text: 'Materi disebar via Google Drive — tidak terkontrol, link kadaluarsa' },
-    { icon: '💬', text: 'Reminder kelas via WA manual — sering lupa, tidak konsisten' },
-    { icon: '🤯', text: 'Tidak ada laporan keuangan otomatis — hitung manual tiap bulan' },
-  ]
-
-  return (
-    <section className="bg-white py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-red-500 mb-3">Masalah yang Sering Terjadi</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Apakah bisnis Anda masih begini?
-          </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            Kalau ya, Anda tidak sendirian. Dan ada solusinya.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
-          {problems.map((p, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 bg-red-50 border border-red-100 rounded-xl p-4"
-            >
-              <span className="text-xl flex-shrink-0">{p.icon}</span>
-              <p className="text-sm text-gray-500 leading-relaxed">{p.text}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Transition */}
-        <div className="text-center">
-          <div className="inline-flex flex-col items-center gap-3">
-            <div className="w-px h-10 bg-gradient-to-b from-red-200 to-blue-400" />
-            <div className="inline-flex items-center gap-2 bg-blue-600 rounded-full px-5 py-2.5 shadow-lg shadow-blue-200">
-              <Zap size={14} className="text-white" />
-              <span className="text-sm font-black text-white">Ada cara yang jauh lebih baik</span>
-            </div>
-            <div className="w-px h-10 bg-gradient-to-b from-blue-400 to-transparent" />
+          <div className="flex items-center gap-2">
+            <Building2 size={20} />
+            <span className="text-sm font-bold">Medika Health</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <ShoppingBag size={20} />
+            <span className="text-sm font-bold">Astra Jastip</span>
           </div>
         </div>
-      </div>
-    </section>
-  )
+      </section>
+    )
 }
-
-// ─── Fitur ────────────────────────────────────────────────────────────────────
-
-function FiturSection() {
-  const ITEMS = [
-    {
-      Icon: Users,
-      title: 'Manajemen Siswa Lengkap',
-      desc: 'Daftarkan siswa, pantau status aktif/alumni, lihat progress belajar real-time. Tidak ada lagi data yang tercecer.',
-      badge: null,
-      highlight: false,
-    },
-    {
-      Icon: MessageCircle,
-      title: 'Notifikasi WA Otomatis',
-      desc: 'Invoice, link Zoom, reminder kelas, dan kredensial login — semuanya dikirim otomatis ke WhatsApp siswa tanpa campur tangan Anda.',
-      badge: 'Favorit',
-      highlight: true,
-    },
-    {
-      Icon: FileText,
-      title: 'Invoice & Laporan Keuangan',
-      desc: 'Generate PDF invoice sekali klik, lacak pemasukan, pengeluaran, dan laporan bulanan otomatis. Tidak perlu hitung manual.',
-      badge: null,
-      highlight: false,
-    },
-    {
-      Icon: BookOpen,
-      title: 'Portal Belajar Siswa',
-      desc: 'Materi, quiz, absensi, dan tugas tersedia di portal khusus siswa. Akses kapan saja, terpantau real-time oleh admin.',
-      badge: null,
-      highlight: false,
-    },
-    {
-      Icon: Shield,
-      title: 'Data Aman & Terpisah',
-      desc: 'Setiap klien punya database sendiri dengan enkripsi penuh dan Row Level Security. Data siswa Anda tidak bercampur dengan siapapun.',
-      badge: null,
-      highlight: false,
-    },
-    {
-      Icon: Clock,
-      title: 'Setup Cepat, Langsung Jalan',
-      desc: 'Tim kami handle semua setup teknis. Anda hanya perlu siapkan konten. Dalam 1–3 hari kerja, platform Anda sudah online.',
-      badge: null,
-      highlight: false,
-    },
-  ]
-
-  return (
-    <section id="fitur" className="bg-[#F8FAFF] py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Fitur Platform</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Semua yang Anda butuhkan, sudah ada
-          </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto">
-            Tidak perlu integrasi puluhan tools berbeda. Satu platform, semua beres.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {ITEMS.map(item => (
-            <div
-              key={item.title}
-              className={`group relative rounded-2xl p-6 transition-all duration-200 ${
-                item.highlight
-                  ? 'bg-blue-600 shadow-xl shadow-blue-200'
-                  : 'bg-white border-2 border-gray-100 hover:border-blue-300 hover:shadow-xl transition-all duration-300'
-              }`}
-              style={!item.highlight ? { boxShadow: '0 2px 12px rgba(0,0,0,0.04)' } : {}}
-            >
-              {item.badge && (
-                <span className="absolute top-4 right-4 bg-white text-blue-600 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide">
-                  {item.badge}
-                </span>
-              )}
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-4 ${
-                item.highlight ? 'bg-white/20' : 'bg-blue-50'
-              }`}>
-                <item.Icon size={20} className={item.highlight ? 'text-white' : 'text-blue-600'} />
-              </div>
-              <h3 className={`font-black text-base mb-2 ${item.highlight ? 'text-white' : 'text-gray-900'}`}>
-                {item.title}
-              </h3>
-              <p className={`text-sm leading-relaxed ${item.highlight ? 'text-white/75' : 'text-gray-400'}`}>
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Integrasi ────────────────────────────────────────────────────────────────
-
-function IntegrasiSection() {
-  const integrations = [
-    {
-      Icon: MessageCircle,
-      name: 'WhatsApp (Fonnte)',
-      desc: 'Invoice, reminder kelas, dan kredensial login dikirim otomatis ke WA siswa',
-      color: 'text-green-600', bg: 'bg-green-50', border: 'border-green-100',
-    },
-    {
-      Icon: Video,
-      name: 'Zoom',
-      desc: 'Link meeting Zoom otomatis disertakan di setiap notifikasi jadwal kelas',
-      color: 'text-blue-600', bg: 'bg-blue-50', border: 'border-blue-100',
-    },
-    {
-      Icon: HardDrive,
-      name: 'Google Drive',
-      desc: 'Invoice PDF digenerate dan disimpan otomatis via Google Apps Script',
-      color: 'text-yellow-600', bg: 'bg-yellow-50', border: 'border-yellow-100',
-    },
-    {
-      Icon: Globe2,
-      name: 'Custom Domain',
-      desc: 'Platform berjalan di domain bisnis Anda sendiri — tanpa jejak platform lain',
-      color: 'text-purple-600', bg: 'bg-purple-50', border: 'border-purple-100',
-    },
-  ]
-
-  const automationFeed = [
-    { color: 'bg-green-500', label: 'WA Terkirim', detail: 'Invoice Rp 2.500.000 → Budi Santoso' },
-    { color: 'bg-yellow-500', label: 'PDF Tersimpan', detail: 'Invoice-2026-001.pdf → Google Drive' },
-    { color: 'bg-blue-500',   label: 'Zoom Dikirim', detail: 'Kelas A · Pertemuan 12 · Link aktif' },
-    { color: 'bg-purple-500', label: 'Domain Aktif', detail: 'kursus-anda.com → Online 24/7' },
-  ]
-
-  return (
-    <section className="bg-[#F8FAFF] py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-          {/* Left — copy + integration list */}
-          <div className="space-y-6">
-            <p className="text-xs font-black uppercase tracking-widest text-blue-600">Integrasi</p>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
-              Terhubung dengan tools yang sudah Anda pakai
-            </h2>
-            <p className="text-lg text-gray-400 leading-relaxed">
-              Tidak perlu integrasi manual. Platform kami sudah terhubung langsung
-              dengan WhatsApp, Zoom, dan Google Drive sejak hari pertama.
-            </p>
-            <div className="space-y-3">
-              {integrations.map(item => (
-                <div
-                  key={item.name}
-                  className={`flex items-center gap-4 bg-white rounded-2xl p-4 border ${item.border} hover:shadow-md transition-all`}
-                  style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
-                >
-                  <div className={`w-11 h-11 ${item.bg} rounded-xl flex items-center justify-center flex-shrink-0`}>
-                    <item.Icon size={18} className={item.color} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-black text-gray-900 text-sm">{item.name}</p>
-                    <p className="text-xs text-gray-400 leading-relaxed mt-0.5">{item.desc}</p>
-                  </div>
-                  <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0" title="Aktif" />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — automation feed visual */}
-          <div className="relative">
-            <div
-              className="rounded-2xl p-6 text-white"
-              style={{ background: 'linear-gradient(135deg, #0A2342 0%, #1A3A6B 100%)', boxShadow: '0 20px 60px rgba(10,35,66,0.25)' }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <p className="font-black text-base">Automation Log</p>
-                  <p className="text-white/40 text-xs mt-0.5">Berjalan otomatis 24/7</p>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-xs text-white/50 font-medium">Live</span>
-                </div>
-              </div>
-
-              {/* Feed items */}
-              <div className="space-y-3 mb-6">
-                {automationFeed.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 animate-fade-in-up"
-                    style={{ animationDelay: `${i * 100}ms` }}
-                  >
-                    <div className={`w-2 h-2 rounded-full ${item.color} flex-shrink-0`} />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-black text-white">{item.label}</p>
-                      <p className="text-[11px] text-white/40 truncate mt-0.5">{item.detail}</p>
-                    </div>
-                    <Check size={13} className="text-green-400 flex-shrink-0" />
-                  </div>
-                ))}
-              </div>
-
-              {/* Bottom stat */}
-              <div className="border-t border-white/10 pt-4 grid grid-cols-3 gap-3 text-center">
-                {[
-                  { val: '0', label: 'Setup manual' },
-                  { val: '< 1 dtk', label: 'Response time' },
-                  { val: '24/7', label: 'Berjalan otomatis' },
-                ].map(s => (
-                  <div key={s.label}>
-                    <p className="text-sm font-black text-white">{s.val}</p>
-                    <p className="text-[10px] text-white/40 mt-0.5">{s.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Cara Kerja ───────────────────────────────────────────────────────────────
-
-function CaraKerjaSection() {
-  const steps = [
-    {
-      num: '01',
-      icon: '💬',
-      title: 'Konsultasi Gratis',
-      desc: 'Ceritakan kebutuhan bisnis Anda via WhatsApp. Kami analisis dan rekomendasikan paket yang paling sesuai — tanpa paksaan.',
-    },
-    {
-      num: '02',
-      icon: '⚙️',
-      title: 'Setup & Kustomisasi',
-      desc: 'Tim kami setup platform, database, dan integrasi WA. Anda tinggal upload konten. Selesai dalam 1–3 hari kerja.',
-    },
-    {
-      num: '03',
-      icon: '🚀',
-      title: 'Langsung Live & Pakai',
-      desc: 'Platform online dengan nama domain Anda. Siswa bisa daftar, admin bisa pantau. Support kami selalu siap bila ada pertanyaan.',
-    },
-  ]
-
-  return (
-    <section className="bg-white py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Cara Kerja</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            3 langkah, platform Anda siap
-          </h2>
-          <p className="text-gray-400 text-lg">Tidak ada yang rumit. Kami yang handle teknisnya.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Connector line */}
-          <div className="hidden md:block absolute top-12 left-1/3 right-1/3 h-px bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
-
-          {steps.map((step, i) => (
-            <div key={i} className="relative text-center">
-              <div className="relative inline-flex w-20 h-20 rounded-2xl bg-blue-50 border border-blue-100 items-center justify-center text-3xl mb-5 mx-auto">
-                {step.icon}
-                <span className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-blue-600 text-white text-[10px] font-black flex items-center justify-center shadow-md">
-                  {i + 1}
-                </span>
-              </div>
-              <h3 className="font-black text-gray-900 text-lg mb-3">{step.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed max-w-xs mx-auto">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
-          <a
-            href={waLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-7 py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-xl transition-all hover:scale-[1.02] text-base shadow-lg shadow-blue-200"
-          >
-            Mulai Konsultasi Gratis <ArrowRight size={16} />
-          </a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Segmen ───────────────────────────────────────────────────────────────────
-
 
 function SegmenSection() {
-  const PORTALS = [
-    {
-      emoji: '🎓',
-      label: 'Portal LMS',
-      comingSoon: false,
-      description: 'Untuk kursus, bimbel, sekolah, dan training karyawan',
-      segments: ['Kursus & Bimbel', 'Sekolah & LPK', 'Bisnis & Korporat'],
-      cta: 'Mulai Demo LMS →',
-      ctaHref: `${LMS_URL}/demo`,
-      waMsg: null,
-      accent: {
-        light: 'bg-blue-50',
-        border: 'border-blue-100',
-        badge: 'bg-blue-100 text-blue-700',
-        bullet: 'bg-blue-500',
-        btn: 'bg-blue-600 hover:bg-blue-700',
-        heading: 'text-blue-700',
+    const PORTALS = [
+      {
+        emoji: '🎓',
+        label: 'Portal LMS',
+        description: 'Untuk kursus, bimbel, sekolah, dan training karyawan korporasi.',
+        cta: 'Demo LMS',
+        href: 'https://ja-lms-platform.vercel.app/demo',
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
       },
-    },
-    {
-      emoji: '🇯🇵',
-      label: 'Portal Jastip Jepang',
-      comingSoon: false,
-      description: 'Untuk bisnis jasa titip barang dari Jepang',
-      segments: [
-        'Kalkulator Ongkir Otomatis',
-        'Support Barang Branded & Luxury',
-        'Estimasi Pengiriman Akurat',
-      ],
-      cta: 'Hitung Ongkir Sekarang →',
-      ctaHref: JASTIP_URL,
-      waMsg: null,
-      accent: {
-        light: 'bg-red-50',
-        border: 'border-red-100',
-        badge: 'bg-green-100 text-green-700',
-        bullet: 'bg-red-500',
-        btn: 'bg-red-600 hover:bg-red-700',
-        heading: 'text-red-700',
+      {
+        emoji: '🏥',
+        label: 'Portal Klinik',
+        description: 'Manajemen rekam medis, antrean, dan billing apotek dalam satu sistem.',
+        cta: 'Demo Klinik',
+        href: 'https://ja-clinic-platform.vercel.app/demo',
+        color: 'text-emerald-600',
+        bg: 'bg-emerald-50',
       },
-    },
-    {
-      emoji: '🏥',
-      label: 'Portal Klinik & Medis',
-      comingSoon: false,
-      description: 'Untuk klinik umum, spesialis, dan praktik dokter mandiri',
-      segments: ['Klinik Umum', 'Klinik Spesialis', 'Praktik Dokter Mandiri'],
-      cta: 'Lihat Demo Klinik →',
-      ctaHref: CLINIC_DEMO_URL,
-      waMsg: null,
-      accent: {
-        light: 'bg-emerald-50',
-        border: 'border-emerald-100',
-        badge: 'bg-emerald-100 text-emerald-700',
-        bullet: 'bg-emerald-500',
-        btn: 'bg-emerald-600 hover:bg-emerald-700',
-        heading: 'text-emerald-700',
+      {
+        emoji: '🇯🇵',
+        label: 'Portal Jastip',
+        description: 'Smart calculator otomatis untuk bisnis jasa titip barang luar negeri.',
+        cta: 'Coba Jastip',
+        href: 'https://ja-jastip-platform.vercel.app',
+        color: 'text-red-600',
+        bg: 'bg-red-50',
       },
-    },
-  ]
+      {
+        emoji: '🌐',
+        label: 'Website Builder',
+        description: 'Hadirkan brand Anda secara online dalam waktu kurang dari 24 jam.',
+        cta: 'Lihat Detail',
+        href: 'https://ja-websitebuilder.vercel.app',
+        color: 'text-purple-600',
+        bg: 'bg-purple-50',
+      },
+    ]
 
-  return (
-    <section id="segmen" className="bg-[#F8FAFF] py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Untuk Siapa?</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Pilih portal sesuai bisnis Anda
-          </h2>
-          <p className="text-gray-400 text-lg">Satu platform, tiga solusi — dikustomisasi untuk kebutuhan spesifik Anda.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {PORTALS.map(portal => {
-            const href = portal.waMsg
-              ? waLink(portal.waMsg)
-              : portal.ctaHref ?? undefined
-
-            return (
-              <div
-                key={portal.label}
-                className={`bg-white rounded-2xl border ${portal.accent.border} p-6 flex flex-col hover:shadow-lg transition-all duration-300 relative`}
-                style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
-              >
-                {/* Coming Soon ribbon */}
-                {portal.comingSoon && (
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-gray-100 text-gray-500 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wide">
-                      Segera Hadir
-                    </span>
-                  </div>
-                )}
-
-                {/* Header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`w-12 h-12 ${portal.accent.light} rounded-xl flex items-center justify-center text-2xl flex-shrink-0`}>
-                    {portal.emoji}
-                  </div>
-                  {!portal.comingSoon && (
-                    <span className={`text-[11px] font-black px-2.5 py-1 rounded-full flex items-center gap-1 ${portal.accent.badge}`}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-current animate-pulse" />
-                      Live Demo
-                    </span>
-                  )}
+    return (
+        <section id="segmen" className="bg-white py-24 lg:py-32 px-4">
+            <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-16">
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Our Solutions</p>
+                    <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
+                        Pilih Platform Sesuai Bisnis Anda
+                    </h2>
                 </div>
 
-                {/* Title */}
-                <h3 className={`font-black text-base mb-3 ${portal.accent.heading}`}>{portal.label}</h3>
-
-                {/* Sub-segments */}
-                <ul className="space-y-1.5 mb-4">
-                  {portal.segments.map(seg => (
-                    <li key={seg} className="flex items-center gap-2 text-xs text-gray-500">
-                      <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${portal.accent.bullet}`} />
-                      {seg}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="border-t border-gray-100 pt-4 mb-4 flex-1">
-                  <p className="text-xs text-gray-500 leading-relaxed">{portal.description}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {PORTALS.map(p => (
+                        <div key={p.label} className="group flex flex-col p-8 rounded-[32px] bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                            <div className={`w-14 h-14 ${p.bg} rounded-[20px] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform`}>
+                                {p.emoji}
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">{p.label}</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed mb-8 flex-1">{p.description}</p>
+                            <a href={p.href} target="_blank" className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black`}>
+                                {p.cta}
+                            </a>
+                        </div>
+                    ))}
                 </div>
-
-                {/* CTA */}
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-full flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-white text-sm font-bold transition-all ${portal.accent.btn}`}
-                >
-                  {portal.cta}
-                </a>
-              </div>
-            )
-          })}
-        </div>
-
-        <p className="text-center text-gray-400 text-sm mt-8">
-          Bisnis Anda tidak ada di sini?{' '}
-          <a
-            href={waLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 font-bold"
-          >
-            Konsultasikan kebutuhan spesifik Anda →
-          </a>
-        </p>
-      </div>
-    </section>
-  )
+            </div>
+        </section>
+    )
 }
 
-// ─── Pricing ──────────────────────────────────────────────────────────────────
+function GlobalFeatures() {
+    const FEATURES = [
+        { title: 'Notifikasi WA Otomatis', desc: 'Reminder invoice, link zoom, dan OTP dikirim langsung ke WhatsApp pelanggan.', icon: MessageCircle },
+        { title: 'Laporan Real-time', desc: 'Pantau grafik pemasukan dan performa bisnis kapanpun dari perangkat apa saja.', icon: BarChart2 },
+        { title: 'Database Terisolasi', desc: 'Setiap tenant memiliki database mandiri (RLS) untuk keamanan data tingkat tinggi.', icon: Shield },
+    ]
 
-const PLANS = [
-  {
-    id: 'starter',
-    badge: 'Starter',
-    name: 'Starter',
-    price: '299rb',
-    period: '/bulan',
-    desc: 'Untuk bisnis yang baru mulai digitalisasi operasional',
-    highlight: false,
-    popular: false,
-    features: [
-      '1 portal bisnis aktif',
-      'Pengguna hingga 50 akun',
-      'Invoice & pembayaran dasar',
-      'Notifikasi WA manual',
-      'Laporan bulanan sederhana',
-      'Support via WA (jam kerja)',
-    ],
-    cta: 'Mulai Gratis 14 Hari →',
-    ctaStyle: 'border',
-    registerHref: `${CLINIC_BASE_URL}/register`,
-    waMsg: null,
-  },
-  {
-    id: 'pro',
-    badge: 'Pro',
-    name: 'Pro',
-    price: '599rb',
-    period: '/bulan',
-    desc: 'Untuk bisnis aktif yang butuh otomasi & laporan lengkap',
-    highlight: false,
-    popular: false,
-    features: [
-      'Semua fitur Starter',
-      'Pengguna unlimited',
-      'Notifikasi & reminder WA otomatis',
-      'Invoice PDF otomatis via WA',
-      'Laporan keuangan otomatis',
-      'Akses fitur lengkap portal',
-      'Support prioritas via WA',
-    ],
-    cta: 'Coba Pro Gratis 14 Hari →',
-    ctaStyle: 'border',
-    registerHref: `${CLINIC_BASE_URL}/register`,
-    waMsg: null,
-  },
-  {
-    id: 'premium',
-    badge: 'Premium',
-    name: 'Premium',
-    price: '999rb',
-    period: '/bulan',
-    desc: 'Untuk bisnis yang ingin semua portal & proses otomatis',
-    highlight: true,
-    popular: true,
-    features: [
-      'Semua fitur Pro',
-      'Akses semua portal (LMS + Jastip + Klinik)',
-      'Multi-admin dengan delegasi akses',
-      'Pengaturan branding warna & nama',
-      'Laporan analitik lengkap',
-      'Onboarding & panduan setup dibantu',
-      'SLA response 1×24 jam',
-    ],
-    cta: 'Pilih Premium →',
-    ctaStyle: 'solid',
-    waMsg: 'Halo, saya tertarik dengan paket Premium Japan Arena Platform. Bisa minta info lebih lanjut?',
-  },
-  {
-    id: 'whitelabel',
-    badge: 'White-label',
-    name: 'White-label',
-    price: '2jt',
-    period: 'setup',
-    priceSub: '+ 1,5jt/bulan' as string | undefined,
-    desc: 'Platform dengan identitas brand Anda sendiri',
-    highlight: false,
-    popular: false,
-    features: [
-      'Semua fitur Premium',
-      'Branding & logo bisnis sendiri',
-      'Domain khusus bisnis Anda',
-      'Hapus semua atribusi Japan Arena',
-      'Request fitur custom',
-      'Prioritas support & maintenance',
-      'SLA response 1×12 jam',
-    ],
-    cta: 'Diskusi Kebutuhan →',
-    ctaStyle: 'border',
-    waMsg: 'Halo, saya tertarik dengan paket White-label Japan Arena Platform. Bisa minta info lebih lanjut?',
-  },
-]
-
-function PricingSection() {
-  return (
-    <section id="harga" className="bg-white py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Investasi</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Harga transparan, tanpa biaya tersembunyi
-          </h2>
-          <p className="text-gray-400 text-lg">
-            Coba gratis 14 hari tanpa kartu kredit — lanjut sesuai kebutuhan bisnis Anda.
-          </p>
-        </div>
-
-        {/* Grid 4 kartu */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-start">
-          {PLANS.map(plan => (
-            <div
-              key={plan.id}
-              className={`rounded-2xl p-6 relative flex flex-col h-full ${
-                plan.highlight
-                  ? 'bg-blue-600 shadow-xl shadow-blue-200 lg:scale-[1.03]'
-                  : 'bg-white border border-gray-200'
-              }`}
-              style={!plan.highlight ? { boxShadow: '0 2px 12px rgba(0,0,0,0.04)' } : {}}
-            >
-              {plan.popular && (
-                <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-white text-blue-600 text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-wider whitespace-nowrap shadow-md">
-                  ⭐ Paling Populer
-                </span>
-              )}
-
-              <p className={`text-[10px] font-black uppercase tracking-widest mb-3 ${
-                plan.highlight ? 'text-blue-200' : 'text-gray-400'
-              }`}>
-                {plan.badge}
-              </p>
-
-              <div className="mb-1">
-                <span className={`text-3xl font-black ${plan.highlight ? 'text-white' : 'text-gray-900'}`}>
-                  {plan.price}
-                </span>
-                <span className={`text-sm ml-1 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
-                  {plan.period}
-                </span>
-              </div>
-              {'priceSub' in plan && plan.priceSub && (
-                <p className={`text-xs mb-2 ${plan.highlight ? 'text-blue-200' : 'text-gray-400'}`}>
-                  {plan.priceSub}
-                </p>
-              )}
-
-              <p className={`text-xs pb-5 mb-5 border-b ${
-                plan.highlight
-                  ? 'text-blue-200/70 border-white/15'
-                  : 'text-gray-400 border-gray-100'
-              }`}>
-                {plan.desc}
-              </p>
-
-              <ul className="space-y-2.5 mb-7 flex-1">
-                {plan.features.map(f => (
-                  <li key={f} className={`flex items-start gap-2 text-xs leading-relaxed ${
-                    plan.highlight ? 'text-white/85' : 'text-gray-600'
-                  }`}>
-                    <Check size={13} className={`flex-shrink-0 mt-0.5 ${
-                      plan.highlight ? 'text-blue-200' : 'text-green-500'
-                    }`} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              {'registerHref' in plan && plan.registerHref ? (
-                <div>
-                  <a
-                    href={plan.registerHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-center py-3 rounded-xl text-sm font-black transition-all bg-emerald-600 hover:bg-emerald-700 text-white"
-                  >
-                    {plan.cta}
-                  </a>
-                  <p className="text-xs text-gray-400 text-center mt-2">
-                    ✓ Gratis 14 hari&nbsp;&nbsp;✓ Tanpa kartu kredit&nbsp;&nbsp;✓ Langsung aktif
-                  </p>
+    return (
+        <section id="fitur" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
+            <div className="max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    {FEATURES.map(f => (
+                        <div key={f.title} className="flex flex-col items-center text-center group">
+                            <div className="w-16 h-16 bg-white rounded-3xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-105 transition-transform">
+                                <f.icon size={28} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3 sf-display">{f.title}</h3>
+                            <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
+                        </div>
+                    ))}
                 </div>
-              ) : (
-                <a
-                  href={waLink(plan.waMsg ?? undefined)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block text-center py-3 rounded-xl text-sm font-black transition-all ${
-                    plan.ctaStyle === 'solid'
-                      ? 'bg-white text-blue-600 hover:bg-blue-50'
-                      : plan.highlight
-                      ? 'border border-white/30 text-white hover:bg-white/10'
-                      : 'border border-gray-200 text-gray-600 hover:border-blue-300 hover:text-blue-600'
-                  }`}
-                >
-                  {plan.cta}
-                </a>
-              )}
             </div>
-          ))}
-        </div>
-
-        {/* Tabel perbandingan ringkas */}
-        <div className="mt-12 bg-gray-50 rounded-2xl p-6 overflow-x-auto">
-          <p className="text-sm font-black text-gray-700 mb-4 text-center">Perbandingan Cepat</p>
-          <table className="w-full text-xs text-gray-600 min-w-[480px]">
-            <thead>
-              <tr className="text-gray-400 border-b border-gray-200">
-                <th className="text-left py-2 font-semibold">Fitur</th>
-                <th className="text-center py-2 font-semibold">Starter</th>
-                <th className="text-center py-2 font-semibold">Pro</th>
-                <th className="text-center py-2 font-bold text-blue-600">Premium</th>
-                <th className="text-center py-2 font-semibold">White-label</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-100">
-              {[
-                ['Jumlah portal', '1', '1', 'Semua', 'Semua'],
-                ['Jumlah akun pengguna', '50', 'Unlimited', 'Unlimited', 'Unlimited'],
-                ['Notifikasi WA otomatis', '—', '✅', '✅', '✅'],
-                ['Invoice PDF otomatis', '—', '✅', '✅', '✅'],
-                ['Multi-admin & delegasi', '—', '—', '✅', '✅'],
-                ['Branding kustom', '—', '—', 'Warna & nama', 'Full white-label'],
-                ['Domain sendiri', '—', '—', '—', '✅'],
-                ['SLA support', 'Jam kerja', 'Prioritas', '1×24 jam', '1×12 jam'],
-              ].map(([fitur, ...cols]) => (
-                <tr key={fitur}>
-                  <td className="py-2.5 text-gray-700 font-medium">{fitur}</td>
-                  {cols.map((val, i) => (
-                    <td key={i} className={`text-center py-2.5 ${i === 2 ? 'font-bold text-blue-600' : ''}`}>
-                      {val}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="text-center text-gray-400 text-sm mt-8">
-          Semua paket sudah termasuk onboarding & panduan penggunaan gratis. Masih ragu?{' '}
-          <a
-            href={waLink('Halo, saya ingin konsultasi paket Japan Arena Platform yang cocok untuk bisnis saya.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 font-bold"
-          >
-            Konsultasi gratis via WA →
-          </a>
-        </p>
-      </div>
-    </section>
-  )
+        </section>
+    )
 }
 
-// ─── Testimonial ──────────────────────────────────────────────────────────────
+// ─── Main Page ───────────────────────────────────────────────────────────────
 
-function TestimonialSection() {
-  const testimonials = [
-    {
-      quote: 'Dulu buat invoice untuk 30+ siswa N2 dan N3 bisa habiskan 2 jam lebih. Sekarang semua otomatis via WA. Saya bisa fokus ke kualitas pengajaran.',
-      name: 'Dimas A.',
-      role: 'Founder, Japan Arena Academy',
-      initials: 'DA',
-      tag: 'invoice 30+ siswa → otomatis',
-    },
-    {
-      quote: 'Flashcard dan quiz JLPT-nya sangat membantu. Bisa latihan kapan saja, progress saya terpantau, dan akhirnya lulus N2 di ujian pertama.',
-      name: 'Tabita D.',
-      role: 'Alumni Japan Arena · Lulus JLPT N2',
-      initials: 'TD',
-      tag: 'lulus N2 ujian pertama',
-    },
-    {
-      quote: 'Absensi 2 kelas N2 dan N3 sekaligus dulu berantakan lewat grup WA. Sekarang siswa langsung dapat notifikasi, rekap otomatis, saya tinggal export.',
-      name: 'Dimas A.',
-      role: 'Japan Arena Academy',
-      initials: 'DA',
-      tag: 'absensi 2 kelas → rapi otomatis',
-    },
-  ]
+import { BarChart2 } from 'lucide-react'
 
-  const stats = [
-    { val: '87%',    label: 'Hemat waktu administrasi'   },
-    { val: '3 hari', label: 'Rata-rata waktu setup'       },
-    { val: '0',      label: 'Keahlian coding dibutuhkan'  },
-    { val: '24/7',   label: 'Akses portal belajar'        },
-  ]
-
+export default function LandingPage() {
   return (
-    <section className="bg-[#F8FAFF] py-20 lg:py-28 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">Testimoni</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Kata mereka yang sudah pakai
-          </h2>
-          <p className="text-gray-400 text-lg">Dari owner, instruktur, hingga siswa — semua merasakannya.</p>
-        </div>
-
-        {/* 3 Testimonial Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
-          {testimonials.map((t, i) => (
-            <div
-              key={i}
-              className="bg-white border border-blue-100 rounded-2xl p-6 flex flex-col"
-              style={{ boxShadow: '0 4px 20px rgba(37,99,235,0.06)' }}
-            >
-              <div className="flex gap-1 mb-4">
-                {[...Array(5)].map((_, j) => (
-                  <Star key={j} size={13} className="text-yellow-400 fill-yellow-400" />
-                ))}
-              </div>
-              <blockquote className="text-sm text-gray-600 italic leading-relaxed mb-6 flex-1">
-                &ldquo;{t.quote}&rdquo;
-              </blockquote>
-              <div>
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-black text-xs flex-shrink-0">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <p className="font-black text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-xs text-gray-400">{t.role}</p>
-                  </div>
-                </div>
-                <div className="bg-green-50 border border-green-100 rounded-full px-3 py-1 inline-flex">
-                  <p className="text-[10px] font-black text-green-600">✓ {t.tag}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {stats.map(s => (
-            <div
-              key={s.label}
-              className="bg-white border border-gray-100 rounded-2xl p-6 text-center"
-              style={{ boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
-            >
-              <p className="text-3xl font-black text-gray-900 mb-1">{s.val}</p>
-              <p className="text-xs text-gray-400 font-medium">{s.label}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA mini */}
-        <div className="bg-blue-600 rounded-2xl p-8 text-center shadow-xl shadow-blue-200">
-          <p className="text-white font-black text-lg mb-2">Mau hasil yang sama untuk bisnis Anda?</p>
-          <p className="text-blue-200 text-sm mb-6">Konsultasi gratis, kami bantu analisis kebutuhan spesifik bisnis Anda.</p>
-          <a
-            href={waLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-blue-50 text-blue-600 font-black rounded-xl transition-all text-sm"
-          >
-            Hubungi Kami via WA <ChevronRight size={15} />
-          </a>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── FAQ ──────────────────────────────────────────────────────────────────────
-
-function FaqSection() {
-  return (
-    <section id="faq" className="bg-white py-20 lg:py-28 px-4">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs font-black uppercase tracking-widest text-blue-600 mb-3">FAQ</p>
-          <h2 className="text-3xl font-black text-gray-900">
-            Pertanyaan yang sering diajukan
-          </h2>
-        </div>
-        <LmsFaq />
-        <p className="text-center mt-8 text-gray-400 text-sm">
-          Pertanyaan lain?{' '}
-          <a
-            href={waLink()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-700 font-bold"
-          >
-            Chat langsung via WhatsApp →
-          </a>
-        </p>
-      </div>
-    </section>
-  )
-}
-
-// ─── CTA Final ────────────────────────────────────────────────────────────────
-
-function CtaSection() {
-  return (
-    <section id="demo" className="bg-white py-20 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div
-          className="rounded-3xl p-10 md:p-14 text-center text-white shadow-2xl"
-          style={{ background: 'linear-gradient(135deg, #1D4ED8 0%, #1e3a8a 100%)' }}
-        >
-          <div className="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-2 text-xs font-black mb-8">
-            <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-            Slot onboarding tersedia bulan ini
-          </div>
-
-          <h2 className="text-3xl md:text-5xl font-black mb-5 leading-tight tracking-tight">
-            Bisnis Anda layak punya<br />sistem yang lebih baik.
-          </h2>
-          <p className="text-blue-100 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
-            Jangan biarkan administrasi manual terus menguras waktu Anda.
-            Satu percakapan singkat bisa mengubah cara Anda mengelola bisnis.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-blue-50 text-blue-700 font-black text-base rounded-xl transition-all shadow-lg"
-            >
-              💬 Konsultasi Gratis via WA <ArrowRight size={16} />
-            </a>
-            <a
-              href={CLINIC_DEMO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white/30 hover:bg-white/10 text-white font-bold text-base rounded-xl transition-all"
-            >
-              Lihat Demo Dulu →
-            </a>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-5 text-xs text-blue-100">
-            <span className="flex items-center gap-1.5"><Check size={12} className="text-blue-200" /> Konsultasi 100% gratis</span>
-            <span className="flex items-center gap-1.5"><Check size={12} className="text-blue-200" /> Tanpa komitmen awal</span>
-            <span className="flex items-center gap-1.5"><Check size={12} className="text-blue-200" /> Respons dalam 1 jam kerja</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-
-function Footer() {
-  return (
-    <footer className="bg-gray-900 text-white/40 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-          <div>
-            <p className="font-black text-white text-base mb-2">
-              Japan Arena <span className="text-blue-400">Platform</span>
-            </p>
-            <p className="text-sm leading-relaxed max-w-xs">
-              Sistem manajemen bisnis siap pakai by Japan Arena Corp. Setup cepat, fitur lengkap, harga transparan.
-            </p>
-          </div>
-
-          <div>
-            <p className="text-white/70 font-bold text-sm mb-4">Platform</p>
-            <div className="space-y-2.5 text-sm">
-              <a href="#fitur"  className="block hover:text-white/70 transition-colors">Fitur</a>
-              <a href="#segmen" className="block hover:text-white/70 transition-colors">Untuk Siapa</a>
-              <a href="#harga"  className="block hover:text-white/70 transition-colors">Harga</a>
-              <a href="#faq"    className="block hover:text-white/70 transition-colors">FAQ</a>
-            </div>
-          </div>
-
-          <div>
-            <p className="text-white/70 font-bold text-sm mb-4">Kontak</p>
-            <div className="space-y-2.5 text-sm">
-              <a
-                href={waLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block hover:text-white/70 transition-colors"
-              >
-                WhatsApp Kami
-              </a>
-              <a href={`${LMS_URL}/demo`} target="_blank" rel="noopener noreferrer" className="block hover:text-white/70 transition-colors">
-                Lihat Demo
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-          <p>© {new Date().getFullYear()} Japan Arena Corp. Hak cipta dilindungi.</p>
-          <p>Dibuat dengan ❤️ untuk bisnis Indonesia</p>
-        </div>
-      </div>
-    </footer>
-  )
-}
-
-// ─── Page ─────────────────────────────────────────────────────────────────────
-
-export default function LmsLandingPage() {
-  return (
-    <>
-      <LmsNavbar />
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      
       <main>
         <HeroSection />
         <SocialProofBar />
-        <ProblemSection />
-        <FiturSection />
-        <IntegrasiSection />
-        <CaraKerjaSection />
         <SegmenSection />
-        <PricingSection />
-        <TestimonialSection />
-        <FaqSection />
-        <CtaSection />
+        <GlobalFeatures />
+        
+        {/* Placeholder for FAQ / Footer which remains standard */}
+        <section id="harga" className="py-24 bg-white border-t border-black/5">
+            <div className="max-w-4xl mx-auto text-center px-4">
+                <h2 className="text-3xl font-black mb-6">Mulai Transformasi Bisnis Anda Hari Ini</h2>
+                <a href={waLink()} className="inline-block bg-[#0071E3] text-white px-10 py-4 rounded-full font-black shadow-lg hover:scale-105 transition-all">Hubungi Sales Specialist</a>
+            </div>
+        </section>
       </main>
-      <Footer />
-    </>
+
+      <footer className="bg-[#1D1D1F] text-white py-12 px-4">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+              <div className="flex items-center gap-3">
+                  <Image src="/images/Icon.png" alt="Logo" width={32} height={32} className="invert brightness-0" />
+                  <span className="font-bold">Japan Arena Corp</span>
+              </div>
+              <p className="text-gray-500 text-xs">© {new Date().getFullYear()} Japan Arena. All rights reserved.</p>
+          </div>
+      </footer>
+    </div>
   )
 }

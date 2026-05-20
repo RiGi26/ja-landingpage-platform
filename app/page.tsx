@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
-  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn,
+  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
 import LmsFaq from '@/components/LmsFaq'

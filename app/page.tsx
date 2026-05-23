@@ -133,7 +133,7 @@ function SegmenSection() {
       {
         emoji: '🎓',
         label: 'Portal LMS',
-        description: 'Untuk kursus, bimbel, sekolah, dan training karyawan korporasi.',
+        description: 'Otomasi sistem pengajaran dan pelatihan karyawan dalam satu platform cerdas & terpusat.',
         cta: 'Demo LMS',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
@@ -142,7 +142,7 @@ function SegmenSection() {
       {
         emoji: '🏥',
         label: 'Portal Klinik',
-        description: 'Manajemen rekam medis, antrean, dan billing pasien dalam satu sistem.',
+        description: 'Tingkatkan layanan kesehatan dengan rekam medis digital dan sistem antrean pasien otomatis.',
         cta: 'Demo Klinik',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
@@ -151,7 +151,7 @@ function SegmenSection() {
       {
         emoji: '💊',
         label: 'Portal Farmasi',
-        description: 'Manajemen stok obat, monitoring expiry date, dan kasir apotek (POS).',
+        description: 'Kendali penuh stok obat dan transaksi apotek dengan sistem POS yang terintegrasi.',
         cta: 'Coba Farmasi',
         href: 'https://ja-pharmacy-platform.vercel.app/login',
         color: 'text-indigo-600',
@@ -160,7 +160,7 @@ function SegmenSection() {
       {
         emoji: '🇯🇵',
         label: 'Portal Jastip',
-        description: 'Smart calculator otomatis untuk bisnis jasa titip barang luar negeri.',
+        description: 'Hitung biaya impor dan kelola pesanan jasa titip secara instan, akurat, dan transparan.',
         cta: 'Coba Jastip',
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',
@@ -169,7 +169,7 @@ function SegmenSection() {
       {
         emoji: '🌐',
         label: 'Website Builder',
-        description: 'Hadirkan brand Anda secara online dalam waktu kurang dari 24 jam.',
+        description: 'Hadirkan brand profesional Anda secara online dengan website instan yang siap pakai.',
         cta: 'Lihat Detail',
         href: 'https://ja-websitebuilder-platform-nfoa.vercel.app',
         color: 'text-purple-600',

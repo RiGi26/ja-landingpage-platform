@@ -142,11 +142,20 @@ function SegmenSection() {
       {
         emoji: '🏥',
         label: 'Portal Klinik',
-        description: 'Manajemen rekam medis, antrean, dan billing apotek dalam satu sistem.',
+        description: 'Manajemen rekam medis, antrean, dan billing pasien dalam satu sistem.',
         cta: 'Demo Klinik',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
+      },
+      {
+        emoji: '💊',
+        label: 'Portal Farmasi',
+        description: 'Manajemen stok obat, monitoring expiry date, dan kasir apotek (POS).',
+        cta: 'Coba Farmasi',
+        href: 'https://ja-pharmacy-platform.vercel.app/login',
+        color: 'text-indigo-600',
+        bg: 'bg-indigo-50',
       },
       {
         emoji: '🇯🇵',
@@ -276,6 +285,7 @@ export default function LandingPage() {
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="https://ja-lms-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
                           <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
+                          <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
                           <li><a href="https://ja-websitebuilder.vercel.app" className="hover:text-[#0071E3] transition-colors">Website Builder</a></li>
                       </ul>

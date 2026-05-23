@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, LayoutDashboard, GraduationCap, Building2, ShoppingBag, ArrowRight, LogIn } from 'lucide-react'
+import { X, LayoutDashboard, GraduationCap, Building2, ShoppingBag, ArrowRight, LogIn, Pill } from 'lucide-react'
 
 export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   if (!isOpen) return null
@@ -24,6 +24,14 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       btn: 'bg-emerald-600'
     },
     {
+      title: 'Portal Farmasi (Apotek)',
+      desc: 'Manajemen stok obat dan kasir apotek terpadu.',
+      icon: Pill,
+      href: 'https://ja-pharmacy-platform.vercel.app/login',
+      color: 'bg-indigo-50 text-indigo-600',
+      btn: 'bg-indigo-600'
+    },
+    {
       title: 'Portal Jastip Jepang',
       desc: 'Hitung biaya dan kelola pesanan titipan.',
       icon: ShoppingBag,
@@ -39,7 +47,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       <div className="absolute inset-0 bg-black/40 backdrop-blur-md" onClick={onClose} />
       
       {/* Modal Card */}
-      <div className="relative bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-pop border border-black/5">
+      <div className="relative bg-white rounded-[32px] shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto animate-scale-pop border border-black/5">
         <div className="p-6 md:p-10">
           <div className="flex justify-between items-start mb-6 md:mb-8">
             <div>
@@ -51,24 +59,23 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {PORTALS.map((p) => (
               <a 
                 key={p.title} 
                 href={p.href}
-                className="group flex flex-row md:flex-col items-center md:items-start gap-4 p-5 md:p-6 rounded-3xl bg-white border border-black/[0.03] apple-shadow hover:shadow-lg transition-all hover:-translate-y-1"
+                className="group flex flex-row items-center gap-4 p-5 md:p-6 rounded-3xl bg-white border border-black/[0.03] apple-shadow hover:shadow-lg transition-all hover:-translate-y-1"
               >
-                <div className={`w-12 h-12 md:w-14 md:h-14 ${p.color} rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
-                  <p.icon size={24} />
+                <div className={`w-12 h-12 md:w-16 md:h-16 ${p.color} rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                  <p.icon size={28} />
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                     <h3 className="font-bold text-gray-900 leading-tight mb-1 md:mb-2 text-sm md:text-base">{p.title}</h3>
-                    <p className="text-[10px] md:text-xs text-gray-500 line-clamp-2 md:line-clamp-none">{p.desc}</p>
-                    <div className="hidden md:flex items-center text-sm font-bold text-blue-600 group-hover:translate-x-1 transition-transform mt-4">
+                    <p className="text-[10px] md:text-xs text-gray-500 line-clamp-2">{p.desc}</p>
+                    <div className="flex items-center text-sm font-bold text-blue-600 group-hover:translate-x-1 transition-transform mt-3">
                         Login <ArrowRight size={14} className="ml-1" />
                     </div>
                 </div>
-                <ArrowRight size={16} className="md:hidden ml-auto text-gray-300 group-hover:text-blue-600 transition-colors" />
               </a>
             ))}
           </div>

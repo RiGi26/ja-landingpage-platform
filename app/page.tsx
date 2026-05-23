@@ -4,7 +4,8 @@ import { useState } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
-  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag
+  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2,
+  Facebook, Twitter, Instagram, Linkedin, ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
 import LmsFaq from '@/components/LmsFaq'
@@ -235,11 +236,60 @@ function GlobalFeatures() {
     )
 }
 
-// ─── Main Page ───────────────────────────────────────────────────────────────
+function TrustSection() {
+    const STEPS = [
+        { t: '1. Pilih Portal', d: 'Pilih platform SaaS yang sesuai dengan kebutuhan bisnis Anda.', i: LayoutGrid },
+        { t: '2. Aktivasi & Branding', d: 'Sistem disiapkan dalam 1-3 hari dengan logo & domain Anda.', i: Zap },
+        { t: '3. Langsung Operasional', d: 'Bisnis Anda siap berjalan dengan otomasi penuh 24/7.', i: Rocket },
+    ]
 
-import { 
-  BarChart2, Facebook, Twitter, Instagram, Linkedin, Github, Mail, MapPin, Phone
-} from 'lucide-react'
+    const BADGES = [
+        { t: 'Enterprise Security', d: '256-bit SSL Encryption', i: ShieldCheck },
+        { t: 'Daily Backups', d: 'Data aman & terproteksi', i: HardDrive },
+        { t: 'High Availability', d: '99.9% Uptime Guarantee', i: Globe2 },
+        { t: 'Official Integration', d: 'Midtrans & WA Gateway', i: Zap },
+    ]
+
+    return (
+        <section className="bg-white py-24 px-4 border-t border-black/5">
+            <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-16">
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Simple Process</p>
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Mulai Dalam 3 Langkah Mudah</h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                    {STEPS.map((s, i) => (
+                        <div key={i} className="relative p-10 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group">
+                            <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
+                            <div className="w-14 h-14 bg-white rounded-2xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
+                                <s.i size={28} />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">{s.t}</h3>
+                            <p className="text-sm text-gray-500 leading-relaxed">{s.d}</p>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="pt-20 border-t border-black/5">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                        {BADGES.map((b, i) => (
+                            <div key={i} className="flex flex-col items-center text-center">
+                                <div className="w-10 h-10 rounded-full bg-blue-50 text-[#0071E3] flex items-center justify-center mb-4">
+                                    <b.i size={20} />
+                                </div>
+                                <h4 className="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-1">{b.t}</h4>
+                                <p className="text-[10px] text-gray-400 font-medium">{b.d}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─── Main Page ───────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
   return (
@@ -251,6 +301,7 @@ export default function LandingPage() {
         <SocialProofBar />
         <SegmenSection />
         <GlobalFeatures />
+        <TrustSection />
         
         {/* Placeholder for FAQ / Footer which remains standard */}
         <section id="harga" className="py-24 bg-white border-t border-black/5">

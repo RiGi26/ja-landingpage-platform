@@ -39,33 +39,36 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       <div className="absolute inset-0 bg-black/40 backdrop-blur-md" onClick={onClose} />
       
       {/* Modal Card */}
-      <div className="relative bg-white rounded-[32px] shadow-2xl w-full max-w-2xl overflow-hidden animate-scale-pop border border-black/5">
-        <div className="p-8 md:p-10">
-          <div className="flex justify-between items-start mb-8">
+      <div className="relative bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-pop border border-black/5">
+        <div className="p-6 md:p-10">
+          <div className="flex justify-between items-start mb-6 md:mb-8">
             <div>
-              <h2 className="text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Anda</h2>
-              <p className="text-gray-500 mt-1">Silakan masuk ke layanan yang Anda gunakan.</p>
+              <h2 className="text-2xl md:text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Anda</h2>
+              <p className="text-sm text-gray-500 mt-1">Silakan masuk ke layanan yang Anda gunakan.</p>
             </div>
-            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <X size={24} />
+            <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors shrink-0">
+              <X size={20} />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             {PORTALS.map((p) => (
               <a 
                 key={p.title} 
                 href={p.href}
-                className="group flex flex-col p-6 rounded-3xl bg-white border border-black/[0.03] apple-shadow hover:shadow-lg transition-all hover:-translate-y-1"
+                className="group flex flex-row md:flex-col items-center md:items-start gap-4 p-5 md:p-6 rounded-3xl bg-white border border-black/[0.03] apple-shadow hover:shadow-lg transition-all hover:-translate-y-1"
               >
-                <div className={`w-12 h-12 ${p.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                <div className={`w-12 h-12 md:w-14 md:h-14 ${p.color} rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
                   <p.icon size={24} />
                 </div>
-                <h3 className="font-bold text-gray-900 leading-tight mb-2">{p.title}</h3>
-                <p className="text-xs text-gray-500 mb-6 flex-1">{p.desc}</p>
-                <div className="flex items-center text-sm font-bold text-blue-600 group-hover:translate-x-1 transition-transform">
-                  Login <ArrowRight size={14} className="ml-1" />
+                <div className="min-w-0">
+                    <h3 className="font-bold text-gray-900 leading-tight mb-1 md:mb-2 text-sm md:text-base">{p.title}</h3>
+                    <p className="text-[10px] md:text-xs text-gray-500 line-clamp-2 md:line-clamp-none">{p.desc}</p>
+                    <div className="hidden md:flex items-center text-sm font-bold text-blue-600 group-hover:translate-x-1 transition-transform mt-4">
+                        Login <ArrowRight size={14} className="ml-1" />
+                    </div>
                 </div>
+                <ArrowRight size={16} className="md:hidden ml-auto text-gray-300 group-hover:text-blue-600 transition-colors" />
               </a>
             ))}
           </div>

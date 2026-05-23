@@ -187,9 +187,12 @@ function SegmenSection() {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {PORTALS.map(p => (
-                        <div key={p.label} className="group flex flex-col p-8 rounded-[32px] bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className="flex flex-wrap justify-center gap-6">
+                    {PORTALS.map((p, index) => (
+                        <div 
+                          key={p.label} 
+                          className={`group flex flex-col p-8 rounded-[32px] bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm`}
+                        >
                             <div className={`w-14 h-14 ${p.bg} rounded-[20px] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform`}>
                                 {p.emoji}
                             </div>

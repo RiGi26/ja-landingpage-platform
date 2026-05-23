@@ -162,7 +162,7 @@ function SegmenSection() {
         label: 'Website Builder',
         description: 'Hadirkan brand Anda secara online dalam waktu kurang dari 24 jam.',
         cta: 'Lihat Detail',
-        href: 'https://ja-websitebuilder-platform.vercel.app',
+        href: 'https://ja-websitebuilder-platform-nfoa.vercel.app',
         color: 'text-purple-600',
         bg: 'bg-purple-50',
       },

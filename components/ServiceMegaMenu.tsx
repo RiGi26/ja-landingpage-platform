@@ -7,7 +7,7 @@ const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanaren
 const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://ja-clinic-platform.vercel.app/auth/login').split('/auth/')[0]
 const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
 
-const STUDIO_URL = 'https://ja-websitebuilder-platform.vercel.app'
+const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
 
 function wa(service: string) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Japan Arena Corp, saya tertarik dengan layanan ${service}.`)}`

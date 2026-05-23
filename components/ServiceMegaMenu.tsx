@@ -7,8 +7,10 @@ const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanaren
 const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://ja-clinic-platform.vercel.app/auth/login').split('/auth/')[0]
 const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
 
+const STUDIO_URL = 'https://ja-websitebuilder-platform.vercel.app'
+
 function wa(service: string) {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Japan Arena, saya tertarik dengan layanan ${service}.`)}`
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Japan Arena Corp, saya tertarik dengan layanan ${service}.`)}`
 }
 
 type ColItem = { label: string; desc: string; href: string }
@@ -21,12 +23,12 @@ const COLUMNS: Column[] = [
     color: 'text-[#0071E3]',
     bg   : 'bg-blue-50',
     items: [
-      { label: 'Company Profile',    desc: 'Website perusahaan modern',         href: wa('Company Profile')   },
-      { label: 'Website Sekolah/LPK',desc: 'Portal resmi lembaga pendidikan',   href: wa('Website Sekolah/LPK')},
-      { label: 'Website Blog/Media', desc: 'Portal artikel & konten SEO',        href: wa('Website Blog/Media') },
-      { label: 'Toko Online',        desc: 'Jual produk fisik & digital',        href: wa('Toko Online')        },
+      { label: 'Website Studio',     desc: 'Bangun web bisnis terima beres',    href: STUDIO_URL               },
+      { label: 'Company Profile',    desc: 'Website perusahaan modern',         href: `${STUDIO_URL}/template` },
+      { label: 'Website Sekolah/LPK',desc: 'Portal resmi lembaga pendidikan',   href: `${STUDIO_URL}/template` },
+      { label: 'Website Blog/Media', desc: 'Portal artikel & konten SEO',        href: `${STUDIO_URL}/template` },
+      { label: 'Toko Online',        desc: 'Jual produk fisik & digital',        href: `${STUDIO_URL}/template` },
       { label: 'Website Jastip',     desc: 'Jastip & cargo Jepang',             href: JASTIP_URL               },
-      { label: 'Custom UI/UX',       desc: 'Desain premium responsive',          href: wa('Custom UI/UX')       },
     ],
   },
   {

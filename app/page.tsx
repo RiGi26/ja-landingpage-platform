@@ -40,8 +40,8 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Solusi SaaS manajemen operasional untuk LMS, Klinik, dan Jastip. 
-              Satu dashboard untuk mengelola seluruh aspek bisnis Anda.
+              Solusi SaaS dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Website Builder. 
+              Satu pintu untuk mengotomasi seluruh aspek operasional bisnis Anda.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

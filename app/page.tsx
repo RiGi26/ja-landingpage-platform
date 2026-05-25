@@ -132,6 +132,15 @@ function SocialProofBar() {
 function SegmenSection() {
     const PORTALS = [
       {
+        emoji: '🌐',
+        label: 'Website Builder',
+        description: 'Hadirkan brand profesional Anda secara online dengan website instan yang siap pakai.',
+        cta: 'Pilih Katalog Desain',
+        href: 'https://ja-websitebuilder-platform-nfoa.vercel.app',
+        color: 'text-purple-600',
+        bg: 'bg-purple-50',
+      },
+      {
         emoji: '🎓',
         label: 'Portal LMS',
         description: 'Otomasi sistem pengajaran dan pelatihan karyawan dalam satu platform cerdas & terpusat.',
@@ -166,15 +175,6 @@ function SegmenSection() {
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',
         bg: 'bg-red-50',
-      },
-      {
-        emoji: '🌐',
-        label: 'Website Builder',
-        description: 'Hadirkan brand profesional Anda secara online dengan website instan yang siap pakai.',
-        cta: 'Pilih Katalog Desain',
-        href: 'https://ja-websitebuilder-platform-nfoa.vercel.app',
-        color: 'text-purple-600',
-        bg: 'bg-purple-50',
       },
     ]
 

@@ -142,9 +142,9 @@ function SegmenSection() {
       },
       {
         emoji: '🚌',
-        label: 'Travel & Rental',
-        description: 'Mobilitas tanpa batas. Pesan tiket travel antar kota & sewa mobil premium dengan mudah.',
-        cta: 'Cek Armada Kami',
+        label: 'Portal Travel & Rental',
+        description: 'Sistem manajemen transportasi antar kota dan operasional penyewaan armada dengan fitur pelacakan real-time dan e-ticketing.',
+        cta: 'Eksplor Sistem Travel',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
         bg: 'bg-sky-50',

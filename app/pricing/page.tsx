@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
+import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
 const PLATFORMS = [
@@ -53,8 +54,23 @@ export default function PricingPage() {
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-32 pb-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-50 pb-20">
+      <Navbar />
+
+      <div className="max-w-6xl mx-auto pt-32 px-4">
+        {/* Breadcrumb / Back Button */}
+        <div className="mb-8 animate-fade-in">
+          <Link 
+            href="/" 
+            className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors group"
+          >
+            <div className="w-8 h-8 rounded-full bg-white border border-black/5 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-100 transition-all shadow-sm">
+              <ArrowRight size={14} className="rotate-180" />
+            </div>
+            Kembali ke Beranda
+          </Link>
+        </div>
+
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">

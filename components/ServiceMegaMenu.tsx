@@ -52,6 +52,7 @@ const COLUMNS: Column[] = [
     bg   : 'bg-indigo-50',
     items: [
       { label: 'Portal Klinik & Medis',  desc: 'Rekam medis, antrian, billing',   href: `${CLINIC_BASE}/demo`           },
+      { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://ja-rental-platform.vercel.app' },
       { label: 'Dashboard Bisnis',       desc: 'Monitoring real-time omzet',       href: wa('Dashboard Bisnis')          },
       { label: 'Invoice PDF Otomatis',   desc: 'Cetak & kirim invoice instan',     href: wa('Invoice PDF Otomatis')      },
       { label: 'Sistem Pembayaran',      desc: 'Integrasi Midtrans per klien',     href: wa('Sistem Pembayaran')         },

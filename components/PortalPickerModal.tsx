@@ -38,6 +38,14 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       href: 'https://ja-jastip-platform.vercel.app',
       color: 'bg-red-50 text-red-600',
       btn: 'bg-red-600'
+    },
+    {
+      title: 'Portal Travel & Rental',
+      desc: 'Manajemen armada, e-ticketing, dan live tracking.',
+      icon: LayoutDashboard,
+      href: 'https://ja-rental-platform.vercel.app/superadmin',
+      color: 'bg-sky-50 text-sky-600',
+      btn: 'bg-sky-600'
     }
   ]
 

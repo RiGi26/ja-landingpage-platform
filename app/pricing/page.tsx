@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
+import ComparisonInfographic from '@/components/ComparisonInfographic'
 
 const PLATFORMS = [
   { 
@@ -127,6 +128,9 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
+
+        {/* Comparison Section */}
+        <ComparisonInfographic />
 
         {/* ECOSYSTEM BUNDLE STRATEGY */}
         <div className="bg-gradient-to-br from-gray-900 to-black rounded-[40px] p-8 md:p-16 text-white relative overflow-hidden">

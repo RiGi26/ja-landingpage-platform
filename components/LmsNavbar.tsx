@@ -9,7 +9,7 @@ import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 const NAV_LINKS = [
   { label: 'Fitur',   href: '#fitur'   },
   { label: 'Solusi',  href: '#segmen'  },
-  { label: 'Harga',   href: '#harga'   },
+  { label: 'Harga',   href: '/pricing' },
 ]
 
 export default function LmsNavbar() {

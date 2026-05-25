@@ -141,6 +141,15 @@ function SegmenSection() {
         bg: 'bg-purple-50',
       },
       {
+        emoji: '🚌',
+        label: 'Travel & Rental',
+        description: 'Mobilitas tanpa batas. Pesan tiket travel antar kota & sewa mobil premium dengan mudah.',
+        cta: 'Cek Armada Kami',
+        href: 'https://ja-rental-platform.vercel.app',
+        color: 'text-sky-600',
+        bg: 'bg-sky-50',
+      },
+      {
         emoji: '🎓',
         label: 'Portal LMS',
         description: 'Otomasi sistem pengajaran dan pelatihan karyawan dalam satu platform cerdas & terpusat.',

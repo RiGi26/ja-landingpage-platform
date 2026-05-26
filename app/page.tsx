@@ -178,9 +178,9 @@ function SegmenSection() {
       },
       {
         emoji: '🇯🇵',
-        label: 'Portal Jastip',
-        description: 'Hitung biaya impor dan kelola pesanan jasa titip secara instan, akurat, dan transparan.',
-        cta: 'Coba Sistem Jastip',
+        label: 'Layanan Jastip Jepang',
+        description: 'Jasa titip profesional dari Jepang ke Indonesia. Belanja barang impian Anda dengan kalkulasi biaya transparan dan pengiriman express.',
+        cta: 'Mulai Titip Barang',
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',
         bg: 'bg-red-50',

@@ -9,7 +9,6 @@ import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
   { label: 'Fitur',   href: '/#fitur'   },
-  { label: 'Solusi',  href: '/#segmen'  },
   { label: 'Harga',   href: '/pricing' },
 ]
 
@@ -65,14 +64,14 @@ export default function LmsNavbar() {
               Home
             </Link>
 
-            {/* Layanan — mega menu trigger */}
+            {/* Produk SaaS — mega menu trigger */}
             <button
               onClick={() => setIsMenuOpen(v => !v)}
               className={`flex items-center gap-1 text-sm font-semibold transition-colors ${
                 isMenuOpen ? 'text-[#0071E3]' : 'text-gray-500 hover:text-blue-600'
               }`}
             >
-              Layanan
+              Produk SaaS
               <ChevronDown
                 size={14}
                 strokeWidth={2.5}
@@ -80,16 +79,26 @@ export default function LmsNavbar() {
               />
             </button>
 
+            {/* Jasa Jastip — Standalone Link */}
+            <a
+              href="https://ja-jastip-platform.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-gray-500 hover:text-red-600 transition-colors"
+            >
+              Jasa Jastip
+            </a>
+
             {/* Regular nav links */}
             {NAV_LINKS.map(l => (
-              <a
+              <Link
                 key={l.href}
                 href={l.href}
                 onClick={closeMenu}
                 className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -119,21 +128,28 @@ export default function LmsNavbar() {
             <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
               Home
             </Link>
+            <a 
+              href="https://ja-jastip-platform.vercel.app" 
+              className="block text-lg font-bold text-red-600 py-1"
+              onClick={() => setOpen(false)}
+            >
+              Jasa Jastip Jepang
+            </a>
             {NAV_LINKS.map(l => (
-              <a
+              <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className="block text-lg font-bold text-gray-900 py-1"
               >
                 {l.label}
-              </a>
+              </Link>
             ))}
 
             {/* Layanan — flat list by column */}
             <div className="pt-2 border-t border-black/5">
               <p className="text-xs font-bold uppercase tracking-widest text-[#0071E3] mb-3">
-                Modul Layanan
+                Katalog Produk SaaS
               </p>
               {COLUMNS.map(col => (
                 <div key={col.title} className="mb-4">

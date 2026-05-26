@@ -12,9 +12,9 @@ const PLATFORMS = [
     name: 'Portal LMS', 
     icon: '🎓',
     plans: [
-      { tier: 'Starter', price: 249000, feat: ['50 Siswa', '5 Kursus', 'Progress Tracking'] },
-      { tier: 'Pro', price: 499000, feat: ['500 Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis'], popular: true },
-      { tier: 'Institusi', price: 999000, feat: ['Unlimited Siswa', 'Custom Domain', 'Advanced Analytics'] },
+      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
+      { tier: 'Pro', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis'], popular: true },
+      { tier: 'Enterprise', price: 'Custom', feat: ['Unlimited Siswa', 'Custom Domain', 'White-label Platform'] },
     ]
   },
   { 
@@ -22,9 +22,9 @@ const PLATFORMS = [
     name: 'Portal Klinik', 
     icon: '🏥',
     plans: [
-      { tier: 'Starter', price: 299000, feat: ['1 Dokter', 'Booking System', 'Rekam Medis Dasar'] },
-      { tier: 'Pro', price: 599000, feat: ['5 Dokter', 'WhatsApp Notifikasi', 'Integrasi Farmasi'], popular: true },
-      { tier: 'Klinik', price: 1199000, feat: ['Unlimited Dokter', 'Multi Cabang', 'Laporan Lanjutan'] },
+      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
+      { tier: 'Pro', price: 599000, feat: ['5 Dokter / Akun', 'WhatsApp Notifikasi', 'Integrasi Farmasi'], popular: true },
+      { tier: 'Enterprise', price: 'Custom', feat: ['Unlimited Dokter', 'Manajemen Multi-cabang', 'SLA 99.9%'] },
     ]
   },
   { 
@@ -32,9 +32,9 @@ const PLATFORMS = [
     name: 'Portal Farmasi', 
     icon: '💊',
     plans: [
-      { tier: 'Starter', price: 199000, feat: ['1 Kasir', 'Stok Obat', 'Laporan Harian'] },
-      { tier: 'Pro', price: 449000, feat: ['3 Kasir', 'Printer Integration', 'Offline Mode'], popular: true },
-      { tier: 'Apotek', price: 899000, feat: ['Unlimited Kasir', 'Cetak Label', 'Analytics Stok'] },
+      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
+      { tier: 'Pro', price: 449000, feat: ['3 Kasir / Akun', 'Printer Integration', 'Sync Data Klinik'], popular: true },
+      { tier: 'Enterprise', price: 'Custom', feat: ['Unlimited Kasir', 'Pusat Distribusi (Gudang)', 'Analytics Stok Cerdas'] },
     ]
   },
   { 
@@ -42,9 +42,9 @@ const PLATFORMS = [
     name: 'Travel & Rental', 
     icon: '🚌',
     plans: [
-      { tier: 'Starter', price: 299000, feat: ['Fleet Management', 'E-Ticketing', 'Jadwal Real-time'] },
+      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Pro', price: 749000, feat: ['Live Tracking Driver', 'WhatsApp E-ticket', 'Payment Integration'], popular: true },
-      { tier: 'Enterprise', price: 1499000, feat: ['White Label App', 'Advanced API', 'SLA 99.9%'] },
+      { tier: 'Enterprise', price: 'Custom', feat: ['White Label App', 'Advanced API', 'Custom Fleet Management'] },
     ]
   }
 ]
@@ -115,12 +115,18 @@ export default function PricingPage() {
               <div className="mb-8">
                 <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">{plan.tier}</p>
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-black text-gray-900">Rp {plan.price.toLocaleString('id-ID')}</span>
-                  <span className="text-gray-400 text-sm font-medium">/bulan</span>
+                  <span className="text-3xl font-black text-gray-900">
+                    {typeof plan.price === 'number' 
+                      ? plan.price === 0 ? 'Gratis' : `Rp ${plan.price.toLocaleString('id-ID')}` 
+                      : plan.price}
+                  </span>
+                  {typeof plan.price === 'number' && plan.price !== 0 && (
+                    <span className="text-gray-400 text-sm font-medium">/bulan</span>
+                  )}
                 </div>
               </div>
 
-              <div className="space-y-4 mb-10">
+              <div className="space-y-4 mb-10 min-h-[140px]">
                 {plan.feat.map(f => (
                   <div key={f} className="flex items-center gap-3 text-sm text-gray-600 font-medium">
                     <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
@@ -132,14 +138,16 @@ export default function PricingPage() {
               </div>
 
               <Link 
-                href="https://wa.me/6281296917963"
+                href={plan.tier === 'Pro Trial' ? '/register' : "https://wa.me/6281296917963"}
                 className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
                   plan.popular 
                   ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg' 
-                  : 'bg-gray-900 text-white hover:bg-black'
+                  : plan.tier === 'Pro Trial'
+                    ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                    : 'bg-gray-900 text-white hover:bg-black'
                 }`}
               >
-                Mulai Berlangganan <ArrowRight size={16} />
+                {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari' : 'Mulai Berlangganan'} <ArrowRight size={16} />
               </Link>
             </div>
           ))}

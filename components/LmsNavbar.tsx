@@ -3,12 +3,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Menu, X, LogIn, ChevronDown } from 'lucide-react'
 import Image from 'next/image'
+import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
 import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
-  { label: 'Fitur',   href: '#fitur'   },
-  { label: 'Solusi',  href: '#segmen'  },
+  { label: 'Fitur',   href: '/#fitur'   },
+  { label: 'Solusi',  href: '/#segmen'  },
   { label: 'Harga',   href: '/pricing' },
 ]
 
@@ -40,7 +41,7 @@ export default function LmsNavbar() {
       >
         <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-16">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image
               src="/images/Icon.png"
               alt="Japan Arena"
@@ -52,17 +53,17 @@ export default function LmsNavbar() {
             <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">
               Japan Arena Corp
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-6">
             {/* Home */}
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
             >
               Home
-            </a>
+            </Link>
 
             {/* Layanan — mega menu trigger */}
             <button
@@ -115,9 +116,9 @@ export default function LmsNavbar() {
         {open && (
           <div className="md:hidden border-t border-black/5 bg-white/95 backdrop-blur-xl px-4 py-6 space-y-4 shadow-2xl overflow-y-auto max-h-[80vh]">
             {/* Regular links */}
-            <a href="#" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
+            <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
               Home
-            </a>
+            </Link>
             {NAV_LINKS.map(l => (
               <a
                 key={l.href}

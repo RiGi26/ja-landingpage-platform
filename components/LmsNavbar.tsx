@@ -8,7 +8,7 @@ import PortalPickerModal from './PortalPickerModal'
 import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
-  { label: 'Fitur',   href: '/#fitur'   },
+  { label: 'Katalog Website', href: '/seluruh-layanan' },
   { label: 'Harga',   href: '/pricing' },
 ]
 
@@ -64,14 +64,14 @@ export default function LmsNavbar() {
               Home
             </Link>
 
-            {/* Produk SaaS — mega menu trigger */}
+            {/* Sistem & Portal — mega menu trigger */}
             <button
               onClick={() => setIsMenuOpen(v => !v)}
               className={`flex items-center gap-1 text-sm font-semibold transition-colors ${
                 isMenuOpen ? 'text-[#0071E3]' : 'text-gray-500 hover:text-blue-600'
               }`}
             >
-              Produk SaaS
+              Sistem & Portal
               <ChevronDown
                 size={14}
                 strokeWidth={2.5}
@@ -149,7 +149,7 @@ export default function LmsNavbar() {
             {/* Layanan — flat list by column */}
             <div className="pt-2 border-t border-black/5">
               <p className="text-xs font-bold uppercase tracking-widest text-[#0071E3] mb-3">
-                Katalog Produk SaaS
+                Katalog Sistem & Portal
               </p>
               {COLUMNS.map(col => (
                 <div key={col.title} className="mb-4">

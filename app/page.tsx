@@ -10,6 +10,7 @@ import {
 import Navbar from '@/components/LmsNavbar'
 import LmsFaq from '@/components/LmsFaq'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 

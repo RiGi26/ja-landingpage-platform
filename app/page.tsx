@@ -41,7 +41,7 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Solusi SaaS dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Website Builder. 
+              Solusi sistem operasional dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Katalog Website. 
               Satu pintu untuk mengotomasi seluruh aspek operasional bisnis Anda.
             </p>
 
@@ -133,12 +133,12 @@ function SegmenSection() {
     const PORTALS = [
       {
         emoji: '🌐',
-        label: 'Website Builder',
-        description: 'Hadirkan brand profesional Anda secara online dengan website instan yang siap pakai.',
-        cta: 'Pilih Katalog Desain',
-        href: 'https://ja-websitebuilder-platform-nfoa.vercel.app',
-        color: 'text-purple-600',
-        bg: 'bg-purple-50',
+        label: 'Katalog Website',
+        description: 'Website profil bisnis profesional, instan, dan terjangkau. Mulai dari Rp 600.000.',
+        cta: 'Mulai Rakit Website',
+        href: '/seluruh-layanan',
+        color: 'text-blue-600',
+        bg: 'bg-blue-50',
       },
       {
         emoji: '🚌',
@@ -247,7 +247,7 @@ function GlobalFeatures() {
 
 function TrustSection() {
     const STEPS = [
-        { t: '1. Pilih Portal', d: 'Pilih platform SaaS yang sesuai dengan kebutuhan bisnis Anda.', i: LayoutGrid },
+        { t: '1. Pilih Layanan', d: 'Pilih sistem atau paket website yang sesuai dengan kebutuhan bisnis Anda.', i: LayoutGrid },
         { t: '2. Aktivasi & Branding', d: 'Sistem disiapkan dalam 1-3 hari dengan logo & domain Anda.', i: Zap },
         { t: '3. Langsung Operasional', d: 'Bisnis Anda siap berjalan dengan otomasi penuh 24/7.', i: Rocket },
     ]
@@ -332,7 +332,7 @@ export default function LandingPage() {
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
                       <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-                          Penyedia solusi infrastruktur digital dan ekosistem SaaS terintegrasi untuk bisnis modern di Indonesia dan Jepang.
+                          Penyedia solusi infrastruktur digital dan ekosistem sistem operasional terintegrasi untuk bisnis modern di Indonesia dan Jepang.
                       </p>
                       <div className="flex gap-4">
                           <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>
@@ -350,7 +350,7 @@ export default function LandingPage() {
                           <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
                           <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
-                          <li><a href="https://ja-websitebuilder.vercel.app" className="hover:text-[#0071E3] transition-colors">Website Builder</a></li>
+                          <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Katalog Website</Link></li>
                       </ul>
                   </div>
 

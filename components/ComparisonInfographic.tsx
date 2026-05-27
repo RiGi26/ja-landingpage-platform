@@ -52,7 +52,7 @@ export default function ComparisonInfographic() {
             <div className="pt-8 flex items-start gap-4 p-6 bg-blue-50 rounded-[32px] border border-blue-100">
                <Info className="text-blue-600 shrink-0 mt-1" size={20} />
                <p className="text-sm text-blue-800 leading-relaxed font-medium">
-                 Data berdasarkan rata-rata harga paket Bisnis/Pro dari 8 kompetitor SaaS utama di Indonesia (Update Desember 2024). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong> untuk menekan biaya server kustomer.
+                 Data berdasarkan rata-rata harga paket Bisnis/Pro dari 8 kompetitor penyedia sistem operasional utama di Indonesia (Update Desember 2024). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong> untuk menekan biaya server kustomer.
                </p>
             </div>
           </div>

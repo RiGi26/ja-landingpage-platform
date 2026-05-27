@@ -46,7 +46,7 @@ const COLUMNS: Column[] = [
   },
   {
     emoji: '🏥',
-    title: 'Portal Sistem (SaaS)',
+    title: 'Portal Sistem Operasional',
     color: 'text-indigo-700',
     bg   : 'bg-indigo-50',
     items: [

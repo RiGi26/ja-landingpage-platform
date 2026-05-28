@@ -351,7 +351,7 @@ export default function LandingPage() {
                           <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
                           <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
-                          <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Katalog Website</Link></li>
+                          <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
                       </ul>
                   </div>
 

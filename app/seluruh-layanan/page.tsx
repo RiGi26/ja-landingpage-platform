@@ -354,33 +354,38 @@ Terima kasih.`
                                     <button
                                         key={pkg.id}
                                         onClick={() => { setSelectedPackage(pkg); setSelectedBundleId(null) }}
-                                        className={`flex flex-col md:flex-row md:items-center justify-between p-6 rounded-[24px] border-2 transition-all group ${
+                                        className={`flex flex-col p-6 rounded-[24px] border-2 transition-all group ${
                                             isSelected 
                                             ? 'border-emerald-500 bg-emerald-50/30 ring-4 ring-emerald-50' 
                                             : 'border-black/[0.03] hover:border-emerald-200'
                                         }`}
                                     >
-                                        <div className="flex items-center gap-5 mb-4 md:mb-0">
-                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors shrink-0 ${isSelected ? 'bg-emerald-500 text-white' : 'bg-gray-50 text-gray-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
-                                                <Database size={24} />
-                                            </div>
-                                            <div className="text-left">
-                                                <p className="font-bold text-gray-900 text-lg">{pkg.name} Server</p>
-                                                <div className="flex flex-wrap gap-2 mt-2">
-                                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
-                                                        <Server size={12}/> {pkg.storage} Storage
-                                                    </span>
-                                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
-                                                        <Users size={12}/> {pkg.visitor}
-                                                    </span>
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
+                                            <div className="flex items-center gap-5 mb-4 md:mb-0">
+                                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors shrink-0 ${isSelected ? 'bg-emerald-500 text-white' : 'bg-gray-50 text-gray-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
+                                                    <Database size={24} />
+                                                </div>
+                                                <div className="text-left">
+                                                    <p className="font-bold text-gray-900 text-lg">{pkg.name} Server</p>
+                                                    <div className="flex flex-wrap gap-2 mt-2">
+                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
+                                                            <Server size={12}/> {pkg.storage} Storage
+                                                        </span>
+                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
+                                                            <Users size={12}/> {pkg.visitor}
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div className="text-left md:text-right">
+                                                <p className={`text-2xl font-black tracking-tight ${isSelected ? 'text-emerald-700' : 'text-gray-900'}`}>
+                                                    Rp {pkg.price.toLocaleString('id-ID')}
+                                                </p>
+                                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Setup & Tahun Pertama</p>
+                                            </div>
                                         </div>
-                                        <div className="text-left md:text-right">
-                                            <p className={`text-2xl font-black tracking-tight ${isSelected ? 'text-emerald-700' : 'text-gray-900'}`}>
-                                                Rp {pkg.price.toLocaleString('id-ID')}
-                                            </p>
-                                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Setup & Tahun Pertama</p>
+                                        <div className={`text-left text-sm leading-relaxed border-t pt-3 w-full transition-colors ${isSelected ? 'text-emerald-800 border-emerald-200/50' : 'text-gray-500 border-black/[0.03]'}`}>
+                                            {pkg.description}
                                         </div>
                                     </button>
                                     )

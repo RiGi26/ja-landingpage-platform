@@ -20,22 +20,23 @@ export interface HostingPackage {
 
 export interface Bundle {
   id: string;
-  emoji: string;
-  name: string;
-  desc: string;
-  addonIds: string[];
-  hostingId: string;
-  normalPrice: number;
-  bundlePrice: number;
-}
+  export interface HostingPackage {
+    id: string;
+    name: string;
+    storage: string;
+    visitor: string;
+    price: number;
+    maintain: number;
+    description: string;
+  }
 
-export const HOSTING_PACKAGES: HostingPackage[] = [
-  { id: 'basic',      name: 'Basic',      storage: '5GB',    visitor: '±500/bulan',        price: 600000,   maintain: 370000  },
-  { id: 'starter',    name: 'Starter',    storage: '20GB',   visitor: '±3.000/bulan',       price: 1200000,  maintain: 750000  },
-  { id: 'growth',     name: 'Growth',     storage: '50GB',   visitor: '±15.000/bulan',      price: 2500000,  maintain: 1550000 },
-  { id: 'business',   name: 'Business',   storage: '100GB',  visitor: '±50.000/bulan',      price: 5000000,  maintain: 3100000 },
-  { id: 'enterprise', name: 'Enterprise', storage: '250GB+', visitor: 'High Performance',   price: 10000000, maintain: 6200000 },
-];
+  export const HOSTING_PACKAGES: HostingPackage[] = [
+    { id: 'basic',      name: 'Basic',      storage: '5GB',    visitor: '±500/bulan',        price: 600000,   maintain: 370000,  description: 'Cocok untuk landing page atau profil bisnis sederhana dengan puluhan foto.' },
+    { id: 'starter',    name: 'Starter',    storage: '20GB',   visitor: '±3.000/bulan',       price: 1200000,  maintain: 750000,  description: 'Pas untuk toko online, klinik, atau bisnis yang rutin upload konten.' },
+    { id: 'growth',     name: 'Growth',     storage: '50GB',   visitor: '±15.000/bulan',      price: 2500000,  maintain: 1550000, description: 'Performa ekstra untuk traffic ramai & banyak transaksi setiap harinya.' },
+    { id: 'business',   name: 'Business',   storage: '100GB',  visitor: '±50.000/bulan',      price: 5000000,  maintain: 3100000, description: 'Skala medium-enterprise dengan kebutuhan storage media yang masif.' },
+    { id: 'enterprise', name: 'Enterprise', storage: '250GB+', visitor: 'High Performance',   price: 10000000, maintain: 6200000, description: 'Dedicated resources untuk aplikasi skala besar dengan ribuan user aktif.' },
+  ];
 
 export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
   general: {

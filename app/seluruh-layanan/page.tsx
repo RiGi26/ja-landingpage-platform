@@ -137,7 +137,7 @@ export default function SeluruhLayananPage() {
     const setup = activeBundle 
       ? activeBundle.bundlePrice 
       : selectedPackage.price + selectedAddons.reduce((acc, curr) => acc + curr.price, 0)
-    const maintain = selectedPackage.maintain + selectedAddons.reduce((acc, curr) => acc + Math.round(curr.price * 0.5), 0)
+    const maintain = selectedPackage.maintain + selectedAddons.reduce((acc, curr) => acc + Math.round(curr.price * 0.75), 0)
     return { setupTotal: setup, maintainTotal: maintain }
   }, [selectedPackage, selectedAddons, selectedBundleId])
 

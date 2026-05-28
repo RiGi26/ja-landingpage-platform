@@ -242,7 +242,7 @@ Terima kasih.`
                 {/* STEP 1: FONDASI & BUNDLING */}
                 {currentStep === 1 && (
                     <div className="space-y-8 animate-fade-in">
-                        <section className="bg-white rounded-[32px] p-8 apple-shadow border border-black/[0.03]">
+                        <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 className="text-xl font-bold text-gray-900">Pilih Jenis Industri</h2>
@@ -342,7 +342,7 @@ Terima kasih.`
                 {/* STEP 2: SERVER */}
                 {currentStep === 2 && (
                     <div className="space-y-8 animate-fade-in">
-                        <section className="bg-white rounded-[32px] p-8 apple-shadow border border-black/[0.03]">
+                        <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 className="text-xl font-bold text-gray-900">Kapasitas Server & Storage</h2>
@@ -642,6 +642,36 @@ Terima kasih.`
                 Lihat Paket Langganan <ArrowRight size={18} />
               </Link>          </div>
       </section>
+
+      {/* Mobile Fixed Bottom Bar */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 pb-6 lg:hidden z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] flex items-center justify-between">
+          <div className="space-y-0.5">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Thn 1</span>
+              <p className="text-xl font-black text-[#0071E3] tracking-tight">
+                  Rp {animatedSetupTotal.toLocaleString('id-ID')}
+              </p>
+          </div>
+          {currentStep < 3 ? (
+              <button
+                  onClick={() => {
+                      window.scrollTo({ top: 150, behavior: 'smooth' });
+                      setCurrentStep(prev => prev + 1);
+                  }}
+                  className="flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-95 transition-all"
+              >
+                  Lanjut <ArrowRight size={16} />
+              </button>
+          ) : (
+              <a 
+                  href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all"
+              >
+                  Checkout <ArrowRight size={16} />
+              </a>
+          )}
+      </div>
     </div>
   )
 }

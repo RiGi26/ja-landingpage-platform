@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { Menu, X, LogIn, ChevronDown } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { Menu, X, LogIn } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
-import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
   { label: 'Rakit Website', href: '/seluruh-layanan' },
@@ -16,37 +15,31 @@ export default function LmsNavbar() {
   const [open,         setOpen]         = useState(false)
   const [scrolled,     setScrolled]     = useState(false)
   const [isPickerOpen, setIsPickerOpen] = useState(false)
-  const [isMenuOpen,   setIsMenuOpen]   = useState(false)
 
-  const closeMenu = useCallback(() => setIsMenuOpen(false), [])
-
-  // Scroll listener — close mega menu on scroll + detect scrolled state
+  // Detect scrolled state
   useEffect(() => {
-    const fn = () => {
-      setScrolled(window.scrollY > 20)
-      if (window.scrollY > 20) closeMenu()
-    }
-    fn()
-    window.addEventListener('scroll', fn, { passive: true })
-    return () => window.removeEventListener('scroll', fn)
-  }, [closeMenu])
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
       <header
         className={`fixed top-0 inset-x-0 z-[60] transition-all duration-300 ${
-          scrolled ? 'bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-sm' : 'bg-transparent'
+          scrolled ? 'bg-white/80 backdrop-blur-xl border-b border-black/5 shadow-sm py-3' : 'bg-transparent py-6'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between h-16">
+        <div className="max-w-6xl mx-auto px-4 lg:px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2 group">
             <Image
               src="/images/Icon.png"
               alt="Japan Arena"
               width={32}
               height={32}
-              className="w-8 h-8 object-contain"
+              className="w-8 h-8 object-contain transition-transform group-hover:scale-110"
               priority
             />
             <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">
@@ -55,7 +48,7 @@ export default function LmsNavbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6">
+          <nav className="hidden md:flex items-center gap-8">
             {/* Home */}
             <Link
               href="/"
@@ -63,21 +56,6 @@ export default function LmsNavbar() {
             >
               Home
             </Link>
-
-            {/* Sistem & Portal — mega menu trigger */}
-            <button
-              onClick={() => setIsMenuOpen(v => !v)}
-              className={`flex items-center gap-1 text-sm font-semibold transition-colors ${
-                isMenuOpen ? 'text-[#0071E3]' : 'text-gray-500 hover:text-blue-600'
-              }`}
-            >
-              Sistem & Portal
-              <ChevronDown
-                size={14}
-                strokeWidth={2.5}
-                className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
 
             {/* Jasa Jastip — Standalone Link */}
             <a
@@ -94,7 +72,6 @@ export default function LmsNavbar() {
               <Link
                 key={l.href}
                 href={l.href}
-                onClick={closeMenu}
                 className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
               >
                 {l.label}
@@ -123,8 +100,7 @@ export default function LmsNavbar() {
 
         {/* Mobile Drawer */}
         {open && (
-          <div className="md:hidden border-t border-black/5 bg-white/95 backdrop-blur-xl px-4 py-6 space-y-4 shadow-2xl overflow-y-auto max-h-[80vh]">
-            {/* Regular links */}
+          <div className="md:hidden absolute top-full left-0 w-full border-t border-black/5 bg-white shadow-2xl p-6 flex flex-col gap-4 animate-fade-in-down">
             <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
               Home
             </Link>
@@ -146,34 +122,6 @@ export default function LmsNavbar() {
               </Link>
             ))}
 
-            {/* Layanan — flat list by column */}
-            <div className="pt-2 border-t border-black/5">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#0071E3] mb-3">
-                Katalog Sistem & Portal
-              </p>
-              {COLUMNS.map(col => (
-                <div key={col.title} className="mb-4">
-                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">
-                    {col.emoji} {col.title}
-                  </p>
-                  <div className="grid grid-cols-2 gap-1">
-                    {col.items.map(item => (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        target={item.href.startsWith('http') ? '_blank' : undefined}
-                        rel="noopener noreferrer"
-                        onClick={() => setOpen(false)}
-                        className="text-xs font-semibold text-gray-700 hover:text-[#0071E3] py-1 truncate transition-colors"
-                      >
-                        {item.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <div className="pt-4 border-t border-black/5">
               <button
                 onClick={() => { setOpen(false); setIsPickerOpen(true) }}
@@ -185,9 +133,6 @@ export default function LmsNavbar() {
           </div>
         )}
       </header>
-
-      {/* Mega Menu (desktop only) */}
-      <ServiceMegaMenu isOpen={isMenuOpen} onClose={closeMenu} />
 
       <PortalPickerModal isOpen={isPickerOpen} onClose={() => setIsPickerOpen(false)} />
     </>

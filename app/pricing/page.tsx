@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle } from 'lucide-react'
+import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
@@ -11,6 +11,7 @@ const PLATFORMS = [
     id: 'lms', 
     name: 'Portal LMS', 
     icon: '🎓',
+    demoUrl: 'https://app.japanarenacorp.com/demo',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Professional', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis'], popular: true },
@@ -21,6 +22,7 @@ const PLATFORMS = [
     id: 'clinic', 
     name: 'Portal Klinik', 
     icon: '🏥',
+    demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Professional', price: 599000, feat: ['5 Dokter / Akun', 'WhatsApp Notifikasi', 'Integrasi Farmasi'], popular: true },
@@ -31,6 +33,7 @@ const PLATFORMS = [
     id: 'pharmacy', 
     name: 'Portal Farmasi', 
     icon: '💊',
+    demoUrl: 'https://ja-pharmacy-platform.vercel.app/login',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Professional', price: 449000, feat: ['3 Kasir / Akun', 'Printer Integration', 'Sync Data Klinik'], popular: true },
@@ -41,6 +44,7 @@ const PLATFORMS = [
     id: 'travel', 
     name: 'Travel & Rental', 
     icon: '🚌',
+    demoUrl: 'https://ja-rental-platform.vercel.app/auth/login',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Professional', price: 749000, feat: ['Live Tracking Driver', 'WhatsApp E-ticket', 'Payment Integration'], popular: true },
@@ -135,18 +139,31 @@ export default function PricingPage() {
                 ))}
               </div>
 
-              <Link 
-                href={plan.tier === 'Pro Trial' ? 'https://ja-rental-platform.vercel.app/register' : "https://wa.me/6281296917963"}
-                className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-95 text-sm uppercase tracking-widest ${
-                  plan.popular 
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200' 
-                  : plan.tier === 'Pro Trial'
-                    ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
-                    : 'bg-gray-900 text-white hover:bg-black'
-                }`}
-              >
-                {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari' : 'Mulai Berlangganan'} <ArrowRight size={16} />
-              </Link>
+              <div className="mt-auto space-y-3">
+                {currentPlatform.demoUrl && (
+                  <Link
+                    href={currentPlatform.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3 rounded-xl border-2 border-blue-50 text-blue-600 font-bold flex items-center justify-center gap-2 hover:bg-blue-50 transition-all text-sm group/demo"
+                  >
+                    Lihat Demo Sistem <ExternalLink size={14} className="group-hover/demo:translate-x-0.5 group-hover/demo:-translate-y-0.5 transition-transform" />
+                  </Link>
+                )}
+
+                <Link 
+                  href={plan.tier === 'Pro Trial' ? 'https://ja-rental-platform.vercel.app/register' : "https://wa.me/6281296917963"}
+                  className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-95 text-sm uppercase tracking-widest ${
+                    plan.popular 
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200' 
+                    : plan.tier === 'Pro Trial'
+                      ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+                      : 'bg-gray-900 text-white hover:bg-black'
+                  }`}
+                >
+                  {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari' : 'Mulai Berlangganan'} <ArrowRight size={16} />
+                </Link>
+              </div>
             </div>
           ))}
         </div>

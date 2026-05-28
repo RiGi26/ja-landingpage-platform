@@ -258,9 +258,9 @@ Terima kasih.`
               <div className="relative z-10">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-200">Paket Bundling — Hemat hingga 25%</p>
+                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-200">Rakitan Populer — Hemat hingga 25%</p>
                 </div>
-                <h3 className="text-xl font-black mb-6">Pilih Paket Siap Pakai</h3>
+                <h3 className="text-xl font-black mb-6">Rekomendasi Rakitan Custom</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {BUNDLES.map((bundle) => {
                     const hostingPkg = HOSTING_PACKAGES.find(h => h.id === bundle.hostingId)
@@ -288,14 +288,14 @@ Terima kasih.`
                           <span className="font-black text-yellow-300">Rp {bundle.bundlePrice.toLocaleString('id-ID')}</span>
                         </div>
                         <p className="text-[9px] text-blue-200 mt-1">
-                          Hosting {hostingPkg?.name} + {bundle.addonIds.length} add-on terpilih
+                          Hosting {hostingPkg?.name} + {bundle.addonIds.length} add-on custom
                         </p>
                       </button>
                     )
                   })}
                 </div>
                 <p className="text-[10px] text-blue-200 mt-4 text-center">
-                  atau pilih manual di bawah — kalkulator estimasi tetap aktif
+                  atau rakit fitur secara manual di bawah — kalkulator estimasi tetap aktif
                 </p>
               </div>
             </section>

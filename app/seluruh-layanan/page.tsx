@@ -91,6 +91,15 @@ export default function SeluruhLayananPage() {
   const [selectedPackage, setSelectedPackage] = useState<HostingPackage>(HOSTING_PACKAGES[0])
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([])
   const [selectedBundleId, setSelectedBundleId] = useState<string | null>(null)
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(['general']) // Default open first group
+
+  const toggleGroup = (groupKey: string) => {
+    setExpandedGroups(prev => 
+      prev.includes(groupKey) 
+        ? prev.filter(k => k !== groupKey) 
+        : [...prev, groupKey]
+    )
+  }
 
   const handleSelectBundle = (bundle: Bundle) => {
     if (selectedBundleId === bundle.id) {

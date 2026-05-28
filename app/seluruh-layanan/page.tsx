@@ -436,55 +436,70 @@ Terima kasih.`
                             </div>
                         )}
 
-                        {Object.entries(ADDON_GROUPS).map(([key, group]) => (
-                            <section key={key} className="bg-white rounded-[32px] p-8 apple-shadow border border-black/[0.03]">
-                                <h3 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-blue-500" />
-                                {group.title}
-                                </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {group.items.map(addon => {
-                                    const isActive = selectedAddons.find(a => a.id === addon.id)
-                                    return (
-                                    <button
-                                        key={addon.id}
-                                        onClick={() => toggleAddon(addon)}
-                                        className={`group p-6 rounded-[24px] border-2 text-left transition-all relative overflow-hidden ${
-                                        isActive 
-                                            ? 'border-[#0071E3] bg-blue-50/50' 
-                                            : 'border-black/[0.03] hover:border-blue-200 bg-white hover:bg-gray-50'
-                                        }`}
+                        {Object.entries(ADDON_GROUPS).map(([key, group]) => {
+                            const isExpanded = expandedGroups.includes(key);
+                            return (
+                                <section key={key} className="bg-white rounded-[24px] apple-shadow border border-black/[0.03] overflow-hidden">
+                                    <button 
+                                        onClick={() => toggleGroup(key)}
+                                        className="w-full px-8 py-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
                                     >
-                                        {isActive && (
-                                        <div className="absolute top-4 right-4 w-6 h-6 bg-[#0071E3] rounded-full flex items-center justify-center text-white">
-                                            <Check size={14} strokeWidth={4} />
+                                        <div className="flex items-center gap-3">
+                                            <div className={`w-2 h-2 rounded-full ${isExpanded ? 'bg-blue-500 animate-pulse' : 'bg-gray-300'}`} />
+                                            <h3 className="text-lg font-bold text-gray-900">{group.title}</h3>
+                                            <span className="text-[10px] font-black text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full uppercase">
+                                                {group.items.length} Fitur
+                                            </span>
                                         </div>
-                                        )}
-                                        <h4 className={`font-bold mb-4 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>
-                                        {addon.name}
-                                        </h4>
-                                        <div className="space-y-1">
-                                            <p className="text-xs font-black text-gray-400 uppercase tracking-widest">Setup Cost</p>
-                                            <p className={`text-xl font-black tracking-tight ${isActive ? 'text-blue-900' : 'text-gray-900'}`}>
-                                                Rp {addon.price.toLocaleString('id-ID')}
-                                            </p>
+                                        <div className={`transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                            <ChevronRight size={20} className="text-gray-400" />
                                         </div>
-                                        <div className="mt-4 pt-4 border-t border-black/[0.03] flex items-center justify-between">
-                                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Maintenance Thn 2+</span>
-                                            <span className="text-[10px] font-bold text-blue-600">Rp {(addon.price * 0.5).toLocaleString('id-ID')}</span>
-                                        </div>
-                                        {addon.disclaimer && (
-                                        <div className="mt-3 pt-3 border-t border-black/[0.03] flex items-start gap-2">
-                                            <Info size={12} className="text-amber-500 shrink-0 mt-0.5" />
-                                            <p className="text-[9px] text-amber-700 leading-relaxed font-medium">{addon.disclaimer}</p>
-                                        </div>
-                                        )}
                                     </button>
-                                    )
-                                })}
-                                </div>
-                            </section>
-                        ))}
+
+                                    {isExpanded && (
+                                        <div className="px-8 pb-8 animate-fade-in">
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {group.items.map(addon => {
+                                                    const isActive = selectedAddons.find(a => a.id === addon.id)
+                                                    return (
+                                                        <button
+                                                            key={addon.id}
+                                                            onClick={() => toggleAddon(addon)}
+                                                            className={`group p-5 rounded-[20px] border-2 text-left transition-all relative overflow-hidden ${
+                                                                isActive 
+                                                                    ? 'border-[#0071E3] bg-blue-50/50' 
+                                                                    : 'border-black/[0.03] hover:border-blue-200 bg-white hover:bg-gray-50'
+                                                            }`}
+                                                        >
+                                                            {isActive && (
+                                                                <div className="absolute top-4 right-4 w-6 h-6 bg-[#0071E3] rounded-full flex items-center justify-center text-white">
+                                                                    <Check size={14} strokeWidth={4} />
+                                                                </div>
+                                                            )}
+                                                            <h4 className={`font-bold text-sm mb-3 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>
+                                                                {addon.name}
+                                                            </h4>
+                                                            <div className="space-y-1">
+                                                                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Setup Cost</p>
+                                                                <p className={`text-lg font-black tracking-tight ${isActive ? 'text-blue-900' : 'text-gray-900'}`}>
+                                                                    Rp {addon.price.toLocaleString('id-ID')}
+                                                                </p>
+                                                            </div>
+                                                            {addon.disclaimer && (
+                                                                <div className="mt-3 pt-3 border-t border-black/[0.03] flex items-start gap-2">
+                                                                    <Info size={12} className="text-amber-500 shrink-0 mt-0.5" />
+                                                                    <p className="text-[9px] text-amber-700 leading-relaxed font-medium">{addon.disclaimer}</p>
+                                                                </div>
+                                                            )}
+                                                        </button>
+                                                    )
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+                                </section>
+                            )
+                        })}
                     </div>
                 )}
             </div>

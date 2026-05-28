@@ -95,7 +95,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   emoji: string
 }> = {
   'Website Perusahaan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/perusahaan',
     tagline: 'Tampil profesional & credible di mata klien korporat',
     mockUrl: 'perusahaan.japanarenacorp.com',
     mockupGradient: 'from-slate-800 to-blue-900',
@@ -103,7 +103,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏢',
   },
   'Toko Online': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/toko-online',
     tagline: 'Toko online siap terima order & pembayaran 24/7',
     mockUrl: 'tokoonline.japanarenacorp.com',
     mockupGradient: 'from-orange-800 to-red-900',
@@ -111,7 +111,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🛍️',
   },
   'Website Sekolah / LPK': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/sekolah',
     tagline: 'Wajah digital institusi pendidikan yang modern',
     mockUrl: 'sekolah.japanarenacorp.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
@@ -119,7 +119,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🎓',
   },
   'Website Institusi': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/institusi',
     tagline: 'Portal informasi resmi dan terpercaya',
     mockUrl: 'institusi.japanarenacorp.com',
     mockupGradient: 'from-gray-800 to-slate-900',
@@ -127,7 +127,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏛️',
   },
   'Website Restaurant': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/restaurant',
     tagline: 'Menu digital yang bikin pelanggan lapar duluan',
     mockUrl: 'restaurant.japanarenacorp.com',
     mockupGradient: 'from-amber-800 to-orange-900',
@@ -135,7 +135,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🍜',
   },
   'Personal Branding': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/personal-branding',
     tagline: 'Personal website yang menonjolkan keahlian Anda',
     mockUrl: 'nama.japanarenacorp.com',
     mockupGradient: 'from-violet-800 to-pink-900',
@@ -143,7 +143,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '👤',
   },
   'Blog / Media': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/blog',
     tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
     mockUrl: 'blog.japanarenacorp.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
@@ -159,7 +159,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '✈️',
   },
   'Custom Jastip': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',
     tagline: 'Sistem jasa titip yang terorganisir & profesional',
     mockUrl: 'jastip.japanarenacorp.com',
     mockupGradient: 'from-rose-800 to-pink-900',

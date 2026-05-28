@@ -254,7 +254,7 @@ Terima kasih.`
                             </div>
 
                             {/* Bento Grid Template Selection */}
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                                 {TEMPLATE_OPTIONS.map((tpl) => {
                                     const Icon = tpl.icon;
                                     const isSelected = selectedTemplate === tpl.name;

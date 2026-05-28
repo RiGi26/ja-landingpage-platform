@@ -86,7 +86,7 @@ export default function LmsNavbar() {
               className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-gray-900 text-sm font-semibold transition-colors"
             >
               <LogIn size={16} />
-              Portal Login
+              Masuk
             </button>
 
             <button
@@ -127,7 +127,7 @@ export default function LmsNavbar() {
                 onClick={() => { setOpen(false); setIsPickerOpen(true) }}
                 className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black"
               >
-                <LogIn size={18} /> Masuk ke Portal
+                <LogIn size={18} /> Masuk Layanan
               </button>
             </div>
           </div>

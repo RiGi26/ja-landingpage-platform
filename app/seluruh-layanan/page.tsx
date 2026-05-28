@@ -106,6 +106,12 @@ export default function SeluruhLayananPage() {
       .flatMap(g => g.items)
       .filter(a => bundle.addonIds.includes(a.id))
     setSelectedAddons(addons)
+    
+    // Auto-advance to Step 3 (Fitur) since Bundle already defines the Server
+    setTimeout(() => {
+        setCurrentStep(3);
+        window.scrollTo({ top: 150, behavior: 'smooth' });
+    }, 400); // Slight delay for visual feedback of selection before jumping
   }
 
   const toggleAddon = (addon: Addon) => {

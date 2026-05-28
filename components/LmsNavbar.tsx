@@ -9,7 +9,7 @@ import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
   { label: 'Rakit Website', href: '/seluruh-layanan' },
-  { label: 'Paket Berlangganan',   href: '/pricing' },
+  { label: 'Paket Langganan',   href: '/pricing' },
 ]
 
 export default function LmsNavbar() {

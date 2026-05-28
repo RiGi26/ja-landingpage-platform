@@ -62,10 +62,13 @@ export default function SeluruhLayananPage() {
   }
 
   const { setupTotal, maintainTotal } = useMemo(() => {
-    const setup = selectedPackage.price + selectedAddons.reduce((acc, curr) => acc + curr.price, 0)
+    const activeBundle = selectedBundleId ? BUNDLES.find(b => b.id === selectedBundleId) : null;
+    const setup = activeBundle 
+      ? activeBundle.bundlePrice 
+      : selectedPackage.price + selectedAddons.reduce((acc, curr) => acc + curr.price, 0)
     const maintain = selectedPackage.maintain + selectedAddons.reduce((acc, curr) => acc + Math.round(curr.price * 0.5), 0)
     return { setupTotal: setup, maintainTotal: maintain }
-  }, [selectedPackage, selectedAddons])
+  }, [selectedPackage, selectedAddons, selectedBundleId])
 
   const hasPortalFeatures = useMemo(() => {
     const categories = ['lms', 'travel', 'medical']
@@ -78,6 +81,9 @@ export default function SeluruhLayananPage() {
       ? selectedAddons.map(a => `- ${a.name}`).join('\n')
       : '- Tanpa add-on tambahan'
 
+    const activeBundle = selectedBundleId ? BUNDLES.find(b => b.id === selectedBundleId) : null;
+    const bundleNote = activeBundle ? `\n\n*(Menggunakan Promo Rakitan: ${activeBundle.name})*` : '';
+
     const msg = `Halo Japan Arena Corp,
 
 Saya tertarik menggunakan layanan berikut:
@@ -89,7 +95,7 @@ Paket Hosting:
 ${selectedPackage.name} (${selectedPackage.storage} Storage)
 
 Add-on:
-${addonText}
+${addonText}${bundleNote}
 
 Estimasi setup tahun pertama:
 Rp ${setupTotal.toLocaleString('id-ID')}
@@ -100,7 +106,7 @@ Rp ${maintainTotal.toLocaleString('id-ID')}
 Mohon info detail selanjutnya.
 Terima kasih.`
     return encodeURIComponent(msg)
-  }, [selectedTemplate, selectedPackage, selectedAddons, setupTotal, maintainTotal])
+  }, [selectedTemplate, selectedPackage, selectedAddons, setupTotal, maintainTotal, selectedBundleId])
 
   const templates = [
     'Website Perusahaan', 'Website Sekolah', 'Website LPK', 'Website Bimbel',
@@ -246,7 +252,7 @@ Terima kasih.`
                             href={hasPortalFeatures.portalLink || '/pricing'}
                             className="px-6 py-3 bg-white text-blue-600 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-xl whitespace-nowrap"
                         >
-                            Cek Paket Portal <ChevronRight size={16} className="inline ml-1" />
+                            Cek Paket Langganan <ChevronRight size={16} className="inline ml-1" />
                         </Link>
                     </div>
                 </div>
@@ -360,26 +366,46 @@ Terima kasih.`
               <h2 className="text-2xl font-black text-gray-900 mb-8 sf-display-heavy relative z-10">Estimasi Biaya</h2>
 
               <div className="space-y-6 mb-8 relative z-10">
-                <div className="p-5 rounded-2xl bg-[#F5F5F7] border border-black/5">
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Paket Server ({selectedPackage.name})</p>
-                    <div className="flex justify-between items-center">
-                        <p className="font-bold text-gray-900">{selectedTemplate}</p>
-                        <p className="font-bold text-[#0071E3]">Rp {selectedPackage.price.toLocaleString('id-ID')}</p>
-                    </div>
-                </div>
-
-                <div className="space-y-4 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-                    {selectedAddons.length > 0 ? (
-                        selectedAddons.map(addon => (
-                            <div key={addon.id} className="flex justify-between items-center text-sm font-bold border-b border-black/[0.03] pb-3 last:border-0">
-                                <span className="text-gray-600">{addon.name}</span>
-                                <span className="text-gray-900">Rp {addon.price.toLocaleString('id-ID')}</span>
+                {selectedBundleId ? (
+                    <div className="p-5 rounded-2xl bg-yellow-50 border border-yellow-200/50">
+                        <div className="flex items-center gap-2 mb-2">
+                            <Zap size={14} className="text-yellow-600" fill="currentColor" />
+                            <p className="text-[10px] font-black text-yellow-800 uppercase tracking-widest">Promo Rakitan Aktif</p>
+                        </div>
+                        <div className="flex justify-between items-center mb-1">
+                            <p className="font-bold text-gray-900">{BUNDLES.find(b => b.id === selectedBundleId)?.name}</p>
+                            <div className="text-right">
+                                <p className="text-[10px] text-gray-400 line-through">Rp {BUNDLES.find(b => b.id === selectedBundleId)?.normalPrice.toLocaleString('id-ID')}</p>
                             </div>
-                        ))
-                    ) : (
-                        <p className="text-xs text-gray-400 text-center py-4 font-medium italic">Belum ada add-on terpilih</p>
-                    )}
-                </div>
+                        </div>
+                        <p className="text-xs text-gray-500 mb-4">
+                            Termasuk Server {selectedPackage.name} + {selectedAddons.length} Fitur Custom.
+                        </p>
+                    </div>
+                ) : (
+                    <>
+                        <div className="p-5 rounded-2xl bg-[#F5F5F7] border border-black/5">
+                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Paket Server ({selectedPackage.name})</p>
+                            <div className="flex justify-between items-center">
+                                <p className="font-bold text-gray-900">{selectedTemplate}</p>
+                                <p className="font-bold text-[#0071E3]">Rp {selectedPackage.price.toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+
+                        <div className="space-y-4 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+                            {selectedAddons.length > 0 ? (
+                                selectedAddons.map(addon => (
+                                    <div key={addon.id} className="flex justify-between items-center text-sm font-bold border-b border-black/[0.03] pb-3 last:border-0">
+                                        <span className="text-gray-600">{addon.name}</span>
+                                        <span className="text-gray-900">Rp {addon.price.toLocaleString('id-ID')}</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p className="text-xs text-gray-400 text-center py-4 font-medium italic">Belum ada add-on terpilih</p>
+                            )}
+                        </div>
+                    </>
+                )}
               </div>
 
               <div className="space-y-4 mb-8 pt-6 border-t border-black/5 relative z-10">

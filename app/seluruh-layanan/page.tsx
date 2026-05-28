@@ -25,7 +25,8 @@ import {
   Newspaper,
   Car,
   Plane,
-  ChevronLeft
+  ChevronLeft,
+  ExternalLink
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -84,6 +85,88 @@ const TEMPLATE_OPTIONS = [
   { name: 'Travel & Rental', icon: Plane },
   { name: 'Custom Jastip', icon: Car },
 ]
+
+const TEMPLATE_PREVIEWS: Record<string, {
+  demoUrl: string
+  tagline: string
+  mockUrl: string
+  mockupGradient: string
+  sections: string[]
+  emoji: string
+}> = {
+  'Website Perusahaan': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Tampil profesional & credible di mata klien korporat',
+    mockUrl: 'perusahaan.japanarenacorp.com',
+    mockupGradient: 'from-slate-800 to-blue-900',
+    sections: ['Hero Banner', 'Tentang Kami', 'Layanan', 'Portofolio', 'Kontak'],
+    emoji: '🏢',
+  },
+  'Toko Online': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Toko online siap terima order & pembayaran 24/7',
+    mockUrl: 'tokoonline.japanarenacorp.com',
+    mockupGradient: 'from-orange-800 to-red-900',
+    sections: ['Hero + Promo', 'Katalog Produk', 'Keranjang', 'Checkout', 'Riwayat Order'],
+    emoji: '🛍️',
+  },
+  'Website Sekolah / LPK': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Wajah digital institusi pendidikan yang modern',
+    mockUrl: 'sekolah.japanarenacorp.com',
+    mockupGradient: 'from-indigo-800 to-purple-900',
+    sections: ['Hero', 'Program Studi', 'Galeri', 'Pendaftaran Online', 'Berita'],
+    emoji: '🎓',
+  },
+  'Website Institusi': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Portal informasi resmi dan terpercaya',
+    mockUrl: 'institusi.japanarenacorp.com',
+    mockupGradient: 'from-gray-800 to-slate-900',
+    sections: ['Header Resmi', 'Pengumuman', 'Struktur Organisasi', 'Layanan', 'Kontak'],
+    emoji: '🏛️',
+  },
+  'Website Restaurant': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Menu digital yang bikin pelanggan lapar duluan',
+    mockUrl: 'restaurant.japanarenacorp.com',
+    mockupGradient: 'from-amber-800 to-orange-900',
+    sections: ['Hero Foto Makanan', 'Menu Digital', 'Reservasi Meja', 'Promo', 'Lokasi & Maps'],
+    emoji: '🍜',
+  },
+  'Personal Branding': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Personal website yang menonjolkan keahlian Anda',
+    mockUrl: 'nama.japanarenacorp.com',
+    mockupGradient: 'from-violet-800 to-pink-900',
+    sections: ['Hero Foto', 'Tentang Saya', 'Portofolio', 'Testimoni', 'Hire Me'],
+    emoji: '👤',
+  },
+  'Blog / Media': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
+    mockUrl: 'blog.japanarenacorp.com',
+    mockupGradient: 'from-emerald-800 to-teal-900',
+    sections: ['Featured Post', 'Kategori', 'Artikel Terbaru', 'Newsletter', 'Author Page'],
+    emoji: '📰',
+  },
+  'Travel & Rental': {
+    demoUrl: 'https://ja-rental-platform.vercel.app',
+    tagline: 'Booking & rental management, siap dioperasikan',
+    mockUrl: 'travel.japanarenacorp.com',
+    mockupGradient: 'from-cyan-800 to-blue-900',
+    sections: ['Hero Destinasi', 'Katalog Armada', 'Booking Online', 'Tracking', 'Dashboard'],
+    emoji: '✈️',
+  },
+  'Custom Jastip': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/template',
+    tagline: 'Sistem jasa titip yang terorganisir & profesional',
+    mockUrl: 'jastip.japanarenacorp.com',
+    mockupGradient: 'from-rose-800 to-pink-900',
+    sections: ['Hero', 'Katalog Titipan', 'Form Request', 'Status Order', 'Pembayaran'],
+    emoji: '📦',
+  },
+}
 
 export default function SeluruhLayananPage() {
   const [currentStep, setCurrentStep] = useState(1)
@@ -291,58 +374,80 @@ Terima kasih.`
                             </div>
                         </section>
 
-                        {/* Bundle Promo Callout */}
+                        {/* First Look: Template Preview */}
                         <section className="bg-gradient-to-br from-gray-900 via-[#1A1A24] to-black rounded-[32px] p-8 text-white relative overflow-hidden apple-shadow">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl -mr-20 -mt-20 pointer-events-none" />
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-2">
-                                <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
-                                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Jalur Cepat (Opsional)</p>
+                                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">First Look</p>
                                 </div>
-                                <h3 className="text-2xl font-black mb-2 sf-display-heavy">Rekomendasi Rakitan</h3>
-                                <p className="text-sm text-gray-400 font-medium mb-6">Gunakan bundle fitur yang sering dipakai industri sejenis untuk hemat hingga 25%.</p>
-                                
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {BUNDLES.map((bundle) => {
-                                    const hostingPkg = HOSTING_PACKAGES.find(h => h.id === bundle.hostingId)
-                                    const isSelected = selectedBundleId === bundle.id
+                                <h3 className="text-2xl font-black mb-1 sf-display-heavy">Preview Template</h3>
+                                <p className="text-sm text-gray-400 font-medium mb-6">
+                                    Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> Anda.
+                                </p>
+
+                                {(() => {
+                                    const preview = TEMPLATE_PREVIEWS[selectedTemplate]
+                                    if (!preview) return null
                                     return (
-                                    <button
-                                        key={bundle.id}
-                                        onClick={() => handleSelectBundle(bundle)}
-                                        className={`text-left p-6 rounded-[24px] border-2 transition-all relative overflow-hidden ${
-                                        isSelected
-                                            ? 'border-yellow-400 bg-white/10'
-                                            : 'border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20'
-                                        }`}
-                                    >
-                                        {isSelected && (
-                                            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-yellow-400/10 to-transparent pointer-events-none" />
-                                        )}
-                                        <div className="flex items-center justify-between mb-4 relative z-10">
-                                            <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl border border-white/5">
-                                                {bundle.emoji}
-                                            </div>
-                                            {isSelected && (
-                                                <span className="text-[10px] font-black bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full uppercase tracking-wider">Dipilih</span>
-                                            )}
-                                        </div>
-                                        <p className="font-black text-lg mb-2 relative z-10">{bundle.name}</p>
-                                        <p className="text-[12px] text-gray-400 leading-relaxed mb-4 relative z-10 min-h-[54px]">{bundle.desc}</p>
-                                        
-                                        <div className="pt-4 border-t border-white/10 relative z-10">
-                                            <div className="flex items-baseline gap-2 mb-1">
-                                                <span className="text-xs text-gray-500 line-through">Rp {bundle.normalPrice.toLocaleString('id-ID')}</span>
-                                                <span className="font-black text-yellow-400 text-xl tracking-tight">Rp {bundle.bundlePrice.toLocaleString('id-ID')}</span>
-                                            </div>
-                                            <p className="text-[10px] text-gray-500 font-bold">
-                                                Termasuk Server {hostingPkg?.name} + {bundle.addonIds.length} Fitur
+                                        <div>
+                                            <a
+                                                href={preview.demoUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="block rounded-[20px] overflow-hidden border border-white/10 group cursor-pointer hover:border-white/30 transition-all"
+                                            >
+                                                {/* Browser Chrome */}
+                                                <div className="bg-white/[0.07] px-4 py-3 flex items-center gap-2.5 border-b border-white/10">
+                                                    <div className="flex gap-1.5">
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                                                    </div>
+                                                    <div className="flex-1 mx-2">
+                                                        <div className="bg-white/10 rounded-md px-3 py-1 text-[10px] text-gray-400 font-mono text-center truncate">
+                                                            {preview.mockUrl}
+                                                        </div>
+                                                    </div>
+                                                    <ExternalLink size={12} className="text-gray-500 group-hover:text-gray-300 transition-colors shrink-0" />
+                                                </div>
+
+                                                {/* Mockup Body */}
+                                                <div className={`bg-gradient-to-br ${preview.mockupGradient} p-8 relative`}>
+                                                    <div className="text-5xl mb-4">{preview.emoji}</div>
+                                                    <div className="h-5 w-48 bg-white/30 rounded-lg mb-2" />
+                                                    <div className="h-3 w-64 bg-white/20 rounded mb-5" />
+                                                    <div className="flex gap-2 mb-5">
+                                                        <div className="h-8 w-28 bg-white/30 rounded-full" />
+                                                        <div className="h-8 w-20 bg-white/10 rounded-full border border-white/20" />
+                                                    </div>
+                                                    <p className="text-[11px] text-white/40 italic font-medium">{preview.tagline}</p>
+
+                                                    {/* Hover Overlay */}
+                                                    <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/20 transition-all duration-300 flex items-center justify-center">
+                                                        <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                                                            <ExternalLink size={12} /> Buka Demo Live
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                {/* Section Chips */}
+                                                <div className="bg-gray-800/60 px-4 py-3 flex gap-2 flex-wrap border-t border-white/5">
+                                                    {preview.sections.map(s => (
+                                                        <span key={s} className="text-[9px] font-black bg-white/10 text-gray-400 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                                            {s}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </a>
+
+                                            <p className="text-[10px] text-gray-500 font-medium mt-3 flex items-center gap-1.5">
+                                                <ExternalLink size={10} /> Klik preview untuk melihat demo live di tab baru
                                             </p>
                                         </div>
-                                    </button>
                                     )
-                                })}
-                                </div>
+                                })()}
                             </div>
                         </section>
                     </div>
@@ -412,6 +517,32 @@ Terima kasih.`
                                 <p className="text-sm text-amber-900 leading-relaxed font-medium">
                                     <strong>Saran Tim IT:</strong> Pilih paket lebih tinggi jika Anda berencana mengupload banyak gambar resolusi tinggi, video materi, atau mengharapkan lonjakan pengunjung. Paket dapat di-upgrade kapan saja tanpa merusak web.
                                 </p>
+                            </div>
+
+                            {/* Bundle Shortcut */}
+                            <div className="mt-4 p-5 rounded-[20px] bg-yellow-50/80 border border-yellow-200/60">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <Zap size={15} className="text-yellow-600 shrink-0" fill="currentColor" />
+                                    <p className="text-sm font-black text-yellow-900">Hemat dengan Paket Bundling</p>
+                                </div>
+                                <p className="text-[11px] text-yellow-800 font-medium leading-relaxed mb-3">
+                                    Sudah tahu fitur yang dibutuhkan? Pilih bundle siap pakai dan hemat hingga 25% dibanding merakit manual.
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                    {BUNDLES.map(bundle => (
+                                        <button
+                                            key={bundle.id}
+                                            onClick={() => handleSelectBundle(bundle)}
+                                            className={`text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all ${
+                                                selectedBundleId === bundle.id
+                                                    ? 'bg-yellow-400 border-yellow-400 text-yellow-900'
+                                                    : 'bg-white border-yellow-200 text-yellow-800 hover:border-yellow-400 hover:bg-yellow-50'
+                                            }`}
+                                        >
+                                            {bundle.emoji} {bundle.name}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         </section>
                     </div>

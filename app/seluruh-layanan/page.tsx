@@ -570,7 +570,7 @@ Terima kasih.`
                                         href={hasPortalFeatures.portalLink || '/pricing'}
                                         className="px-6 py-3 bg-white text-blue-600 rounded-full font-bold text-sm hover:scale-105 transition-all shadow-xl whitespace-nowrap"
                                     >
-                                        Cek Paket Langganan <ChevronRight size={16} className="inline ml-1" />
+                                        Cek Layanan Kami <ChevronRight size={16} className="inline ml-1" />
                                     </Link>
                                 </div>
                             </div>
@@ -803,7 +803,7 @@ Terima kasih.`
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-black transition-all"
               >
-                Lihat Paket Langganan <ArrowRight size={18} />
+                Lihat Layanan Kami <ArrowRight size={18} />
               </Link>          </div>
       </section>
 

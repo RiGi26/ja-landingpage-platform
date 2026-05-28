@@ -81,7 +81,7 @@ export default function PricingPage() {
             Investasi Digital yang <span className="text-blue-600 underline decoration-blue-200 decoration-8 underline-offset-4">Tepat Sasaran</span>
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Pilih Paket Langganan (Sistem Siap Pakai) yang sesuai dengan skala operasional bisnis Anda. Transparan, terjangkau, dan tanpa biaya setup per fitur.
+            Pilih Layanan Kami (Sistem Siap Pakai) yang sesuai dengan skala operasional bisnis Anda. Transparan, terjangkau, dan tanpa biaya setup per fitur.
           </p>
         </div>
 

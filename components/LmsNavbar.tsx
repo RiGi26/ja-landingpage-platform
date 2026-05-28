@@ -8,7 +8,7 @@ import PortalPickerModal from './PortalPickerModal'
 
 const NAV_LINKS = [
   { label: 'Rakit Website', href: '/seluruh-layanan' },
-  { label: 'Paket Langganan',   href: '/pricing' },
+  { label: 'Layanan Kami',   href: '/pricing' },
 ]
 
 export default function LmsNavbar() {
@@ -57,16 +57,6 @@ export default function LmsNavbar() {
               Home
             </Link>
 
-            {/* Jasa Jastip — Standalone Link */}
-            <a
-              href="https://ja-jastip-platform.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-semibold text-gray-500 hover:text-red-600 transition-colors"
-            >
-              Jasa Jastip
-            </a>
-
             {/* Regular nav links */}
             {NAV_LINKS.map(l => (
               <Link
@@ -104,13 +94,6 @@ export default function LmsNavbar() {
             <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
               Home
             </Link>
-            <a 
-              href="https://ja-jastip-platform.vercel.app" 
-              className="block text-lg font-bold text-red-600 py-1"
-              onClick={() => setOpen(false)}
-            >
-              Jasa Jastip Jepang
-            </a>
             {NAV_LINKS.map(l => (
               <Link
                 key={l.href}

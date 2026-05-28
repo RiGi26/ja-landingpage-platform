@@ -42,8 +42,8 @@ const PLATFORMS = [
   },
   { 
     id: 'travel', 
-    name: 'Travel & Rental', 
-    icon: '🚌',
+    name: 'JapanArena Go', 
+    icon: '🚀',
     demoUrl: 'https://ja-rental-platform.vercel.app/auth/login',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },

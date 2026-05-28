@@ -91,23 +91,23 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
     ]
   },
   travel: {
-    title: 'Travel & Rental',
+    title: 'JapanArena Go (Travel)',
     items: [
-      { id: 'booking',       name: 'Booking Online',   price: 300000, category: 'travel', isPortalFeature: true, portalName: 'Travel & Rental Platform', portalLink: '/pricing' },
-      { id: 'e-ticket',      name: 'E-Ticketing',      price: 400000, category: 'travel', isPortalFeature: true, portalName: 'Travel & Rental Platform', portalLink: '/pricing' },
+      { id: 'booking',       name: 'Booking Online',   price: 300000, category: 'travel', isPortalFeature: true, portalName: 'JapanArena Go', portalLink: '/pricing' },
+      { id: 'e-ticket',      name: 'E-Ticketing',      price: 400000, category: 'travel', isPortalFeature: true, portalName: 'JapanArena Go', portalLink: '/pricing' },
       {
         id: 'gps',
         name: 'Tracking Armada GPS',
         price: 550000,
         category: 'travel',
         isPortalFeature: true,
-        portalName: 'Travel & Rental Platform',
+        portalName: 'JapanArena Go',
         portalLink: '/pricing',
         disclaimer: 'Termasuk setup integrasi GPS. Biaya data GPS per armada ditagih terpisah sesuai provider GPS pilihan Anda (mulai Rp 50.000/unit/bulan).'
       },
-      { id: 'driver-sched',   name: 'Jadwal Driver',   price: 250000, category: 'travel', isPortalFeature: true, portalName: 'Travel & Rental Platform', portalLink: '/pricing' },
-      { id: 'seat',           name: 'Seat Management', price: 250000, category: 'travel', isPortalFeature: true, portalName: 'Travel & Rental Platform', portalLink: '/pricing' },
-      { id: 'invoice-travel', name: 'Invoice Travel',  price: 200000, category: 'travel', isPortalFeature: true, portalName: 'Travel & Rental Platform', portalLink: '/pricing' },
+      { id: 'driver-sched',   name: 'Jadwal Driver',   price: 250000, category: 'travel', isPortalFeature: true, portalName: 'JapanArena Go', portalLink: '/pricing' },
+      { id: 'seat',           name: 'Seat Management', price: 250000, category: 'travel', isPortalFeature: true, portalName: 'JapanArena Go', portalLink: '/pricing' },
+      { id: 'invoice-travel', name: 'Invoice Travel',  price: 200000, category: 'travel', isPortalFeature: true, portalName: 'JapanArena Go', portalLink: '/pricing' },
     ]
   },
   medical: {

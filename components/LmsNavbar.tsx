@@ -80,10 +80,10 @@ export default function LmsNavbar() {
           </nav>
 
           {/* Right actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <button
               onClick={() => setIsPickerOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white text-sm font-bold transition-all hover:bg-gray-800 shadow-md hover:shadow-lg active:scale-95"
+              className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-gray-900 text-sm font-semibold transition-colors"
             >
               <LogIn size={16} />
               Portal Login

@@ -120,8 +120,8 @@ Terima kasih.`
             <Zap size={14} fill="currentColor" /> Kalkulator Estimasi Biaya Transparan
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-[1.1] tracking-tight sf-display-heavy mb-6">
-            Katalog Website Japan Arena.<br />
-            <span className="text-[#0071E3]">All-in Rp 600.000 — Hosting + Domain + SSL.</span>
+            Kalkulator Pembuatan Website.<br />
+            <span className="text-[#0071E3]">Transparan Mulai Rp 600.000.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
             Pilih template dasar, paket server, dan tambahkan fitur yang Anda butuhkan. 
@@ -432,7 +432,7 @@ Terima kasih.`
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-black transition-all"
               >
-                Lihat Seluruh Layanan <ArrowRight size={18} />
+                Lihat Paket Berlangganan (SaaS) <ArrowRight size={18} />
               </Link>          </div>
       </section>
     </div>

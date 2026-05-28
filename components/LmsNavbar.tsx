@@ -8,8 +8,8 @@ import PortalPickerModal from './PortalPickerModal'
 import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
-  { label: 'Seluruh Layanan', href: '/seluruh-layanan' },
-  { label: 'Harga',   href: '/pricing' },
+  { label: 'Rakit Website', href: '/seluruh-layanan' },
+  { label: 'Paket Berlangganan',   href: '/pricing' },
 ]
 
 export default function LmsNavbar() {

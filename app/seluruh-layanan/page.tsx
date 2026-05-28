@@ -758,16 +758,25 @@ Terima kasih.`
                     </div>
                 </div>
 
-                <a 
+                <a
+                    href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-4 rounded-2xl bg-[#0071E3] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-xl shadow-blue-200 active:scale-95"
+                >
+                    Buat Order & Lacak Progress <ArrowRight size={18} />
+                </a>
+
+                <a
                     href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-4 rounded-2xl bg-gray-900 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-black transition-all shadow-xl shadow-gray-200 active:scale-95"
+                    className="w-full py-3 mt-2 rounded-2xl border border-gray-200 text-gray-500 font-bold text-xs flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
                 >
-                    Checkout via WA <ArrowRight size={18} />
+                    atau langsung chat via WhatsApp
                 </a>
 
-                <div className="mt-4 flex items-start gap-2">
+                <div className="mt-3 flex items-start gap-2">
                     <Info size={14} className="text-gray-400 shrink-0 mt-0.5" />
                     <p className="text-[10px] text-gray-400 leading-relaxed font-medium">
                         Harga estimasi final dapat berubah menyesuaikan tingkat kompleksitas custom & lisensi aset.
@@ -817,13 +826,13 @@ Terima kasih.`
                   Lanjut <ArrowRight size={16} />
               </button>
           ) : (
-              <a 
-                  href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
+              <a
+                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all"
               >
-                  Checkout <ArrowRight size={16} />
+                  Buat Order <ArrowRight size={16} />
               </a>
           )}
       </div>

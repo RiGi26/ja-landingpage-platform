@@ -17,7 +17,7 @@ export default function ComparisonInfographic() {
         {/* Header Infografis */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 text-green-600 text-xs font-black uppercase tracking-widest mb-4 border border-green-100">
-            <TrendingDown size={14} /> Analisis Efisiensi Biaya 2024
+            <TrendingDown size={14} /> Analisis Efisiensi Biaya 2026
           </div>
           <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-4">
             Beralih ke JapanArena, Pangkas Operasional Hingga <span className="text-green-600">75%</span>
@@ -52,7 +52,10 @@ export default function ComparisonInfographic() {
             <div className="pt-8 flex items-start gap-4 p-6 bg-blue-50 rounded-[32px] border border-blue-100">
                <Info className="text-blue-600 shrink-0 mt-1" size={20} />
                <p className="text-sm text-blue-800 leading-relaxed font-medium">
-                 Data berdasarkan rata-rata harga paket Bisnis/Pro dari 8 kompetitor penyedia sistem operasional utama di Indonesia (Update Desember 2024). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong> untuk menekan biaya server kustomer.
+                 <strong>Metodologi:</strong> Perbandingan berdasarkan rata-rata harga paket mid-range dengan fitur
+                 setara — multi-user, notifikasi WhatsApp, dan integrasi sistem — dari 8 vendor SaaS aktif di Indonesia
+                 (Update Mei 2026). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong>
+                 berbasis Next.js 16 + Supabase untuk menekan biaya operasional klien.
                </p>
             </div>
           </div>

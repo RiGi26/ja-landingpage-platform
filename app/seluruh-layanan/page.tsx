@@ -19,11 +19,13 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
-import { 
-  HOSTING_PACKAGES, 
-  ADDON_GROUPS, 
+import {
+  HOSTING_PACKAGES,
+  ADDON_GROUPS,
   Addon,
-  HostingPackage
+  HostingPackage,
+  BUNDLES,
+  Bundle
 } from '@/constants/services'
 
 const WA_NUMBER = '6281296917963'
@@ -32,9 +34,27 @@ export default function SeluruhLayananPage() {
   const [selectedTemplate, setSelectedTemplate] = useState('Website Perusahaan')
   const [selectedPackage, setSelectedPackage] = useState<HostingPackage>(HOSTING_PACKAGES[0])
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([])
+  const [selectedBundleId, setSelectedBundleId] = useState<string | null>(null)
+
+  const handleSelectBundle = (bundle: Bundle) => {
+    if (selectedBundleId === bundle.id) {
+      setSelectedBundleId(null)
+      setSelectedPackage(HOSTING_PACKAGES[0])
+      setSelectedAddons([])
+      return
+    }
+    setSelectedBundleId(bundle.id)
+    const pkg = HOSTING_PACKAGES.find(h => h.id === bundle.hostingId)
+    if (pkg) setSelectedPackage(pkg)
+    const addons = Object.values(ADDON_GROUPS)
+      .flatMap(g => g.items)
+      .filter(a => bundle.addonIds.includes(a.id))
+    setSelectedAddons(addons)
+  }
 
   const toggleAddon = (addon: Addon) => {
-    setSelectedAddons(prev => 
+    setSelectedBundleId(null)
+    setSelectedAddons(prev =>
       prev.find(a => a.id === addon.id)
         ? prev.filter(a => a.id !== addon.id)
         : [...prev, addon]
@@ -101,7 +121,7 @@ Terima kasih.`
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-[1.1] tracking-tight sf-display-heavy mb-6">
             Katalog Website Japan Arena.<br />
-            <span className="text-[#0071E3]">Mulai Rp 600.000.</span>
+            <span className="text-[#0071E3]">All-in Rp 600.000 — Hosting + Domain + SSL.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
             Pilih template dasar, paket server, dan tambahkan fitur yang Anda butuhkan. 
@@ -170,7 +190,7 @@ Terima kasih.`
                     {HOSTING_PACKAGES.map((pkg) => (
                         <button
                             key={pkg.id}
-                            onClick={() => setSelectedPackage(pkg)}
+                            onClick={() => { setSelectedPackage(pkg); setSelectedBundleId(null) }}
                             className={`flex flex-col md:flex-row md:items-center justify-between p-5 rounded-2xl border-2 transition-all ${
                                 selectedPackage.id === pkg.id 
                                 ? 'border-emerald-500 bg-emerald-50/30' 
@@ -232,6 +252,54 @@ Terima kasih.`
                 </div>
             )}
 
+            {/* Bundle Paket Hemat */}
+            <section className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 blur-3xl -mr-20 -mt-20" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-yellow-400 animate-pulse" />
+                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-200">Paket Bundling — Hemat hingga 25%</p>
+                </div>
+                <h3 className="text-xl font-black mb-6">Pilih Paket Siap Pakai</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {BUNDLES.map((bundle) => {
+                    const hostingPkg = HOSTING_PACKAGES.find(h => h.id === bundle.hostingId)
+                    const isSelected = selectedBundleId === bundle.id
+                    return (
+                      <button
+                        key={bundle.id}
+                        onClick={() => handleSelectBundle(bundle)}
+                        className={`text-left p-5 rounded-2xl border-2 transition-all ${
+                          isSelected
+                            ? 'border-yellow-400 bg-white/20'
+                            : 'border-white/20 bg-white/5 hover:bg-white/10'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-lg">{bundle.emoji}</span>
+                          {isSelected && (
+                            <span className="text-[9px] font-black bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full uppercase">Dipilih</span>
+                          )}
+                        </div>
+                        <p className="font-black text-sm mb-1">{bundle.name}</p>
+                        <p className="text-[11px] text-white/70 leading-relaxed mb-3">{bundle.desc}</p>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-xs text-white/50 line-through">Rp {bundle.normalPrice.toLocaleString('id-ID')}</span>
+                          <span className="font-black text-yellow-300">Rp {bundle.bundlePrice.toLocaleString('id-ID')}</span>
+                        </div>
+                        <p className="text-[9px] text-blue-200 mt-1">
+                          Hosting {hostingPkg?.name} + {bundle.addonIds.length} add-on terpilih
+                        </p>
+                      </button>
+                    )
+                  })}
+                </div>
+                <p className="text-[10px] text-blue-200 mt-4 text-center">
+                  atau pilih manual di bawah — kalkulator estimasi tetap aktif
+                </p>
+              </div>
+            </section>
+
             {/* Step 3: Add-ons */}
             {Object.entries(ADDON_GROUPS).map(([key, group]) => (
               <section key={key} className="bg-white rounded-[32px] p-8 apple-shadow border border-black/[0.03]">
@@ -270,6 +338,12 @@ Terima kasih.`
                             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Maintenance Thn 2+</span>
                             <span className="text-[10px] font-bold text-blue-600">Rp {(addon.price * 0.5).toLocaleString('id-ID')}</span>
                         </div>
+                        {addon.disclaimer && (
+                          <div className="mt-3 pt-3 border-t border-black/[0.03] flex items-start gap-2">
+                            <Info size={12} className="text-amber-500 shrink-0 mt-0.5" />
+                            <p className="text-[9px] text-amber-700 leading-relaxed font-medium">{addon.disclaimer}</p>
+                          </div>
+                        )}
                       </button>
                     )
                   })}
@@ -318,7 +392,7 @@ Terima kasih.`
                     </div>
                 </div>
                 <div className="flex justify-between items-center bg-blue-50/50 p-4 rounded-2xl border border-blue-100">
-                    <span className="text-xs font-bold text-blue-900">Maint. Tahun Ke-2+</span>
+                    <span className="text-xs font-bold text-blue-900">Renewal Thn 2+ (hemat ~38%)</span>
                     <span className="text-lg font-black text-blue-900">Rp {maintainTotal.toLocaleString('id-ID')}</span>
                 </div>
               </div>
@@ -354,13 +428,12 @@ Terima kasih.`
           <div className="max-w-4xl mx-auto px-4 text-center">
               <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Butuh Sistem yang Lebih Kompleks?</h2>
               <p className="text-gray-500 mb-8 font-medium">Kami siap membantu membangun platform digital skala enterprise sesuai kebutuhan spesifik bisnis Anda.</p>
-              <Link 
+              <Link
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-black transition-all"
               >
-                Lihat Semua Solusi SaaS <ArrowRight size={18} />
-              </Link>
-          </div>
+                Lihat Seluruh Layanan <ArrowRight size={18} />
+              </Link>          </div>
       </section>
     </div>
   )

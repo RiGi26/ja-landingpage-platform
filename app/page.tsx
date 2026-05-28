@@ -42,7 +42,7 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Solusi sistem operasional dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Katalog Website. 
+              Solusi sistem operasional dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Seluruh Layanan. 
               Satu pintu untuk mengotomasi seluruh aspek operasional bisnis Anda.
             </p>
 

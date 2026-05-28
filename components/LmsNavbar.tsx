@@ -8,7 +8,7 @@ import PortalPickerModal from './PortalPickerModal'
 import ServiceMegaMenu, { COLUMNS } from './ServiceMegaMenu'
 
 const NAV_LINKS = [
-  { label: 'Katalog Website', href: '/seluruh-layanan' },
+  { label: 'Seluruh Layanan', href: '/seluruh-layanan' },
   { label: 'Harga',   href: '/pricing' },
 ]
 

@@ -807,11 +807,12 @@ Terima kasih.`
               </Link>          </div>
       </section>
 
-      {/* Mobile Fixed Bottom Bar */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 pb-6 lg:hidden z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] flex items-center justify-between">
+      {/* Fixed Bottom Bar (All Screens) */}
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <div className="space-y-0.5">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Thn 1</span>
-              <p className="text-xl font-black text-[#0071E3] tracking-tight">
+              <p className="text-xl md:text-2xl font-black text-[#0071E3] tracking-tight">
                   Rp {animatedSetupTotal.toLocaleString('id-ID')}
               </p>
           </div>
@@ -821,7 +822,7 @@ Terima kasih.`
                       window.scrollTo({ top: 150, behavior: 'smooth' });
                       setCurrentStep(prev => prev + 1);
                   }}
-                  className="flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-95 transition-all"
               >
                   Lanjut <ArrowRight size={16} />
               </button>
@@ -830,11 +831,12 @@ Terima kasih.`
                   href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all hover:bg-blue-600"
               >
                   Buat Order & Lacak <ArrowRight size={16} />
               </a>
           )}
+        </div>
       </div>
     </div>
   )

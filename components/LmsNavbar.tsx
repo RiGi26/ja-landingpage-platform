@@ -6,6 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
 
+const WEBSITEBUILDER_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
+
 const NAV_LINKS = [
   { label: 'Rakit Website', href: '/seluruh-layanan' },
   { label: 'Layanan Kami',   href: '/pricing' },
@@ -67,6 +69,13 @@ export default function LmsNavbar() {
                 {l.label}
               </Link>
             ))}
+
+            <a
+              href={`${WEBSITEBUILDER_URL}/track`}
+              className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              Track Pesanan
+            </a>
           </nav>
 
           {/* Right actions */}
@@ -104,6 +113,14 @@ export default function LmsNavbar() {
                 {l.label}
               </Link>
             ))}
+
+            <a
+              href={`${WEBSITEBUILDER_URL}/track`}
+              onClick={() => setOpen(false)}
+              className="block text-lg font-bold text-gray-900 py-1"
+            >
+              Track Pesanan
+            </a>
 
             <div className="pt-4 border-t border-black/5">
               <button

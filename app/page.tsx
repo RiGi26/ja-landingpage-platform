@@ -349,8 +349,7 @@ export default function LandingPage() {
                       <ul className="space-y-4 text-sm text-gray-500">
                           <li className="flex gap-3">
                               <MapPin size={18} className="text-[#0071E3] shrink-0" />
-                              <span>Jakarta, Indonesia • Tokyo, Japan</span>
-                          </li>
+                              <span>Jakarta, Indonesia</span>                          </li>
                           <li className="flex gap-3">
                               <Mail size={18} className="text-[#0071E3] shrink-0" />
                               <span>contact@japanarena.com</span>

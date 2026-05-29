@@ -26,7 +26,8 @@ import {
   Car,
   Plane,
   ChevronLeft,
-  ExternalLink
+  ExternalLink,
+  Sparkles
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -36,7 +37,8 @@ import {
   Addon,
   HostingPackage,
   BUNDLES,
-  Bundle
+  Bundle,
+  RECOMMENDED_ADDONS
 } from '@/constants/services'
 
 const WA_NUMBER = '6281296917963'
@@ -232,6 +234,22 @@ export default function SeluruhLayananPage() {
     const found = selectedAddons.find(a => categories.includes(a.category))
     return found ? found : null
   }, [selectedAddons])
+
+  // Add-on yg direkomendasikan untuk industri terpilih (badge di Step 3).
+  const recommendedIds = useMemo(
+    () => RECOMMENDED_ADDONS[selectedTemplate] ?? [],
+    [selectedTemplate]
+  )
+
+  // Auto-buka grup yg memuat add-on rekomendasi supaya badge langsung terlihat
+  // (tanpa menutup grup yg sudah dibuka user).
+  useEffect(() => {
+    if (recommendedIds.length === 0) return
+    const groupsWithRec = Object.entries(ADDON_GROUPS)
+      .filter(([, g]) => g.items.some(a => recommendedIds.includes(a.id)))
+      .map(([k]) => k)
+    setExpandedGroups(prev => Array.from(new Set([...prev, ...groupsWithRec])))
+  }, [recommendedIds])
 
   const waMessage = useMemo(() => {
     const addonText = selectedAddons.length > 0
@@ -576,6 +594,15 @@ Terima kasih.`
                             </div>
                         )}
 
+                        {recommendedIds.length > 0 && (
+                            <div className="flex items-start gap-3 px-5 py-4 rounded-2xl bg-amber-50 border border-amber-100">
+                                <Sparkles size={18} className="text-amber-500 shrink-0 mt-0.5" fill="currentColor" />
+                                <p className="text-sm text-amber-900 font-medium leading-relaxed">
+                                    Fitur bertanda <span className="font-black">Rekomendasi</span> kami sarankan untuk industri <span className="font-black">{selectedTemplate}</span>. Tetap opsional — pilih sesuai kebutuhan Anda.
+                                </p>
+                            </div>
+                        )}
+
                         {Object.entries(ADDON_GROUPS).map(([key, group]) => {
                             const isExpanded = expandedGroups.includes(key);
                             return (
@@ -599,21 +626,31 @@ Terima kasih.`
                                     {isExpanded && (
                                         <div className="px-8 pb-8 animate-fade-in">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                {group.items.map(addon => {
+                                                {[...group.items]
+                                                  .sort((a, b) => (recommendedIds.includes(b.id) ? 1 : 0) - (recommendedIds.includes(a.id) ? 1 : 0))
+                                                  .map(addon => {
                                                     const isActive = selectedAddons.find(a => a.id === addon.id)
+                                                    const isRecommended = recommendedIds.includes(addon.id)
                                                     return (
                                                         <button
                                                             key={addon.id}
                                                             onClick={() => toggleAddon(addon)}
                                                             className={`group p-5 rounded-[20px] border-2 text-left transition-all relative overflow-hidden ${
-                                                                isActive 
-                                                                    ? 'border-[#0071E3] bg-blue-50/50' 
-                                                                    : 'border-black/[0.03] hover:border-blue-200 bg-white hover:bg-gray-50'
+                                                                isActive
+                                                                    ? 'border-[#0071E3] bg-blue-50/50'
+                                                                    : isRecommended
+                                                                        ? 'border-amber-300 bg-amber-50/30 hover:border-amber-400'
+                                                                        : 'border-black/[0.03] hover:border-blue-200 bg-white hover:bg-gray-50'
                                                             }`}
                                                         >
                                                             {isActive && (
                                                                 <div className="absolute top-4 right-4 w-6 h-6 bg-[#0071E3] rounded-full flex items-center justify-center text-white">
                                                                     <Check size={14} strokeWidth={4} />
+                                                                </div>
+                                                            )}
+                                                            {isRecommended && !isActive && (
+                                                                <div className="absolute top-3 right-3 bg-amber-100 text-amber-700 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded-full flex items-center gap-1">
+                                                                    <Sparkles size={9} /> Rekomendasi
                                                                 </div>
                                                             )}
                                                             <h4 className={`font-bold text-sm mb-3 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>

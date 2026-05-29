@@ -723,7 +723,7 @@ Terima kasih.`
                         <div className="space-y-3">
                             <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Fitur Tambahan</p>
                             {selectedAddons.length > 0 ? (
-                                <div className="bg-[#F5F5F7] rounded-xl p-4 border border-black/5 space-y-2">
+                                <div className="bg-[#F5F5F7] rounded-xl p-4 border border-black/5 space-y-2 max-h-[160px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
                                     {selectedAddons.map(addon => (
                                         <div key={addon.id} className="flex justify-between items-center text-xs font-bold border-b border-black/[0.03] pb-2 last:border-0 last:pb-0">
                                             <span className="text-gray-600">{addon.name}</span>
@@ -832,7 +832,7 @@ Terima kasih.`
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all"
               >
-                  Buat Order <ArrowRight size={16} />
+                  Buat Order & Lacak <ArrowRight size={16} />
               </a>
           )}
       </div>

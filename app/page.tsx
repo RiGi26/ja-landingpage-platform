@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
 import LmsFaq from '@/components/LmsFaq'
+import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -71,35 +72,11 @@ function HeroSection() {
           </div>
 
           {/* Device Mockup Visualization */}
-          <div className="relative animate-fade-up" style={{animationDelay: '100ms'}}>
-            <div className="bg-white rounded-[40px] border-[12px] border-black shadow-2xl overflow-hidden aspect-[4/3] relative">
-                <div className="absolute inset-0 bg-[#F5F5F7] p-6">
-                    {/* Header Mockup */}
-                    <div className="flex justify-between items-center mb-6">
-                        <div className="flex gap-2">
-                            <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
-                            <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                        </div>
-                        <div className="bg-white rounded-lg px-4 py-1 text-[10px] font-mono text-gray-400 border border-black/5">dashboard.yourbusiness.com</div>
-                    </div>
-                    {/* Content Mockup */}
-                    <div className="grid grid-cols-3 gap-4 mb-6">
-                        {[1,2,3].map(i => <div key={i} className="h-16 bg-white rounded-2xl apple-shadow border border-black/5" />)}
-                    </div>
-                    <div className="h-32 bg-white rounded-[24px] apple-shadow border border-black/5 p-4 flex items-center justify-center text-gray-300">
-                        <BarChart2 size={32} />
-                    </div>
-                </div>
-            </div>
-            {/* Notifications overlay */}
-            <div className="absolute -right-6 top-1/4 bg-white p-4 rounded-2xl apple-shadow border border-black/5 flex items-center gap-3 animate-bounce">
-                <div className="w-8 h-8 rounded-lg bg-green-500 flex items-center justify-center text-white"><MessageCircle size={16}/></div>
-                <div>
-                    <p className="text-[10px] font-bold text-gray-900">WA Notifikasi</p>
-                    <p className="text-[9px] text-gray-400">Invoice terkirim otomatis</p>
-                </div>
-            </div>
+          <div className="relative z-20 hidden lg:block">
+            <AnimatedHeroMockup />
+          </div>
+          <div className="relative z-20 block lg:hidden">
+            <AnimatedHeroMockup />
           </div>
 
         </div>

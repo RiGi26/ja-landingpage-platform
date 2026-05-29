@@ -1,13 +1,13 @@
 'use client'
 
-import { BarChart2, MessageCircle, MousePointer2, CheckCircle2, Loader2, Sparkles } from 'lucide-react'
+import { BarChart2, MessageCircle, MousePointer2, CheckCircle2, Loader2, Sparkles, Lock } from 'lucide-react'
 
 export default function AnimatedHeroMockup() {
   return (
     <div className="relative animate-fade-up" style={{ animationDelay: '100ms' }}>
       
       {/* Custom Keyframes for this Mockup */}
-      <style dangerouslySetContent={{ __html: `
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes cursorMove {
           0%, 10% { transform: translate(150px, 150px); opacity: 0; }
           15% { transform: translate(150px, 150px); opacity: 1; }

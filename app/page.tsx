@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
@@ -8,7 +8,6 @@ import {
   Facebook, Twitter, Instagram, Linkedin, ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
-import LmsFaq from '@/components/LmsFaq'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
 import Image from 'next/image'
@@ -26,8 +25,18 @@ const waLink = (msg?: string): string => {
 function HeroSection() {
   return (
     <section className="relative bg-[#F5F5F7] pt-32 pb-24 px-4 overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-3xl -mr-64 -mt-64 opacity-60" />
+      {/* Dot grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.35]"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #94a3b8 1px, transparent 1px)',
+          backgroundSize: '28px 28px',
+        }}
+      />
+      {/* Gradient mesh — blue bloom top-right */}
+      <div className="absolute top-0 right-0 w-[700px] h-[500px] opacity-40" style={{background: 'radial-gradient(ellipse 70% 60% at 80% 0%, #BFDBFE, transparent)'}} />
+      {/* Gradient mesh — subtle warm bottom-left */}
+      <div className="absolute bottom-0 left-0 w-[400px] h-[300px] opacity-20" style={{background: 'radial-gradient(ellipse 60% 60% at 0% 100%, #E0F2FE, transparent)'}} />
       
       <div className="max-w-6xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -44,8 +53,8 @@ function HeroSection() {
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Solusi sistem operasional dan ekosistem digital terpadu untuk LMS, Klinik, Jastip, hingga Seluruh Layanan. 
-              Satu pintu untuk mengotomasi seluruh aspek operasional bisnis Anda.
+              Bisnis Anda seharusnya bisa jalan sendiri. Kami urus invoice, notifikasi pelanggan, dan laporan harian —
+              supaya Anda fokus tumbuh, bukan tenggelam di pekerjaan admin.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -87,25 +96,24 @@ function HeroSection() {
 }
 
 function SocialProofBar() {
-    return (
-      <section className="bg-white border-y border-black/5 py-6 px-4">
-        <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-50 grayscale">
-          <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">Dipercaya oleh</p>
-          <div className="flex items-center gap-2">
-            <GraduationCap size={20} />
-            <span className="text-sm font-bold">Academy Japan</span>
+  const STATS = [
+    { value: '6+', label: 'Platform Aktif' },
+    { value: '1–3 hari', label: 'Waktu Setup' },
+    { value: '24/7', label: 'Sistem Berjalan' },
+    { value: '100%', label: 'Tanpa Coding' },
+  ]
+  return (
+    <section className="bg-white border-y border-black/5 py-6 px-4">
+      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
+        {STATS.map(s => (
+          <div key={s.label} className="flex items-center gap-3">
+            <span className="text-lg font-extrabold text-gray-900 sf-display-heavy">{s.value}</span>
+            <span className="text-[12px] text-gray-400 font-medium border-l border-black/10 pl-3">{s.label}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <Building2 size={20} />
-            <span className="text-sm font-bold">Medika Health</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <ShoppingBag size={20} />
-            <span className="text-sm font-bold">Astra Jastip</span>
-          </div>
-        </div>
-      </section>
-    )
+        ))}
+      </div>
+    </section>
+  )
 }
 
 function SegmenSection() {
@@ -170,28 +178,47 @@ function SegmenSection() {
         <section id="segmen" className="bg-white py-24 lg:py-32 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Our Solutions</p>
-                    <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight">
-                        Pilih Platform Sesuai Bisnis Anda
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Solusi Kami</p>
+                    <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
+                        Satu Ekosistem,<br className="hidden md:block" /> Semua Kebutuhan Bisnis
                     </h2>
+                    <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+                      Pilih sistem yang cocok — atau gabungkan semuanya. Setiap platform sudah terintegrasi satu sama lain.
+                    </p>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-6">
-                    {PORTALS.map((p, index) => (
-                        <div 
-                          key={p.label} 
-                          className={`group flex flex-col p-8 rounded-[32px] bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm`}
+                    {PORTALS.map((p, index) => {
+                        const isFeatured = index === 0
+                        return (
+                        <div
+                          key={p.label}
+                          className={`group flex flex-col p-8 rounded-[32px] transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm ${
+                            isFeatured
+                              ? 'bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 hover:shadow-2xl hover:shadow-blue-300'
+                              : 'bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl'
+                          }`}
                         >
-                            <div className={`w-14 h-14 ${p.bg} rounded-[20px] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform`}>
+                            <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform ${
+                              isFeatured ? 'bg-white/20' : p.bg
+                            }`}>
                                 {p.emoji}
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3">{p.label}</h3>
-                            <p className="text-sm text-gray-500 leading-relaxed mb-8 flex-1">{p.description}</p>
-                            <a href={p.href} target="_blank" className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black`}>
+                            {isFeatured && (
+                              <span className="text-[10px] font-black uppercase tracking-widest text-blue-100 mb-2">Produk Unggulan</span>
+                            )}
+                            <h3 className={`text-xl font-bold mb-3 sf-display ${isFeatured ? 'text-white' : 'text-gray-900'}`}>{p.label}</h3>
+                            <p className={`text-sm leading-relaxed mb-8 flex-1 ${isFeatured ? 'text-blue-100' : 'text-gray-500'}`}>{p.description}</p>
+                            <a href={p.href} target="_blank" className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all ${
+                              isFeatured
+                                ? 'bg-white text-[#0071E3] hover:bg-blue-50'
+                                : 'bg-gray-900 text-white hover:bg-black'
+                            }`}>
                                 {p.cta}
                             </a>
                         </div>
-                    ))}
+                        )
+                    })}
                 </div>
             </div>
         </section>
@@ -200,17 +227,17 @@ function SegmenSection() {
 
 function GlobalFeatures() {
     const FEATURES = [
-        { title: 'Notifikasi WA Otomatis', desc: 'Reminder invoice, link zoom, dan OTP dikirim langsung ke WhatsApp pelanggan.', icon: MessageCircle },
-        { title: 'Laporan Real-time', desc: 'Pantau grafik pemasukan dan performa bisnis kapanpun dari perangkat apa saja.', icon: BarChart2 },
-        { title: 'Database Terisolasi', desc: 'Setiap tenant memiliki database mandiri (RLS) untuk keamanan data tingkat tinggi.', icon: Shield },
+        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
+        { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semua sudah tersaji, bukan menunggu rekap manual.', icon: BarChart2 },
+        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Tidak bercampur, tidak bisa diintip — enkripsi enterprise dari hari pertama.', icon: Shield },
     ]
 
     return (
         <section id="fitur" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-                    {FEATURES.map(f => (
-                        <div key={f.title} className="flex flex-col items-center text-center group">
+                    {FEATURES.map((f, i) => (
+                        <div key={f.title} className={`flex flex-col items-center text-center group reveal reveal-delay-${i + 1}`}>
                             <div className="w-16 h-16 bg-white rounded-3xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-105 transition-transform">
                                 <f.icon size={28} />
                             </div>
@@ -226,9 +253,9 @@ function GlobalFeatures() {
 
 function TrustSection() {
     const STEPS = [
-        { t: '1. Pilih Layanan', d: 'Pilih sistem atau paket website yang sesuai dengan kebutuhan bisnis Anda.', i: LayoutGrid },
-        { t: '2. Aktivasi & Branding', d: 'Sistem disiapkan dalam 1-3 hari dengan logo & domain Anda.', i: Zap },
-        { t: '3. Langsung Operasional', d: 'Bisnis Anda siap berjalan dengan otomasi penuh 24/7.', i: Rocket },
+        { t: 'Pilih & Konsultasi', d: 'Ceritakan bisnis Anda. Kami bantu tentukan platform mana yang paling cocok — tanpa jargon teknis.', i: LayoutGrid },
+        { t: 'Kami Setup dalam 1–3 Hari', d: 'Logo, domain, dan sistem dikonfigurasi tim kami. Anda tidak perlu sentuh satu baris kode pun.', i: Zap },
+        { t: 'Bisnis Jalan, Anda Santai', d: 'Pembayaran masuk, notifikasi terkirim, laporan tersaji — semua berjalan sendiri 24/7.', i: Rocket },
     ]
 
     const BADGES = [
@@ -242,13 +269,13 @@ function TrustSection() {
         <section className="bg-white py-24 px-4 border-t border-black/5">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Simple Process</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Mulai Dalam 3 Langkah Mudah</h2>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Dari Nol ke Operasional<br className="hidden md:block" /> dalam 3 Hari</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                     {STEPS.map((s, i) => (
-                        <div key={i} className="relative p-10 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group">
+                        <div key={i} className={`relative p-10 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
                             <div className="w-14 h-14 bg-white rounded-2xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
                                 <s.i size={28} />
@@ -280,6 +307,16 @@ function TrustSection() {
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal')
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) } }),
+      { threshold: 0.12 }
+    )
+    els.forEach(el => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -292,13 +329,35 @@ export default function LandingPage() {
         <GlobalFeatures />
         <TrustSection />
         
-        {/* Placeholder for FAQ / Footer which remains standard */}
-        <section id="harga" className="py-24 bg-white border-t border-black/5">
-            <div className="max-w-4xl mx-auto text-center px-4">
-                <h2 className="text-4xl font-black mb-6 tracking-tight text-gray-900 sf-display-heavy">Mulai Transformasi Bisnis Anda Hari Ini</h2>
-                <p className="text-gray-500 mb-10 text-lg">Bergabunglah dengan puluhan bisnis yang telah mengotomasi operasional mereka bersama kami.</p>
-                <a href={waLink('Halo Japan Arena Corp, saya ingin mendiskusikan implementasi sistem untuk bisnis saya.')} className="inline-block bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button">Hubungi Sales Specialist</a>
-            </div>
+        <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">
+          {/* Background mesh */}
+          <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)'}} />
+          <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(ellipse 60% 60% at 80% 80%, #3B82F6, transparent)'}} />
+          <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
+              <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
+                Berapa jam seminggu Anda<br className="hidden md:block" /> habiskan untuk hal yang<br className="hidden md:block" /> <span className="text-[#0071E3]">bisa diotomasi?</span>
+              </h2>
+              <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
+                Bisnis yang bergabung dengan kami rata-rata memangkas waktu admin hingga 70%.
+                Satu percakapan WA — kami tunjukkan sistemnya langsung.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+                  className="inline-flex items-center justify-center gap-2 bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button"
+                >
+                  Chat & Lihat Demo Gratis <ArrowRight size={18} />
+                </a>
+                <a
+                  href="#segmen"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all backdrop-blur-sm"
+                >
+                  Jelajahi Platform
+                </a>
+              </div>
+              <p className="text-gray-600 text-sm mt-8">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>
+          </div>
         </section>
       </main>
 
@@ -340,7 +399,7 @@ export default function LandingPage() {
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Tentang Kami</a></li>
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Karir</a></li>
-                          <li><a href="/blog" className="hover:text-[#0071E3] transition-colors">Blog Edukasi</a></li>
+                          <li><a href="#" className="hover:text-[#0071E3] transition-colors text-gray-300 cursor-not-allowed" title="Segera hadir">Blog Edukasi</a></li>
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Partner Kami</a></li>
                       </ul>
                   </div>

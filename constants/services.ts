@@ -105,6 +105,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         description: 'Koneksi website ke sistem eksternal yang sudah Anda pakai (ERP, aplikasi kasir, platform logistik, dll) agar data tidak perlu diinput dua kali.',
         price: 450000,
         category: 'general',
+        disclaimer: 'Harga estimasi untuk 1 integrasi standar. Setiap sistem eksternal berbeda kompleksitasnya — tim kami akan konfirmasi scope & biaya final setelah konsultasi teknis.',
       },
       {
         id: 'email-auto',
@@ -118,6 +119,13 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         name: 'CRM Customer',
         description: 'Database terpusat semua data pelanggan (nama, kontak, riwayat transaksi, catatan) dengan fitur follow-up dan segmentasi — agar tidak ada prospek yang terlewat.',
         price: 600000,
+        category: 'general',
+      },
+      {
+        id: 'blog',
+        name: 'Blog / Halaman Berita',
+        description: 'Halaman artikel yang bisa Anda kelola sendiri — tulis berita, promo, atau konten edukasi langsung dari dashboard admin. Mendukung gambar, kategori, dan tanggal publish.',
+        price: 200000,
         category: 'general',
       },
     ]
@@ -276,8 +284,9 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         id: 'affiliate',
         name: 'Affiliate System',
         description: 'Mitra atau influencer punya link unik masing-masing; setiap penjualan dari link itu tercatat otomatis dan komisi dihitung di dashboard tanpa rekap manual.',
-        price: 750000,
+        price: 1100000,
         category: 'ecommerce',
+        disclaimer: 'Mencakup: unique referral link per mitra, tracking konversi, dan laporan komisi di dashboard. Tidak termasuk auto-payout — pembayaran komisi dilakukan manual oleh admin.',
       },
       {
         id: 'vendor',
@@ -442,7 +451,7 @@ export const BUNDLES: Bundle[] = [
     desc: 'Website perusahaan profesional dengan fitur SEO, sistem blog berita, dan Live Chat terintegrasi.',
     hostingId: 'starter',
     addonIds: ['seo', 'blog', 'admin-dash', 'live-chat'],
-    normalPrice: 1650000,
+    normalPrice: 1900000,
     bundlePrice: 1299000,
   },
   {

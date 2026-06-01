@@ -134,14 +134,14 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
 // Dipakai untuk menampilkan badge "Direkomendasikan" di Step 3 (Fitur Custom).
 export const RECOMMENDED_ADDONS: Record<string, string[]> = {
   'Website Perusahaan':     ['admin-dash', 'seo', 'live-chat', 'wa-auto', 'crm'],
-  'Toko Online':            ['cart', 'checkout', 'stock', 'voucher', 'midtrans', 'wa-auto'],
-  'Website Sekolah / LPK':  ['ppdb', 'portal-siswa', 'cbt', 'absensi', 'admin-dash'],
-  'Website Institusi':      ['admin-dash', 'seo', 'wa-auto', 'g-sheets'],
-  'Website Restaurant':     ['admin-dash', 'wa-auto', 'midtrans', 'seo', 'live-chat'],
+  'Toko Online':            ['cart', 'checkout', 'stock', 'track-pack', 'midtrans', 'wa-auto', 'voucher'],
+  'Website Sekolah / LPK':  ['ppdb', 'portal-siswa', 'cbt', 'absensi', 'cert', 'wa-auto', 'admin-dash'],
+  'Website Institusi':      ['admin-dash', 'seo', 'wa-auto', 'email-auto', 'g-sheets'],
+  'Website Restaurant':     ['admin-dash', 'wa-auto', 'midtrans', 'invoice-auto', 'seo', 'live-chat'],
   'Personal Branding':      ['seo', 'admin-dash', 'live-chat', 'email-auto'],
   'Blog / Media':           ['seo', 'admin-dash', 'membership', 'email-auto'],
-  'Travel & Rental':        ['booking', 'e-ticket', 'gps', 'driver-sched', 'midtrans'],
-  'Custom Jastip':          ['cart', 'checkout', 'track-pack', 'wa-auto', 'midtrans'],
+  'Travel & Rental':        ['booking', 'e-ticket', 'gps', 'driver-sched', 'seat', 'midtrans'],
+  'Custom Jastip':          ['cart', 'checkout', 'track-pack', 'invoice-auto', 'wa-auto', 'midtrans', 'g-sheets'],
 };
 
 export const BUNDLES: Bundle[] = [

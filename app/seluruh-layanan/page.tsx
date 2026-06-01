@@ -684,9 +684,12 @@ Terima kasih.`
                                                                     <Sparkles size={9} /> Rekomendasi
                                                                 </div>
                                                             )}
-                                                            <h4 className={`font-bold text-sm mb-3 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>
+                                                            <h4 className={`font-bold text-sm mb-1.5 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>
                                                                 {addon.name}
                                                             </h4>
+                                                            <p className="text-[11px] text-gray-400 leading-relaxed mb-3 pr-2">
+                                                                {addon.description}
+                                                            </p>
                                                             <div className="space-y-1">
                                                                 <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Setup Cost</p>
                                                                 <p className={`text-lg font-black tracking-tight ${isActive ? 'text-blue-900' : 'text-gray-900'}`}>

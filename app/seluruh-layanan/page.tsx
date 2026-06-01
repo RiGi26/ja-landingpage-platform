@@ -27,7 +27,8 @@ import {
   Plane,
   ChevronLeft,
   ExternalLink,
-  Sparkles
+  Sparkles,
+  Loader2
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -105,9 +106,9 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏢',
   },
   'Toko Online': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/toko-online',
-    tagline: 'Toko online siap terima order & pembayaran 24/7',
-    mockUrl: 'tokoonline.japanarenacorp.com',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/batik-larasati',
+    tagline: 'Toko online siap terima order & pembayaran 24/7 — contoh: Batik Larasati',
+    mockUrl: 'batik-larasati.japanarenacorp.com',
     mockupGradient: 'from-orange-800 to-red-900',
     sections: ['Hero + Promo', 'Katalog Produk', 'Keranjang', 'Checkout', 'Riwayat Order'],
     emoji: '🛍️',
@@ -129,9 +130,9 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏛️',
   },
   'Website Restaurant': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/restaurant',
-    tagline: 'Menu digital yang bikin pelanggan lapar duluan',
-    mockUrl: 'restaurant.japanarenacorp.com',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/kanawa',
+    tagline: 'Menu digital yang bikin pelanggan lapar duluan — contoh: Kanawa Izakaya',
+    mockUrl: 'kanawa.japanarenacorp.com',
     mockupGradient: 'from-amber-800 to-orange-900',
     sections: ['Hero Foto Makanan', 'Menu Digital', 'Reservasi Meja', 'Promo', 'Lokasi & Maps'],
     emoji: '🍜',
@@ -177,6 +178,13 @@ export default function SeluruhLayananPage() {
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([])
   const [selectedBundleId, setSelectedBundleId] = useState<string | null>(null)
   const [expandedGroups, setExpandedGroups] = useState<string[]>(['general']) // Default open first group
+  const [previewLoaded, setPreviewLoaded] = useState(false)
+  const [previewError, setPreviewError] = useState(false)
+
+  useEffect(() => {
+    setPreviewLoaded(false)
+    setPreviewError(false)
+  }, [selectedTemplate])
 
   const toggleGroup = (groupKey: string) => {
     setExpandedGroups(prev => 
@@ -431,17 +439,40 @@ Terima kasih.`
                                                     <ExternalLink size={12} className="text-gray-500 group-hover:text-gray-300 transition-colors shrink-0" />
                                                 </div>
 
-                                                {/* Mockup Body */}
-                                                <div className={`bg-gradient-to-br ${preview.mockupGradient} p-8 relative`}>
-                                                    <div className="text-5xl mb-4">{preview.emoji}</div>
-                                                    <div className="h-5 w-48 bg-white/30 rounded-lg mb-2" />
-                                                    <div className="h-3 w-64 bg-white/20 rounded mb-5" />
-                                                    <div className="flex gap-2 mb-5">
-                                                        <div className="h-8 w-28 bg-white/30 rounded-full" />
-                                                        <div className="h-8 w-20 bg-white/10 rounded-full border border-white/20" />
-                                                    </div>
-                                                    <p className="text-[11px] text-white/40 italic font-medium">{preview.tagline}</p>
-
+                                                {/* Live Preview / Fallback Mockup */}
+                                                <div className="relative w-full aspect-[4/3] overflow-hidden">
+                                                    {!previewError ? (
+                                                        <>
+                                                            {/* Spinner saat loading */}
+                                                            <div className={`absolute inset-0 flex items-center justify-center bg-gray-900 transition-opacity duration-500 ${previewLoaded ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+                                                                <Loader2 size={28} className="animate-spin text-gray-400" />
+                                                            </div>
+                                                            {/* Iframe live demo */}
+                                                            <iframe
+                                                                key={selectedTemplate}
+                                                                src={preview.demoUrl}
+                                                                title={selectedTemplate}
+                                                                loading="lazy"
+                                                                tabIndex={-1}
+                                                                onLoad={() => setPreviewLoaded(true)}
+                                                                onError={() => setPreviewError(true)}
+                                                                className="absolute top-0 left-0 w-[1440px] h-[1080px] origin-top-left scale-50 border-0 pointer-events-none"
+                                                                sandbox="allow-scripts allow-same-origin"
+                                                            />
+                                                        </>
+                                                    ) : (
+                                                        /* Fallback: mockup statis jika iframe gagal */
+                                                        <div className={`bg-gradient-to-br ${preview.mockupGradient} h-full p-8`}>
+                                                            <div className="text-5xl mb-4">{preview.emoji}</div>
+                                                            <div className="h-5 w-48 bg-white/30 rounded-lg mb-2" />
+                                                            <div className="h-3 w-64 bg-white/20 rounded mb-5" />
+                                                            <div className="flex gap-2 mb-5">
+                                                                <div className="h-8 w-28 bg-white/30 rounded-full" />
+                                                                <div className="h-8 w-20 bg-white/10 rounded-full border border-white/20" />
+                                                            </div>
+                                                            <p className="text-[11px] text-white/40 italic font-medium">{preview.tagline}</p>
+                                                        </div>
+                                                    )}
                                                     {/* Hover Overlay */}
                                                     <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/20 transition-all duration-300 flex items-center justify-center">
                                                         <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">

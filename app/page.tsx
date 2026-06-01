@@ -10,6 +10,7 @@ import {
 import Navbar from '@/components/LmsNavbar'
 import LmsFaq from '@/components/LmsFaq'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
+import PortfolioGallery from '@/components/PortfolioGallery'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -287,6 +288,7 @@ export default function LandingPage() {
         <HeroSection />
         <SocialProofBar />
         <SegmenSection />
+        <PortfolioGallery />
         <GlobalFeatures />
         <TrustSection />
         

@@ -25,6 +25,7 @@ import {
   Newspaper,
   Car,
   Plane,
+  Stethoscope,
   ChevronLeft,
   ExternalLink,
   Sparkles,
@@ -80,6 +81,7 @@ function useAnimatedNumber(value: number, duration = 800) {
 const TEMPLATE_OPTIONS = [
   { name: 'Website Perusahaan', icon: Briefcase },
   { name: 'Toko Online', icon: ShoppingCart },
+  { name: 'Website Klinik & Spa', icon: Stethoscope },
   { name: 'Website Sekolah / LPK', icon: GraduationCap },
   { name: 'Website Institusi', icon: Building },
   { name: 'Website Restaurant', icon: Utensils },
@@ -98,9 +100,9 @@ const TEMPLATE_PREVIEWS: Record<string, {
   emoji: string
 }> = {
   'Website Perusahaan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/perusahaan',
-    tagline: 'Tampil profesional & credible di mata klien korporat',
-    mockUrl: 'perusahaan.japanarenacorp.com',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/nusa-konsultan',
+    tagline: 'Tampil profesional & credible di mata klien korporat — contoh: Nusa Konsultan Digital',
+    mockUrl: 'nusa-konsultan.japanarenacorp.com',
     mockupGradient: 'from-slate-800 to-blue-900',
     sections: ['Hero Banner', 'Tentang Kami', 'Layanan', 'Portofolio', 'Kontak'],
     emoji: '🏢',
@@ -113,10 +115,18 @@ const TEMPLATE_PREVIEWS: Record<string, {
     sections: ['Hero + Promo', 'Katalog Produk', 'Keranjang', 'Checkout', 'Riwayat Order'],
     emoji: '🛍️',
   },
+  'Website Klinik & Spa': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lumiere-spa',
+    tagline: 'Klinik & spa premium yang warm, terpercaya & mudah booking — contoh: Lumière Beauty & Spa',
+    mockUrl: 'lumiere-spa.japanarenacorp.com',
+    mockupGradient: 'from-emerald-800 to-teal-900',
+    sections: ['Hero + Jadwal Dokter', 'Layanan Klinik', 'Reservasi Online', 'Testimoni Pasien', 'Kontak & Lokasi'],
+    emoji: '🏥',
+  },
   'Website Sekolah / LPK': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/sekolah',
-    tagline: 'Wajah digital institusi pendidikan yang modern',
-    mockUrl: 'sekolah.japanarenacorp.com',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lpk-sakura',
+    tagline: 'Wajah digital institusi pendidikan yang modern & terpercaya — contoh: LPK Sakura Academy',
+    mockUrl: 'lpk-sakura.japanarenacorp.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
     sections: ['Hero', 'Program Studi', 'Galeri', 'Pendaftaran Online', 'Berita'],
     emoji: '🎓',

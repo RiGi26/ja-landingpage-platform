@@ -423,6 +423,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
 // Dipakai untuk menampilkan badge "Direkomendasikan" di Step 3 (Fitur Custom).
 export const RECOMMENDED_ADDONS: Record<string, string[]> = {
   'Website Perusahaan':     ['admin-dash', 'seo', 'live-chat', 'wa-auto', 'crm'],
+  'Website Klinik & Spa':   ['clinic-res', 'queue', 'doc-sched', 'wa-auto', 'admin-dash', 'seo', 'live-chat'],
   'Toko Online':            ['cart', 'checkout', 'stock', 'track-pack', 'midtrans', 'wa-auto', 'voucher'],
   'Website Sekolah / LPK':  ['ppdb', 'portal-siswa', 'cbt', 'absensi', 'cert', 'wa-auto', 'admin-dash'],
   'Website Institusi':      ['admin-dash', 'seo', 'wa-auto', 'email-auto', 'g-sheets'],

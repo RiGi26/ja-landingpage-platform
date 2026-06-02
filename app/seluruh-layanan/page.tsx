@@ -518,8 +518,8 @@ Terima kasih.`
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
-                                    <h2 className="text-xl font-bold text-gray-900">Kapasitas Server & Storage</h2>
-                                    <p className="text-sm text-gray-400 font-medium mt-1">Sesuaikan dengan proyeksi traffic dan media Anda.</p>
+                                    <h2 className="text-xl font-bold text-gray-900">Pilih Ukuran Server</h2>
+                                    <p className="text-sm text-gray-400 font-medium mt-1">Sesuaikan dengan proyeksi pengunjung dan media Anda.</p>
                                 </div>
                                 <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0">
                                     <Server size={24} />
@@ -804,7 +804,7 @@ Terima kasih.`
                         <div className="space-y-3">
                             <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Fitur Tambahan</p>
                             {selectedAddons.length > 0 ? (
-                                <div className="bg-[#F5F5F7] rounded-xl p-4 border border-black/5 space-y-2 max-h-[160px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300">
+                                <div className="bg-[#F5F5F7] rounded-xl p-4 border border-black/5 space-y-2 max-h-[160px] overflow-y-auto">
                                     {selectedAddons.map(addon => (
                                         <div key={addon.id} className="flex justify-between items-center text-xs font-bold border-b border-black/[0.03] pb-2 last:border-0 last:pb-0">
                                             <span className="text-gray-600">{addon.name}</span>
@@ -843,7 +843,7 @@ Terima kasih.`
                     href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-4 rounded-2xl bg-[#0071E3] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-xl shadow-blue-200 active:scale-95"
+                    className="w-full py-4 rounded-2xl bg-[#0071E3] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-xl shadow-blue-200 active:scale-[0.96]"
                 >
                     Buat Order & Lacak Progress <ArrowRight size={18} />
                 </a>
@@ -903,7 +903,7 @@ Terima kasih.`
                       window.scrollTo({ top: 150, behavior: 'smooth' });
                       setCurrentStep(prev => prev + 1);
                   }}
-                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-95 transition-all"
+                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-[0.96] transition-all"
               >
                   Lanjut <ArrowRight size={16} />
               </button>
@@ -912,7 +912,7 @@ Terima kasih.`
                   href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-95 transition-all hover:bg-blue-600"
+                  className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-[0.96] transition-all hover:bg-blue-600"
               >
                   Buat Order & Lacak <ArrowRight size={16} />
               </a>

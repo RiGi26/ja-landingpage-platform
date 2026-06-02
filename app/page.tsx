@@ -133,7 +133,7 @@ function SegmenSection() {
         icon: Bus,
         label: 'Portal Travel & Rental',
         description: 'Armada terpantau, tiket terkelola, penumpang dapat konfirmasi otomatis. Tidak ada lagi booking manual lewat telepon.',
-        cta: 'Eksplor Sistem Travel',
+        cta: 'Lihat Demo',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
@@ -143,7 +143,7 @@ function SegmenSection() {
         icon: GraduationCap,
         label: 'Portal LMS',
         description: 'Karyawan baru selesai training tanpa menyita waktu manajer. Materi tersimpan, progres terpantau, sertifikat otomatis.',
-        cta: 'Eksplor Portal',
+        cta: 'Lihat Demo',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
         bg: 'bg-blue-50',
@@ -153,7 +153,7 @@ function SegmenSection() {
         icon: Cross,
         label: 'Portal Klinik',
         description: 'Pasien tidak antre lama. Dokter tidak tenggelam di kertas. Rekam medis digital dan antrean otomatis — semua tercatat rapi.',
-        cta: 'Eksplor Portal Klinik',
+        cta: 'Lihat Demo',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
@@ -163,7 +163,7 @@ function SegmenSection() {
         icon: Pill,
         label: 'Portal Farmasi',
         description: 'Stok obat tidak pernah habis tiba-tiba. Kasir digital catat semua transaksi otomatis. Laporan harian tersedia tanpa rekap manual.',
-        cta: 'Eksplor Portal Farmasi',
+        cta: 'Lihat Demo',
         href: 'https://ja-pharmacy-platform.vercel.app/login',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
@@ -185,12 +185,12 @@ function SegmenSection() {
         <section id="segmen" className="bg-white py-24 lg:py-32 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Solusi Kami</p>
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Mulai</p>
                     <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-                        Satu Ekosistem,<br className="hidden md:block" /> Semua Kebutuhan Bisnis
+                        Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
                     <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                      Pilih sistem yang cocok — atau gabungkan semuanya. Setiap platform sudah terintegrasi satu sama lain.
+                      Setup website bisnis Anda dalam 3 hari. Kalau operasional sudah butuh lebih — sistem portal kami siap dipakai tanpa coding.
                     </p>
                 </div>
 
@@ -199,8 +199,18 @@ function SegmenSection() {
                         const isFeatured = index === 0
                         const IconComponent = p.icon
                         return (
+                        <div key={p.label} className="contents">
+                        {/* Divider sebelum portal cards — muncul setelah featured card */}
+                        {index === 1 && (
+                          <div className="w-full flex items-center gap-4 py-2">
+                            <div className="flex-1 h-px bg-black/5" />
+                            <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest text-center whitespace-nowrap">
+                              Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
+                            </p>
+                            <div className="flex-1 h-px bg-black/5" />
+                          </div>
+                        )}
                         <div
-                          key={p.label}
                           className={`group flex flex-col p-6 rounded-[32px] transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm ${
                             isFeatured
                               ? 'bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 hover:shadow-2xl hover:shadow-blue-300'
@@ -228,6 +238,7 @@ function SegmenSection() {
                             >
                                 {p.cta}
                             </a>
+                        </div>
                         </div>
                         )
                     })}

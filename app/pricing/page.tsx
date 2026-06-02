@@ -195,6 +195,62 @@ export default function PricingPage() {
         {/* Comparison Section */}
         <ComparisonInfographic />
 
+        {/* FAQ */}
+        <div className="py-20 border-t border-black/5">
+          <div className="text-center mb-12">
+            <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
+            <h2 className="text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">
+              Pertanyaan Sebelum Berlangganan
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                q: 'Apa yang terjadi setelah trial 14 hari habis?',
+                a: 'Akses fitur dibatasi ke paket gratis. Tidak ada charge otomatis, tidak ada kartu kredit yang ditagih. Anda bisa pilih paket berbayar kapan saja — atau tetap di akses terbatas.',
+              },
+              {
+                q: 'Apakah bisa upgrade atau downgrade paket?',
+                a: 'Ya, kapan saja. Tidak ada penalti, tidak ada kontrak minimum. Cukup chat tim kami dan paket diubah di hari yang sama.',
+              },
+              {
+                q: 'Bagaimana cara pembayaran langganan?',
+                a: 'Transfer bank, QRIS, atau kartu kredit via Midtrans. Konfirmasi pembayaran otomatis masuk via WA.',
+              },
+              {
+                q: 'Apakah data saya aman kalau berhenti berlangganan?',
+                a: 'Data Anda tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
+              },
+              {
+                q: 'Apakah portal ini bisa dipakai bersamaan dengan website builder?',
+                a: 'Ya. Keduanya terpisah tapi terintegrasi. Website untuk tampilan online, portal untuk operasional bisnis dari dalam.',
+              },
+              {
+                q: 'Apakah ada biaya setup per fitur?',
+                a: 'Tidak. Semua fitur dalam paket langsung aktif tanpa biaya setup tambahan. Yang ada hanya biaya langganan bulanan yang tercantum.',
+              },
+            ].map((faq, i) => (
+              <div key={i} className="bg-[#F5F5F7] rounded-[24px] p-8 border border-black/[0.03]">
+                <h3 className="text-base font-bold text-gray-900 mb-3">{faq.q}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <p className="text-sm text-gray-400 font-medium">
+              Pertanyaan lain?{' '}
+              <a
+                href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20punya%20pertanyaan%20soal%20langganan."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#0071E3] font-bold hover:underline"
+              >
+                Chat tim kami
+              </a>
+            </p>
+          </div>
+        </div>
+
         {/* ECOSYSTEM BUNDLE STRATEGY */}
         <div className="bg-gradient-to-br from-gray-900 to-black rounded-[48px] p-8 md:p-16 text-white relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -mr-32 -mt-32" />

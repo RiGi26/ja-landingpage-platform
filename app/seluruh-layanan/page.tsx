@@ -339,8 +339,9 @@ Terima kasih.`
                     const isPassed = currentStep > step.num;
                     return (
                         <div key={step.num} className="flex-1 flex items-center">
-                            <button 
+                            <button
                                 onClick={() => setCurrentStep(step.num)}
+                                aria-current={isActive ? 'step' : undefined}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-2xl transition-all w-full ${
                                     isActive ? 'bg-blue-50/50' : 'hover:bg-gray-50'
                                 }`}
@@ -390,6 +391,7 @@ Terima kasih.`
                                         <button
                                             key={tpl.name}
                                             onClick={() => setSelectedTemplate(tpl.name)}
+                                            aria-pressed={selectedTemplate === tpl.name}
                                             className={`p-4 rounded-[20px] border-2 text-left transition-all flex flex-col gap-3 group ${
                                                 isSelected 
                                                 ? 'border-[#0071E3] bg-blue-50/30 ring-4 ring-blue-50' 
@@ -676,6 +678,8 @@ Terima kasih.`
                                                         <button
                                                             key={addon.id}
                                                             onClick={() => toggleAddon(addon)}
+                                                            role="checkbox"
+                                                            aria-checked={!!isActive}
                                                             className={`group p-5 rounded-[20px] border-2 text-left transition-all relative overflow-hidden ${
                                                                 isActive
                                                                     ? 'border-[#0071E3] bg-blue-50/50'
@@ -730,8 +734,9 @@ Terima kasih.`
                 <button
                     onClick={() => setCurrentStep(prev => Math.max(1, prev - 1))}
                     className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all ${
-                        currentStep === 1 ? 'opacity-0 pointer-events-none' : 'text-gray-500 hover:bg-gray-200'
+                        currentStep === 1 ? 'invisible pointer-events-none' : 'text-gray-500 hover:bg-gray-200'
                     }`}
+                    aria-hidden={currentStep === 1}
                 >
                     <ChevronLeft size={18} /> Kembali
                 </button>

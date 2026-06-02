@@ -78,11 +78,14 @@ export default function PricingPage() {
 
         {/* Header */}
         <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-5 border border-green-100">
+            <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
+          </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight sf-display-heavy">
-            Investasi Digital yang <span className="text-blue-600 underline decoration-blue-200 decoration-8 underline-offset-4">Tepat Sasaran</span>
+            Sistem Portal Bisnis — <span className="text-blue-600">Hemat 44–74%</span> vs Vendor Lain
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Pilih Layanan Kami (Sistem Siap Pakai) yang sesuai dengan skala operasional bisnis Anda. Transparan, terjangkau, dan tanpa biaya setup per fitur.
+            Pilih portal sesuai bisnis Anda. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
           </p>
         </div>
 
@@ -182,7 +185,7 @@ export default function PricingPage() {
                       : 'bg-gray-900 text-white hover:bg-black'
                   }`}
                 >
-                  {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari' : 'Mulai Berlangganan'} <ArrowRight size={16} />
+                  {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari — Gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai Berlangganan'} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
@@ -222,9 +225,14 @@ export default function PricingPage() {
             <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 text-center border-dashed">
                 <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle mulai</p>
                 <div className="text-5xl font-black text-white mb-6 sf-display-heavy">Rp 1.499.000<span className="text-lg text-gray-500 font-medium">/bln</span></div>
-                <button className="w-full bg-white text-black py-4 px-8 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-gray-200 transition-all active:scale-[0.96] shadow-xl">
-                  Hubungi Sales Expert <MessageCircle size={20} />
-                </button>
+                <a
+                  href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20tertarik%20dengan%20Business%20Bundle%20untuk%20beberapa%20portal."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-white text-black py-4 px-8 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-gray-200 transition-all active:scale-[0.96] shadow-xl"
+                >
+                  Chat Tim Kami <MessageCircle size={20} />
+                </a>
                 <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-tighter font-bold">*Syarat berlaku — minimal 3 portal aktif</p>
             </div>
           </div>
@@ -233,9 +241,9 @@ export default function PricingPage() {
         {/* Footer Info */}
         <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
            {[
-             { t: 'Tanpa Biaya Setup', d: 'Mulai operasional digital Anda hari ini tanpa biaya instalasi awal yang memberatkan kashflow bisnis.' },
-             { t: 'Update Berkala', d: 'Dapatkan pembaruan fitur keamanan dan fungsionalitas secara gratis setiap bulannya tanpa biaya tambahan.' },
-             { t: 'Keamanan Data', d: 'Data bisnis Anda disimpan di infrastruktur terenkripsi dengan backup berkala demi kenyamanan Anda.' },
+             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu Anda daftar.' },
+             { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. Anda tidak perlu urus apapun.' },
+             { t: 'Data Tidak Bisa Diintip', d: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Enkripsi aktif dari hari pertama, backup harian.' },
            ].map(item => (
              <div key={item.t} className="group">
                <h4 className="font-black text-gray-900 mb-3 uppercase text-xs tracking-widest border-l-4 border-blue-600 pl-4">{item.t}</h4>

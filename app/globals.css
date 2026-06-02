@@ -50,6 +50,15 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeInUp 0.3s ease forwards;
 }
 
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ── Custom utility classes (used across components) ─────────────────────── */
 
 .apple-shadow {

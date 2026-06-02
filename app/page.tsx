@@ -98,7 +98,7 @@ function HeroSection() {
 
 function SocialProofBar() {
   const STATS = [
-    { value: '6+', label: 'Platform Aktif' },
+    { value: '20+', label: 'Bisnis Aktif' },
     { value: '1–3 hari', label: 'Waktu Setup' },
     { value: '24/7', label: 'Sistem Berjalan' },
     { value: '100%', label: 'Tanpa Coding' },
@@ -351,8 +351,8 @@ export default function LandingPage() {
                 Berapa jam seminggu Anda<br className="hidden md:block" /> habiskan untuk hal yang<br className="hidden md:block" /> <span className="text-[#0071E3]">bisa diotomasi?</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Bisnis yang bergabung dengan kami rata-rata memangkas waktu admin hingga 70%.
-                Satu percakapan WA — kami tunjukkan sistemnya langsung.
+                Satu percakapan WA, 15 menit — tim kami tunjukkan langsung sistemnya.
+                Bukan bot, bukan sales script.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -368,7 +368,11 @@ export default function LandingPage() {
                   Jelajahi Platform
                 </a>
               </div>
-              <p className="text-gray-600 text-sm mt-8">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
+                <p className="text-gray-500 text-sm font-medium">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>
+                <span className="hidden sm:block text-gray-700">·</span>
+                <p className="text-gray-500 text-sm font-medium">Konsultasi 15 menit via WA — tim kami yang jelaskan langsung.</p>
+              </div>
           </div>
         </section>
       </main>

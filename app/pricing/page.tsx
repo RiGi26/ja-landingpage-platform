@@ -12,7 +12,7 @@ const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; 
     id: 'lms',
     name: 'Portal LMS',
     icon: GraduationCap,
-    demoUrl: 'https://app.japanarenacorp.com/demo',
+    demoUrl: 'https://app.japanarena.com/demo',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
       { tier: 'Professional', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis'], popular: true },

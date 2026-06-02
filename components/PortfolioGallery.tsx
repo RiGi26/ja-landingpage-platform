@@ -53,7 +53,7 @@ function PortfolioCard({ site }: { site: Site }) {
         </div>
         <div className="flex-1 mx-1">
           <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-400 font-mono text-center truncate">
-            {site.slug}.japanarenacorp.com
+            {site.slug}.japanarena.com
           </div>
         </div>
         <ExternalLink size={12} className="text-gray-300 group-hover:text-[#0071E3] transition-colors shrink-0" />

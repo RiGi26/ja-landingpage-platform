@@ -335,7 +335,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.japanarenacorp.com) atau kami bantu daftarkan domain baru.',
+      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.japanarena.com) atau kami bantu daftarkan domain baru.',
     },
     {
       q: 'Apakah ada biaya setelah tahun pertama?',

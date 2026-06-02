@@ -8,11 +8,11 @@ export const metadata: Metadata = {
     'harga buat website', 'kalkulator website indonesia', 'website murah profesional',
     'website bisnis 3 hari', 'buat website toko online', 'website klinik murah',
   ],
-  alternates: { canonical: 'https://japanarenacorp.com/seluruh-layanan' },
+  alternates: { canonical: 'https://japanarena.com/seluruh-layanan' },
   openGraph: {
     title: 'Kalkulator Harga Website — Mulai Rp 600.000 | Japan Arena Corp',
     description: 'Harga transparan, tidak ada biaya tersembunyi. Website live 1–3 hari.',
-    url: 'https://japanarenacorp.com/seluruh-layanan',
+    url: 'https://japanarena.com/seluruh-layanan',
     type: 'website',
   },
 }

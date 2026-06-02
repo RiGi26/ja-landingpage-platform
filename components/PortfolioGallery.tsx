@@ -92,7 +92,8 @@ function PortfolioCard({ site }: { site: Site }) {
           <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
           <p className="text-[11px] text-gray-400 font-medium mt-0.5">{meta.label}</p>
         </div>
-        <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0">
+        <span className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0">
+          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
           Live
         </span>
       </div>
@@ -129,14 +130,18 @@ export default function PortfolioGallery() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
-            <Globe size={14} /> Karya Kami
+            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
+            Live Sekarang
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-            Website yang Sudah Kami Bangun
+            {sites
+              ? <>{sites.length} Website Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
+              : <>Website Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
+            }
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mt-5 font-medium">
-            Bukan sekadar mockup — ini website klien kami yang sudah live & beroperasi.
-            Klik untuk melihat langsung di tab baru.
+            Bukan mockup, bukan demo — ini domain nyata yang sudah diakses pelanggan klien kami hari ini.
+            Klik kartu mana saja untuk buka langsung di tab baru.
           </p>
         </div>
 
@@ -166,13 +171,14 @@ export default function PortfolioGallery() {
         )}
 
         {/* CTA */}
-        <div className="text-center mt-14">
+        <div className="text-center mt-14 space-y-3">
           <a
             href="/seluruh-layanan"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] shadow-lg glow-button"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
           >
-            Buat Website Seperti Ini <ArrowRight size={18} />
+            Website Saya Mau Seperti Ini <ArrowRight size={18} />
           </a>
+          <p className="text-sm text-gray-400 font-medium">Live dalam 3 hari. Domain sendiri. Mulai dari Rp 600.000.</p>
         </div>
       </div>
     </section>

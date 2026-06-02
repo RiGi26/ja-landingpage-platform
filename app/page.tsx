@@ -49,21 +49,24 @@ function HeroSection() {
             </div>
 
             <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
-              Otomasi Bisnis Anda.<br />
-              <span className="text-[#0071E3]">Tanpa Ribet.</span>
+              Bisnis Anda Bisa<br />
+              <span className="text-[#0071E3]">Jalan Sendiri.</span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Bisnis Anda seharusnya bisa jalan sendiri. Kami urus invoice, notifikasi pelanggan, dan laporan harian —
-              supaya Anda fokus tumbuh, bukan tenggelam di pekerjaan admin.
+              Masih rekap manual setiap malam? Masih telepon satu-satu untuk tagih pembayaran?
+              Klien kami rata-rata memangkas <span className="text-gray-900 font-semibold">70% waktu admin</span> —
+              karena invoice, notifikasi WA, dan laporan harian sudah berjalan otomatis.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="#segmen"
+                href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] shadow-lg glow-button"
               >
-                Pilih Produk & Demo <ArrowRight size={18} />
+                Chat & Lihat Demo Gratis <ArrowRight size={18} />
               </a>
               <a
                 href={waLink('Halo Japan Arena, saya ingin konsultasi sistem bisnis.')}

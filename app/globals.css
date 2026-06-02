@@ -66,6 +66,16 @@ h1, h2, h3, h4, h5, h6 {
   animation: fadeInDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* animate-fade-in — used in seluruh-layanan wizard step content */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ── Custom utility classes (used across components) ─────────────────────── */
 
 .apple-shadow {

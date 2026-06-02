@@ -82,10 +82,7 @@ function HeroSection() {
           </div>
 
           {/* Device Mockup Visualization */}
-          <div className="relative z-20 hidden lg:block">
-            <AnimatedHeroMockup />
-          </div>
-          <div className="relative z-20 block lg:hidden">
+          <div className="relative z-20">
             <AnimatedHeroMockup />
           </div>
 

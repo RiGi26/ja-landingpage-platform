@@ -122,7 +122,7 @@ function SegmenSection() {
       {
         icon: Globe2,
         label: 'Katalog Website',
-        description: 'Website profil bisnis profesional, instan, dan terjangkau. Mulai dari Rp 600.000.',
+        description: 'Website bisnis Anda live dalam 3 hari. Desain profesional, domain sendiri, langsung bisa diakses pelanggan. Mulai dari Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',
@@ -132,7 +132,7 @@ function SegmenSection() {
       {
         icon: Bus,
         label: 'Portal Travel & Rental',
-        description: 'Sistem manajemen transportasi antar kota dan operasional penyewaan armada dengan fitur pelacakan real-time dan e-ticketing.',
+        description: 'Armada terpantau, tiket terkelola, penumpang dapat konfirmasi otomatis. Tidak ada lagi booking manual lewat telepon.',
         cta: 'Eksplor Sistem Travel',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
@@ -142,7 +142,7 @@ function SegmenSection() {
       {
         icon: GraduationCap,
         label: 'Portal LMS',
-        description: 'Otomasi sistem pengajaran dan pelatihan karyawan dalam satu platform cerdas & terpusat.',
+        description: 'Karyawan baru selesai training tanpa menyita waktu manajer. Materi tersimpan, progres terpantau, sertifikat otomatis.',
         cta: 'Eksplor Portal',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
@@ -152,7 +152,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Tingkatkan layanan kesehatan dengan rekam medis digital dan sistem antrean pasien otomatis.',
+        description: 'Pasien tidak antre lama. Dokter tidak tenggelam di kertas. Rekam medis digital dan antrean otomatis — semua tercatat rapi.',
         cta: 'Eksplor Portal Klinik',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
@@ -162,7 +162,7 @@ function SegmenSection() {
       {
         icon: Pill,
         label: 'Portal Farmasi',
-        description: 'Kendali penuh stok obat dan transaksi apotek dengan sistem POS yang terintegrasi.',
+        description: 'Stok obat tidak pernah habis tiba-tiba. Kasir digital catat semua transaksi otomatis. Laporan harian tersedia tanpa rekap manual.',
         cta: 'Eksplor Portal Farmasi',
         href: 'https://ja-pharmacy-platform.vercel.app/login',
         color: 'text-indigo-600',
@@ -172,7 +172,7 @@ function SegmenSection() {
       {
         icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
-        description: 'Jasa titip profesional dari Jepang ke Indonesia. Belanja barang impian Anda dengan kalkulasi biaya transparan dan pengiriman express.',
+        description: 'Titip barang dari Jepang langsung ke rumah Anda. Harga transparan, pengiriman terlacak, tidak perlu khawatir barang hilang.',
         cta: 'Mulai Titip Barang',
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',

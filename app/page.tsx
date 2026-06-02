@@ -55,8 +55,8 @@ function HeroSection() {
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
               Masih rekap manual setiap malam? Masih telepon satu-satu untuk tagih pembayaran?
-              Klien kami rata-rata memangkas <span className="text-gray-900 font-semibold">70% waktu admin</span> —
-              karena invoice, notifikasi WA, dan laporan harian sudah berjalan otomatis.
+              Invoice keluar otomatis. Notifikasi WA terkirim sendiri. Laporan tersaji tiap pagi tanpa rekap manual.
+              Setup 1–3 hari — bisnis Anda bisa jalan seperti ini mulai besok.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

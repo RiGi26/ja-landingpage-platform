@@ -383,10 +383,10 @@ export default function LandingPage() {
                           Penyedia solusi infrastruktur digital dan ekosistem sistem operasional terintegrasi untuk bisnis modern di Indonesia.
                       </p>
                       <div className="flex gap-4">
-                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>
-                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Twitter size={18} /></a>
-                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Instagram size={18} /></a>
-                          <a href="#" className="w-9 h-9 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Linkedin size={18} /></a>
+                          <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>
+                          <a href="#" aria-label="Twitter" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Twitter size={18} /></a>
+                          <a href="#" aria-label="Instagram" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Instagram size={18} /></a>
+                          <a href="#" aria-label="LinkedIn" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Linkedin size={18} /></a>
                       </div>
                   </div>
 
@@ -408,7 +408,7 @@ export default function LandingPage() {
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Tentang Kami</a></li>
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Karir</a></li>
-                          <li><a href="#" className="hover:text-[#0071E3] transition-colors text-gray-300 cursor-not-allowed" title="Segera hadir">Blog Edukasi</a></li>
+                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Blog Edukasi</span></li>
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Partner Kami</a></li>
                       </ul>
                   </div>

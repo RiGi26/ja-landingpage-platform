@@ -13,10 +13,8 @@
 }
 
 :root {
-  --primary: #1D4ED8;
-  --blue: #2563EB;
-  --blue-light: #EFF6FF;
-  --blue-border: #BFDBFE;
+  --primary: #0071E3;
+  --primary-dark: #005BB5;
   --font-display: 'Syne', sans-serif;
   --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
 }

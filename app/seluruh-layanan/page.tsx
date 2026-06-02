@@ -164,12 +164,12 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '📰',
   },
   'Travel & Rental': {
-    demoUrl: 'https://ja-rental-platform.vercel.app',
-    tagline: 'Booking & rental management, siap dioperasikan',
-    mockUrl: 'travel.japanarena.com',
-    mockupGradient: 'from-cyan-800 to-blue-900',
-    sections: ['Hero Destinasi', 'Katalog Armada', 'Booking Online', 'Tracking', 'Dashboard'],
-    emoji: '✈️',
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/rental',
+    tagline: 'Rental mobil & motor profesional siap live — contoh: Nusantara Drive',
+    mockUrl: 'nusantara-drive.japanarena.com',
+    mockupGradient: 'from-amber-800 to-orange-900',
+    sections: ['Hero + Booking Form', 'Katalog Armada', 'GPS Tracking', 'Cara Pesan', 'Testimoni'],
+    emoji: '🚗',
   },
   'Custom Jastip': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',

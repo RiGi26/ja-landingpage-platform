@@ -872,7 +872,7 @@ Terima kasih.`
                 <div className="mt-2 flex items-start gap-2">
                     <Info size={14} className="text-gray-400 shrink-0 mt-0.5" />
                     <p className="text-[10px] text-gray-400 leading-relaxed font-medium">
-                        Harga estimasi final dapat berubah menyesuaikan tingkat kompleksitas custom & lisensi aset.
+                        Estimasi ini akurat untuk kebutuhan standar. Tim kami konfirmasi harga final via WA sebelum proses dimulai.
                     </p>
                 </div>
               </div>
@@ -890,8 +890,8 @@ Terima kasih.`
       {/* Footer / FAQ Shortcut */}
       <section className="bg-white py-20 mt-20 border-t border-black/5">
           <div className="max-w-4xl mx-auto px-4 text-center">
-              <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Butuh Sistem yang Lebih Kompleks?</h2>
-              <p className="text-gray-500 mb-8 font-medium">Kami siap membantu membangun platform digital skala enterprise sesuai kebutuhan spesifik bisnis Anda.</p>
+              <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Website saja tidak cukup?</h2>
+              <p className="text-gray-500 mb-8 font-medium">Butuh booking system, kasir digital, atau LMS karyawan? Kami punya platformnya — siap pakai, bukan custom dari nol.</p>
               <Link
                 href="/pricing"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-bold rounded-full hover:bg-black transition-all"

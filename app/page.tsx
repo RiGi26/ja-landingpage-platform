@@ -198,13 +198,13 @@ function SegmenSection() {
                         return (
                         <div
                           key={p.label}
-                          className={`group flex flex-col p-8 rounded-[32px] transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm ${
+                          className={`group flex flex-col p-6 rounded-[32px] transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm ${
                             isFeatured
                               ? 'bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 hover:shadow-2xl hover:shadow-blue-300'
                               : 'bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl'
                           }`}
                         >
-                            <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
+                            <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
                               isFeatured ? 'bg-white/20 text-white' : `${p.bg} ${p.color}`
                             }`}>
                                 <IconComponent size={26} />
@@ -284,9 +284,9 @@ function TrustSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                     {STEPS.map((s, i) => (
-                        <div key={i} className={`relative p-10 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
+                        <div key={i} className={`relative p-8 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
-                            <div className="w-14 h-14 bg-white rounded-2xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
+                            <div className="w-14 h-14 bg-white rounded-lg apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
                                 <s.i size={28} />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-3">{s.t}</h3>

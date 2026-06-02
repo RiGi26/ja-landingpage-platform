@@ -327,6 +327,69 @@ function TrustSection() {
     )
 }
 
+function FaqSection() {
+  const FAQS = [
+    {
+      q: 'Berapa lama website saya selesai?',
+      a: '1–3 hari kerja setelah brief dan DP diterima. Konten sederhana selesai lebih cepat. Website dengan fitur custom bisa lebih — kami konfirmasi timeline pasti sebelum mulai.',
+    },
+    {
+      q: 'Apakah saya bisa pakai domain sendiri?',
+      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.japanarenacorp.com) atau kami bantu daftarkan domain baru.',
+    },
+    {
+      q: 'Apakah ada biaya setelah tahun pertama?',
+      a: 'Ya, ada biaya renewal untuk hosting dan maintenance. Jumlahnya sudah tertera di kalkulator sejak awal — tidak ada biaya tersembunyi yang muncul belakangan.',
+    },
+    {
+      q: 'Apakah saya bisa request revisi?',
+      a: 'Ya. Revisi konten dan layout minor termasuk dalam paket. Untuk perubahan besar seperti ganti template atau tambah fitur baru, kami diskusikan estimasi biayanya dulu.',
+    },
+    {
+      q: 'Apa bedanya website builder dengan portal (LMS, klinik, dll)?',
+      a: 'Website builder untuk tampilan online bisnis Anda — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
+    },
+    {
+      q: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
+      a: 'Tidak ada kontrak minimum. Untuk portal SaaS, bisa cancel kapan saja. Untuk website, hosting berjalan per tahun dan bisa tidak diperpanjang saat jatuh tempo.',
+    },
+  ]
+
+  return (
+    <section className="bg-white py-24 px-4 border-t border-black/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">
+            Pertanyaan yang Sering Ditanya
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {FAQS.map((faq, i) => (
+            <div key={i} className="bg-[#F5F5F7] rounded-[24px] p-8 border border-black/[0.03]">
+              <h3 className="text-base font-bold text-gray-900 mb-3">{faq.q}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-10">
+          <p className="text-sm text-gray-400 font-medium">
+            Masih ada pertanyaan?{' '}
+            <a
+              href={waLink('Halo Japan Arena, saya punya pertanyaan sebelum mulai.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0071E3] font-bold hover:underline"
+            >
+              Chat tim kami
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
@@ -351,7 +414,8 @@ export default function LandingPage() {
         <PortfolioGallery />
         <GlobalFeatures />
         <TrustSection />
-        
+        <FaqSection />
+
         <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">
           {/* Background mesh */}
           <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)'}} />

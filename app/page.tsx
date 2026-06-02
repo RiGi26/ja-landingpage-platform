@@ -383,7 +383,7 @@ export default function LandingPage() {
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
                       <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-                          Penyedia solusi infrastruktur digital dan ekosistem sistem operasional terintegrasi untuk bisnis modern di Indonesia.
+                          Kami bangun sistem operasional untuk bisnis Indonesia — dari kasir digital dan LMS karyawan, sampai website dan tiket online. Setup cepat, tanpa coding.
                       </p>
                       <div className="flex gap-4">
                           <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>

@@ -68,7 +68,7 @@ export default function PricingPage() {
             href="/" 
             className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors group"
           >
-            <div className="w-8 h-8 rounded-full bg-white border border-black/5 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-100 transition-all shadow-sm">
+            <div className="w-11 h-11 rounded-full bg-white border border-black/5 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-100 transition-all shadow-sm">
               <ArrowRight size={14} className="rotate-180" />
             </div>
             Kembali ke Beranda
@@ -108,7 +108,7 @@ export default function PricingPage() {
             <div 
               key={plan.tier}
               className={`relative bg-white rounded-[40px] p-8 border-2 transition-all flex flex-col ${
-                plan.popular ? 'border-blue-600 shadow-2xl scale-105 z-10' : 'border-black/[0.03] shadow-sm'
+                plan.popular ? 'border-blue-600 shadow-2xl shadow-blue-100 ring-4 ring-blue-50' : 'border-black/[0.03] shadow-sm'
               }`}
             >
               {plan.popular && (

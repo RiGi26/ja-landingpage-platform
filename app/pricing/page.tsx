@@ -86,14 +86,17 @@ export default function PricingPage() {
         </div>
 
         {/* Platform Switcher */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
+        <div role="tablist" aria-label="Pilih platform" className="flex flex-wrap justify-center gap-2 mb-12">
           {PLATFORMS.map(p => (
             <button
               key={p.id}
+              role="tab"
+              aria-selected={activeTab === p.id}
+              aria-controls={`tabpanel-${p.id}`}
               onClick={() => setActiveTab(p.id)}
               className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${
-                activeTab === p.id 
-                ? 'bg-blue-600 text-white shadow-lg scale-105' 
+                activeTab === p.id
+                ? 'bg-blue-600 text-white shadow-lg scale-105'
                 : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-100'
               }`}
             >
@@ -103,7 +106,11 @@ export default function PricingPage() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
+        <div
+          role="tabpanel"
+          id={`tabpanel-${currentPlatform.id}`}
+          aria-labelledby={`tab-${currentPlatform.id}`}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
           {currentPlatform.plans.map((plan, idx) => (
             <div 
               key={plan.tier}

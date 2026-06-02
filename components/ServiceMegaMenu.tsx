@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 const WA_NUMBER   = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
-const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanarenacorp.com'
+const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanarena.com'
 const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://ja-clinic-platform.vercel.app/auth/login').split('/auth/')[0]
 const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
 

@@ -102,7 +102,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Website Perusahaan': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/nusa-konsultan',
     tagline: 'Tampil profesional & credible di mata klien korporat — contoh: Nusa Konsultan Digital',
-    mockUrl: 'nusa-konsultan.japanarenacorp.com',
+    mockUrl: 'nusa-konsultan.japanarena.com',
     mockupGradient: 'from-slate-800 to-blue-900',
     sections: ['Hero Banner', 'Tentang Kami', 'Layanan', 'Portofolio', 'Kontak'],
     emoji: '🏢',
@@ -110,7 +110,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Toko Online': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/batik-larasati',
     tagline: 'Toko online siap terima order & pembayaran 24/7 — contoh: Batik Larasati',
-    mockUrl: 'batik-larasati.japanarenacorp.com',
+    mockUrl: 'batik-larasati.japanarena.com',
     mockupGradient: 'from-orange-800 to-red-900',
     sections: ['Hero + Promo', 'Katalog Produk', 'Keranjang', 'Checkout', 'Riwayat Order'],
     emoji: '🛍️',
@@ -118,7 +118,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Website Klinik & Spa': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lumiere-spa',
     tagline: 'Klinik & spa premium yang warm, terpercaya & mudah booking — contoh: Lumière Beauty & Spa',
-    mockUrl: 'lumiere-spa.japanarenacorp.com',
+    mockUrl: 'lumiere-spa.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
     sections: ['Hero + Jadwal Dokter', 'Layanan Klinik', 'Reservasi Online', 'Testimoni Pasien', 'Kontak & Lokasi'],
     emoji: '🏥',
@@ -126,7 +126,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Website Sekolah / LPK': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lpk-sakura',
     tagline: 'Wajah digital institusi pendidikan yang modern & terpercaya — contoh: LPK Sakura Academy',
-    mockUrl: 'lpk-sakura.japanarenacorp.com',
+    mockUrl: 'lpk-sakura.japanarena.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
     sections: ['Hero', 'Program Studi', 'Galeri', 'Pendaftaran Online', 'Berita'],
     emoji: '🎓',
@@ -134,7 +134,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Website Institusi': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/institusi',
     tagline: 'Portal informasi resmi dan terpercaya',
-    mockUrl: 'institusi.japanarenacorp.com',
+    mockUrl: 'institusi.japanarena.com',
     mockupGradient: 'from-gray-800 to-slate-900',
     sections: ['Header Resmi', 'Pengumuman', 'Struktur Organisasi', 'Layanan', 'Kontak'],
     emoji: '🏛️',
@@ -142,7 +142,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Website Restaurant': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/kanawa',
     tagline: 'Menu digital yang bikin pelanggan lapar duluan — contoh: Kanawa Izakaya',
-    mockUrl: 'kanawa.japanarenacorp.com',
+    mockUrl: 'kanawa.japanarena.com',
     mockupGradient: 'from-amber-800 to-orange-900',
     sections: ['Hero Foto Makanan', 'Menu Digital', 'Reservasi Meja', 'Promo', 'Lokasi & Maps'],
     emoji: '🍜',
@@ -150,7 +150,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Personal Branding': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/personal-branding',
     tagline: 'Personal website yang menonjolkan keahlian Anda',
-    mockUrl: 'nama.japanarenacorp.com',
+    mockUrl: 'nama.japanarena.com',
     mockupGradient: 'from-violet-800 to-pink-900',
     sections: ['Hero Foto', 'Tentang Saya', 'Portofolio', 'Testimoni', 'Hire Me'],
     emoji: '👤',
@@ -158,7 +158,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Blog / Media': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/blog',
     tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
-    mockUrl: 'blog.japanarenacorp.com',
+    mockUrl: 'blog.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
     sections: ['Featured Post', 'Kategori', 'Artikel Terbaru', 'Newsletter', 'Author Page'],
     emoji: '📰',
@@ -166,7 +166,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Travel & Rental': {
     demoUrl: 'https://ja-rental-platform.vercel.app',
     tagline: 'Booking & rental management, siap dioperasikan',
-    mockUrl: 'travel.japanarenacorp.com',
+    mockUrl: 'travel.japanarena.com',
     mockupGradient: 'from-cyan-800 to-blue-900',
     sections: ['Hero Destinasi', 'Katalog Armada', 'Booking Online', 'Tracking', 'Dashboard'],
     emoji: '✈️',
@@ -174,7 +174,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Custom Jastip': {
     demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',
     tagline: 'Sistem jasa titip yang terorganisir & profesional',
-    mockUrl: 'jastip.japanarenacorp.com',
+    mockUrl: 'jastip.japanarena.com',
     mockupGradient: 'from-rose-800 to-pink-900',
     sections: ['Hero', 'Katalog Titipan', 'Form Request', 'Status Order', 'Pembayaran'],
     emoji: '📦',

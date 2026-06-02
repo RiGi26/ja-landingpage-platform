@@ -26,14 +26,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Japan Arena Corp' }],
   verification: {
-    google: '6bxcOOpSIGpRRHXnmKeIzEKykPQL6x_Co1YT7Hrqu8c',
+    google: 'demIw8L-D7hiN7YrFATE8fJGPbkamQh9K8pu65FYcDI',
   },
-  metadataBase: new URL('https://japanarenacorp.com'),
-  alternates: { canonical: 'https://japanarenacorp.com' },
+  metadataBase: new URL('https://japanarena.com'),
+  alternates: { canonical: 'https://japanarena.com' },
   openGraph: {
     title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
     description: 'Website bisnis dalam 3 hari. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
-    url: 'https://japanarenacorp.com',
+    url: 'https://japanarena.com',
     siteName: 'Japan Arena Corp',
     locale: 'id_ID',
     type: 'website',
@@ -52,8 +52,8 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Japan Arena Corp',
-  url: 'https://japanarenacorp.com',
-  logo: 'https://japanarenacorp.com/images/Icon.png',
+  url: 'https://japanarena.com',
+  logo: 'https://japanarena.com/images/Icon.png',
   description: 'Penyedia website bisnis dan portal sistem operasional untuk UKM Indonesia.',
   contactPoint: {
     '@type': 'ContactPoint',
@@ -66,7 +66,7 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Japan Arena Corp',
-  url: 'https://japanarenacorp.com',
+  url: 'https://japanarena.com',
 }
 
 const homepageFaqSchema = {

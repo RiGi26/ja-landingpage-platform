@@ -84,6 +84,10 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 30px rgba(0, 113, 227, 0.45);
   transform: translateY(-1px);
 }
+.glow-button:active {
+  transform: scale(0.96);
+  box-shadow: 0 0 10px rgba(0, 113, 227, 0.2);
+}
 
 .sf-display-heavy {
   font-family: var(--font-display);

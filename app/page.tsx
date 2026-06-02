@@ -69,7 +69,7 @@ function HeroSection() {
                 href={waLink('Halo Japan Arena, saya ingin konsultasi sistem bisnis.')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 apple-shadow"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
               >
                 Konsultasi WA
               </a>
@@ -360,7 +360,7 @@ export default function LandingPage() {
                 </a>
                 <a
                   href="#segmen"
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 transition-all backdrop-blur-sm"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 active:scale-[0.96] transition-all backdrop-blur-sm"
                 >
                   Jelajahi Platform
                 </a>

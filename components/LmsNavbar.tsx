@@ -125,7 +125,7 @@ export default function LmsNavbar() {
             <div className="pt-4 border-t border-black/5">
               <button
                 onClick={() => { setOpen(false); setIsPickerOpen(true) }}
-                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black"
+                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black transition-transform active:scale-[0.96]"
               >
                 <LogIn size={18} /> Masuk Layanan
               </button>

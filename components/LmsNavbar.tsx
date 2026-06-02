@@ -92,7 +92,7 @@ export default function LmsNavbar() {
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#0071E3] text-white text-sm font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] glow-button"
             >
               <MessageCircle size={15} />
-              Demo Gratis
+              Konsultasi Gratis
             </a>
             <button
               onClick={() => setIsPickerOpen(true)}

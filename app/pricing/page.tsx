@@ -58,7 +58,7 @@ export default function PricingPage() {
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 font-sans">
+    <div className="min-h-screen bg-gray-50 pb-20">
       <Navbar />
 
       <div className="max-w-6xl mx-auto pt-32 px-4">

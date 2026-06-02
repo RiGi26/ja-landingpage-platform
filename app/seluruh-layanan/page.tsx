@@ -346,9 +346,9 @@ Terima kasih.`
                                     isActive ? 'bg-blue-50/50' : 'hover:bg-gray-50'
                                 }`}
                             >
-                                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all shrink-0 ${
-                                    isActive ? 'bg-[#0071E3] text-white shadow-md shadow-blue-200' : 
-                                    isPassed ? 'bg-blue-100 text-[#0071E3]' : 
+                                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold transition-all shrink-0 ${
+                                    isActive ? 'bg-[#0071E3] text-white shadow-md shadow-blue-200' :
+                                    isPassed ? 'bg-blue-100 text-[#0071E3]' :
                                     'bg-gray-100 text-gray-400'
                                 }`}>
                                     {isPassed ? <Check size={16} strokeWidth={3} /> : step.num}
@@ -594,13 +594,13 @@ Terima kasih.`
                                         <button
                                             key={bundle.id}
                                             onClick={() => handleSelectBundle(bundle)}
-                                            className={`text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all ${
+                                            className={`text-[11px] font-bold px-4 py-2.5 rounded-full border transition-all min-h-[44px] ${
                                                 selectedBundleId === bundle.id
                                                     ? 'bg-yellow-400 border-yellow-400 text-yellow-900'
                                                     : 'bg-white border-yellow-200 text-yellow-800 hover:border-yellow-400 hover:bg-yellow-50'
                                             }`}
                                         >
-                                            {bundle.emoji} {bundle.name}
+                                            {bundle.name}
                                         </button>
                                     ))}
                                 </div>

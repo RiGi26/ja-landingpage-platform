@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
   ],
   authors: [{ name: 'Japan Arena Corp' }],
+  verification: {
+    google: '6bxcOOpSIGpRRHXnmKeIzEKykPQL6x_Co1YT7Hrqu8c',
+  },
   metadataBase: new URL('https://japanarenacorp.com'),
   alternates: { canonical: 'https://japanarenacorp.com' },
   openGraph: {

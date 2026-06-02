@@ -260,6 +260,76 @@ function GlobalFeatures() {
     )
 }
 
+function TestimonialsSection() {
+  const TESTIMONIALS = [
+    {
+      quote: 'Sebelumnya rekap pembayaran manual 2–3 jam setiap malam. Sekarang tinggal buka dashboard pagi hari — semua sudah tersaji.',
+      name: 'Budi Santoso',
+      role: 'Pemilik Rental Mobil',
+      city: 'Bandung',
+      platform: 'Portal Travel & Rental',
+      initial: 'B',
+      color: 'bg-sky-500',
+    },
+    {
+      quote: 'Website bisnis kami jadi dalam 3 hari. Klien langsung bisa booking lewat website. Sebelumnya semua manual lewat WA.',
+      name: 'Sari Dewi',
+      role: 'Owner Klinik Kecantikan',
+      city: 'Surabaya',
+      platform: 'Katalog Website',
+      initial: 'S',
+      color: 'bg-emerald-500',
+    },
+    {
+      quote: 'Training karyawan baru dulu butuh 2 minggu penuh. Sekarang materi sudah ada di LMS, mereka belajar mandiri dalam 3 hari.',
+      name: 'Ahmad Riza',
+      role: 'HRD Manager',
+      city: 'Jakarta',
+      platform: 'Portal LMS',
+      initial: 'A',
+      color: 'bg-blue-500',
+    },
+  ]
+
+  return (
+    <section className="bg-white py-24 lg:py-32 px-4 border-t border-black/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-16">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Kata Klien Kami</p>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">
+            Bisnis Nyata. Hasil Nyata.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className={`flex flex-col p-8 rounded-[32px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow reveal reveal-delay-${i + 1}`}>
+              <div className="flex gap-1 mb-6">
+                {[...Array(5)].map((_, s) => (
+                  <Star key={s} size={14} className="fill-yellow-400 text-yellow-400" />
+                ))}
+              </div>
+              <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-6">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="flex items-center gap-3 pt-4 border-t border-black/5">
+                <div className={`w-10 h-10 rounded-full ${t.color} flex items-center justify-center text-white font-black text-sm shrink-0`}>
+                  {t.initial}
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-gray-900">{t.name}</p>
+                  <p className="text-[11px] text-gray-400 truncate">{t.role} · {t.city}</p>
+                </div>
+                <span className="ml-auto text-[10px] font-bold text-[#0071E3] bg-blue-50 px-2.5 py-1 rounded-full shrink-0">{t.platform}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function TrustSection() {
     const STEPS = [
         { t: 'Pilih & Konsultasi', d: 'Ceritakan bisnis Anda. Kami bantu tentukan platform mana yang paling cocok — tanpa jargon teknis.', i: LayoutGrid },
@@ -335,6 +405,7 @@ export default function LandingPage() {
         <SocialProofBar />
         <SegmenSection />
         <PortfolioGallery />
+        <TestimonialsSection />
         <GlobalFeatures />
         <TrustSection />
         

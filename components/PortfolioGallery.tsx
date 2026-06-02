@@ -14,23 +14,22 @@ type Site = {
   tipe_industri: string | null
 }
 
-// Label + emoji per tipe industri (fallback aman untuk tipe baru).
-const INDUSTRY_META: Record<string, { label: string; emoji: string }> = {
-  toko_online: { label: 'Toko Online', emoji: '🛍️' },
-  restaurant: { label: 'Restaurant', emoji: '🍜' },
-  klinik: { label: 'Klinik & Beauty', emoji: '💆' },
-  perusahaan: { label: 'Perusahaan', emoji: '🏢' },
-  sekolah: { label: 'Sekolah / LPK', emoji: '🎓' },
-  institusi: { label: 'Institusi', emoji: '🏛️' },
-  personal_branding: { label: 'Personal Branding', emoji: '👤' },
-  blog: { label: 'Blog / Media', emoji: '📰' },
-  jastip: { label: 'Jastip', emoji: '📦' },
-  travel: { label: 'Travel & Rental', emoji: '✈️' },
+const INDUSTRY_META: Record<string, { label: string }> = {
+  toko_online: { label: 'Toko Online' },
+  restaurant: { label: 'Restaurant' },
+  klinik: { label: 'Klinik & Beauty' },
+  perusahaan: { label: 'Perusahaan' },
+  sekolah: { label: 'Sekolah / LPK' },
+  institusi: { label: 'Institusi' },
+  personal_branding: { label: 'Personal Branding' },
+  blog: { label: 'Blog / Media' },
+  jastip: { label: 'Jastip' },
+  travel: { label: 'Travel & Rental' },
 }
 
 function metaFor(tipe: string | null) {
   if (tipe && INDUSTRY_META[tipe]) return INDUSTRY_META[tipe]
-  return { label: 'Website Custom', emoji: '🌐' }
+  return { label: 'Website Custom' }
 }
 
 function PortfolioCard({ site }: { site: Site }) {
@@ -91,7 +90,7 @@ function PortfolioCard({ site }: { site: Site }) {
       <div className="flex items-center justify-between px-5 py-4">
         <div className="min-w-0">
           <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
-          <p className="text-[11px] text-gray-400 font-medium mt-0.5">{meta.emoji} {meta.label}</p>
+          <p className="text-[11px] text-gray-400 font-medium mt-0.5">{meta.label}</p>
         </div>
         <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0">
           Live

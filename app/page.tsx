@@ -5,7 +5,8 @@ import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
   X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2,
-  Facebook, Twitter, Instagram, Linkedin, ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone
+  Facebook, Twitter, Instagram, Linkedin, ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
+  Bus, Pill, Cross
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
@@ -119,58 +120,64 @@ function SocialProofBar() {
 function SegmenSection() {
     const PORTALS = [
       {
-        emoji: '🌐',
+        icon: Globe2,
         label: 'Katalog Website',
         description: 'Website profil bisnis profesional, instan, dan terjangkau. Mulai dari Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',
         bg: 'bg-blue-50',
+        isExternal: false,
       },
       {
-        emoji: '🚌',
+        icon: Bus,
         label: 'Portal Travel & Rental',
         description: 'Sistem manajemen transportasi antar kota dan operasional penyewaan armada dengan fitur pelacakan real-time dan e-ticketing.',
         cta: 'Eksplor Sistem Travel',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
+        isExternal: true,
       },
       {
-        emoji: '🎓',
+        icon: GraduationCap,
         label: 'Portal LMS',
         description: 'Otomasi sistem pengajaran dan pelatihan karyawan dalam satu platform cerdas & terpusat.',
         cta: 'Eksplor Portal',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
         bg: 'bg-blue-50',
+        isExternal: true,
       },
       {
-        emoji: '🏥',
+        icon: Cross,
         label: 'Portal Klinik',
         description: 'Tingkatkan layanan kesehatan dengan rekam medis digital dan sistem antrean pasien otomatis.',
         cta: 'Eksplor Portal Klinik',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
+        isExternal: true,
       },
       {
-        emoji: '💊',
+        icon: Pill,
         label: 'Portal Farmasi',
         description: 'Kendali penuh stok obat dan transaksi apotek dengan sistem POS yang terintegrasi.',
         cta: 'Eksplor Portal Farmasi',
         href: 'https://ja-pharmacy-platform.vercel.app/login',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
+        isExternal: true,
       },
       {
-        emoji: '🇯🇵',
+        icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
         description: 'Jasa titip profesional dari Jepang ke Indonesia. Belanja barang impian Anda dengan kalkulasi biaya transparan dan pengiriman express.',
         cta: 'Mulai Titip Barang',
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',
         bg: 'bg-red-50',
+        isExternal: true,
       },
     ]
 
@@ -190,6 +197,7 @@ function SegmenSection() {
                 <div className="flex flex-wrap justify-center gap-6">
                     {PORTALS.map((p, index) => {
                         const isFeatured = index === 0
+                        const IconComponent = p.icon
                         return (
                         <div
                           key={p.label}
@@ -199,21 +207,25 @@ function SegmenSection() {
                               : 'bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl'
                           }`}
                         >
-                            <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform ${
-                              isFeatured ? 'bg-white/20' : p.bg
+                            <div className={`w-14 h-14 rounded-[20px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
+                              isFeatured ? 'bg-white/20 text-white' : `${p.bg} ${p.color}`
                             }`}>
-                                {p.emoji}
+                                <IconComponent size={26} />
                             </div>
                             {isFeatured && (
                               <span className="text-[10px] font-black uppercase tracking-widest text-blue-100 mb-2">Produk Unggulan</span>
                             )}
                             <h3 className={`text-xl font-bold mb-3 sf-display ${isFeatured ? 'text-white' : 'text-gray-900'}`}>{p.label}</h3>
                             <p className={`text-sm leading-relaxed mb-8 flex-1 ${isFeatured ? 'text-blue-100' : 'text-gray-500'}`}>{p.description}</p>
-                            <a href={p.href} target="_blank" className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all ${
-                              isFeatured
-                                ? 'bg-white text-[#0071E3] hover:bg-blue-50'
-                                : 'bg-gray-900 text-white hover:bg-black'
-                            }`}>
+                            <a
+                              href={p.href}
+                              {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                              className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all ${
+                                isFeatured
+                                  ? 'bg-white text-[#0071E3] hover:bg-blue-50'
+                                  : 'bg-gray-900 text-white hover:bg-black'
+                              }`}
+                            >
                                 {p.cta}
                             </a>
                         </div>

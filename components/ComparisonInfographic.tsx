@@ -104,13 +104,13 @@ export default function ComparisonInfographic() {
                 <div className="grid grid-cols-2 gap-4 text-center">
                   <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                     <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Tech Stack Kita</p>
-                    <p className="text-sm font-black text-gray-900">Next.js 16 + React</p>
-                    <p className="text-[9px] text-blue-600 font-bold mt-1 tracking-widest underline italic">BLAZING FAST</p>
+                    <p className="text-sm font-black text-gray-900">Next.js 14+ + React</p>
+                    <p className="text-[9px] text-blue-600 font-bold mt-1 tracking-widest">&lt; 1s load time</p>
                   </div>
                   <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 opacity-60">
                     <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Tech Stack Mereka</p>
                     <p className="text-sm font-bold text-gray-500">Legacy PHP / WP</p>
-                    <p className="text-[9px] text-red-400 font-bold mt-1 tracking-widest italic line-through">MODERNIZATION NEEDED</p>
+                    <p className="text-[9px] text-red-400 font-bold mt-1 tracking-widest">Teknologi lama</p>
                   </div>
                 </div>
               </div>

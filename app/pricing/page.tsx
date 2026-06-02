@@ -161,7 +161,7 @@ export default function PricingPage() {
 
                 <Link 
                   href={plan.tier === 'Pro Trial' ? 'https://ja-rental-platform.vercel.app/register' : "https://wa.me/6281296917963"}
-                  className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-95 text-sm uppercase tracking-widest ${
+                  className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm uppercase tracking-widest ${
                     plan.popular 
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200' 
                     : plan.tier === 'Pro Trial'
@@ -209,10 +209,10 @@ export default function PricingPage() {
             <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 text-center border-dashed">
                 <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle mulai</p>
                 <div className="text-5xl font-black text-white mb-6 sf-display-heavy">Rp 1.499.000<span className="text-lg text-gray-500 font-medium">/bln</span></div>
-                <button className="w-full bg-white text-black py-4 px-8 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-gray-200 transition-all active:scale-95 shadow-xl">
+                <button className="w-full bg-white text-black py-4 px-8 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-gray-200 transition-all active:scale-[0.96] shadow-xl">
                   Hubungi Sales Expert <MessageCircle size={20} />
                 </button>
-                <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-tighter font-bold">*S&K Berlaku untuk minimal 3 aktivasi portal</p>
+                <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-tighter font-bold">*Syarat berlaku — minimal 3 portal aktif</p>
             </div>
           </div>
         </div>

@@ -1,12 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Menu, X, LogIn } from 'lucide-react'
+import { Menu, X, LogIn, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
 
 const WEBSITEBUILDER_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
+const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
+const waLink = (msg?: string) => {
+  const base = `https://wa.me/${WA_NUMBER}`
+  return msg ? `${base}?text=${encodeURIComponent(msg)}` : base
+}
 
 const NAV_LINKS = [
   { label: 'Rakit Website', href: '/seluruh-layanan' },
@@ -79,7 +84,16 @@ export default function LmsNavbar() {
           </nav>
 
           {/* Right actions */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-3">
+            <a
+              href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#0071E3] text-white text-sm font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] glow-button"
+            >
+              <MessageCircle size={15} />
+              Demo Gratis
+            </a>
             <button
               onClick={() => setIsPickerOpen(true)}
               className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-gray-900 text-sm font-semibold transition-colors"

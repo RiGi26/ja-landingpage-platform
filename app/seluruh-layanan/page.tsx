@@ -322,7 +322,7 @@ Terima kasih.`
             <span className="text-[#0071E3]">Transparan Mulai Rp 600.000.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
-            Pilih template dasar, paket server, dan tambahkan fitur yang Anda butuhkan. 
+            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">1–3 hari</span> setelah order.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
         </div>
@@ -857,12 +857,19 @@ Terima kasih.`
                     href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3 mt-2 rounded-2xl border border-gray-200 text-gray-500 font-bold text-xs flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
+                    className="w-full py-3 mt-2 rounded-2xl border border-gray-200 text-gray-600 font-bold text-xs flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
                 >
-                    atau langsung chat via WhatsApp
+                    <MessageCircle size={14} className="text-green-500" /> atau chat langsung via WhatsApp
                 </a>
 
-                <div className="mt-3 flex items-start gap-2">
+                <div className="mt-3 p-3 rounded-xl bg-blue-50/60 border border-blue-100 flex items-start gap-2">
+                    <Check size={14} className="text-[#0071E3] shrink-0 mt-0.5" />
+                    <p className="text-[10px] text-blue-900 leading-relaxed font-medium">
+                        Setelah order, tim kami konfirmasi via WA dalam 1×24 jam dan proses dimulai.
+                    </p>
+                </div>
+
+                <div className="mt-2 flex items-start gap-2">
                     <Info size={14} className="text-gray-400 shrink-0 mt-0.5" />
                     <p className="text-[10px] text-gray-400 leading-relaxed font-medium">
                         Harga estimasi final dapat berubah menyesuaikan tingkat kompleksitas custom & lisensi aset.

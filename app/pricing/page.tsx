@@ -87,7 +87,10 @@ export default function PricingPage() {
         </div>
 
         {/* Platform Switcher */}
-        <div role="tablist" aria-label="Pilih platform" className="flex flex-wrap justify-center gap-2 mb-12">
+        <div className="text-center mb-5">
+          <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
+        </div>
+        <div role="tablist" aria-label="Pilih platform" className="flex flex-wrap justify-center gap-2 mb-4">
           {PLATFORMS.map(p => (
             <button
               key={p.id}
@@ -104,6 +107,16 @@ export default function PricingPage() {
               <p.icon size={16} /> {p.name}
             </button>
           ))}
+        </div>
+        <div className="text-center mb-12">
+          <a
+            href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20tidak%20yakin%20platform%20mana%20yang%20cocok%20untuk%20bisnis%20saya."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-[#0071E3] font-bold hover:underline"
+          >
+            Tidak yakin pilih yang mana? Chat tim kami →
+          </a>
         </div>
 
         {/* Pricing Cards */}

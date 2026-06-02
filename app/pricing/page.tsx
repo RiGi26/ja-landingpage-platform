@@ -1,16 +1,17 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink } from 'lucide-react'
+import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
-const PLATFORMS = [
-  { 
-    id: 'lms', 
-    name: 'Portal LMS', 
-    icon: '🎓',
+const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
+  {
+    id: 'lms',
+    name: 'Portal LMS',
+    icon: GraduationCap,
     demoUrl: 'https://app.japanarenacorp.com/demo',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
@@ -18,10 +19,10 @@ const PLATFORMS = [
       { tier: 'Business', price: 1199000, feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan'] },
     ]
   },
-  { 
-    id: 'clinic', 
-    name: 'Portal Klinik', 
-    icon: '🏥',
+  {
+    id: 'clinic',
+    name: 'Portal Klinik',
+    icon: Cross,
     demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
@@ -29,10 +30,10 @@ const PLATFORMS = [
       { tier: 'Business', price: 1499000, feat: ['Unlimited Dokter', 'Cetak Resep & Kwitansi PDF', 'Audit Log Staf'] },
     ]
   },
-  { 
-    id: 'pharmacy', 
-    name: 'Portal Farmasi', 
-    icon: '💊',
+  {
+    id: 'pharmacy',
+    name: 'Portal Farmasi',
+    icon: Pill,
     demoUrl: 'https://ja-pharmacy-platform.vercel.app/login',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
@@ -40,10 +41,10 @@ const PLATFORMS = [
       { tier: 'Business', price: 999000, feat: ['Unlimited Kasir', 'Sync Stok Otomatis', 'Laporan Tahunan'] },
     ]
   },
-  { 
-    id: 'travel', 
-    name: 'JapanArena Go', 
-    icon: '🚀',
+  {
+    id: 'travel',
+    name: 'Portal Travel & Rental',
+    icon: Bus,
     demoUrl: 'https://ja-rental-platform.vercel.app/auth/login',
     plans: [
       { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
@@ -97,7 +98,7 @@ export default function PricingPage() {
                 : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-100'
               }`}
             >
-              <span>{p.icon}</span> {p.name}
+              <p.icon size={16} /> {p.name}
             </button>
           ))}
         </div>

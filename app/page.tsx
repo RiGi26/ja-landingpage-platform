@@ -336,16 +336,16 @@ function GlobalFeatures() {
 
 function TrustSection() {
     const STEPS = [
-        { t: 'Chat 15 Menit, Kami Pahami Bisnis Anda', d: 'Ceritakan bisnis Anda via WA. Dalam 15 menit, kami jelaskan sistem yang cocok — tanpa istilah teknis, tanpa PowerPoint.', i: LayoutGrid },
-        { t: 'Tim Kami Bangun dalam 3–5 Hari', d: 'Logo, domain, sistem booking — semua dikonfigurasi tim kami. Anda tidak perlu sentuh satu baris kode.', i: Zap },
-        { t: 'Bisnis Jalan, Anda Pantau dari HP', d: 'Booking masuk otomatis. Laporan tersaji pagi hari. Pantau semuanya dari HP — dari mana saja.', i: Rocket },
+        { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi transparan, lalu pesan dan bayar DP — langsung online. Tanpa harus chat dulu atau nunggu sales.', i: LayoutGrid },
+        { t: 'Isi Briefing, Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form briefing. Tersimpan otomatis, boleh dicicil. Belum siap? Tim kami siapkan draf awalnya.', i: Zap },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Tanpa sentuh satu baris kode. Pantau progress via Order ID sampai website tayang di domain Anda sendiri.', i: Rocket },
     ]
 
     const BADGES = [
-        { t: 'Data Pelanggan Aman', d: 'Enkripsi bank-level, tidak bocor', i: ShieldCheck },
-        { t: 'Backup Harian', d: 'Data tidak pernah hilang', i: HardDrive },
-        { t: 'Website Tidak Mati', d: 'Tetap online saat promo ramai', i: Globe2 },
-        { t: 'Integrasi Resmi', d: 'Midtrans & WA Gateway', i: Zap },
+        { t: 'Data Pembeli Aman', d: 'Nomor & transaksi pelanggan tersimpan terkunci — tidak bocor, tidak dijual', i: ShieldCheck },
+        { t: 'Tidak Akan Hilang', d: 'Disalin otomatis tiap hari. Sebenci apa pun error, data Anda tetap ada', i: HardDrive },
+        { t: 'Anti-Ngadat Saat Rame', d: 'Pelanggan tetap bisa buka & pesan walau pengunjung membludak', i: Globe2 },
+        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp Anda sendiri', i: Zap },
     ]
 
     return (

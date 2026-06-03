@@ -45,18 +45,18 @@ function HeroSection() {
           <div className="space-y-8 animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Satu Platform, Berbagai Solusi Bisnis
+              Untuk Lapangan, Salon, Klinik, dan Bisnis Lainnya
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
-              Bisnis Anda Bisa<br />
-              <span className="text-[#0071E3]">Jalan Sendiri.</span>
+              Bisnis Anda Buka 24 Jam.<br />
+              <span className="text-[#0071E3]">Anda Tidak Harus.</span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Masih rekap manual setiap malam? Masih telepon satu-satu untuk tagih pembayaran?
-              Invoice keluar otomatis. Notifikasi WA terkirim sendiri. Laporan tersaji tiap pagi tanpa rekap manual.
-              Setup 1–3 hari — bisnis Anda bisa jalan seperti ini mulai besok.
+              Masih catat booking di buku atau grup WA? Masih rekap pemasukan tiap malam sebelum tidur?
+              Website profesional dan sistem operasional — live dalam 3–5 hari kerja.
+              Pelanggan booking sendiri. Laporan keluar sendiri. Bisnis tetap jalan saat Anda istirahat.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -69,19 +69,17 @@ function HeroSection() {
                 Chat & Lihat Demo Gratis <ArrowRight size={18} />
               </a>
               <a
-                href={waLink('Halo Japan Arena, saya ingin konsultasi sistem bisnis.')}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#segmen"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
               >
-                Konsultasi WA
+                Lihat Semua Platform ↓
               </a>
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-400 font-medium">
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Setup 1–3 hari</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Live 3–5 Hari Kerja</span>
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Enterprise Security</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Data Anda Tidak Bocor</span>
             </div>
           </div>
 
@@ -98,8 +96,8 @@ function HeroSection() {
 
 function SocialProofBar() {
   const STATS = [
-    { value: '20+', label: 'Bisnis Aktif' },
-    { value: '1–3 hari', label: 'Waktu Setup' },
+    { value: '6', label: 'Platform Aktif' },
+    { value: '3–5 hari', label: 'Waktu Live' },
     { value: '24/7', label: 'Sistem Berjalan' },
     { value: '100%', label: 'Tanpa Coding' },
   ]
@@ -122,7 +120,7 @@ function SegmenSection() {
       {
         icon: Globe2,
         label: 'Katalog Website',
-        description: 'Website bisnis Anda live dalam 3 hari. Desain profesional, domain sendiri, langsung bisa diakses pelanggan. Mulai dari Rp 600.000.',
+        description: 'Pelanggan Anda sedang cari bisnis seperti milik Anda di Google sekarang. Apakah Anda muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',
@@ -132,7 +130,7 @@ function SegmenSection() {
       {
         icon: Bus,
         label: 'Portal Travel & Rental',
-        description: 'Armada terpantau, tiket terkelola, penumpang dapat konfirmasi otomatis. Tidak ada lagi booking manual lewat telepon.',
+        description: 'Tidak ada lagi double booking atau jadwal bentrok. Pelanggan pesan online, slot terisi otomatis, konfirmasi terkirim sendiri.',
         cta: 'Lihat Demo',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
@@ -152,7 +150,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Pasien tidak antre lama. Dokter tidak tenggelam di kertas. Rekam medis digital dan antrean otomatis — semua tercatat rapi.',
+        description: 'Rekam medis digital terintegrasi SATUSEHAT. Pasien booking online, antrian terkelola otomatis — dokter fokus ke pasien, bukan ke kertas.',
         cta: 'Lihat Demo',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
@@ -185,12 +183,12 @@ function SegmenSection() {
         <section id="segmen" className="bg-white py-24 lg:py-32 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Mulai</p>
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Anda</p>
                     <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
                     <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                      Setup website bisnis Anda dalam 3 hari. Kalau operasional sudah butuh lebih — sistem portal kami siap dipakai tanpa coding.
+                      Bukan template generik. Setiap sistem dibuat sesuai cara kerja industri Anda — dari lapangan futsal sampai klinik pratama.
                     </p>
                 </div>
 
@@ -281,16 +279,16 @@ function GlobalFeatures() {
 
 function TrustSection() {
     const STEPS = [
-        { t: 'Pilih & Konsultasi', d: 'Ceritakan bisnis Anda. Kami bantu tentukan platform mana yang paling cocok — tanpa jargon teknis.', i: LayoutGrid },
-        { t: 'Kami Setup dalam 1–3 Hari', d: 'Logo, domain, dan sistem dikonfigurasi tim kami. Anda tidak perlu sentuh satu baris kode pun.', i: Zap },
-        { t: 'Bisnis Jalan, Anda Santai', d: 'Pembayaran masuk, notifikasi terkirim, laporan tersaji — semua berjalan sendiri 24/7.', i: Rocket },
+        { t: 'Chat 15 Menit, Kami Pahami Bisnis Anda', d: 'Ceritakan bisnis Anda via WA. Dalam 15 menit, kami jelaskan sistem yang cocok — tanpa istilah teknis, tanpa PowerPoint.', i: LayoutGrid },
+        { t: 'Tim Kami Bangun dalam 3–5 Hari', d: 'Logo, domain, sistem booking — semua dikonfigurasi tim kami. Anda tidak perlu sentuh satu baris kode.', i: Zap },
+        { t: 'Bisnis Jalan, Anda Pantau dari HP', d: 'Booking masuk otomatis. Laporan tersaji pagi hari. Pantau semuanya dari HP — dari mana saja.', i: Rocket },
     ]
 
     const BADGES = [
-        { t: 'Enterprise Security', d: '256-bit SSL Encryption', i: ShieldCheck },
-        { t: 'Daily Backups', d: 'Data aman & terproteksi', i: HardDrive },
-        { t: 'High Availability', d: '99.9% Uptime Guarantee', i: Globe2 },
-        { t: 'Official Integration', d: 'Midtrans & WA Gateway', i: Zap },
+        { t: 'Data Pelanggan Aman', d: 'Enkripsi bank-level, tidak bocor', i: ShieldCheck },
+        { t: 'Backup Harian', d: 'Data tidak pernah hilang', i: HardDrive },
+        { t: 'Website Tidak Mati', d: 'Tetap online saat promo ramai', i: Globe2 },
+        { t: 'Integrasi Resmi', d: 'Midtrans & WA Gateway', i: Zap },
     ]
 
     return (
@@ -298,7 +296,7 @@ function TrustSection() {
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Dari Nol ke Operasional<br className="hidden md:block" /> dalam 3 Hari</h2>
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Dari Nol ke Bisnis Online<br className="hidden md:block" /> dalam 3–5 Hari Kerja</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
@@ -428,11 +426,11 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
               <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
               <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
-                Berapa jam seminggu Anda<br className="hidden md:block" /> habiskan untuk hal yang<br className="hidden md:block" /> <span className="text-[#0071E3]">bisa diotomasi?</span>
+                Pesaing Anda sudah<br className="hidden md:block" /> ditemukan di Google.<br className="hidden md:block" /> <span className="text-[#0071E3]">Bisnis Anda kapan?</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Satu percakapan WA, 15 menit — tim kami tunjukkan langsung sistemnya.
-                Bukan bot, bukan sales script.
+                Satu chat WA, 15 menit — tim kami tunjukkan langsung sistemnya.
+                Bukan bot, bukan sales script. Kami yang jelaskan.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
@@ -445,7 +443,7 @@ export default function LandingPage() {
                   href="#segmen"
                   className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 active:scale-[0.96] transition-all backdrop-blur-sm"
                 >
-                  Jelajahi Platform
+                  Lihat Semua Platform
                 </a>
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
@@ -467,7 +465,7 @@ export default function LandingPage() {
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
                       <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
-                          Kami bangun sistem operasional untuk bisnis Indonesia — dari kasir digital dan LMS karyawan, sampai website dan tiket online. Setup cepat, tanpa coding.
+                          Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang jalan sendiri. Tanpa coding, tanpa ribet.
                       </p>
                       <div className="flex gap-4">
                           <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>

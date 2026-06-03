@@ -48,7 +48,7 @@ function HeroSection() {
               Satu Platform, Berbagai Solusi Bisnis
             </div>
 
-            <h1 className="text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
               Bisnis Anda Bisa<br />
               <span className="text-[#0071E3]">Jalan Sendiri.</span>
             </h1>

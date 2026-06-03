@@ -468,7 +468,7 @@ Terima kasih.`
                                                                 tabIndex={-1}
                                                                 onLoad={() => setPreviewLoaded(true)}
                                                                 onError={() => setPreviewError(true)}
-                                                                className="absolute top-0 left-0 w-[1440px] h-[1080px] origin-top-left scale-50 border-0 pointer-events-none"
+                                                                className="absolute top-0 left-0 w-[1440px] h-[1080px] origin-top-left scale-[0.26] sm:scale-[0.35] md:scale-50 border-0 pointer-events-none"
                                                                 sandbox="allow-scripts allow-same-origin"
                                                             />
                                                         </>
@@ -667,7 +667,7 @@ Terima kasih.`
                                     </button>
 
                                     {isExpanded && (
-                                        <div className="px-8 pb-8 animate-fade-in">
+                                        <div className="px-4 sm:px-8 pb-6 sm:pb-8 animate-fade-in">
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 {[...group.items]
                                                   .sort((a, b) => (recommendedIds.includes(b.id) ? 1 : 0) - (recommendedIds.includes(a.id) ? 1 : 0))
@@ -901,7 +901,7 @@ Terima kasih.`
       </section>
 
       {/* Fixed Bottom Bar (All Screens) */}
-      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+      <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <div className="space-y-0.5">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Thn 1</span>

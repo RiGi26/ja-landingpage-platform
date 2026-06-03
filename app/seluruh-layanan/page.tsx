@@ -322,7 +322,7 @@ Terima kasih.`
             <span className="text-[#0071E3]">Transparan Mulai Rp 600.000.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
-            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">1–3 hari</span> setelah order.
+            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah briefing diterima.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
         </div>
@@ -845,7 +845,7 @@ Terima kasih.`
                 </div>
 
                 <a
-                    href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
+                    href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-4 rounded-2xl bg-[#0071E3] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-xl shadow-blue-200 active:scale-[0.96]"
@@ -921,7 +921,7 @@ Terima kasih.`
               </button>
           ) : (
               <a
-                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.name).join(', '))}`}
+                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-[0.96] transition-all hover:bg-blue-600"

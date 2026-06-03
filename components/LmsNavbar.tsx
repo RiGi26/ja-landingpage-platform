@@ -105,6 +105,8 @@ export default function LmsNavbar() {
             <button
               onClick={() => setOpen(o => !o)}
               className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
+              aria-label={open ? 'Tutup menu' : 'Buka menu'}
+              aria-expanded={open}
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>

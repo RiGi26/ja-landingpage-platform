@@ -55,8 +55,8 @@ function HeroSection() {
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
               Masih catat booking di buku atau grup WA? Masih rekap pemasukan tiap malam sebelum tidur?
-              Website profesional dan sistem operasional — live dalam 3–5 hari kerja.
-              Pelanggan booking sendiri. Laporan keluar sendiri. Bisnis tetap jalan saat Anda istirahat.
+              Website profesional dan sistem lengkap — siap pakai dalam 3–5 hari kerja.
+              Pelanggan bisa booking kapan saja, tanpa perlu hubungi Anda dulu. Laporan pemasukan tersedia otomatis. Bisnis jalan terus, bahkan saat Anda istirahat.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -130,7 +130,7 @@ function SegmenSection() {
       {
         icon: Bus,
         label: 'Portal Travel & Rental',
-        description: 'Tidak ada lagi double booking atau jadwal bentrok. Pelanggan pesan online, slot terisi otomatis, konfirmasi terkirim sendiri.',
+        description: 'Tidak ada lagi double booking atau jadwal bentrok. Pelanggan pesan online, slot terisi otomatis, konfirmasi terkirim otomatis.',
         cta: 'Lihat Demo',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
@@ -254,7 +254,7 @@ function SegmenSection() {
 function GlobalFeatures() {
     const FEATURES = [
         { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
-        { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semua sudah tersaji, bukan menunggu rekap manual.', icon: BarChart2 },
+        { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
         { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Tidak bercampur, tidak bisa diintip — enkripsi enterprise dari hari pertama.', icon: Shield },
     ]
 
@@ -448,8 +448,6 @@ export default function LandingPage() {
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
                 <p className="text-gray-500 text-sm font-medium">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>
-                <span className="hidden sm:block text-gray-700">·</span>
-                <p className="text-gray-500 text-sm font-medium">Konsultasi 15 menit via WA — tim kami yang jelaskan langsung.</p>
               </div>
           </div>
         </section>
@@ -465,7 +463,7 @@ export default function LandingPage() {
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
                       <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
-                          Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang jalan sendiri. Tanpa coding, tanpa ribet.
+                          Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang berjalan otomatis. Tanpa coding, tanpa ribet.
                       </p>
                       <div className="flex gap-4">
                           <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>

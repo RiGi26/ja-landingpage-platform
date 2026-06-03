@@ -107,7 +107,7 @@ function SocialProofBar() {
         {STATS.map(s => (
           <div key={s.label} className="flex items-center gap-3">
             <span className="text-lg font-extrabold text-gray-900 sf-display-heavy">{s.value}</span>
-            <span className="text-[12px] text-gray-400 font-medium border-l border-black/10 pl-3">{s.label}</span>
+            <span className="text-[12px] text-gray-600 font-medium border-l border-black/10 pl-3">{s.label}</span>
           </div>
         ))}
       </div>
@@ -208,7 +208,7 @@ function SegmenSection() {
                               </p>
                               <div className="flex-1 h-px bg-black/5" />
                             </div>
-                            <p className="sm:hidden text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center leading-relaxed">
+                            <p className="sm:hidden text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center leading-relaxed">
                               Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
                             </p>
                           </div>
@@ -226,10 +226,10 @@ function SegmenSection() {
                                 <IconComponent size={26} />
                             </div>
                             {isFeatured && (
-                              <span className="text-[10px] font-black uppercase tracking-widest text-blue-100 mb-2">Produk Unggulan</span>
+                              <span className="text-[10px] font-black uppercase tracking-widest text-white mb-2">Produk Unggulan</span>
                             )}
                             <h3 className={`text-xl font-bold mb-3 sf-display ${isFeatured ? 'text-white' : 'text-gray-900'}`}>{p.label}</h3>
-                            <p className={`text-sm leading-relaxed mb-8 flex-1 ${isFeatured ? 'text-blue-100' : 'text-gray-500'}`}>{p.description}</p>
+                            <p className={`text-sm leading-relaxed mb-8 flex-1 ${isFeatured ? 'text-blue-50' : 'text-gray-500'}`}>{p.description}</p>
                             <a
                               href={p.href}
                               {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
@@ -320,7 +320,7 @@ function TrustSection() {
                                     <b.i size={20} />
                                 </div>
                                 <h4 className="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-1">{b.t}</h4>
-                                <p className="text-[10px] text-gray-400 font-medium">{b.d}</p>
+                                <p className="text-[10px] text-gray-600 font-medium">{b.d}</p>
                             </div>
                         ))}
                     </div>
@@ -376,7 +376,7 @@ function FaqSection() {
           ))}
         </div>
         <div className="text-center mt-10">
-          <p className="text-sm text-gray-400 font-medium">
+          <p className="text-sm text-gray-600 font-medium">
             Masih ada pertanyaan?{' '}
             <a
               href={waLink('Halo Japan Arena, saya punya pertanyaan sebelum mulai.')}
@@ -464,7 +464,7 @@ export default function LandingPage() {
                           <Image src="/images/Icon.png" alt="Japan Arena Corp" width={40} height={40} className="object-contain" />
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
-                      <p className="text-sm text-gray-500 leading-relaxed max-w-xs">
+                      <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
                           Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang jalan sendiri. Tanpa coding, tanpa ribet.
                       </p>
                       <div className="flex gap-4">
@@ -477,7 +477,7 @@ export default function LandingPage() {
 
                   {/* Product Links */}
                   <div className="col-span-1 md:col-span-2 space-y-5">
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</h4>
+                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</p>
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="https://ja-lms-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
                           <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
@@ -489,7 +489,7 @@ export default function LandingPage() {
 
                   {/* Company Links */}
                   <div className="col-span-1 md:col-span-2 space-y-5">
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</h4>
+                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Tentang Kami</a></li>
                           <li><a href="#" className="hover:text-[#0071E3] transition-colors">Karir</a></li>
@@ -500,7 +500,7 @@ export default function LandingPage() {
 
                   {/* Contact Info */}
                   <div className="col-span-full md:col-span-4 space-y-5">
-                      <h4 className="text-xs font-bold uppercase tracking-widest text-gray-900">Hubungi Kami</h4>
+                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Hubungi Kami</p>
                       <ul className="space-y-4 text-sm text-gray-500">
                           <li className="flex gap-3">
                               <MapPin size={18} className="text-[#0071E3] shrink-0" />

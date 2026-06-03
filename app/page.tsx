@@ -11,6 +11,7 @@ import {
 import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
+import DemoPickerModal from '@/components/DemoPickerModal'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,7 +24,7 @@ const waLink = (msg?: string): string => {
 
 // ─── Sections ───────────────────────────────────────────────────────────────
 
-function HeroSection() {
+function HeroSection({ onDemo }: { onDemo: () => void }) {
   return (
     <section className="relative bg-[#F5F5F7] pt-32 pb-24 px-4 overflow-hidden">
       {/* Dot grid pattern */}
@@ -61,19 +62,18 @@ function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] shadow-lg glow-button"
+                href="/seluruh-layanan"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
               >
-                Chat & Lihat Demo Gratis <ArrowRight size={18} />
+                Rakit Website Sekarang <ArrowRight size={18} />
               </a>
-              <a
-                href="#segmen"
+              <button
+                type="button"
+                onClick={onDemo}
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
               >
-                Lihat Semua Platform ↓
-              </a>
+                Lihat Demo Sistem
+              </button>
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
@@ -219,7 +219,7 @@ function SegmenSection() {
         label: 'Portal Farmasi',
         description: 'Stok obat tidak pernah habis tiba-tiba. Kasir digital catat semua transaksi otomatis. Laporan harian tersedia tanpa rekap manual.',
         cta: 'Lihat Demo',
-        href: 'https://ja-pharmacy-platform.vercel.app/login',
+        href: 'https://ja-pharmacy-platform.vercel.app/demo',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
         isExternal: true,
@@ -453,6 +453,8 @@ function FaqSection() {
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
 export default function LandingPage() {
+  const [demoOpen, setDemoOpen] = useState(false)
+
   useEffect(() => {
     const els = document.querySelectorAll('.reveal')
     const io = new IntersectionObserver(
@@ -467,8 +469,10 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
       <Navbar />
       
+      <DemoPickerModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
+
       <main>
-        <HeroSection />
+        <HeroSection onDemo={() => setDemoOpen(true)} />
         <SocialProofBar />
         <GlobalFeatures />
         <SegmenSection />
@@ -497,12 +501,13 @@ export default function LandingPage() {
                 >
                   Chat & Lihat Demo Gratis <ArrowRight size={18} />
                 </a>
-                <a
-                  href="#segmen"
+                <button
+                  type="button"
+                  onClick={() => setDemoOpen(true)}
                   className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 active:scale-[0.96] transition-all backdrop-blur-sm"
                 >
-                  Lihat Semua Platform
-                </a>
+                  Lihat Demo Sistem
+                </button>
               </div>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
                 <p className="text-gray-500 text-sm font-medium">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>

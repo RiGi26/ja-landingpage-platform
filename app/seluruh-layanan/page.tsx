@@ -779,7 +779,7 @@ Terima kasih.`
               
               <h2 className="text-xl font-black text-gray-900 mb-5 sf-display-heavy relative z-10">Estimasi Biaya</h2>
 
-              <div className="space-y-4 relative z-10">
+              <div key={`${selectedTemplate}-${selectedPackage.id}-${selectedAddons.length}-${selectedBundleId}`} className="space-y-4 relative z-10 animate-fade-in">
                 {selectedBundleId ? (
                     <div className="p-4 rounded-xl bg-yellow-50 border border-yellow-200/50">
                         <div className="flex items-center gap-2 mb-1.5">
@@ -856,28 +856,18 @@ Terima kasih.`
                     </div>
                 </div>
 
-                <a
-                    href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-4 rounded-2xl bg-[#0071E3] text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-xl shadow-blue-200 active:scale-[0.96]"
-                >
-                    Buat Order & Lacak Progress <ArrowRight size={18} />
-                </a>
-
-                <a
-                    href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 mt-2 rounded-2xl border border-gray-200 text-gray-600 font-bold text-xs flex items-center justify-center gap-2 hover:bg-gray-50 transition-all"
-                >
-                    <MessageCircle size={14} className="text-green-500" /> atau chat langsung via WhatsApp
-                </a>
-
                 <div className="mt-3 p-3 rounded-xl bg-blue-50/60 border border-blue-100 flex items-start gap-2">
                     <Check size={14} className="text-[#0071E3] shrink-0 mt-0.5" />
                     <p className="text-[10px] text-blue-900 leading-relaxed font-medium">
-                        Setelah order, tim kami konfirmasi via WA dalam 1×24 jam dan proses dimulai.
+                        Setelah order, tim kami konfirmasi via WA dalam 1×24 jam dan proses dimulai.{' '}
+                        <a
+                            href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-black underline underline-offset-2 hover:text-blue-700"
+                        >
+                            Butuh bantuan memilih? Chat tim kami →
+                        </a>
                     </p>
                 </div>
 

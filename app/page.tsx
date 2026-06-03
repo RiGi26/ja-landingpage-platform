@@ -5,7 +5,7 @@ import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
   X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2,
-  Facebook, Twitter, Instagram, Linkedin, ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
+  ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
   Bus, Pill, Cross
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
@@ -76,7 +76,7 @@ function HeroSection() {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-400 font-medium">
+            <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Live 3–5 Hari Kerja</span>
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Data Anda Tidak Bocor</span>
@@ -110,6 +110,63 @@ function SocialProofBar() {
             <span className="text-[12px] text-gray-600 font-medium border-l border-black/10 pl-3">{s.label}</span>
           </div>
         ))}
+      </div>
+    </section>
+  )
+}
+
+function ProofSection() {
+  const PILLARS = [
+    {
+      icon: Globe2,
+      title: 'Karya yang Bisa Dicek Langsung',
+      desc: 'Situs klien kami sudah tayang di domain nyata — bukan mockup. Gulir ke bawah, klik mana saja, buka sendiri di tab baru.',
+      cta: 'Lihat karya live ↓',
+      href: '#portofolio',
+    },
+    {
+      icon: ShieldCheck,
+      title: 'Integrasi Resmi, Bukan Tempelan',
+      desc: 'Pembayaran lewat Midtrans, notifikasi lewat WhatsApp Gateway resmi. Bukan akalan, bukan plugin asal jalan.',
+    },
+    {
+      icon: BarChart2,
+      title: 'Harga Transparan Sejak Awal',
+      desc: 'Estimasi final muncul di kalkulator sebelum Anda bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
+      cta: 'Hitung estimasi →',
+      href: '/seluruh-layanan',
+    },
+  ]
+
+  return (
+    <section className="bg-white py-24 lg:py-28 px-4 border-t border-black/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Bukti, Bukan Janji</p>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
+            Kami Lebih Suka Tunjukkan<br className="hidden md:block" /> daripada Sekadar Berjanji.
+          </h2>
+          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa Anda buktikan sendiri sekarang.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {PILLARS.map((p, i) => (
+            <div key={p.title} className={`flex flex-col p-8 rounded-[32px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow reveal reveal-delay-${i + 1}`}>
+              <div className="w-14 h-14 rounded-2xl bg-white apple-shadow flex items-center justify-center mb-6 text-[#0071E3]">
+                <p.icon size={26} />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 sf-display">{p.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed flex-1">{p.desc}</p>
+              {p.cta && p.href && (
+                <a href={p.href} className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors mt-5">
+                  {p.cta}
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
@@ -203,7 +260,7 @@ function SegmenSection() {
                           <div className="w-full py-3 sm:py-2">
                             <div className="hidden sm:flex items-center gap-4">
                               <div className="flex-1 h-px bg-black/5" />
-                              <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest text-center whitespace-nowrap">
+                              <p className="text-[12px] font-bold text-gray-600 uppercase tracking-widest text-center whitespace-nowrap">
                                 Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
                               </p>
                               <div className="flex-1 h-px bg-black/5" />
@@ -334,7 +391,7 @@ function FaqSection() {
   const FAQS = [
     {
       q: 'Berapa lama website saya selesai?',
-      a: '1–3 hari kerja setelah brief dan DP diterima. Konten sederhana selesai lebih cepat. Website dengan fitur custom bisa lebih — kami konfirmasi timeline pasti sebelum mulai.',
+      a: '3–5 hari kerja setelah brief dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
@@ -414,6 +471,7 @@ export default function LandingPage() {
         <HeroSection />
         <SocialProofBar />
         <SegmenSection />
+        <ProofSection />
         <PortfolioGallery />
         <GlobalFeatures />
         <TrustSection />
@@ -465,12 +523,14 @@ export default function LandingPage() {
                       <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
                           Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang berjalan otomatis. Tanpa coding, tanpa ribet.
                       </p>
-                      <div className="flex gap-4">
-                          <a href="#" aria-label="Facebook" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Facebook size={18} /></a>
-                          <a href="#" aria-label="Twitter" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Twitter size={18} /></a>
-                          <a href="#" aria-label="Instagram" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Instagram size={18} /></a>
-                          <a href="#" aria-label="LinkedIn" className="w-11 h-11 rounded-full bg-white apple-shadow flex items-center justify-center text-gray-400 hover:text-[#0071E3] transition-colors border border-black/5"><Linkedin size={18} /></a>
-                      </div>
+                      <a
+                          href={waLink('Halo Japan Arena Corp, saya ingin tanya soal layanan.')}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors"
+                      >
+                          <Phone size={16} /> Chat tim kami di WhatsApp
+                      </a>
                   </div>
 
                   {/* Product Links */}
@@ -489,10 +549,10 @@ export default function LandingPage() {
                   <div className="col-span-1 md:col-span-2 space-y-5">
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
                       <ul className="space-y-3 text-sm text-gray-500">
-                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Tentang Kami</a></li>
-                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Karir</a></li>
+                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Tentang Kami</span></li>
+                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Karir</span></li>
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Blog Edukasi</span></li>
-                          <li><a href="#" className="hover:text-[#0071E3] transition-colors">Partner Kami</a></li>
+                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
                       </ul>
                   </div>
 
@@ -517,13 +577,13 @@ export default function LandingPage() {
 
               {/* Bottom Copyright */}
               <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                  <p className="text-[12px] text-gray-400 font-medium">
+                  <p className="text-[12px] text-gray-600 font-medium">
                       © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
                   </p>
-                  <div className="flex gap-8 text-[12px] text-gray-400 font-medium">
-                      <a href="#" className="hover:text-gray-900 transition-colors">Kebijakan Privasi</a>
-                      <a href="#" className="hover:text-gray-900 transition-colors">Syarat & Ketentuan</a>
-                      <a href="#" className="hover:text-gray-900 transition-colors">Cookie Policy</a>
+                  <div className="flex gap-8 text-[12px] text-gray-600 font-medium">
+                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Kebijakan Privasi</span>
+                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Syarat & Ketentuan</span>
+                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Cookie Policy</span>
                   </div>
               </div>
           </div>

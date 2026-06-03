@@ -90,7 +90,7 @@ function PortfolioCard({ site }: { site: Site }) {
       <div className="flex items-center justify-between px-5 py-4">
         <div className="min-w-0">
           <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
-          <p className="text-[11px] text-gray-400 font-medium mt-0.5">{meta.label}</p>
+          <p className="text-[11px] text-gray-500 font-medium mt-0.5">{meta.label}</p>
         </div>
         <span className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0">
           <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
@@ -178,7 +178,7 @@ export default function PortfolioGallery() {
           >
             Website Saya Mau Seperti Ini <ArrowRight size={18} />
           </a>
-          <p className="text-sm text-gray-400 font-medium">Live dalam 3 hari. Domain sendiri. Mulai dari Rp 600.000.</p>
+          <p className="text-sm text-gray-600 font-medium">Live dalam 3–5 hari kerja. Domain sendiri. Mulai dari Rp 600.000.</p>
         </div>
       </div>
     </section>

@@ -349,7 +349,7 @@ function TrustSection() {
     ]
 
     return (
-        <section className="bg-white py-24 px-4 border-t border-black/5">
+        <section className="bg-[#F5F5F7] py-24 px-4 border-t border-black/5">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
@@ -358,9 +358,9 @@ function TrustSection() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
                     {STEPS.map((s, i) => (
-                        <div key={i} className={`relative p-8 rounded-[40px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
+                        <div key={i} className={`relative p-8 rounded-[40px] bg-white border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
-                            <div className="w-14 h-14 bg-white rounded-lg apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
+                            <div className="w-14 h-14 bg-[#F5F5F7] rounded-lg flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
                                 <s.i size={28} />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-3">{s.t}</h3>
@@ -470,11 +470,11 @@ export default function LandingPage() {
       <main>
         <HeroSection />
         <SocialProofBar />
+        <GlobalFeatures />
         <SegmenSection />
+        <TrustSection />
         <ProofSection />
         <PortfolioGallery />
-        <GlobalFeatures />
-        <TrustSection />
         <FaqSection />
 
         <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">

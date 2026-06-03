@@ -18,6 +18,8 @@ export interface HostingPackage {
   price: number;
   maintain: number;
   description: string;
+  industryDesc?: Record<string, string>;
+  recommendedFor?: string[];
 }
 
 export interface Bundle {
@@ -32,11 +34,70 @@ export interface Bundle {
 }
 
 export const HOSTING_PACKAGES: HostingPackage[] = [
-  { id: 'basic',      name: 'Basic',      storage: '5GB',    visitor: '±500/bulan',        price: 600000,   maintain: 450000,  description: 'Cocok untuk landing page atau profil bisnis sederhana dengan puluhan foto.' },
-  { id: 'starter',    name: 'Starter',    storage: '20GB',   visitor: '±3.000/bulan',       price: 1200000,  maintain: 900000,  description: 'Pas untuk toko online, klinik, atau bisnis yang rutin upload konten.' },
-  { id: 'growth',     name: 'Growth',     storage: '50GB',   visitor: '±15.000/bulan',      price: 2500000,  maintain: 1875000, description: 'Performa ekstra untuk traffic ramai & banyak transaksi setiap harinya.' },
-  { id: 'business',   name: 'Business',   storage: '100GB',  visitor: '±50.000/bulan',      price: 5000000,  maintain: 3750000, description: 'Skala medium-enterprise dengan kebutuhan storage media yang masif.' },
-  { id: 'enterprise', name: 'Enterprise', storage: '250GB+', visitor: 'High Performance',   price: 10000000, maintain: 7500000, description: 'Dedicated resources untuk aplikasi skala besar dengan ribuan user aktif.' },
+  {
+    id: 'basic', name: 'Basic', storage: '5GB', visitor: '±500/bulan',
+    price: 600000, maintain: 450000,
+    description: 'Profil bisnis online + katalog produk/layanan. Cocok untuk bisnis baru yang baru mulai hadir di internet.',
+    recommendedFor: ['Website Perusahaan', 'Toko Online', 'Website Klinik & Spa', 'Website Restaurant', 'Travel & Rental', 'Personal Branding', 'Custom Jastip'],
+    industryDesc: {
+      'Website Perusahaan':  'Profil perusahaan + halaman layanan + 20–50 foto portofolio. Cukup untuk bisnis yang target klien B2B via referral dan Google.',
+      'Toko Online':         'Katalog sampai 100 produk + foto tiap item. Cocok untuk toko baru yang baru mulai jual online.',
+      'Website Klinik & Spa':'Profil klinik + jadwal dokter + foto fasilitas. Cukup untuk 1–2 dokter dengan pasien lokal radius 5km.',
+      'Website Restaurant':  'Menu digital 20–80 item + foto suasana + Google Maps. Cukup untuk 1 outlet tanpa sistem order online.',
+      'Travel & Rental':     'Katalog armada sampai 20 unit + form booking dasar. Cocok untuk rental yang baru mulai online.',
+      'Personal Branding':   'Portofolio 10–40 proyek + bio + kontak. Storage sangat ringan — bisa bertahan lama di paket ini.',
+      'Custom Jastip':       'Katalog batch + foto produk + form order. Cocok untuk jastip aktif 1–2 batch per bulan.',
+      'Website Sekolah / LPK': 'Kurang disarankan — video profil dan foto galeri angkatan butuh ruang lebih. Pertimbangkan Starter.',
+      'Blog / Media':        'Kurang disarankan — traffic SEO bisa melonjak tiba-tiba. Blog aktif butuh bandwidth lebih. Pertimbangkan Starter.',
+      'Website Institusi':   'Kurang disarankan — arsip PDF dan foto kegiatan tahunan akan cepat penuh. Pertimbangkan Starter.',
+    },
+  },
+  {
+    id: 'starter', name: 'Starter', storage: '20GB', visitor: '±3.000/bulan',
+    price: 1200000, maintain: 900000,
+    description: 'Bisnis aktif dengan konten rutin, booking online, atau katalog lengkap. Paket paling banyak dipilih.',
+    recommendedFor: ['Website Sekolah / LPK', 'Blog / Media', 'Website Institusi'],
+    industryDesc: {
+      'Website Perusahaan':  'Portofolio proyek lengkap + galeri tim + dokumen profil PDF. Untuk perusahaan yang rutin pitch ke klien baru.',
+      'Toko Online':         'Katalog 200+ produk + foto HD tiap SKU. Untuk toko yang aktif promosi di Instagram atau TikTok.',
+      'Website Klinik & Spa':'Booking online aktif + banyak foto layanan + mulai buka cabang kedua. Paling banyak dipilih klinik.',
+      'Website Sekolah / LPK': 'Video profil sekolah + foto galeri angkatan + halaman pendaftaran. Rekomendasi untuk semua LPK dan bimbel.',
+      'Website Restaurant':  'Multi-outlet atau menu musiman yang sering berubah. Untuk restoran yang aktif promosi event.',
+      'Travel & Rental':     'Armada 20–50 unit + booking real-time + foto lengkap tiap kendaraan. Untuk rental yang serius scale.',
+      'Personal Branding':   'Tambah halaman produk digital, kelas online, atau e-book. Untuk konsultan yang mulai monetisasi konten.',
+      'Blog / Media':        'Ratusan artikel + foto header tiap post. Rekomendasi untuk media — traffic SEO bisa melonjak tiba-tiba.',
+      'Custom Jastip':       'Batch bulanan aktif 100–300 item per batch + galeri testimoni. Untuk jastip dengan repeat buyer rutin.',
+      'Website Institusi':   'Arsip dokumen PDF + foto kegiatan tahunan + halaman pengumuman. Rekomendasi untuk semua yayasan dan organisasi.',
+    },
+  },
+  {
+    id: 'growth', name: 'Growth', storage: '50GB', visitor: '±15.000/bulan',
+    price: 2500000, maintain: 1875000,
+    description: 'Bisnis ramai — promo sering, traffic dari iklan, atau banyak transaksi dan media setiap hari.',
+    recommendedFor: [],
+    industryDesc: {
+      'Website Perusahaan':  'Perusahaan besar dengan banyak proyek, tim lintas kota, dan traffic dari iklan atau liputan media.',
+      'Toko Online':         'Ribuan SKU + promo flash sale sering + traffic tinggi dari marketplace atau iklan berbayar.',
+      'Website Klinik & Spa':'Klinik dengan banyak dokter spesialis, sistem booking penuh, dan iklan digital aktif.',
+      'Website Sekolah / LPK': 'LMS ringan, banyak cabang, atau arsip materi per angkatan yang terus bertambah setiap tahun.',
+      'Website Restaurant':  'Chain restoran multi-outlet dengan sistem order delivery dan program loyalitas.',
+      'Travel & Rental':     'Fleet 50+ unit di beberapa kota, booking ramai saat musim liburan, iklan aktif Google/Meta.',
+      'Personal Branding':   'Platform kursus online dengan video materi, ribuan subscriber, dan live webinar rutin.',
+      'Blog / Media':        'Media aktif dengan 1.000+ artikel dan traffic 10.000+ per bulan dari pencarian Google.',
+      'Custom Jastip':       'Jastip besar dengan ribuan pembeli, stok ready stock, atau live shopping rutin di TikTok.',
+      'Website Institusi':   'Lembaga besar dengan banyak cabang, arsip 10+ tahun, dan ratusan anggota aktif.',
+    },
+  },
+  {
+    id: 'business', name: 'Business', storage: '100GB', visitor: '±50.000/bulan',
+    price: 5000000, maintain: 3750000,
+    description: 'Untuk bisnis dengan ribuan produk, video kursus banyak, atau traffic besar dari iklan skala nasional.',
+  },
+  {
+    id: 'enterprise', name: 'Enterprise', storage: '250GB+', visitor: 'High Performance',
+    price: 10000000, maintain: 7500000,
+    description: 'Dedicated resources untuk platform dengan puluhan ribu user aktif — tidak berbagi server dengan siapapun.',
+  },
 ];
 
 export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {

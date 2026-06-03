@@ -521,7 +521,9 @@ Terima kasih.`
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 className="text-xl font-bold text-gray-900">Pilih Ukuran Server</h2>
-                                    <p className="text-sm text-gray-400 font-medium mt-1">Sesuaikan dengan proyeksi pengunjung dan media Anda.</p>
+                                    <p className="text-sm text-gray-400 font-medium mt-1">
+                                      {selectedTemplate ? `Disesuaikan untuk: ${selectedTemplate}` : 'Pilih industri di Step 1 untuk rekomendasi yang lebih tepat.'}
+                                    </p>
                                 </div>
                                 <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0">
                                     <Server size={24} />
@@ -547,7 +549,14 @@ Terima kasih.`
                                                     <Database size={24} />
                                                 </div>
                                                 <div className="text-left">
-                                                    <p className="font-bold text-gray-900 text-lg">{pkg.name} Server</p>
+                                                    <div className="flex items-center gap-2 flex-wrap">
+                                                      <p className="font-bold text-gray-900 text-lg">{pkg.name} Server</p>
+                                                      {selectedTemplate && pkg.recommendedFor?.includes(selectedTemplate) && (
+                                                        <span className="text-[10px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">
+                                                          Rekomendasi
+                                                        </span>
+                                                      )}
+                                                    </div>
                                                     <div className="flex flex-wrap gap-2 mt-2">
                                                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
                                                             <Server size={12}/> {pkg.storage} Storage
@@ -566,7 +575,7 @@ Terima kasih.`
                                             </div>
                                         </div>
                                         <div className={`text-left text-sm leading-relaxed border-t pt-3 w-full transition-colors ${isSelected ? 'text-emerald-800 border-emerald-200/50' : 'text-gray-500 border-black/[0.03]'}`}>
-                                            {pkg.description}
+                                            {(selectedTemplate && pkg.industryDesc?.[selectedTemplate]) ?? pkg.description}
                                         </div>
                                     </button>
                                     )
@@ -576,7 +585,10 @@ Terima kasih.`
                             <div className="mt-8 p-5 rounded-[20px] bg-amber-50 border border-amber-100 flex gap-4">
                                 <AlertCircle className="text-amber-500 shrink-0" size={24} />
                                 <p className="text-sm text-amber-900 leading-relaxed font-medium">
-                                    <strong>Saran Tim IT:</strong> Pilih paket lebih tinggi jika Anda berencana mengupload banyak gambar resolusi tinggi, video materi, atau mengharapkan lonjakan pengunjung. Paket dapat di-upgrade kapan saja tanpa merusak web.
+                                    <strong>Saran Tim Kami:</strong>{' '}
+                                    {selectedTemplate === 'Website Sekolah / LPK' || selectedTemplate === 'Blog / Media' || selectedTemplate === 'Website Institusi'
+                                      ? `Untuk ${selectedTemplate}, kami sarankan mulai dari Starter — bukan Basic. Konten bertambah cepat dan traffic bisa melonjak saat pendaftaran atau publikasi.`
+                                      : 'Paket bisa di-upgrade kapan saja tanpa merusak website. Mulai dari yang sesuai sekarang, naikkan kalau bisnis makin ramai.'}
                                 </p>
                             </div>
 

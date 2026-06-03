@@ -774,115 +774,105 @@ Terima kasih.`
 
           {/* Right Column: Summary (Sticky) */}
           <div className="lg:col-span-4 lg:sticky lg:top-28">
-            <div className="bg-white rounded-[32px] p-6 apple-shadow border-2 border-[#0071E3]/20 relative overflow-hidden">
+            <div className="bg-white rounded-[32px] p-6 apple-shadow border border-black/[0.05] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 blur-3xl -mr-16 -mt-16 pointer-events-none" />
-              
-              <h2 className="text-xl font-black text-gray-900 mb-5 sf-display-heavy relative z-10">Estimasi Biaya</h2>
 
-              <div key={`${selectedTemplate}-${selectedPackage.id}-${selectedAddons.length}-${selectedBundleId}`} className="space-y-4 relative z-10 animate-fade-in">
-                {selectedBundleId ? (
-                    <div className="p-4 rounded-xl bg-yellow-50 border border-yellow-200/50">
-                        <div className="flex items-center gap-2 mb-1.5">
-                            <Zap size={14} className="text-yellow-600" fill="currentColor" />
-                            <p className="text-[10px] font-black text-yellow-800 uppercase tracking-widest">Promo Rakitan Aktif</p>
-                        </div>
-                        <div className="flex justify-between items-center mb-1">
-                            <p className="text-sm font-bold text-gray-900">{BUNDLES.find(b => b.id === selectedBundleId)?.name}</p>
-                            <div className="text-right">
-                                <p className="text-[10px] text-gray-400 line-through">Rp {BUNDLES.find(b => b.id === selectedBundleId)?.normalPrice.toLocaleString('id-ID')}</p>
-                            </div>
-                        </div>
-                        <p className="text-[11px] text-gray-500">
-                            Termasuk Server {selectedPackage.name} + {selectedAddons.length} Fitur Custom.
-                        </p>
-                    </div>
-                ) : (
+              <h2 className="text-xl font-black text-gray-900 mb-4 sf-display-heavy relative z-10">Estimasi Biaya</h2>
+
+              <div
+                key={`${selectedTemplate}-${selectedPackage.id}-${selectedAddons.length}-${selectedBundleId}`}
+                className="relative z-10 animate-fade-in"
+              >
+                {/* Industry label */}
+                <div className="mb-3">
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Industri</p>
+                  <p className="text-base font-black text-gray-900 leading-tight">{selectedTemplate}</p>
+                </div>
+
+                {/* Line items — receipt style */}
+                <div className="border-t border-black/5 pt-3 space-y-0">
+                  {selectedBundleId ? (
                     <>
-                        <div className="p-4 rounded-xl bg-[#F5F5F7] border border-black/5 flex items-start gap-3">
-                            <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-gray-400 shadow-sm shrink-0">
-                                <Layout size={16} />
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Template Dasar</p>
-                                <p className="text-sm font-bold text-gray-900 leading-tight">{selectedTemplate}</p>
-                            </div>
-                        </div>
-
-                        <div className="p-4 rounded-xl bg-[#F5F5F7] border border-black/5">
-                            <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1.5">Paket Server</p>
-                            <div className="flex justify-between items-center">
-                                <p className="text-sm font-bold text-gray-900 flex items-center gap-2">
-                                    <Server size={14} className="text-[#0071E3]" /> {selectedPackage.name}
-                                </p>
-                                <p className="text-sm font-bold text-[#0071E3]">Rp {selectedPackage.price.toLocaleString('id-ID')}</p>
-                            </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-1">Fitur Tambahan</p>
-                            {selectedAddons.length > 0 ? (
-                                <div className="bg-[#F5F5F7] rounded-xl p-4 border border-black/5 space-y-2 max-h-[160px] overflow-y-auto">
-                                    {selectedAddons.map(addon => (
-                                        <div key={addon.id} className="flex justify-between items-center text-xs font-bold border-b border-black/[0.03] pb-2 last:border-0 last:pb-0">
-                                            <span className="text-gray-600">{addon.name}</span>
-                                            <span className="text-gray-900">Rp {addon.price.toLocaleString('id-ID')}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="text-center py-4 bg-gray-50 rounded-xl border border-dashed border-gray-200">
-                                    <p className="text-[11px] text-gray-400 font-medium italic">Belum ada add-on terpilih</p>
-                                </div>
-                            )}
-                        </div>
+                      <div className="flex items-center gap-1.5 mb-2">
+                        <Zap size={11} className="text-yellow-600" fill="currentColor" />
+                        <p className="text-[9px] font-black text-yellow-700 uppercase tracking-widest">Promo Rakitan</p>
+                      </div>
+                      <div className="flex justify-between items-center py-2 border-b border-black/[0.04]">
+                        <span className="text-sm text-gray-700 font-medium">{BUNDLES.find(b => b.id === selectedBundleId)?.name}</span>
+                        <span className="text-[10px] text-gray-400 line-through">Rp {BUNDLES.find(b => b.id === selectedBundleId)?.normalPrice.toLocaleString('id-ID')}</span>
+                      </div>
+                      <p className="text-[10px] text-gray-400 pt-1">Server {selectedPackage.name} + {selectedAddons.length} fitur custom</p>
                     </>
-                )}
-              </div>
-
-              {/* Fixed Bottom Section (Totals & Button) */}
-              <div className="pt-5 border-t border-black/5 relative z-10 mt-5 bg-white">
-                <div className="space-y-3 mb-5">
-                    <div className="flex justify-between items-end">
-                        <div className="space-y-0.5">
-                            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Tahun Pertama</span>
-                            <p className="text-2xl font-black text-[#0071E3] tracking-tight">
-                                Rp {animatedSetupTotal.toLocaleString('id-ID')}
-                            </p>
+                  ) : (
+                    <>
+                      <div className="flex justify-between items-center py-2.5 border-b border-black/[0.04]">
+                        <span className="text-sm text-gray-500">Template Dasar</span>
+                        <span className="text-[11px] font-bold text-gray-300 uppercase tracking-wide">Termasuk</span>
+                      </div>
+                      <div className="flex justify-between items-center py-2.5 border-b border-black/[0.04]">
+                        <span className="text-sm text-gray-700 font-medium flex items-center gap-1.5">
+                          <Server size={12} className="text-gray-400" /> {selectedPackage.name} Server
+                        </span>
+                        <span className="text-sm font-bold text-gray-900">Rp {selectedPackage.price.toLocaleString('id-ID')}</span>
+                      </div>
+                      {selectedAddons.length > 0 ? (
+                        <div className="max-h-[140px] overflow-y-auto">
+                          {selectedAddons.map(addon => (
+                            <div key={addon.id} className="flex justify-between items-center py-2.5 border-b border-black/[0.04] last:border-0">
+                              <span className="text-sm text-gray-500 truncate pr-2">{addon.name}</span>
+                              <span className="text-sm font-bold text-gray-900 shrink-0">Rp {addon.price.toLocaleString('id-ID')}</span>
+                            </div>
+                          ))}
                         </div>
-                    </div>
-                    <div className="flex justify-between items-center bg-blue-50/50 p-3 rounded-xl border border-blue-100">
-                        <span className="text-[11px] font-bold text-blue-900">Renewal Thn 2+</span>
-                        <span className="text-sm font-black text-blue-900">Rp {maintainTotal.toLocaleString('id-ID')}</span>
-                    </div>
+                      ) : (
+                        <div className="py-3 text-center">
+                          <p className="text-[11px] text-gray-400">Pilih fitur di Step 3 untuk tambah ke estimasi</p>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
 
-                <div className="mt-3 p-3 rounded-xl bg-blue-50/60 border border-blue-100 flex items-start gap-2">
-                    <Check size={14} className="text-[#0071E3] shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-blue-900 leading-relaxed font-medium">
-                        Setelah order, tim kami konfirmasi via WA dalam 1×24 jam dan proses dimulai.{' '}
-                        <a
-                            href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="font-black underline underline-offset-2 hover:text-blue-700"
-                        >
-                            Butuh bantuan memilih? Chat tim kami →
-                        </a>
+                {/* Dark total card */}
+                <div className="mt-4 bg-[#1D1D1F] rounded-2xl p-5 text-white">
+                  <div className={setupTotal > 3_000_000 ? 'mb-3' : ''}>
+                    <p className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Setup Tahun Pertama</p>
+                    <p className="text-2xl font-black tracking-tight">
+                      Rp {animatedSetupTotal.toLocaleString('id-ID')}
                     </p>
+                  </div>
+
+                  {setupTotal > 3_000_000 && (
+                    <div className="bg-white/10 rounded-xl p-3 mb-3">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
+                      <p className="text-lg font-black text-green-400">
+                        Rp {Math.ceil(setupTotal * 0.5).toLocaleString('id-ID')}
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between items-center pt-3 border-t border-white/10">
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Renewal Thn 2+</span>
+                    <span className="text-sm font-black text-gray-300">Rp {maintainTotal.toLocaleString('id-ID')}</span>
+                  </div>
                 </div>
 
-                <div className="mt-2 flex items-start gap-2">
-                    <Info size={14} className="text-gray-400 shrink-0 mt-0.5" />
-                    <p className="text-[10px] text-gray-400 leading-relaxed font-medium">
-                        Estimasi ini akurat untuk kebutuhan standar. Tim kami konfirmasi harga final via WA sebelum proses dimulai.
-                    </p>
+                {/* Single info note */}
+                <div className="mt-3 flex items-start gap-2">
+                  <Check size={13} className="text-[#0071E3] shrink-0 mt-0.5" />
+                  <p className="text-[10px] text-gray-500 leading-relaxed">
+                    Konfirmasi via WA dalam 1×24 jam setelah order.{' '}
+                    <a
+                      href={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#0071E3] font-bold hover:underline"
+                    >
+                      Butuh bantuan memilih? Chat →
+                    </a>
+                  </p>
                 </div>
               </div>
-            </div>
-
-            {/* Support Link */}
-            <div className="mt-5 text-center">
-                <p className="text-xs text-gray-400 font-medium">Bingung memilih? <Link href={waLink('Halo Japan Arena, saya butuh bantuan memilih fitur website.')} className="text-[#0071E3] font-bold hover:underline">Konsultasi Gratis</Link></p>
             </div>
           </div>
 

@@ -489,18 +489,27 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
               <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
               <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
-                Pesaing Anda sudah<br className="hidden md:block" /> ditemukan di Google.<br className="hidden md:block" /> <span className="text-[#0071E3]">Bisnis Anda kapan?</span>
+                Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Satu chat WA, 15 menit — tim kami tunjukkan langsung sistemnya.
-                Bukan bot, bukan sales script. Kami yang jelaskan.
+                Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
+                Masih ragu?{' '}
+                <a
+                  href={waLink('Halo Japan Arena Corp, saya mau tanya dulu sebelum mulai.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0071E3] font-bold hover:underline"
+                >
+                  Chat tim kami dulu
+                </a>
+                , gratis, tanpa script jualan.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+                  href="/seluruh-layanan"
                   className="inline-flex items-center justify-center gap-2 bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button"
                 >
-                  Chat & Lihat Demo Gratis <ArrowRight size={18} />
+                  Rakit Website Sekarang <ArrowRight size={18} />
                 </a>
                 <button
                   type="button"

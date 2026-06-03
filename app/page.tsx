@@ -202,12 +202,17 @@ function SegmenSection() {
                         <div key={p.label} className="contents">
                         {/* Divider sebelum portal cards — muncul setelah featured card */}
                         {index === 1 && (
-                          <div className="w-full flex items-center gap-4 py-2">
-                            <div className="flex-1 h-px bg-black/5" />
-                            <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest text-center whitespace-nowrap">
+                          <div className="w-full py-3 sm:py-2">
+                            <div className="hidden sm:flex items-center gap-4">
+                              <div className="flex-1 h-px bg-black/5" />
+                              <p className="text-[12px] font-bold text-gray-400 uppercase tracking-widest text-center whitespace-nowrap">
+                                Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
+                              </p>
+                              <div className="flex-1 h-px bg-black/5" />
+                            </div>
+                            <p className="sm:hidden text-[11px] font-bold text-gray-400 uppercase tracking-widest text-center leading-relaxed">
                               Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
                             </p>
-                            <div className="flex-1 h-px bg-black/5" />
                           </div>
                         )}
                         <div

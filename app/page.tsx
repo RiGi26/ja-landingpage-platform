@@ -46,18 +46,19 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
           <div className="space-y-8 animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Untuk Lapangan, Salon, Klinik, dan Bisnis Lainnya
+              Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
-              Bisnis Anda Buka 24 Jam.<br />
-              <span className="text-[#0071E3]">Anda Tidak Harus.</span>
+              Berhenti Jadi Admin<br />
+              <span className="text-[#0071E3]">di Bisnis Anda Sendiri.</span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Masih catat booking di buku atau grup WA? Masih rekap pemasukan tiap malam sebelum tidur?
-              Website profesional dan sistem lengkap — siap pakai dalam 3–5 hari kerja.
-              Pelanggan bisa booking kapan saja, tanpa perlu hubungi Anda dulu. Laporan pemasukan tersedia otomatis. Bisnis jalan terus, bahkan saat Anda istirahat.
+              Tiap hari HP penuh chat yang nanya hal sama: masih ada slot? berapa harganya?
+              Booking dicatat di buku, pemasukan direkap manual tiap malam sebelum tidur.
+              Kami bangunkan website plus sistem yang urus semua itu — pelanggan pesan dan bayar sendiri,
+              laporan jalan otomatis. Siap pakai 3–5 hari kerja, dan bisnis tetap jalan waktu Anda istirahat.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -488,18 +489,27 @@ export default function LandingPage() {
           <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
               <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
               <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
-                Pesaing Anda sudah<br className="hidden md:block" /> ditemukan di Google.<br className="hidden md:block" /> <span className="text-[#0071E3]">Bisnis Anda kapan?</span>
+                Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Satu chat WA, 15 menit — tim kami tunjukkan langsung sistemnya.
-                Bukan bot, bukan sales script. Kami yang jelaskan.
+                Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
+                Masih ragu?{' '}
+                <a
+                  href={waLink('Halo Japan Arena Corp, saya mau tanya dulu sebelum mulai.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0071E3] font-bold hover:underline"
+                >
+                  Chat tim kami dulu
+                </a>
+                , gratis, tanpa script jualan.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+                  href="/seluruh-layanan"
                   className="inline-flex items-center justify-center gap-2 bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button"
                 >
-                  Chat & Lihat Demo Gratis <ArrowRight size={18} />
+                  Rakit Website Sekarang <ArrowRight size={18} />
                 </a>
                 <button
                   type="button"

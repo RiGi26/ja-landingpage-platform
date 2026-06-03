@@ -46,18 +46,19 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
           <div className="space-y-8 animate-fade-up">
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Untuk Lapangan, Salon, Klinik, dan Bisnis Lainnya
+              Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
-              Bisnis Anda Buka 24 Jam.<br />
-              <span className="text-[#0071E3]">Anda Tidak Harus.</span>
+              Berhenti Jadi Admin<br />
+              <span className="text-[#0071E3]">di Bisnis Anda Sendiri.</span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Masih catat booking di buku atau grup WA? Masih rekap pemasukan tiap malam sebelum tidur?
-              Website profesional dan sistem lengkap — siap pakai dalam 3–5 hari kerja.
-              Pelanggan bisa booking kapan saja, tanpa perlu hubungi Anda dulu. Laporan pemasukan tersedia otomatis. Bisnis jalan terus, bahkan saat Anda istirahat.
+              Tiap hari HP penuh chat yang nanya hal sama: masih ada slot? berapa harganya?
+              Booking dicatat di buku, pemasukan direkap manual tiap malam sebelum tidur.
+              Kami bangunkan website plus sistem yang urus semua itu — pelanggan pesan dan bayar sendiri,
+              laporan jalan otomatis. Siap pakai 3–5 hari kerja, dan bisnis tetap jalan waktu Anda istirahat.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">

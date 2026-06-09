@@ -51,7 +51,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
               Berhenti Jadi Admin<br />
-              <span className="text-[#0071E3]">di Bisnis Anda Sendiri.</span>
+              <span className="text-[#0071E3]">di Bisnis Kamu Sendiri.</span>
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
@@ -313,7 +313,7 @@ function GlobalFeatures() {
     const FEATURES = [
         { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
         { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
-        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Tidak bercampur, tidak bisa diintip — enkripsi enterprise dari hari pertama.', icon: Shield },
+        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Data setiap bisnis disimpan terpisah—nggak bakal bercampur, nggak bisa diintip, dan langsung dilindungi enkripsi kelas enterprise.', icon: Shield },
     ]
 
     return (
@@ -339,12 +339,12 @@ function TrustSection() {
     const STEPS = [
         { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
         { t: 'Isi Briefing, Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form briefing. Tersimpan otomatis, boleh dicicil. Belum siap? Tim kami siapkan draf awalnya.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Anda terima beres. Pantau progress via Order ID sampai website tayang di domain Anda sendiri.', i: Rocket },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', i: Rocket },
     ]
 
     const BADGES = [
         { t: 'Data Pembeli Aman', d: 'Nomor & transaksi pelanggan tersimpan terkunci — tidak bocor, tidak dijual', i: ShieldCheck },
-        { t: 'Tidak Akan Hilang', d: 'Disalin otomatis tiap hari. Sebenci apa pun error, data Anda tetap ada', i: HardDrive },
+        { t: 'Tidak Akan Hilang', d: 'Mau se-error apa pun sistemnya nanti, data kamu tetap aman karena otomatis di-backup tiap hari', i: HardDrive },
         { t: 'Anti-Ngadat Saat Rame', d: 'Pelanggan tetap bisa buka & pesan walau pengunjung membludak', i: Globe2 },
         { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp Anda sendiri', i: Zap },
     ]
@@ -427,7 +427,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa request revisi?',
-      a: 'Ya. Revisi konten dan layout minor termasuk dalam paket. Untuk perubahan besar seperti ganti template atau tambah fitur baru, kami diskusikan estimasi biayanya dulu.',
+      a: 'Ya. Revisi konten dan layout minor termasuk dalam paket. Untuk perubahan besar seperti ganti template atau tambah fitur baru, kita obrolin bareng dulu estimasi biayanya.',
     },
     {
       q: 'Apa bedanya website builder dengan portal (LMS, klinik, dll)?',

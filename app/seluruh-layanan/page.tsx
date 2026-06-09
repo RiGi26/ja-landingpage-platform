@@ -322,6 +322,18 @@ Terima kasih.`
       <Navbar />
 
       <main className="max-w-6xl mx-auto pt-32 px-4">
+        {/* WhatsApp Sticky Button (Mobile) - positioned higher to avoid fixed bottom bar */}
+        <div className="fixed bottom-[100px] right-6 z-40 md:hidden">
+          <a
+            href={waLink('Halo Japan Arena, saya butuh bantuan merakit website.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
+          >
+            <MessageCircle size={28} />
+          </a>
+        </div>
+
         {/* Header */}
         <div className="mb-12 animate-fade-up">
           <div className="inline-flex items-center gap-2 bg-blue-50 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full mb-6 border border-blue-100">

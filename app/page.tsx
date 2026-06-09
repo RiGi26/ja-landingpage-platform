@@ -246,7 +246,7 @@ function SegmenSection() {
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
                     <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                      Bukan template generik. Setiap sistem dibuat sesuai cara kerja industri Anda — dari lapangan futsal sampai klinik pratama.
+                      Bukan template generik. Setiap sistem dibuat pas sesuai alur kerja bisnis kamu — mulai dari rental mobil, tempat kursus, sampai operasional klinik dan apotek.
                     </p>
                 </div>
 

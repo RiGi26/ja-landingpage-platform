@@ -901,14 +901,14 @@ Terima kasih.`
 
                 {/* Dark total card */}
                 <div className="mt-4 bg-[#1D1D1F] rounded-2xl p-5 text-white">
-                  <div className={setupTotal > 3_000_000 ? 'mb-3' : ''}>
+                  <div className={setupTotal >= 4_000_000 ? 'mb-3' : ''}>
                     <p className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Setup Tahun Pertama</p>
                     <p className="text-2xl font-black tracking-tight">
                       Rp {animatedSetupTotal.toLocaleString('id-ID')}
                     </p>
                   </div>
 
-                  {setupTotal > 3_000_000 && (
+                  {setupTotal >= 4_000_000 && (
                     <div className="bg-white/10 rounded-xl p-3 mb-3">
                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
                       <p className="text-lg font-black text-green-400">

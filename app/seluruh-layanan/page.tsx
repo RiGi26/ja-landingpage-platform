@@ -40,7 +40,8 @@ import {
   HostingPackage,
   BUNDLES,
   Bundle,
-  RECOMMENDED_ADDONS
+  RECOMMENDED_ADDONS,
+  isPricedAddon
 } from '@/constants/services'
 
 const WA_NUMBER = '6281296917963'
@@ -236,11 +237,15 @@ export default function SeluruhLayananPage() {
   }
 
   const { setupTotal, maintainTotal } = useMemo(() => {
+    // Hanya add-on yang benar-benar bisa di-deploy ('live'/'manual') yang dijumlahkan.
+    // Fitur 'portal' & 'soon' tidak menambah estimasi otomatis — ditandai sebagai
+    // "konsultasi dulu" supaya tak ada fitur tak-terkirim yang dihargai diam-diam.
+    const pricedAddons = selectedAddons.filter(isPricedAddon)
     const activeBundle = selectedBundleId ? BUNDLES.find(b => b.id === selectedBundleId) : null;
-    const setup = activeBundle 
-      ? activeBundle.bundlePrice 
-      : selectedPackage.price + selectedAddons.reduce((acc, curr) => acc + curr.price, 0)
-    const maintain = selectedPackage.maintain + selectedAddons.reduce((acc, curr) => acc + Math.round(curr.price * 0.75), 0)
+    const setup = activeBundle
+      ? activeBundle.bundlePrice
+      : selectedPackage.price + pricedAddons.reduce((acc, curr) => acc + curr.price, 0)
+    const maintain = selectedPackage.maintain + pricedAddons.reduce((acc, curr) => acc + Math.round(curr.price * 0.75), 0)
     return { setupTotal: setup, maintainTotal: maintain }
   }, [selectedPackage, selectedAddons, selectedBundleId])
 
@@ -270,8 +275,13 @@ export default function SeluruhLayananPage() {
   }, [recommendedIds])
 
   const waMessage = useMemo(() => {
+    const addonNote = (a: Addon) =>
+      a.availability === 'portal' ? ' (tersedia via produk portal — konsultasi)'
+      : a.availability === 'soon' ? ' (perlu konsultasi, di luar estimasi)'
+      : a.availability === 'manual' ? ' (setup oleh tim)'
+      : ''
     const addonText = selectedAddons.length > 0
-      ? selectedAddons.map(a => `- ${a.name}`).join('\n')
+      ? selectedAddons.map(a => `- ${a.name}${addonNote(a)}`).join('\n')
       : '- Tanpa add-on tambahan'
 
     const activeBundle = selectedBundleId ? BUNDLES.find(b => b.id === selectedBundleId) : null;
@@ -293,7 +303,7 @@ ${addonText}${bundleNote}
 Estimasi setup tahun pertama:
 Rp ${setupTotal.toLocaleString('id-ID')}
 
-Estimasi maintenance tahun ke-2:
+Estimasi perpanjangan tahun ke-2:
 Rp ${maintainTotal.toLocaleString('id-ID')}
 
 Mohon info detail selanjutnya.
@@ -530,6 +540,16 @@ Terima kasih.`
                                 </div>
                             </div>
 
+                            {/* Penjelasan awam: apa itu server */}
+                            <div className="mb-6 p-5 rounded-[20px] bg-emerald-50/60 border border-emerald-100 flex gap-4">
+                                <Info className="text-emerald-600 shrink-0" size={22} />
+                                <p className="text-sm text-emerald-900 leading-relaxed font-medium">
+                                    <strong>Server itu seperti &ldquo;rumah&rdquo; website Anda di internet.</strong>{' '}
+                                    Makin banyak foto, produk, dan pengunjung, makin besar rumah yang dibutuhkan.
+                                    Tenang — Anda bisa pindah ke rumah yang lebih besar kapan saja tanpa membongkar website.
+                                </p>
+                            </div>
+
                             <div className="grid grid-cols-1 gap-4">
                                 {HOSTING_PACKAGES.map((pkg) => {
                                     const isSelected = selectedPackage.id === pkg.id;
@@ -559,12 +579,13 @@ Terima kasih.`
                                                     </div>
                                                     <div className="flex flex-wrap gap-2 mt-2">
                                                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
-                                                            <Server size={12}/> {pkg.storage} Storage
+                                                            <Server size={12}/> Ruang Simpan {pkg.storage}
                                                         </span>
                                                         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
                                                             <Users size={12}/> {pkg.visitor}
                                                         </span>
                                                     </div>
+                                                    <p className="text-[11px] text-gray-400 font-medium mt-1.5">{pkg.capacityHint}</p>
                                                 </div>
                                             </div>
                                             <div className="text-left md:text-right">
@@ -588,7 +609,7 @@ Terima kasih.`
                                     <strong>Saran Tim Kami:</strong>{' '}
                                     {selectedTemplate === 'Website Sekolah / LPK' || selectedTemplate === 'Blog / Media' || selectedTemplate === 'Website Institusi'
                                       ? `Untuk ${selectedTemplate}, kami sarankan mulai dari Starter — bukan Basic. Konten bertambah cepat dan traffic bisa melonjak saat pendaftaran atau publikasi.`
-                                      : 'Paket bisa di-upgrade kapan saja tanpa merusak website. Mulai dari yang sesuai sekarang, naikkan kalau bisnis makin ramai.'}
+                                      : 'Paket bisa dinaikkan ke yang lebih besar kapan saja tanpa membongkar website. Mulai dari yang sesuai sekarang, naikkan kalau bisnis makin ramai.'}
                                 </p>
                             </div>
 
@@ -686,6 +707,7 @@ Terima kasih.`
                                                   .map(addon => {
                                                     const isActive = selectedAddons.find(a => a.id === addon.id)
                                                     const isRecommended = recommendedIds.includes(addon.id)
+                                                    const priced = isPricedAddon(addon)
                                                     return (
                                                         <button
                                                             key={addon.id}
@@ -713,15 +735,41 @@ Terima kasih.`
                                                             <h4 className={`font-bold text-sm mb-1.5 pr-8 transition-colors ${isActive ? 'text-[#0071E3]' : 'text-gray-900'}`}>
                                                                 {addon.name}
                                                             </h4>
+                                                            {addon.availability === 'manual' && (
+                                                                <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full mb-2">
+                                                                    Disetup oleh tim
+                                                                </span>
+                                                            )}
+                                                            {addon.availability === 'portal' && (
+                                                                <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full mb-2">
+                                                                    Produk Portal
+                                                                </span>
+                                                            )}
+                                                            {addon.availability === 'soon' && (
+                                                                <span className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-widest bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full mb-2">
+                                                                    Konsultasi Dulu
+                                                                </span>
+                                                            )}
                                                             <p className="text-[11px] text-gray-400 leading-relaxed mb-3 pr-2">
                                                                 {addon.description}
                                                             </p>
-                                                            <div className="space-y-1">
-                                                                <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Setup Cost</p>
-                                                                <p className={`text-lg font-black tracking-tight ${isActive ? 'text-blue-900' : 'text-gray-900'}`}>
-                                                                    Rp {addon.price.toLocaleString('id-ID')}
-                                                                </p>
-                                                            </div>
+                                                            {priced ? (
+                                                                <div className="space-y-1">
+                                                                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Biaya Setup</p>
+                                                                    <p className={`text-lg font-black tracking-tight ${isActive ? 'text-blue-900' : 'text-gray-900'}`}>
+                                                                        Rp {addon.price.toLocaleString('id-ID')}
+                                                                    </p>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="space-y-1">
+                                                                    <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Harga</p>
+                                                                    <p className="text-sm font-bold text-gray-500 leading-snug">
+                                                                        {addon.availability === 'portal'
+                                                                            ? 'Tersedia di produk portal kami — tanya tim'
+                                                                            : 'Custom — konsultasi dulu (di luar estimasi)'}
+                                                                    </p>
+                                                                </div>
+                                                            )}
                                                             {addon.disclaimer && (
                                                                 <div className="mt-3 pt-3 border-t border-black/[0.03] flex items-start gap-2">
                                                                     <Info size={12} className="text-amber-500 shrink-0 mt-0.5" />
@@ -820,7 +868,13 @@ Terima kasih.`
                           {selectedAddons.map(addon => (
                             <div key={addon.id} className="flex justify-between items-center py-2.5 border-b border-black/[0.04] last:border-0">
                               <span className="text-sm text-gray-500 truncate pr-2">{addon.name}</span>
-                              <span className="text-sm font-bold text-gray-900 shrink-0">Rp {addon.price.toLocaleString('id-ID')}</span>
+                              {isPricedAddon(addon) ? (
+                                <span className="text-sm font-bold text-gray-900 shrink-0">Rp {addon.price.toLocaleString('id-ID')}</span>
+                              ) : (
+                                <span className="text-[10px] font-bold text-indigo-500 shrink-0 uppercase tracking-wide">
+                                  {addon.availability === 'portal' ? 'Portal' : 'Konsultasi'}
+                                </span>
+                              )}
                             </div>
                           ))}
                         </div>
@@ -852,9 +906,12 @@ Terima kasih.`
                   )}
 
                   <div className="flex justify-between items-center pt-3 border-t border-white/10">
-                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Renewal Thn 2+</span>
+                    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Perpanjangan Thn 2+</span>
                     <span className="text-sm font-black text-gray-300">Rp {maintainTotal.toLocaleString('id-ID')}</span>
                   </div>
+                  <p className="text-[10px] text-gray-500 leading-relaxed mt-2">
+                    Biaya sewa server + perawatan rutin (update keamanan, backup, bantuan teknis) — bukan biaya buat ulang website.
+                  </p>
                 </div>
 
                 {/* Single info note */}

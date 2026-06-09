@@ -19,7 +19,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
   description:
-    'Buat website bisnis dalam 3 hari. Atau tingkatkan dengan portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000, tanpa coding.',
+    'Bikin website bisnis siap pakai (Klinik, LMS, Farmasi, Travel) mulai Rp 600rb. Proses cepat 3 hari, terima beres tanpa coding. Cek demonya di sini!',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',

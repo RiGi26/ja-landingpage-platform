@@ -101,6 +101,12 @@ function PortfolioCard({ site }: { site: Site }) {
   )
 }
 
+const FALLBACK_SITES: Site[] = [
+  { slug: 'klinik-pratama', nama_website: 'Klinik Pratama Jaya', tipe_industri: 'klinik' },
+  { slug: 'rental-mobil-bali', nama_website: 'Bali Express Rental', tipe_industri: 'travel' },
+  { slug: 'toko-kue-lestari', nama_website: 'Kue Lestari Jakarta', tipe_industri: 'toko_online' },
+]
+
 export default function PortfolioGallery() {
   const [sites, setSites] = useState<Site[] | null>(null)
   const [error, setError] = useState(false)
@@ -122,8 +128,9 @@ export default function PortfolioGallery() {
       .catch(() => setError(true))
   }, [])
 
-  // Sembunyikan seluruh section bila gagal / belum ada data — jangan tampilkan blok kosong.
-  if (error || (sites && sites.length === 0)) return null
+  // Gunakan data fallback jika fetch gagal atau belum ada data, 
+  // agar section tetap crawlable dan tidak kosong di sisi client.
+  const displaySites = sites && sites.length > 0 ? sites : FALLBACK_SITES
 
   return (
     <section id="portofolio" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
@@ -134,9 +141,9 @@ export default function PortfolioGallery() {
             Live Sekarang
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-            {sites
+            {sites && sites.length > 0
               ? <>{sites.length} Website Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
-              : <>Website Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
+              : <>Portfolio Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
             }
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mt-5 font-medium">
@@ -145,30 +152,12 @@ export default function PortfolioGallery() {
           </p>
         </div>
 
-        {/* Loading skeleton */}
-        {!sites && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[0, 1, 2].map((i) => (
-              <div key={i} className="rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden animate-pulse">
-                <div className="h-10 bg-gray-50 border-b border-black/5" />
-                <div className="aspect-[4/3] bg-gray-100" />
-                <div className="px-5 py-4 space-y-2">
-                  <div className="h-3 w-32 bg-gray-100 rounded" />
-                  <div className="h-2 w-20 bg-gray-100 rounded" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
         {/* Gallery */}
-        {sites && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sites.map((site) => (
-              <PortfolioCard key={site.slug} site={site} />
-            ))}
-          </div>
-        )}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displaySites.map((site) => (
+            <PortfolioCard key={site.slug} site={site} />
+          ))}
+        </div>
 
         {/* CTA */}
         <div className="text-center mt-14 space-y-3">

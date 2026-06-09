@@ -55,26 +55,26 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
             </h1>
 
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
-              Tiap hari HP penuh chat yang nanya hal sama: masih ada slot? berapa harganya?
-              Booking dicatat di buku, pemasukan direkap manual tiap malam sebelum tidur.
-              Kami bangunkan website plus sistem yang urus semua itu — pelanggan pesan dan bayar sendiri,
-              laporan jalan otomatis. Siap pakai 3–5 hari kerja, dan bisnis tetap jalan waktu Anda istirahat.
+              Buat pemilik bisnis yang udah capek ngurusin semua operasional sendirian. Tiap hari HP penuh chat nanya ketersediaan, catat booking manual, sampai rekap uang malam-malam. Kami buatin sistem otomatis supaya bisnis tetap jalan walau kamu lagi tidur.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href="/seluruh-layanan"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
-              >
-                Rakit Website Sekarang <ArrowRight size={18} />
-              </a>
-              <button
-                type="button"
-                onClick={onDemo}
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
-              >
-                Lihat Demo Sistem
-              </button>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                <a
+                  href="/seluruh-layanan"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
+                >
+                  Rakit Website Sekarang <ArrowRight size={18} />
+                </a>
+                <button
+                  type="button"
+                  onClick={onDemo}
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
+                >
+                  Coba Demo Sistem (Gratis)
+                </button>
+              </div>
+              <p className="text-[13px] text-gray-400 font-medium">Mulai dari <span className="text-gray-900 font-bold">Rp 600.000</span></p>
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
@@ -97,10 +97,10 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
 
 function SocialProofBar() {
   const STATS = [
-    { value: '6', label: 'Platform Aktif' },
+    { value: '5 Platform', label: 'Siap Pakai' },
     { value: '3–5 hari', label: 'Waktu Live' },
     { value: '24/7', label: 'Sistem Berjalan' },
-    { value: '100%', label: 'Tanpa Coding' },
+    { value: 'Mulai 600rb', label: 'Biaya Terjangkau' },
   ]
   return (
     <section className="bg-white border-y border-black/5 py-6 px-4">
@@ -132,7 +132,7 @@ function ProofSection() {
     },
     {
       icon: BarChart2,
-      title: 'Harga Transparan Sejak Awal',
+      title: 'Biaya Jujur Sejak Awal',
       desc: 'Estimasi final muncul di kalkulator sebelum Anda bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
       cta: 'Hitung estimasi →',
       href: '/seluruh-layanan',
@@ -188,7 +188,7 @@ function SegmenSection() {
       {
         icon: Bus,
         label: 'Portal Travel & Rental',
-        description: 'Tidak ada lagi double booking atau jadwal bentrok. Pelanggan pesan online, slot terisi otomatis, konfirmasi terkirim otomatis.',
+        description: 'Sistem booking anti-bentrok. Pelanggan bisa cek ketersediaan unit, pilih tanggal, dan bayar langsung dari HP mereka.',
         cta: 'Lihat Demo',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
@@ -198,7 +198,7 @@ function SegmenSection() {
       {
         icon: GraduationCap,
         label: 'Portal LMS',
-        description: 'Karyawan baru selesai training tanpa menyita waktu manajer. Materi tersimpan, progres terpantau, sertifikat otomatis.',
+        description: 'Tinggal upload materi sekali, sistem otomatis ngurus pendaftaran siswa, ujian, sampai penerbitan sertifikat secara mandiri.',
         cta: 'Lihat Demo',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
@@ -208,7 +208,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Rekam medis digital terintegrasi SATUSEHAT. Pasien booking online, antrian terkelola otomatis — dokter fokus ke pasien, bukan ke kertas.',
+        description: 'Gak ada lagi drama salah jadwal dokter atau rekam medis keselip. Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik.',
         cta: 'Lihat Demo',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
@@ -218,7 +218,7 @@ function SegmenSection() {
       {
         icon: Pill,
         label: 'Portal Farmasi',
-        description: 'Stok obat tidak pernah habis tiba-tiba. Kasir digital catat semua transaksi otomatis. Laporan harian tersedia tanpa rekap manual.',
+        description: 'Pantau stok obat kedaluwarsa dan kelola resep digital tanpa pusing. Kasir langsung terhubung ke gudang secara real-time.',
         cta: 'Lihat Demo',
         href: 'https://ja-pharmacy-platform.vercel.app/demo',
         color: 'text-indigo-600',
@@ -228,7 +228,7 @@ function SegmenSection() {
       {
         icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
-        description: 'Titip barang dari Jepang langsung ke rumah Anda. Harga transparan, pengiriman terlacak, tidak perlu khawatir barang hilang.',
+        description: 'Titip barang dari Jepang langsung ke rumah Anda. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
         cta: 'Mulai Titip Barang',
         href: 'https://ja-jastip-platform.vercel.app',
         color: 'text-red-600',
@@ -262,12 +262,12 @@ function SegmenSection() {
                             <div className="hidden sm:flex items-center gap-4">
                               <div className="flex-1 h-px bg-black/5" />
                               <p className="text-[12px] font-bold text-gray-600 uppercase tracking-widest text-center whitespace-nowrap">
-                                Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
+                                Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
                               </p>
                               <div className="flex-1 h-px bg-black/5" />
                             </div>
                             <p className="sm:hidden text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center leading-relaxed">
-                              Bisnis yang tumbuh biasanya butuh lebih dari sekadar website:
+                              Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
                             </p>
                           </div>
                         )}
@@ -337,9 +337,9 @@ function GlobalFeatures() {
 
 function TrustSection() {
     const STEPS = [
-        { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi transparan, lalu pesan dan bayar DP — langsung online. Tanpa harus chat dulu atau nunggu sales.', i: LayoutGrid },
+        { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
         { t: 'Isi Briefing, Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form briefing. Tersimpan otomatis, boleh dicicil. Belum siap? Tim kami siapkan draf awalnya.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Tanpa sentuh satu baris kode. Pantau progress via Order ID sampai website tayang di domain Anda sendiri.', i: Rocket },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Anda terima beres. Pantau progress via Order ID sampai website tayang di domain Anda sendiri.', i: Rocket },
     ]
 
     const BADGES = [
@@ -354,7 +354,7 @@ function TrustSection() {
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Dari Nol ke Bisnis Online<br className="hidden md:block" /> dalam 3–5 Hari Kerja</h2>
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Pesan Senin, Website Rilis Jumat —<br className="hidden md:block" /> Tanpa Kamu Harus Ngerti Coding</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
@@ -386,6 +386,29 @@ function TrustSection() {
             </div>
         </section>
     )
+}
+
+function TestimonialSection() {
+  return (
+    <section className="bg-white py-24 px-4 border-t border-black/5">
+      <div className="max-w-6xl mx-auto text-center">
+        <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Kata Mereka</p>
+        <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy mb-12">
+          Cerita Pemilik Bisnis
+        </h2>
+        
+        {/* Placeholder Box */}
+        <div className="max-w-3xl mx-auto bg-[#F5F5F7] rounded-[32px] p-10 border border-dashed border-black/10 flex flex-col items-center justify-center min-h-[250px]">
+          <MessageCircle size={32} className="text-gray-300 mb-4" />
+          <p className="text-gray-500 font-medium text-lg mb-2">Belum ada testimoni berbayar di sini.</p>
+          <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
+            Kami sedang mengumpulkan cerita asli dari klien-klien kami yang sistemnya sudah live dan berjalan. 
+            Jadilah salah satu cerita sukses berikutnya.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function FaqSection() {
@@ -473,6 +496,18 @@ export default function LandingPage() {
       <DemoPickerModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
 
       <main>
+        {/* WhatsApp Sticky Button (Mobile) */}
+        <div className="fixed bottom-6 right-6 z-50 md:hidden">
+          <a
+            href={waLink('Halo Japan Arena, saya ingin tanya soal layanan.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
+          >
+            <MessageCircle size={28} />
+          </a>
+        </div>
+
         <HeroSection onDemo={() => setDemoOpen(true)} />
         <SocialProofBar />
         <GlobalFeatures />
@@ -480,6 +515,7 @@ export default function LandingPage() {
         <TrustSection />
         <ProofSection />
         <PortfolioGallery />
+        <TestimonialSection />
         <FaqSection />
 
         <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">
@@ -536,7 +572,7 @@ export default function LandingPage() {
                           <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
                       </div>
                       <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
-                          Sistem digital untuk bisnis Indonesia yang siap serius tumbuh — dari website profesional sampai operasional yang berjalan otomatis. Tanpa coding, tanpa ribet.
+                          Untuk bisnis yang sudah capek ngurus semuanya sendiri — dari website profesional sampai operasional yang berjalan otomatis. Tanpa ribet, tanpa drama.
                       </p>
                       <a
                           href={waLink('Halo Japan Arena Corp, saya ingin tanya soal layanan.')}

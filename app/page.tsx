@@ -513,8 +513,8 @@ export default function LandingPage() {
         <GlobalFeatures />
         <SegmenSection />
         <TrustSection />
-        <ProofSection />
-        <PortfolioGallery />
+        {/* <ProofSection /> */}
+        {/* <PortfolioGallery /> */}
         <TestimonialSection />
         <FaqSection />
 

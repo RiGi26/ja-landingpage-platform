@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Syne, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
+import RefCapture from './RefCapture'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -133,7 +134,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased"><RefCapture />{children}</body>
     </html>
   )
 }

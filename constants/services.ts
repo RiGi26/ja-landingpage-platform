@@ -226,6 +226,26 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'general',
         availability: 'live',
       },
+      // Sinkron katalog wb 2026-06-11: career & newsletter kini LIVE (band CTA
+      // terinjeksi otomatis di website, semua tema termasuk lux).
+      {
+        id: 'career',
+        name: 'Portal Lowongan Kerja',
+        description: 'Section karier di website Anda — ajakan bergabung dengan tombol kirim lamaran (via WhatsApp/email). Cocok untuk perusahaan yang sedang berkembang.',
+        price: 300000,
+        category: 'general',
+        availability: 'live',
+        disclaimer: 'Versi saat ini berupa banner ajakan + tombol lamaran. Daftar lowongan terstruktur (posisi, lokasi, filter) menyusul.',
+      },
+      {
+        id: 'newsletter',
+        name: 'Newsletter System',
+        description: 'Band ajakan berlangganan info & promo di website Anda — pengunjung mendaftar lewat WhatsApp sehingga langsung masuk daftar kontak Anda.',
+        price: 200000,
+        category: 'general',
+        availability: 'live',
+        disclaimer: 'Pendaftaran via WhatsApp (tanpa form email otomatis). Kolektor email + kirim massal menyusul.',
+      },
     ]
   },
   lms: {

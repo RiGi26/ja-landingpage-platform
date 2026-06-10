@@ -7,16 +7,17 @@ import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
-const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
+const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
   {
     id: 'lms',
     name: 'Portal LMS',
     icon: GraduationCap,
-    demoUrl: 'https://app.japanarena.com/demo',
+    demoUrl: 'https://ja-lms-platform.vercel.app/demo',
+    registerUrl: 'https://ja-lms-platform.vercel.app/register',
     plans: [
-      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
-      { tier: 'Professional', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis'], popular: true },
-      { tier: 'Business', price: 1199000, feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan'] },
+      { tier: 'Starter', price: 0, feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
+      { tier: 'Pro', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
+      { tier: 'Business', price: 1199000, feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ]
   },
   {
@@ -24,32 +25,35 @@ const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; 
     name: 'Portal Klinik',
     icon: Cross,
     demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
+    registerUrl: 'https://ja-clinic-platform.vercel.app/register',
     plans: [
-      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
-      { tier: 'Professional', price: 599000, feat: ['5 Dokter / Akun', 'WhatsApp Notifikasi', 'Integrasi Farmasi'], popular: true },
-      { tier: 'Business', price: 1499000, feat: ['Unlimited Dokter', 'Cetak Resep & Kwitansi PDF', 'Audit Log Staf'] },
+      { tier: 'Starter', price: 0, feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
+      { tier: 'Pro', price: 599000, feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
+      { tier: 'Business', price: 1499000, feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ]
   },
   {
     id: 'pharmacy',
     name: 'Portal Farmasi',
     icon: Pill,
-    demoUrl: 'https://ja-pharmacy-platform.vercel.app/login',
+    demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
+    registerUrl: 'https://ja-pharmacy-platform.vercel.app/register',
     plans: [
-      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
-      { tier: 'Professional', price: 449000, feat: ['3 Kasir / Akun', 'Printer Integration', 'Sync Data Klinik'], popular: true },
-      { tier: 'Business', price: 999000, feat: ['Unlimited Kasir', 'Sync Stok Otomatis', 'Laporan Tahunan'] },
+      { tier: 'Starter', price: 0, feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
+      { tier: 'Pro', price: 449000, feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
+      { tier: 'Business', price: 999000, feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
     ]
   },
   {
     id: 'travel',
     name: 'Portal Travel & Rental',
     icon: Bus,
-    demoUrl: 'https://ja-rental-platform.vercel.app/auth/login',
+    demoUrl: 'https://ja-rental-platform.vercel.app/demo',
+    registerUrl: 'https://ja-rental-platform.vercel.app/register',
     plans: [
-      { tier: 'Pro Trial', price: 0, feat: ['Akses Semua Fitur Pro', 'Aktif selama 14 Hari', 'Tanpa Kartu Kredit'] },
-      { tier: 'Professional', price: 749000, feat: ['Live Tracking Driver', 'WhatsApp E-ticket', 'Payment Integration'], popular: true },
-      { tier: 'Business', price: 1899000, feat: ['Custom Subdomain Unik', 'Fleet Status Advanced', 'E-Ticket WA Unlimited'] },
+      { tier: 'Starter', price: 0, feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
+      { tier: 'Pro', price: 749000, feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
+      { tier: 'Business', price: 1899000, feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
     ]
   }
 ]
@@ -175,17 +179,17 @@ export default function PricingPage() {
                   </Link>
                 )}
 
-                <Link 
-                  href={plan.tier === 'Pro Trial' ? 'https://ja-rental-platform.vercel.app/register' : "https://wa.me/6281296917963"}
+                <Link
+                  href={plan.tier === 'Starter' ? currentPlatform.registerUrl : "https://wa.me/6281296917963"}
                   className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm uppercase tracking-widest ${
-                    plan.popular 
-                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200' 
-                    : plan.tier === 'Pro Trial'
+                    plan.popular
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
+                    : plan.tier === 'Starter'
                       ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
                       : 'bg-gray-900 text-white hover:bg-black'
                   }`}
                 >
-                  {plan.tier === 'Pro Trial' ? 'Mulai Trial 14 Hari — Gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai Berlangganan'} <ArrowRight size={16} />
+                  {plan.tier === 'Starter' ? 'Mulai Trial 14 Hari — Gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai Berlangganan'} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>

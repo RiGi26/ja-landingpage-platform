@@ -613,7 +613,7 @@ export default function LandingPage() {
                       <ul className="space-y-4 text-sm text-gray-500">
                           <li className="flex gap-3">
                               <MapPin size={18} className="text-[#0071E3] shrink-0" />
-                              <span>Jakarta, Indonesia</span>                          </li>
+                              <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>                          </li>
                           <li className="flex gap-3">
                               <Mail size={18} className="text-[#0071E3] shrink-0" />
                               <span>contact@japanarena.com</span>
@@ -628,9 +628,14 @@ export default function LandingPage() {
 
               {/* Bottom Copyright */}
               <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                  <p className="text-[12px] text-gray-600 font-medium">
-                      © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
-                  </p>
+                  <div>
+                    <p className="text-[12px] text-gray-600 font-medium">
+                        © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
+                    </p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      Japan Arena Corp adalah nama usaha terdaftar yang beroperasi di bawah hukum Republik Indonesia.
+                    </p>
+                  </div>
                   <div className="flex gap-8 text-[12px] text-gray-600 font-medium">
                       <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Kebijakan Privasi</span>
                       <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Syarat & Ketentuan</span>

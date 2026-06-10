@@ -44,6 +44,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div className="space-y-8 animate-fade-up">
+            <p className="text-[11px] text-gray-400 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
               Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
@@ -193,8 +194,8 @@ function SegmenSection() {
       },
       {
         icon: Bus,
-        label: 'Portal Travel & Rental',
-        description: 'Sistem booking anti-bentrok. Pelanggan bisa cek ketersediaan unit, pilih tanggal, dan bayar langsung dari HP mereka.',
+        label: 'Portal Travel, Rental & Venue',
+        description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
         href: 'https://ja-rental-platform.vercel.app',
         color: 'text-sky-600',
@@ -203,8 +204,8 @@ function SegmenSection() {
       },
       {
         icon: GraduationCap,
-        label: 'Portal LMS',
-        description: 'Tinggal upload materi sekali, sistem otomatis ngurus pendaftaran siswa, ujian, sampai penerbitan sertifikat secara mandiri.',
+        label: 'Portal Belajar / LMS',
+        description: 'Untuk karyawan baru atau kursus publik — tinggal upload materi sekali. Sistem otomatis ngurus pendaftaran, ujian, sampai penerbitan sertifikat. Cocok untuk: LPK, bimbel, kursus online, sekolah.',
         cta: 'Lihat Demo',
         href: 'https://ja-lms-platform.vercel.app/demo',
         color: 'text-blue-600',
@@ -214,7 +215,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Gak ada lagi drama salah jadwal dokter atau rekam medis keselip. Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik.',
+        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Termasuk integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',
@@ -224,7 +225,7 @@ function SegmenSection() {
       {
         icon: Pill,
         label: 'Portal Farmasi',
-        description: 'Pantau stok obat kedaluwarsa dan kelola resep digital tanpa pusing. Kasir langsung terhubung ke gudang secara real-time.',
+        description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
         cta: 'Lihat Demo',
         href: 'https://ja-pharmacy-platform.vercel.app/demo',
         color: 'text-indigo-600',
@@ -345,7 +346,7 @@ function TrustSection() {
     const STEPS = [
         { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
         { t: 'Isi Data Bisnis Anda — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', i: Rocket },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, Anda bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
     ]
 
     const BADGES = [
@@ -400,19 +401,39 @@ function TestimonialSection() {
     <section className="bg-white py-24 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto text-center">
         <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Kata Mereka</p>
-        <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy mb-12">
-          Cerita Pemilik Bisnis
+        <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy mb-3">
+          Yang Klien Kami Bilang
         </h2>
-        
-        {/* Placeholder Box */}
-        <div className="max-w-3xl mx-auto bg-[#F5F5F7] rounded-[32px] p-10 border border-dashed border-black/10 flex flex-col items-center justify-center min-h-[250px]">
-          <MessageCircle size={32} className="text-gray-300 mb-4" />
-          <p className="text-gray-500 font-medium text-lg mb-2">Belum ada testimoni berbayar di sini.</p>
-          <p className="text-gray-400 text-sm max-w-md mx-auto leading-relaxed">
-            Kami sedang mengumpulkan cerita asli dari klien-klien kami yang sistemnya sudah live dan berjalan. 
-            Jadilah salah satu cerita sukses berikutnya.
+        <p className="text-gray-500 mb-12">Tanpa script, tanpa editan — apa adanya.</p>
+
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 max-w-lg mx-auto">
+          <p className="text-gray-700 italic text-base leading-relaxed">
+            {/* TODO: Ganti dengan kutipan testimoni asli dari klien */}
+            &ldquo;Websitenya jadi dalam 4 hari, saya kira bakal lama karena
+            saya sama sekali tidak ngerti teknologi.&rdquo;
           </p>
+          <div className="mt-4">
+            <p className="font-semibold text-gray-900">
+              {/* TODO: Nama Klien */}
+              [Nama Klien]
+            </p>
+            <p className="text-sm text-gray-500">
+              {/* TODO: Jenis bisnis & kota */}
+              [Jenis Bisnis] · 📍 [Kota]
+            </p>
+          </div>
         </div>
+
+        <p className="text-center mt-6">
+          <a
+            href="https://www.japanarena.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-blue-500 underline"
+          >
+            Ingin lihat sistem kami langsung? Kunjungi japanarena.id →
+          </a>
+        </p>
       </div>
     </section>
   )
@@ -521,7 +542,7 @@ export default function LandingPage() {
         <SegmenSection />
         <TrustSection />
         {/* <ProofSection /> */}
-        {/* <PortfolioGallery /> */}
+        <PortfolioGallery />
         <TestimonialSection />
         <FaqSection />
 
@@ -607,10 +628,18 @@ export default function LandingPage() {
                   <div className="col-span-1 md:col-span-2 space-y-5">
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
                       <ul className="space-y-3 text-sm text-gray-500">
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Tentang Kami</span></li>
+                          <li><Link href="/tentang-kami" className="hover:text-[#0071E3] transition-colors">Tentang Kami</Link></li>
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Karir</span></li>
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Blog Edukasi</span></li>
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
+                          <li>
+                            <a
+                              href="https://ja-websitebuilder-platform-nfoa.vercel.app/track"
+                              className="hover:text-[#0071E3] transition-colors"
+                            >
+                              Lacak Pesanan
+                            </a>
+                          </li>
                       </ul>
                   </div>
 
@@ -628,6 +657,10 @@ export default function LandingPage() {
                           <li className="flex gap-3">
                               <Phone size={18} className="text-[#0071E3] shrink-0" />
                               <span>+62 812-9691-7963</span>
+                          </li>
+                          <li className="flex gap-3">
+                              <MessageCircle size={18} className="text-[#0071E3] shrink-0" />
+                              <span>Support WA: Senin–Sabtu, 08.00–17.00 WIB</span>
                           </li>
                       </ul>
                   </div>

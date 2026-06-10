@@ -30,7 +30,8 @@ import {
   ExternalLink,
   Sparkles,
   Loader2,
-  Wrench
+  Wrench,
+  Camera
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -91,6 +92,8 @@ const TEMPLATE_OPTIONS = [
   { name: 'Blog / Media', icon: Newspaper, subtitle: 'Berita, review, komunitas, blog' },
   { name: 'Travel & Rental', icon: Plane, subtitle: 'Rental mobil, motor, alat, wisata' },
   { name: 'Custom Jastip', icon: Car, subtitle: 'Layanan titip beli, pengiriman khusus' },
+  { name: 'Kuliner & Makanan', icon: Utensils, subtitle: 'Katering, kue rumahan, UMKM kuliner, warung, cloud kitchen' },
+  { name: 'Studio & Kreatif', icon: Camera, subtitle: 'Fotografer, videografer, studio foto, galeri seni, desainer' },
   { name: 'Bisnis Jasa & Lainnya', icon: Wrench, subtitle: 'Bengkel, salon, laundry, gym, kontraktor, dan jasa lainnya' },
 ]
 
@@ -181,6 +184,22 @@ const TEMPLATE_PREVIEWS: Record<string, {
     mockupGradient: 'from-rose-800 to-pink-900',
     sections: ['Hero', 'Katalog Titipan', 'Form Request', 'Status Order', 'Pembayaran'],
     emoji: '📦',
+  },
+  'Kuliner & Makanan': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/kuliner',
+    tagline: 'Website kuliner yang bikin pelanggan langsung lapar & order',
+    mockUrl: 'nama-kuliner.japanarena.com',
+    mockupGradient: 'from-orange-700 to-yellow-900',
+    sections: ['Hero + Menu Andalan', 'Katalog Produk', 'Form Order WA', 'Lokasi & Maps', 'Promo'],
+    emoji: '🍽️',
+  },
+  'Studio & Kreatif': {
+    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/studio',
+    tagline: 'Portofolio & booking studio yang menonjolkan karya terbaik Anda',
+    mockUrl: 'studio.japanarena.com',
+    mockupGradient: 'from-purple-800 to-slate-900',
+    sections: ['Hero Portofolio', 'Galeri Karya', 'Layanan & Paket', 'Booking Sesi', 'Kontak'],
+    emoji: '📷',
   },
 }
 
@@ -395,6 +414,30 @@ Terima kasih.`
                 {/* STEP 1: FONDASI & BUNDLING */}
                 {currentStep === 1 && (
                     <div className="space-y-8 animate-fade-in">
+                        {selectedTemplate === 'Toko Online' && (
+                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-gray-700">
+                                <p className="font-semibold text-blue-800 mb-2">
+                                    ✅ Termasuk dalam paket Toko Online:
+                                </p>
+                                <ul className="space-y-1 list-none">
+                                    <li>• Halaman produk dengan foto &amp; deskripsi</li>
+                                    <li>• Tombol pesan via WhatsApp</li>
+                                    <li>• QRIS / transfer untuk pembayaran</li>
+                                    <li>• Kelola stok produk (paket standar)</li>
+                                </ul>
+                                <p className="mt-3">
+                                    💬 Butuh keranjang belanja &amp; checkout otomatis?{" "}
+                                    <a
+                                        href="https://wa.me/6281296917963?text=Saya%20tertarik%20Toko%20Online%20dengan%20fitur%20checkout%20otomatis"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-blue-600 underline font-medium"
+                                    >
+                                        Tanyakan ke tim kami →
+                                    </a>
+                                </p>
+                            </div>
+                        )}
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
@@ -445,7 +488,7 @@ Terima kasih.`
                             <div className="relative z-10">
                                 <div className="flex items-center gap-3 mb-2">
                                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">First Look</p>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Pratinjau Template</p>
                                 </div>
                                 <h3 className="text-2xl font-black mb-1 sf-display-heavy">Preview Template</h3>
                                 <p className="text-sm text-gray-400 font-medium mb-6">
@@ -911,6 +954,16 @@ Terima kasih.`
                     <p className="text-2xl font-black tracking-tight">
                       Rp {animatedSetupTotal.toLocaleString('id-ID')}
                     </p>
+                    <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                      Dengan semua fitur tambahan: maks. sekitar{" "}
+                      <span className="font-medium">Rp 4.250.000</span>
+                      <span
+                        title="Estimasi jika semua fitur opsional dipilih. Anda bebas pilih hanya yang dibutuhkan."
+                        className="cursor-help text-gray-300 border border-gray-300 rounded-full w-4 h-4 flex items-center justify-center text-xs leading-none"
+                      >
+                        ?
+                      </span>
+                    </p>
                   </div>
 
                   {setupTotal >= 4_000_000 && (
@@ -946,6 +999,15 @@ Terima kasih.`
                     </a>
                   </p>
                 </div>
+                <div className="mt-2 flex items-start gap-2">
+                  <Globe size={13} className="text-[#0071E3] shrink-0 mt-0.5" />
+                  <p className="text-[10px] text-gray-500 leading-relaxed">
+                    Domain sendiri atau subdomain gratis{' '}
+                    <span className="font-mono text-gray-400">nama.japanarena.com</span>
+                    {' '}—{' '}
+                    <a href="#faq-domain" className="text-[#0071E3] font-bold hover:underline">baca FAQ</a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -953,8 +1015,29 @@ Terima kasih.`
         </div>
       </main>
 
+      {/* Post-Order Steps */}
+      <section className="bg-white py-16 mt-20 border-t border-black/5">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Setelah Anda Order</p>
+          <h2 className="text-2xl font-black text-gray-900 mb-10 tracking-tight">3 Langkah Sederhana — Website Anda Live</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {[
+              { step: '1', icon: '💳', title: 'Bayar DP Online', desc: 'Pilih paket, bayar DP 50% lewat QRIS atau transfer. Konfirmasi masuk otomatis via WA.' },
+              { step: '2', icon: '🔨', title: 'Tim Bangun (3–5 Hari)', desc: 'Tim kami bangun website sesuai industri Anda. Anda bisa pantau progres via Order ID.' },
+              { step: '3', icon: '✏️', title: 'Anda Edit Sendiri & Launch', desc: 'Website live di domain Anda. Edit konten kapan saja dari dashboard — tanpa perlu hubungi kami.' },
+            ].map(s => (
+              <div key={s.step} className="flex flex-col items-center p-6 bg-[#F5F5F7] rounded-[24px]">
+                <span className="text-3xl mb-3">{s.icon}</span>
+                <p className="font-black text-gray-900 mb-2">{s.title}</p>
+                <p className="text-sm text-gray-500 leading-relaxed">{s.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Footer / FAQ Shortcut */}
-      <section className="bg-white py-20 mt-20 border-t border-black/5">
+      <section className="bg-white py-20 border-t border-black/5">
           <div className="max-w-4xl mx-auto px-4 text-center">
               <h2 className="text-3xl font-black text-gray-900 mb-4 tracking-tight">Website saja tidak cukup?</h2>
               <p className="text-gray-500 mb-8 font-medium">Butuh booking system, kasir digital, atau LMS karyawan? Kami punya platformnya — siap pakai, bukan custom dari nol.</p>

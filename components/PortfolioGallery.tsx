@@ -42,8 +42,11 @@ function PortfolioCard({ site }: { site: Site }) {
       href={liveUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
     >
+      <span className="absolute top-2 right-2 z-10 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+        🟢 Live Sekarang
+      </span>
       {/* Browser chrome */}
       <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
         <div className="flex gap-1.5">
@@ -87,15 +90,10 @@ function PortfolioCard({ site }: { site: Site }) {
       </div>
 
       {/* Footer info */}
-      <div className="flex items-center justify-between px-5 py-4">
-        <div className="min-w-0">
-          <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
-          <p className="text-[11px] text-gray-500 font-medium mt-0.5">{meta.label}</p>
-        </div>
-        <span className="flex items-center gap-1.5 text-[10px] font-black text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0">
-          <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-          Live
-        </span>
+      <div className="px-5 py-4">
+        <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
+        <span className="text-xs text-gray-400">{meta.label}</span>
+        <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">{site.slug}.japanarena.com</p>
       </div>
     </a>
   )
@@ -157,7 +155,56 @@ export default function PortfolioGallery() {
           {displaySites.map((site) => (
             <PortfolioCard key={site.slug} site={site} />
           ))}
+
+          {/* Japan Arena Academy — always shown */}
+          <a
+            href="https://www.japanarena.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+          >
+            <span className="absolute top-2 right-2 z-10 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
+              🟢 Live Sekarang
+            </span>
+            {/* Browser chrome */}
+            <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+              </div>
+              <div className="flex-1 mx-1">
+                <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-400 font-mono text-center truncate">
+                  www.japanarena.id
+                </div>
+              </div>
+              <ExternalLink size={12} className="text-gray-300 group-hover:text-[#0071E3] transition-colors shrink-0" />
+            </div>
+            {/* Preview */}
+            <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center">
+              <div className="text-center px-6">
+                <p className="text-4xl mb-3">🎓</p>
+                <p className="text-white font-black text-lg">Japan Arena Academy</p>
+                <p className="text-blue-200 text-sm mt-1">Sistem Pelatihan Bahasa Jepang</p>
+              </div>
+              <div className="absolute inset-0 bg-[#0071E3]/0 group-hover:bg-[#0071E3]/15 transition-all duration-300 flex items-center justify-center">
+                <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                  <ExternalLink size={13} /> Buka Website Live
+                </span>
+              </div>
+            </div>
+            {/* Footer info */}
+            <div className="px-5 py-4">
+              <h3 className="text-sm font-bold text-gray-900 truncate">Japan Arena Academy</h3>
+              <span className="text-xs text-gray-400">Website Sekolah / LMS</span>
+              <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">www.japanarena.id</p>
+            </div>
+          </a>
         </div>
+
+        <p className="text-sm text-gray-500 text-center mt-6 italic">
+          Semua website di atas bisa Anda buka sekarang di browser — bukan mockup, bukan demo internal.
+        </p>
 
         {/* CTA */}
         <div className="text-center mt-14 space-y-3">

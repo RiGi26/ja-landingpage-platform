@@ -34,7 +34,7 @@ export default function ComparisonInfographic() {
               <div key={item.portal} className="space-y-2 group">
                 <div className="flex justify-between items-end text-sm">
                   <span className="font-bold text-gray-900">{item.portal}</span>
-                  <span className="text-green-600 font-black px-2 py-0.5 bg-green-50 rounded text-[10px]">SAVE {item.save}</span>
+                  <span className="text-green-600 font-black px-2 py-0.5 bg-green-50 rounded text-[10px]">HEMAT {item.save}</span>
                 </div>
                 <div className="relative h-12 w-full bg-gray-50 rounded-xl border border-gray-100 overflow-hidden">
                   {/* Bar Vendor Lain */}
@@ -97,7 +97,7 @@ export default function ComparisonInfographic() {
               <div className="space-y-8">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-xs font-bold text-gray-900">Uptime & Reliability</span>
+                    <span className="text-xs font-bold text-gray-900">Ketersediaan & Keandalan Sistem</span>
                     <span className="text-xs font-black text-blue-600 italic tracking-tighter">Infrastruktur Andal</span>
                   </div>
                   <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">

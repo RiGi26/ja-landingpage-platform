@@ -75,12 +75,6 @@ export default function LmsNavbar() {
               </Link>
             ))}
 
-            <a
-              href={`${WEBSITEBUILDER_URL}/track`}
-              className="text-sm font-semibold text-gray-500 hover:text-blue-600 transition-colors"
-            >
-              Track Pesanan
-            </a>
           </nav>
 
           {/* Right actions */}
@@ -94,13 +88,22 @@ export default function LmsNavbar() {
               <MessageCircle size={15} />
               Konsultasi Gratis
             </a>
-            <button
-              onClick={() => setIsPickerOpen(true)}
-              className="hidden sm:flex items-center gap-2 text-gray-400 hover:text-gray-900 text-sm font-semibold transition-colors"
-            >
-              <LogIn size={16} />
-              Masuk
-            </button>
+            <div className="hidden sm:flex flex-col items-center">
+              <button
+                onClick={() => setIsPickerOpen(true)}
+                title="Sudah punya akun? Login di sini"
+                className="flex items-center gap-2 text-sm text-gray-600 border border-gray-300 rounded-lg px-3 py-1.5 hover:bg-gray-50 transition-colors"
+              >
+                <LogIn size={15} />
+                Masuk Pelanggan
+              </button>
+              <a
+                href={`${WEBSITEBUILDER_URL}/track`}
+                className="text-xs text-gray-400 hover:text-gray-600 text-center block mt-1"
+              >
+                Lacak pesanan →
+              </a>
+            </div>
 
             <button
               onClick={() => setOpen(o => !o)}
@@ -129,14 +132,6 @@ export default function LmsNavbar() {
                 {l.label}
               </Link>
             ))}
-
-            <a
-              href={`${WEBSITEBUILDER_URL}/track`}
-              onClick={() => setOpen(false)}
-              className="block text-lg font-bold text-gray-900 py-1"
-            >
-              Track Pesanan
-            </a>
 
             <div className="pt-4 border-t border-black/5">
               <button

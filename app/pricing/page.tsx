@@ -10,8 +10,8 @@ import ComparisonInfographic from '@/components/ComparisonInfographic'
 const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
   {
     id: 'lms',
-    name: 'Portal LMS',
-    subtitle: 'Sistem pelatihan online',
+    name: 'Portal Belajar / LMS',
+    subtitle: 'Sistem belajar & kursus online',
     icon: GraduationCap,
     demoUrl: 'https://ja-lms-platform.vercel.app/demo',
     registerUrl: 'https://ja-lms-platform.vercel.app/register',
@@ -30,7 +30,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     registerUrl: 'https://ja-clinic-platform.vercel.app/register',
     plans: [
       { tier: 'Starter', price: 0, feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
-      { tier: 'Pro', price: 599000, feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
+      { tier: 'Pro', price: 599000, feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
       { tier: 'Business', price: 1499000, feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ]
   },
@@ -40,7 +40,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     subtitle: 'Manajemen apotek digital',
     icon: Pill,
     demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
-    registerUrl: 'https://ja-pharmacy-platform.vercel.app/register',
+    registerUrl: 'https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
     plans: [
       { tier: 'Starter', price: 0, feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
       { tier: 'Pro', price: 449000, feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
@@ -203,6 +203,32 @@ export default function PricingPage() {
           ))}
         </div>
 
+        {/* Contextual notes per platform */}
+        <div className="mb-12 space-y-2 text-center">
+          {activeTab === 'lms' && (
+            <p className="text-sm text-gray-500">
+              📁 <span className="font-semibold text-gray-700">Format konten yang didukung:</span> Video, PDF, Quiz, Tugas, Live Zoom — semua bisa diupload dari dashboard.
+            </p>
+          )}
+          {activeTab === 'clinic' && (
+            <p className="text-xs text-gray-400">
+              ¹ SATUSEHAT = sistem rekam medis resmi Kementerian Kesehatan RI, wajib bagi klinik yang terdaftar di Kemkes.
+            </p>
+          )}
+          <p className="text-sm text-gray-500">
+            💡 <span className="font-medium text-gray-700">Harga berlaku untuk 1 akun bisnis.</span>{' '}
+            Punya lebih dari 1 cabang?{' '}
+            <a
+              href="https://wa.me/6281296917963?text=Saya%20ingin%20tanya%20soal%20paket%20multi-cabang%20Japan%20Arena"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0071E3] font-bold hover:underline"
+            >
+              Tanyakan paket bundle →
+            </a>
+          </p>
+        </div>
+
         {/* Comparison Section */}
         <ComparisonInfographic />
 
@@ -226,7 +252,7 @@ export default function PricingPage() {
               },
               {
                 q: 'Bagaimana cara pembayaran langganan?',
-                a: 'Transfer bank, QRIS, atau kartu kredit via Midtrans. Konfirmasi pembayaran otomatis masuk via WA.',
+                a: 'Transfer bank, QRIS, kartu kredit, atau minimarket (Alfamart/Indomaret) via Midtrans. Konfirmasi pembayaran otomatis masuk via WA.',
               },
               {
                 q: 'Apakah data saya aman kalau berhenti berlangganan?',
@@ -268,7 +294,7 @@ export default function PricingPage() {
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-xl text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-blue-600/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-blue-500/30">
-                < Zap size={12} fill="currentColor" /> Ecosystem Advantage
+                < Zap size={12} fill="currentColor" /> Keuntungan Ekosistem Terintegrasi
               </div>
               <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight sf-display-heavy">
                 Gunakan Seluruh Ekosistem, Hemat Hingga <span className="text-blue-500">40%</span>
@@ -300,7 +326,15 @@ export default function PricingPage() {
                 >
                   Chat Tim Kami <MessageCircle size={20} />
                 </a>
-                <p className="text-[10px] text-gray-500 mt-4 uppercase tracking-tighter font-bold">*Syarat berlaku — minimal 3 portal aktif</p>
+                <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                  *Paket Business Bundle berlaku untuk langganan minimal 3 portal
+                  sekaligus (contoh: LMS + Klinik + Farmasi). Harga satuan normal:
+                  Rp 499.000–749.000/bln × 3 portal = Rp 1.497.000–2.247.000/bln.
+                  Dengan bundle: mulai Rp 1.499.000/bln —{" "}
+                  <span className="font-medium text-green-600">
+                    hemat hingga Rp 748.000/bln
+                  </span>.
+                </p>
             </div>
           </div>
         </div>

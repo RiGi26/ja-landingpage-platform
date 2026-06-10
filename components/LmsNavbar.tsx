@@ -14,8 +14,8 @@ const waLink = (msg?: string) => {
 }
 
 const NAV_LINKS = [
-  { label: 'Rakit Website', href: '/seluruh-layanan' },
-  { label: 'Layanan Kami',   href: '/pricing' },
+  { label: 'Buat Website', href: '/seluruh-layanan' },
+  { label: 'Sistem Bisnis', href: '/pricing' },
 ]
 
 export default function LmsNavbar() {

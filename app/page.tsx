@@ -54,6 +54,12 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
               <span className="text-[#0071E3]">di Bisnis Kamu Sendiri.</span>
             </h1>
 
+            <p className="text-lg md:text-xl font-medium text-blue-600 mt-2 mb-4">
+              Belum punya website? Tampil di Google mulai{" "}
+              <span className="font-bold">Rp 600.000</span>{" "}
+              — siap dalam 3–5 hari kerja.
+            </p>
+
             <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
               Buat pemilik bisnis yang udah capek ngurusin semua operasional sendirian. Tiap hari HP penuh chat nanya ketersediaan, catat booking manual, sampai rekap uang malam-malam. Kami buatin sistem otomatis supaya bisnis tetap jalan walau kamu lagi tidur.
             </p>
@@ -338,7 +344,7 @@ function GlobalFeatures() {
 function TrustSection() {
     const STEPS = [
         { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
-        { t: 'Isi Briefing, Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form briefing. Tersimpan otomatis, boleh dicicil. Belum siap? Tim kami siapkan draf awalnya.', i: Zap },
+        { t: 'Isi Data Bisnis Anda — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
         { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', i: Rocket },
     ]
 
@@ -366,6 +372,7 @@ function TrustSection() {
                             </div>
                             <h3 className="text-xl font-bold text-gray-900 mb-3">{s.t}</h3>
                             <p className="text-sm text-gray-500 leading-relaxed">{s.d}</p>
+                            {'extra' in s && <p className="text-sm text-gray-500 mt-1">{(s as { extra: string }).extra}</p>}
                         </div>
                     ))}
                 </div>
@@ -415,7 +422,7 @@ function FaqSection() {
   const FAQS = [
     {
       q: 'Berapa lama website saya selesai?',
-      a: '3–5 hari kerja setelah brief dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
+      a: '3–5 hari kerja setelah data bisnis dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',

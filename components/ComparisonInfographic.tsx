@@ -1,6 +1,6 @@
 'use client'
 
-import { TrendingDown, Zap, ShieldCheck, Info, XCircle, CheckCircle2 } from 'lucide-react'
+import { TrendingDown, Zap, ShieldCheck, XCircle, CheckCircle2 } from 'lucide-react'
 
 const COMPARISON_DATA = [
   { portal: 'LMS (Bisnis)', others: 1950000, ja: 499000, save: '74%' },
@@ -49,15 +49,19 @@ export default function ComparisonInfographic() {
               </div>
             ))}
 
-            <div className="pt-8 flex items-start gap-4 p-6 bg-blue-50 rounded-[32px] border border-blue-100">
-               <Info className="text-blue-600 shrink-0 mt-1" size={20} />
-               <p className="text-sm text-blue-800 leading-relaxed font-medium">
-                 <strong>Metodologi:</strong> Perbandingan berdasarkan rata-rata harga paket mid-range dengan fitur
-                 setara — multi-user, notifikasi WhatsApp, dan integrasi sistem — dari 8 vendor SaaS aktif di Indonesia
-                 (Update Mei 2026). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong>
-                 untuk menekan biaya operasional klien.
-               </p>
-            </div>
+            <p className="text-xs text-gray-500 mt-3 leading-relaxed">
+              Perbandingan berdasarkan rata-rata harga paket mid-range
+              (multi-user, notif WhatsApp, integrasi sistem) dari vendor
+              SaaS sejenis aktif di Indonesia, update Mei 2026.{" "}
+              <a
+                href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20melihat%20perbandingan%20harga%20lengkap."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 underline"
+              >
+                Minta daftar perbandingan lengkap →
+              </a>
+            </p>
           </div>
 
           {/* SISI KANAN: Fitur & Performa */}

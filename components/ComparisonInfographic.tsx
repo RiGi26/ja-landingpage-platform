@@ -55,7 +55,7 @@ export default function ComparisonInfographic() {
                  <strong>Metodologi:</strong> Perbandingan berdasarkan rata-rata harga paket mid-range dengan fitur
                  setara — multi-user, notifikasi WhatsApp, dan integrasi sistem — dari 8 vendor SaaS aktif di Indonesia
                  (Update Mei 2026). JapanArena menggunakan arsitektur <strong>Serverless Shared-Infrastructure</strong>
-                 berbasis Next.js 16 + Supabase untuk menekan biaya operasional klien.
+                 untuk menekan biaya operasional klien.
                </p>
             </div>
           </div>
@@ -94,7 +94,7 @@ export default function ComparisonInfographic() {
                 <div>
                   <div className="flex justify-between mb-2">
                     <span className="text-xs font-bold text-gray-900">Uptime & Reliability</span>
-                    <span className="text-xs font-black text-blue-600 italic tracking-tighter">Enterprise Grade</span>
+                    <span className="text-xs font-black text-blue-600 italic tracking-tighter">Infrastruktur Andal</span>
                   </div>
                   <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                     <div className="h-full bg-blue-600 rounded-full" style={{ width: '99.9%' }} />
@@ -105,12 +105,12 @@ export default function ComparisonInfographic() {
                   <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100">
                     <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Tech Stack Kita</p>
                     <p className="text-sm font-black text-gray-900">Next.js 14+ + React</p>
-                    <p className="text-[9px] text-blue-600 font-bold mt-1 tracking-widest">&lt; 1s load time</p>
+                    <p className="text-[9px] text-blue-600 font-bold mt-1 tracking-widest">Dioptimasi untuk kecepatan loading</p>
                   </div>
                   <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 opacity-60">
                     <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Tech Stack Mereka</p>
-                    <p className="text-sm font-bold text-gray-500">Legacy PHP / WP</p>
-                    <p className="text-[9px] text-red-400 font-bold mt-1 tracking-widest">Teknologi lama</p>
+                    <p className="text-sm font-bold text-gray-500">Teknologi konvensional</p>
+                    <p className="text-[9px] text-red-400 font-bold mt-1 tracking-widest">Teknologi konvensional</p>
                   </div>
                 </div>
               </div>

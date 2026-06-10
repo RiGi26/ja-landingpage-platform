@@ -7,10 +7,11 @@ import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
-const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
+const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
   {
     id: 'lms',
     name: 'Portal LMS',
+    subtitle: 'Sistem pelatihan online',
     icon: GraduationCap,
     demoUrl: 'https://ja-lms-platform.vercel.app/demo',
     registerUrl: 'https://ja-lms-platform.vercel.app/register',
@@ -23,6 +24,7 @@ const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; 
   {
     id: 'clinic',
     name: 'Portal Klinik',
+    subtitle: 'Manajemen pasien digital',
     icon: Cross,
     demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
     registerUrl: 'https://ja-clinic-platform.vercel.app/register',
@@ -35,6 +37,7 @@ const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; 
   {
     id: 'pharmacy',
     name: 'Portal Farmasi',
+    subtitle: 'Manajemen apotek digital',
     icon: Pill,
     demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
     registerUrl: 'https://ja-pharmacy-platform.vercel.app/register',
@@ -47,6 +50,7 @@ const PLATFORMS: { id: string; name: string; icon: LucideIcon; demoUrl: string; 
   {
     id: 'travel',
     name: 'Portal Travel & Rental',
+    subtitle: 'Booking & kelola aset online',
     icon: Bus,
     demoUrl: 'https://ja-rental-platform.vercel.app/demo',
     registerUrl: 'https://ja-rental-platform.vercel.app/register',
@@ -105,13 +109,16 @@ export default function PricingPage() {
               aria-selected={activeTab === p.id}
               aria-controls={`tabpanel-${p.id}`}
               onClick={() => setActiveTab(p.id)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition-all ${
+              className={`flex flex-col items-start px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
                 activeTab === p.id
                 ? 'bg-blue-600 text-white shadow-lg scale-105'
                 : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-100'
               }`}
             >
-              <p.icon size={16} /> {p.name}
+              <div className="flex items-center gap-2">
+                <p.icon size={16} /> {p.name}
+              </div>
+              <span className="text-xs text-gray-500 mt-0.5">{p.subtitle}</span>
             </button>
           ))}
         </div>

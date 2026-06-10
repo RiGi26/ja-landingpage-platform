@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { 
-  Check, 
-  ArrowRight, 
-  MessageCircle, 
-  Globe, 
-  Zap, 
-  Shield, 
+import {
+  Check,
+  ArrowRight,
+  MessageCircle,
+  Globe,
+  Zap,
+  Shield,
   AlertCircle,
   Layout,
   Smartphone,
@@ -29,7 +29,8 @@ import {
   ChevronLeft,
   ExternalLink,
   Sparkles,
-  Loader2
+  Loader2,
+  Wrench
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -80,16 +81,17 @@ function useAnimatedNumber(value: number, duration = 800) {
 
 // --- TEMPLATES WITH ICONS ---
 const TEMPLATE_OPTIONS = [
-  { name: 'Website Perusahaan', icon: Briefcase },
-  { name: 'Toko Online', icon: ShoppingCart },
-  { name: 'Website Klinik & Spa', icon: Stethoscope },
-  { name: 'Website Sekolah / LPK', icon: GraduationCap },
-  { name: 'Website Institusi', icon: Building },
-  { name: 'Website Restaurant', icon: Utensils },
-  { name: 'Personal Branding', icon: User },
-  { name: 'Blog / Media', icon: Newspaper },
-  { name: 'Travel & Rental', icon: Plane },
-  { name: 'Custom Jastip', icon: Car },
+  { name: 'Website Perusahaan', icon: Briefcase, subtitle: 'CV, PT, firma, yayasan' },
+  { name: 'Toko Online', icon: ShoppingCart, subtitle: 'Produk fisik, olshop, marketplace pribadi' },
+  { name: 'Website Klinik & Spa', icon: Stethoscope, subtitle: 'Klinik, pijat, perawatan, kecantikan' },
+  { name: 'Website Sekolah / LPK', icon: GraduationCap, subtitle: 'Kursus, bimbel, pelatihan, les privat' },
+  { name: 'Website Institusi', icon: Building, subtitle: 'Organisasi, komunitas, lembaga' },
+  { name: 'Website Restaurant', icon: Utensils, subtitle: 'Resto, kafe, warung makan, catering' },
+  { name: 'Personal Branding', icon: User, subtitle: 'Freelancer, konsultan, fotografer' },
+  { name: 'Blog / Media', icon: Newspaper, subtitle: 'Berita, review, komunitas, blog' },
+  { name: 'Travel & Rental', icon: Plane, subtitle: 'Rental mobil, motor, alat, wisata' },
+  { name: 'Custom Jastip', icon: Car, subtitle: 'Layanan titip beli, pengiriman khusus' },
+  { name: 'Bisnis Jasa & Lainnya', icon: Wrench, subtitle: 'Bengkel, salon, laundry, gym, kontraktor, dan jasa lainnya' },
 ]
 
 const TEMPLATE_PREVIEWS: Record<string, {
@@ -344,7 +346,7 @@ Terima kasih.`
             <span className="text-[#0071E3]">Transparan Mulai Rp 600.000.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
-            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah briefing diterima.
+            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah data bisnis Anda kami terima.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
         </div>
@@ -427,6 +429,9 @@ Terima kasih.`
                                             </div>
                                             <span className={`text-sm font-bold leading-tight ${isSelected ? 'text-blue-900' : 'text-gray-700'}`}>
                                                 {tpl.name}
+                                            </span>
+                                            <span className="text-xs text-gray-400 mt-0.5 leading-tight">
+                                                {tpl.subtitle}
                                             </span>
                                         </button>
                                     )

@@ -144,8 +144,8 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       },
       {
         id: 'wa-auto',
-        name: 'WhatsApp Automation',
-        description: 'Pesan WA otomatis terkirim ke customer saat ada order baru, konfirmasi pembayaran, atau pengingat jadwal — tanpa ketik manual satu per satu.',
+        name: 'WhatsApp Order Integration',
+        description: 'Order dan pertanyaan masuk langsung ke WhatsApp Anda: semua tombol pesan di website tersambung ke nomor Anda dengan format pesan terisi otomatis (produk, jumlah, halaman asal) — pembeli tinggal kirim, Anda tinggal balas.',
         price: 300000,
         category: 'general',
         availability: 'live',
@@ -171,7 +171,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'seo',
         name: 'SEO Technical Setup',
-        description: 'Optimasi teknis agar website mudah ditemukan di Google: meta title, sitemap, kecepatan halaman, dan schema data. Meningkatkan peluang muncul di hasil pencarian.',
+        description: 'Optimasi teknis agar website mudah ditemukan di Google: meta title & description tiap halaman, struktur heading yang benar, dan kecepatan halaman. Meningkatkan peluang muncul di hasil pencarian.',
         price: 150000,
         category: 'general',
         availability: 'live',
@@ -377,7 +377,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'checkout',
         name: 'Checkout System',
-        description: 'Halaman checkout lengkap di website Anda sendiri: isi alamat, pilih ekspedisi, hitung ongkir otomatis, dan konfirmasi order sebelum bayar.',
+        description: 'Halaman checkout lengkap di website Anda sendiri: pembeli mengisi alamat, melihat ringkasan pesanan, dan konfirmasi order sebelum bayar.',
         price: 200000,
         category: 'ecommerce',
         availability: 'live',
@@ -540,26 +540,15 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         portalLink: '/pricing',
       },
       {
+        // Gabungan kartu lama "Jadwal Dokter" + "Reservasi Online Klinik"
+        // (2026-06-12): keduanya = satu deliverable booking yang sama di
+        // sistem — dua kartu terpisah berisiko dobel bayar utk satu fitur.
         id: 'doc-sched',
-        name: 'Jadwal Dokter',
-        description: 'Ketersediaan dokter per hari dan jam praktek ditampilkan real-time — pasien bisa pilih dokter dan waktu yang pas sebelum datang ke klinik.',
-        price: 250000,
+        name: 'Jadwal Dokter & Reservasi Online',
+        description: 'Jadwal praktek dokter tampil di website dan pasien bisa booking slot konsultasi secara online — reservasi masuk langsung ke klinik tanpa perlu telepon.',
+        price: 300000,
         category: 'medical',
         availability: 'live',
-        isPortalFeature: true,
-        portalName: 'Portal Klinik',
-        portalLink: '/pricing',
-      },
-      {
-        id: 'clinic-res',
-        name: 'Reservasi Online Klinik',
-        description: 'Pasien booking slot konsultasi secara online; jadwal masuk ke sistem klinik otomatis dan konfirmasi langsung dikirim ke WA atau email pasien.',
-        price: 250000,
-        category: 'medical',
-        availability: 'live',
-        isPortalFeature: true,
-        portalName: 'Portal Klinik',
-        portalLink: '/pricing',
       },
     ]
   }
@@ -572,7 +561,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
 // "produk portal" supaya badge "Rekomendasi" tetap jujur (bisa dikirim).
 export const RECOMMENDED_ADDONS: Record<string, string[]> = {
   'Website Perusahaan':     ['admin-dash', 'seo', 'live-chat', 'wa-auto'],
-  'Website Klinik & Spa':   ['clinic-res', 'doc-sched', 'wa-auto', 'admin-dash', 'seo', 'live-chat'],
+  'Website Klinik & Spa':   ['doc-sched', 'wa-auto', 'admin-dash', 'seo', 'live-chat'],
   'Toko Online':            ['cart', 'checkout', 'midtrans', 'wa-auto'],
   'Website Sekolah / LPK':  ['wa-auto', 'admin-dash'],
   'Website Institusi':      ['admin-dash', 'seo', 'wa-auto', 'email-auto', 'g-sheets'],
@@ -588,7 +577,7 @@ export const BUNDLES: Bundle[] = [
     id: 'starter-bisnis',
     emoji: '🚀',
     name: 'Starter Bisnis',
-    desc: 'Paket populer untuk UMKM yang baru go-digital. Sudah termasuk WA otomatis dan invoice digital.',
+    desc: 'Paket populer untuk UMKM yang baru go-digital. Sudah termasuk tombol order WhatsApp dan invoice digital.',
     hostingId: 'basic',
     addonIds: ['admin-dash', 'wa-auto', 'invoice-auto'],
     normalPrice: 1350000,
@@ -608,7 +597,7 @@ export const BUNDLES: Bundle[] = [
     id: 'toko-online',
     emoji: '🛒',
     name: 'Toko Online Basic',
-    desc: 'Semua yang dibutuhkan untuk mulai berjualan online: keranjang belanja, checkout, pembayaran otomatis (Midtrans), dan notifikasi WhatsApp ke pembeli.',
+    desc: 'Semua yang dibutuhkan untuk mulai berjualan online: keranjang belanja, checkout, pembayaran otomatis (Midtrans), dan order masuk langsung ke WhatsApp Anda.',
     hostingId: 'starter',
     addonIds: ['cart', 'checkout', 'midtrans', 'wa-auto'],
     normalPrice: 2350000,

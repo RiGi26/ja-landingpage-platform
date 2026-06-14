@@ -10,7 +10,7 @@
 // FASE 3b+: kartu punya DUA aksi terpisah — "Lihat preview" (lightbox halaman
 // penuh, ThemePreviewModal) dan "Pilih gaya ini" (handoff tema ke order).
 // ============================================================
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   UtensilsCrossed,
   Shirt,
@@ -133,6 +133,8 @@ function ThemeCard({
         >
           <img
             src={t.thumbs!.desktop}
+            srcSet={`${t.thumbs!.mobile} 440w, ${t.thumbs!.tablet} 720w, ${t.thumbs!.desktop} 1000w`}
+            sizes="(min-width: 1024px) 240px, (min-width: 640px) calc((100vw - 96px) * 0.45), calc((100vw - 96px) * 0.72)"
             alt={`Contoh tampilan tema ${t.nama} untuk ${t.subKategoriNama}`}
             loading="lazy"
             className="w-full h-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
@@ -218,6 +220,73 @@ function ThemeCard({
   )
 }
 
+// ── Baris tema: carousel snap di mobile (+ dots), grid di sm+ ────────────────
+function GroupCarousel({
+  themes,
+  selectedThemeId,
+  onToggleSelect,
+  onView,
+}: {
+  themes: ThemePreviewEntry[]
+  selectedThemeId?: string
+  onToggleSelect: (t: ThemePreviewEntry) => void
+  onView: (t: ThemePreviewEntry) => void
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+
+  const itemStride = () => {
+    const el = scrollRef.current
+    const first = el?.firstElementChild as HTMLElement | null
+    return first ? first.offsetWidth + 12 /* gap-3 */ : el?.clientWidth || 1
+  }
+  const onScroll = () => {
+    const el = scrollRef.current
+    if (el) setActive(Math.round(el.scrollLeft / itemStride()))
+  }
+  const goTo = (i: number) => scrollRef.current?.scrollTo({ left: i * itemStride(), behavior: 'smooth' })
+
+  return (
+    <>
+      <div
+        ref={scrollRef}
+        onScroll={onScroll}
+        className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible"
+      >
+        {themes.map((t) => (
+          <ThemeCard
+            key={t.themeId}
+            theme={t}
+            selected={selectedThemeId === t.themeId}
+            onToggleSelect={() => onToggleSelect(t)}
+            onView={() => onView(t)}
+          />
+        ))}
+      </div>
+      {themes.length > 1 && (
+        <div className="flex justify-center gap-1 mt-2.5 sm:hidden" role="group" aria-label="Navigasi tema">
+          {themes.map((t, i) => (
+            <button
+              key={t.themeId}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={`Ke tema ${i + 1} dari ${themes.length}`}
+              aria-current={active === i}
+              className="grid place-items-center h-6 w-6 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3]"
+            >
+              <span
+                className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  active === i ? 'w-5 bg-white/80' : 'w-1.5 bg-white/25'
+                }`}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+    </>
+  )
+}
+
 // ── Galeri ────────────────────────────────────────────────────────────────
 export default function ThemeGallery({
   label,
@@ -249,19 +318,14 @@ export default function ThemeGallery({
                 </span>
               </div>
             )}
-            <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible">
-              {g.themes.map((t) => (
-                <ThemeCard
-                  key={t.themeId}
-                  theme={t}
-                  selected={selectedThemeId === t.themeId}
-                  onToggleSelect={() =>
-                    selectedThemeId === t.themeId ? onClear?.() : onSelect?.(t.subKategori, t.themeId)
-                  }
-                  onView={() => setViewing(t)}
-                />
-              ))}
-            </div>
+            <GroupCarousel
+              themes={g.themes}
+              selectedThemeId={selectedThemeId}
+              onToggleSelect={(t) =>
+                selectedThemeId === t.themeId ? onClear?.() : onSelect?.(t.subKategori, t.themeId)
+              }
+              onView={(t) => setViewing(t)}
+            />
           </div>
         )
       })}

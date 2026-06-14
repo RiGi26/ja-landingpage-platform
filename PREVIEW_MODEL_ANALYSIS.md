@@ -151,11 +151,12 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 
 ## 9. Rencana implementasi (default rekomendasi diadopsi)
 
-> Keputusan §7 diadopsi pakai **default rekomendasi** di bawah — **asumsi, owner bebas override.**
+> Keputusan §7 **DIKONFIRMASI owner via "lanjut sesuai rekomendasi" (2026-06-15)** — default rekomendasi dipakai.
+> Pengecualian sanity-check: **D1 (routing)** = keputusan produk nyata (subtitle 2 tile overlap) → diadopsi `toko_online/kuliner` tapi minta angguk eksplisit owner kalau intent beda.
 > Eksekusi WB ditunda sampai owner selesai sesi paralel di repo WB (hindari index.lock/drift).
 
-### 9.1 Keputusan yang diasumsikan
-| # | Keputusan | Default diadopsi | Catatan |
+### 9.1 Keputusan (DIKONFIRMASI via "lanjut sesuai rekomendasi", 2026-06-15)
+| # | Keputusan | Diadopsi | Catatan |
 |---|---|---|---|
 | D1 | Routing "Kuliner & Makanan" | → **toko_online/kuliner** (perbaiki bug) | 2 tile berbeda: "Website Restaurant"=resto/dine-in→restaurant-lux; "Kuliner & Makanan"=UMKM makanan/catering→toko-kuliner (Tungku/Pamor) |
 | D2 | Handoff tema ke order | **YA** (`?subkat=&theme=` + WB pre-fill) | Dikerjakan sbg PR terpisah (Fase 3); sebelum itu galeri = "pilihan gaya" yg tetap terkirim |

@@ -26,6 +26,8 @@ Mismatch-nya **timpang & terkonsentrasi**, bukan merata:
 
 ### Inventaris tema live (sumber: `taxonomy.ts` THEMES + `BESPOKE_VARIANTS` + `BESPOKE_RENDERERS` + `theme-samples/`)
 
+> **Update 2026-06-15:** sub-kat **rumah** kini LIVE — tema #7 **"rumah-selaras"** (Japandi greige, sesi paralel, PR #158 merged). Jadi toko_online punya **6 sub-kat ready** & total **7 tema live**. Tabel di bawah snapshot 6-tema; **registry auto-derive kondisi terkini**, jadi rumah-selaras (dan tema berikutnya) otomatis ikut begitu generator (Fase 1) dibangun — tak perlu edit manual doc/preview.
+
 | Industri (TipeIndustri) | Sub-kat | Tema (varian) | `themeKey` (renderer) | Screenshot? | Status registry |
 |---|---|---|---|---|---|
 | toko_online | kuliner | kuliner-tungku, kuliner-pamor | toko-kuliner | ✅ | `live` |

@@ -320,7 +320,7 @@ function GlobalFeatures() {
     const FEATURES = [
         { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
         { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
-        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Data setiap bisnis disimpan terpisah—nggak bakal bercampur, nggak bisa diintip, dan langsung dilindungi enkripsi kelas enterprise.', icon: Shield },
+        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Data setiap bisnis disimpan terpisah—nggak bakal bercampur, nggak bisa diintip, dan tiap data dienkripsi.', icon: Shield },
     ]
 
     return (

@@ -23,7 +23,7 @@ const COLUMNS: Column[] = [
     color: 'text-[#0071E3]',
     bg   : 'bg-blue-50',
     items: [
-      { label: 'All-in Rp 600rb — Domain + Hosting + SSL', desc: 'Selesai 3 hari, tanpa biaya tersembunyi', href: '/seluruh-layanan' },
+      { label: 'All-in Rp 600rb — Domain + Hosting + SSL', desc: 'Selesai 3–5 hari kerja, tanpa biaya tersembunyi', href: '/seluruh-layanan' },
       { label: 'Company Profile',    desc: 'Website perusahaan modern',         href: '/seluruh-layanan' },
       { label: 'Website Sekolah/LPK',desc: 'Portal resmi lembaga pendidikan',   href: '/seluruh-layanan' },
       { label: 'Website Toko Online',desc: 'Jual produk fisik & digital',        href: '/seluruh-layanan' },

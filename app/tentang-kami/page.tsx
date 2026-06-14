@@ -49,7 +49,7 @@ export default function TentangKamiPage() {
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { t: 'Jujur', d: 'Harga transparan sejak awal. Tidak ada biaya tersembunyi, tidak ada kontrak paksa.' },
-              { t: 'Bisa Dibuktikan', d: 'Semua klaim bisa dicek — demo nyata, portofolio nyata, uptime nyata.' },
+              { t: 'Bisa Dibuktikan', d: 'Semua klaim bisa dicek — demo nyata, portofolio live, harga transparan.' },
               { t: 'Untuk Indonesia', d: 'Bahasa Indonesia, metode bayar Indonesia, support WA dalam bahasa Indonesia.' },
             ].map(v => (
               <div key={v.t} className="bg-[#F5F5F7] rounded-[20px] p-5">
@@ -58,15 +58,6 @@ export default function TentangKamiPage() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Team placeholder */}
-        <div className="bg-white rounded-[32px] p-8 md:p-10 apple-shadow border border-dashed border-black/10 mb-8">
-          <h2 className="text-2xl font-black text-gray-900 mb-2">Tim Kami</h2>
-          <p className="text-gray-400 text-sm italic">
-            {/* TODO: Isi dengan profil tim — nama, foto, peran */}
-            Halaman ini sedang dilengkapi. Hubungi kami via WhatsApp untuk tahu lebih lanjut tentang tim di balik Japan Arena Corp.
-          </p>
         </div>
 
         {/* Contact */}

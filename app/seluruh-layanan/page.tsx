@@ -49,6 +49,7 @@ import {
   RECOMMENDED_ADDONS,
   isPricedAddon
 } from '@/constants/services'
+import ThemeGallery, { galleryForLabel } from './ThemeGallery'
 
 const WA_NUMBER = '6281296917963'
 
@@ -773,19 +774,28 @@ Terima kasih.`
                         <section className="bg-gradient-to-br from-gray-900 via-[#1A1A24] to-black rounded-[32px] p-8 text-white relative overflow-hidden apple-shadow">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-3xl -mr-20 -mt-20 pointer-events-none" />
                             <div className="relative z-10">
-                                <div className="flex items-center gap-3 mb-2">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Pratinjau Template</p>
-                                </div>
-                                <h3 className="text-2xl font-black mb-1 sf-display-heavy">Preview Template</h3>
-                                <p className="text-sm text-gray-400 font-medium mb-6">
-                                    Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> Anda.
-                                </p>
-
                                 {(() => {
+                                    const gallery = galleryForLabel(selectedTemplate)
                                     const preview = TEMPLATE_PREVIEWS[selectedTemplate]
-                                    if (!preview) return null
+                                    if (!gallery && !preview) return null
                                     return (
+                                      <>
+                                        <div className="flex items-center gap-3 mb-2">
+                                            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{gallery ? 'Tema Siap Pakai' : 'Pratinjau Template'}</p>
+                                        </div>
+                                        <h3 className="text-2xl font-black mb-1 sf-display-heavy">{gallery ? 'Pilihan Tema' : 'Preview Template'}</h3>
+                                        <p className="text-sm text-gray-400 font-medium mb-6">
+                                            {gallery ? (
+                                                <>Beberapa gaya tema premium siap pakai untuk <span className="text-white font-bold">{selectedTemplate}</span>. Gambar di bawah cuma contoh; konten diisi sesuai bisnis Anda setelah pesan.</>
+                                            ) : (
+                                                <>Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> Anda.</>
+                                            )}
+                                        </p>
+
+                                        {gallery ? (
+                                            <ThemeGallery label={selectedTemplate} groups={gallery.groups} />
+                                        ) : preview ? (
                                         <div>
                                             <a
                                                 href={preview.demoUrl}
@@ -864,6 +874,8 @@ Terima kasih.`
                                                 <ExternalLink size={10} /> Klik preview untuk melihat demo live di tab baru
                                             </p>
                                         </div>
+                                        ) : null}
+                                      </>
                                     )
                                 })()}
                             </div>

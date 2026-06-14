@@ -1,0 +1,227 @@
+{
+  "toko_online": {
+    "tipe": "toko_online",
+    "corpLabels": [
+      "Toko Online",
+      "Kuliner & Makanan"
+    ],
+    "hasReadyThemes": true,
+    "subKategori": [
+      {
+        "id": "kuliner",
+        "nama": "Kuliner / Makanan",
+        "icon": "UtensilsCrossed",
+        "themes": [
+          {
+            "themeId": "kuliner-tungku",
+            "themeKey": "toko-kuliner",
+            "subKategori": "kuliner",
+            "subKategoriNama": "Kuliner / Makanan",
+            "nama": "Tungku",
+            "deskripsi": "Hangat & rumahan, krem dan bara terracotta. Untuk warung, kue, frozen, masakan rumahan.",
+            "mood": "#A8381A",
+            "bg": "warm",
+            "icon": "Flame",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/kuliner/kuliner-tungku-mobile.webp",
+              "tablet": "/theme-previews/toko_online/kuliner/kuliner-tungku-tablet.webp",
+              "desktop": "/theme-previews/toko_online/kuliner/kuliner-tungku-desktop.webp"
+            }
+          },
+          {
+            "themeId": "kuliner-pamor",
+            "themeKey": "toko-kuliner",
+            "subKategori": "kuliner",
+            "subKategoriNama": "Kuliner / Makanan",
+            "nama": "Pamor",
+            "deskripsi": "Gelap heritage & emas, dramatis sinematik. Untuk kuliner premium, signature, oleh-oleh khas.",
+            "mood": "#C9A24A",
+            "bg": "dark",
+            "icon": "Crown",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/kuliner/kuliner-pamor-mobile.webp",
+              "tablet": "/theme-previews/toko_online/kuliner/kuliner-pamor-tablet.webp",
+              "desktop": "/theme-previews/toko_online/kuliner/kuliner-pamor-desktop.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "fashion",
+        "nama": "Fashion / Pakaian",
+        "icon": "Shirt",
+        "themes": [
+          {
+            "themeId": "atelier-noir",
+            "themeKey": "toko-atelier",
+            "subKategori": "fashion",
+            "subKategoriNama": "Fashion / Pakaian",
+            "nama": "Noir",
+            "deskripsi": "Gelap mewah seperti butik malam, sorot dramatis. Untuk label busana premium & koleksi eksklusif.",
+            "mood": "#1C1916",
+            "bg": "dark",
+            "icon": "Moon",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/fashion/atelier-noir-mobile.webp",
+              "tablet": "/theme-previews/toko_online/fashion/atelier-noir-tablet.webp",
+              "desktop": "/theme-previews/toko_online/fashion/atelier-noir-desktop.webp"
+            }
+          },
+          {
+            "themeId": "atelier-ivoire",
+            "themeKey": "toko-atelier",
+            "subKategori": "fashion",
+            "subKategoriNama": "Fashion / Pakaian",
+            "nama": "Ivoire",
+            "deskripsi": "Gading hangat & terang, elegan tenang. Untuk fashion minimalis, ready-to-wear, brand bersih.",
+            "mood": "#A9885E",
+            "bg": "light",
+            "icon": "Sun",
+            "status": "live-noshot",
+            "thumbs": null
+          }
+        ]
+      },
+      {
+        "id": "kerajinan",
+        "nama": "Kerajinan / Heritage",
+        "icon": "Palette",
+        "themes": [
+          {
+            "themeId": "kerajinan-tanah",
+            "themeKey": "toko-kerajinan",
+            "subKategori": "kerajinan",
+            "subKategoriNama": "Kerajinan / Heritage",
+            "nama": "Tanah Loka",
+            "deskripsi": "Heritage botanical — motif kawung, palet hutan dan perkamen. Untuk batik tulis, tenun, anyaman, ukiran.",
+            "mood": "#1E3A2F",
+            "bg": "dark",
+            "icon": "Palette",
+            "status": "live-noshot",
+            "thumbs": null
+          }
+        ]
+      },
+      {
+        "id": "kecantikan",
+        "nama": "Kecantikan / Skincare",
+        "icon": "Sparkles",
+        "themes": [
+          {
+            "themeId": "kecantikan-embun",
+            "themeKey": "toko-kecantikan",
+            "subKategori": "kecantikan",
+            "subKategoriNama": "Kecantikan / Skincare",
+            "nama": "Embun",
+            "deskripsi": "Terang berkilau seperti glass skin, mekar rose lembut. Untuk skincare, kosmetik, parfum, body care.",
+            "mood": "#B5566B",
+            "bg": "light",
+            "icon": "Sparkles",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/kecantikan/kecantikan-embun-mobile.webp",
+              "tablet": "/theme-previews/toko_online/kecantikan/kecantikan-embun-tablet.webp",
+              "desktop": "/theme-previews/toko_online/kecantikan/kecantikan-embun-desktop.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "gadget",
+        "nama": "Elektronik / Gadget",
+        "icon": "Smartphone",
+        "themes": [
+          {
+            "themeId": "gadget-onyx",
+            "themeKey": "toko-gadget",
+            "subKategori": "gadget",
+            "subKategoriNama": "Elektronik / Gadget",
+            "nama": "Onyx",
+            "deskripsi": "Gelap teknis dengan cyan elektrik, presisi & modern. Untuk aksesoris HP, audio, gadget, smart device.",
+            "mood": "#22D3EE",
+            "bg": "dark",
+            "icon": "Cpu",
+            "status": "live-noshot",
+            "thumbs": null
+          }
+        ]
+      },
+      {
+        "id": "rumah",
+        "nama": "Rumah & Dekor",
+        "icon": "Sofa",
+        "themes": [
+          {
+            "themeId": "rumah-selaras",
+            "themeKey": "toko-rumah",
+            "subKategori": "rumah",
+            "subKategoriNama": "Rumah & Dekor",
+            "nama": "Selaras",
+            "deskripsi": "Japandi tenang & lapang, greige hangat dengan aksen sage. Untuk mebel, dekorasi, keramik, tanaman.",
+            "mood": "#6F7A66",
+            "bg": "light",
+            "icon": "Armchair",
+            "status": "live-noshot",
+            "thumbs": null
+          }
+        ]
+      }
+    ],
+    "fallback": {
+      "tagline": "Toko online siap terima order & pembayaran 24/7",
+      "mockupGradient": "from-orange-800 to-red-900",
+      "sections": [
+        "Hero + Promo",
+        "Katalog Produk",
+        "Keranjang",
+        "Checkout",
+        "Riwayat Order"
+      ],
+      "emoji": "🛍️"
+    }
+  },
+  "restaurant": {
+    "tipe": "restaurant",
+    "corpLabels": [
+      "Website Restaurant"
+    ],
+    "hasReadyThemes": true,
+    "subKategori": [
+      {
+        "id": "finedining",
+        "nama": "Fine Dining",
+        "icon": "UtensilsCrossed",
+        "themes": [
+          {
+            "themeId": "restaurant-lux",
+            "themeKey": "restaurant-lux",
+            "subKategori": "finedining",
+            "subKategoriNama": "Fine Dining",
+            "nama": "Lux",
+            "deskripsi": "Sinematik gelap-mewah beraksen emas, menu sebagai panggung. Untuk fine dining, omakase, chef table.",
+            "mood": "#C9A24A",
+            "bg": "dark",
+            "icon": "Wine",
+            "status": "live-noshot",
+            "thumbs": null
+          }
+        ]
+      }
+    ],
+    "fallback": {
+      "tagline": "Menu digital sinematik yang menggugah selera",
+      "mockupGradient": "from-amber-800 to-orange-900",
+      "sections": [
+        "Hero Foto Makanan",
+        "Menu Digital",
+        "Reservasi Meja",
+        "Promo",
+        "Lokasi & Maps"
+      ],
+      "emoji": "🍜"
+    }
+  }
+}

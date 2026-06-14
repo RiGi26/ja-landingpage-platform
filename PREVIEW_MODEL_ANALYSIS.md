@@ -153,7 +153,8 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 
 > Keputusan §7 **DIKONFIRMASI owner via "lanjut sesuai rekomendasi" (2026-06-15)** — default rekomendasi dipakai.
 > Pengecualian sanity-check: **D1 (routing)** = keputusan produk nyata (subtitle 2 tile overlap) → diadopsi `toko_online/kuliner` tapi minta angguk eksplisit owner kalau intent beda.
-> Eksekusi WB ditunda sampai owner selesai sesi paralel di repo WB (hindari index.lock/drift).
+>
+> **STATUS (2026-06-15):** ✅ **FASE 1 (WB) BUILT — PR #159 hijau-open** (Typecheck+Render pass, Vercel Ready). Generator + sync siap. Berikutnya: aksi owner Fase 0 (install `sharp`, shoot tema, `npm run sync:corp-preview`) → **Fase 2 (CORP)** galeri Model B. WB kini bebas (master bersih), blocker sesi paralel hilang.
 
 ### 9.1 Keputusan (DIKONFIRMASI via "lanjut sesuai rekomendasi", 2026-06-15)
 | # | Keputusan | Diadopsi | Catatan |
@@ -170,12 +171,16 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 - Konfirmasi/override D1–D5 di atas.
 - `npm run shoot:chrome -- kerajinan-tanah` · `-- gadget-onyx` · tambah sample `restaurant-lux` (opsional bila mau 6/6 saat launch).
 
-**FASE 1 — PR di WB `ja-websitebuilder-platform` (generator + sync):**
-- `scripts/build-theme-registry.mjs` — import `THEMES`+`INDUSTRY_SUBKATEGORI` (taxonomy.ts), `BESPOKE_VARIANTS` (variants.ts), `BESPOKE_RENDERERS` (registry.ts). Emit `theme-registry.json` sesuai bentuk §5. Aturan: hanya sub-kat `ready:true`; status `live` jika id∈BESPOKE_VARIANTS (atau restaurant-lux) **dan** 3 PNG ada di `theme-samples/`, else `live-noshot`; `ready:false` → exclude. Isi `corpLabels[]` sesuai D1.
-- `scripts/sync-corp-preview.mjs` — optimize `theme-samples/*.png` → webp ≤~120KB → copy ke `../ja-corp-landing/public/theme-previews/<tipe>/<subkat>/<themeId>-{mobile,tablet,desktop}.webp`; tulis `../ja-corp-landing/data/theme-registry.json`.
-- npm scripts: `build:theme-registry`, `sync:corp-preview` (jalankan build lalu copy).
-- Opsional: CI guard — gagal jika tema ready+sellable tak punya screenshot.
-- *Gate:* tsc + CI. *Verifikasi:* jalankan `sync:corp-preview`, cek `theme-registry.json` + webp landing benar di corp working tree.
+**FASE 1 — PR di WB `ja-websitebuilder-platform` (generator + sync): ✅ DONE (PR #159, 2026-06-15).**
+- `scripts/build-theme-registry-entry.ts` — import `THEMES`+`INDUSTRY_SUBKATEGORI` (taxonomy.ts) + `BESPOKE_VARIANTS` (variants.ts). Emit `theme-samples/theme-registry.json` (gitignored, artefak) sesuai bentuk §5. Aturan: hanya sub-kat `ready:true`; status `live` jika id∈BESPOKE_VARIANTS (atau restaurant-lux) **dan** 3 PNG ada di `theme-samples/`, else `live-noshot`; `ready:false` → exclude. `corpLabels[]` per D1.
+- `scripts/sync-corp-preview.mjs` — optimize `theme-samples/*.png` → webp ≤~120KB (sharp) → copy ke `../ja-corp-landing/public/theme-previews/<tipe>/<subkat>/<themeId>-{mobile,tablet,desktop}.webp`; tulis `../ja-corp-landing/data/theme-registry.json`. **Owner-run** (sharp native + PNG; sandbox tak bisa).
+- npm scripts: `build:theme-registry`, `sync:corp-preview` (build lalu copy); devDep `sharp`.
+- **Deviasi sadar vs sketsa di atas (dicatat di header tiap script):**
+  1. Generator bukan `.mjs` murni → pola **`tsc` → `run-gen.cjs`** (node tak bisa import `.ts`; esbuild crash di sandbox Windows; `tsc` satu-satunya compiler aman + bisa diverifikasi agen).
+  2. **TIDAK** import `registry.ts` (`BESPOKE_RENDERERS`) — file itu meng-import komponen React renderer ('use client'), tak jalan di node. Data themeId→themeKey cukup dari `variants.ts`; `restaurant-lux` = entry eksplisit.
+  3. **CI guard opsional di-SKIP** — PNG di-gitignore (`theme-samples/`), guard "gagal jika tak ada screenshot" akan **selalu merah** di CI.
+  4. **`SHOOT_ID` override** — peta nama sampel legacy (Atelier noir = `toko-atelier`) → `themeId`, supaya shot lama dikenali tanpa re-shoot; field internal `_shootId` dialirkan ke sync lalu **di-strip** sebelum tulis registry CORP (data CORP bersih).
+- *Gate LOLOS:* `tsc --noEmit` (strict) hijau; `npm run build:theme-registry` emit registry valid; CI Typecheck+Render pass; Vercel Ready. Konversi webp nyata = owner-run.
 
 **FASE 2 — PR di CORP `ja-corp-landing` (konsumsi registry + galeri Model B):**
 - Commit `data/theme-registry.json` + `public/theme-previews/**` (hasil Fase 1).
@@ -190,9 +195,11 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 - *Verifikasi:* tema kepilih di corp → kebawa → ke-pre-fill di brief → tersimpan ke build.
 
 ### 9.3 Checklist aksi owner
-- [ ] Konfirmasi/override D1–D5 (§9.1)
-- [ ] Shoot kerajinan-tanah · gadget-onyx · restaurant-lux (lokal)
-- [ ] Setelah Fase 1 jalan: `npm run sync:corp-preview`, review diff CORP, commit
+- [x] Konfirmasi/override D1–D5 (§9.1) — 2026-06-15
+- [x] **Fase 1 (WB) dibangun** — PR #159 (merge bila review oke)
+- [ ] `npm i -D sharp` di WB (jika belum) — dipakai `sync:corp-preview`
+- [ ] Shoot tema `live-noshot` (lokal, `npm run shoot:chrome -- <id>`): `kerajinan-tanah` · `gadget-onyx` · `rumah-selaras` · `atelier-ivoire` (id sampel `toko-atelier-ivoire`) · `restaurant-lux`. (Sudah `live`: `kuliner-tungku`, `kuliner-pamor`, `kecantikan-embun`, `atelier-noir`.)
+- [ ] Setelah merge PR #159: `npm run sync:corp-preview`, review diff CORP (`data/` + `public/theme-previews/`), commit
 - [ ] Putuskan PR vs direct-push tiap fase (default: PR, karena multi-file/logic)
 
 ### 9.4 Catatan eksekusi

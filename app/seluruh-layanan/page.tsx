@@ -389,6 +389,17 @@ function WaFallbackLine({ waHref }: { waHref: string }) {
   )
 }
 
+// --- Proof strip: hanya klaim proses yang verifiable (bukan social-proof tak bersumber) ---
+function ProofStrip() {
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold text-gray-500 mt-6">
+      <span className="inline-flex items-center gap-1.5"><Zap size={13} className="text-[#0071E3]" fill="currentColor" /> Live 3–5 hari kerja</span>
+      <span className="inline-flex items-center gap-1.5"><Check size={13} strokeWidth={3} className="text-emerald-500" /> Revisi sampai puas sebelum go-live</span>
+      <span className="inline-flex items-center gap-1.5"><Shield size={13} className="text-gray-400" /> Pembayaran aman via Midtrans</span>
+    </div>
+  )
+}
+
 export default function SeluruhLayananPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATE_OPTIONS[0].name)
@@ -565,6 +576,7 @@ Terima kasih.`
             Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah data bisnis Anda kami terima.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
+          <ProofStrip />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -830,6 +842,9 @@ Terima kasih.`
                         <div>
                             <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
                             <p className="text-sm text-gray-600 font-medium mt-1">Semua opsional — pilih yang relevan, lewati sisanya. Estimasi terupdate otomatis.</p>
+                            <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-700">
+                                <Check size={14} strokeWidth={3} /> Revisi sampai puas sebelum go-live
+                            </div>
                         </div>
                         {/* Smart Recommendation Callout */}
                         {hasPortalFeatures && (

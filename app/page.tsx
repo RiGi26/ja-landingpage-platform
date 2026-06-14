@@ -44,7 +44,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div className="space-y-8 animate-fade-up">
-            <p className="text-[11px] text-gray-400 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
+            <p className="text-[11px] text-gray-500 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
               Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
@@ -81,7 +81,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
                   Coba Demo Sistem (Gratis)
                 </button>
               </div>
-              <p className="text-[13px] text-gray-400 font-medium">Mulai dari <span className="text-gray-900 font-bold">Rp 600.000</span></p>
+              <p className="text-[13px] text-gray-600 font-medium">Mulai dari <span className="text-gray-900 font-bold">Rp 600.000</span></p>
             </div>
 
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
@@ -580,9 +580,10 @@ export default function LandingPage() {
             href={waLink('Halo Japan Arena, saya ingin tanya soal layanan.')}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Chat via WhatsApp"
             className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
           >
-            <MessageCircle size={28} />
+            <MessageCircle size={28} aria-hidden="true" />
           </a>
         </div>
 
@@ -722,7 +723,7 @@ export default function LandingPage() {
                     <p className="text-[12px] text-gray-600 font-medium">
                         © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
                     </p>
-                    <p className="text-xs text-gray-400 mt-1">
+                    <p className="text-xs text-gray-500 mt-1">
                       Japan Arena Corp adalah nama usaha terdaftar yang beroperasi di bawah hukum Republik Indonesia.
                     </p>
                   </div>

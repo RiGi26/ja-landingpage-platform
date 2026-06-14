@@ -354,9 +354,10 @@ Terima kasih.`
             href={waLink('Halo Japan Arena, saya butuh bantuan merakit website.')}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Chat via WhatsApp"
             className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
           >
-            <MessageCircle size={28} />
+            <MessageCircle size={28} aria-hidden="true" />
           </a>
         </div>
 
@@ -447,7 +448,7 @@ Terima kasih.`
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 className="text-xl font-bold text-gray-900">Pilih Jenis Industri</h2>
-                                    <p className="text-sm text-gray-400 font-medium mt-1">Kami akan menyesuaikan desain dasar (template) untuk Anda.</p>
+                                    <p className="text-sm text-gray-600 font-medium mt-1">Kami akan menyesuaikan desain dasar (template) untuk Anda.</p>
                                 </div>
                                 <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0071E3] shrink-0">
                                     <Layout size={24} />
@@ -478,7 +479,7 @@ Terima kasih.`
                                             <span className={`text-sm font-bold leading-tight ${isSelected ? 'text-blue-900' : 'text-gray-700'}`}>
                                                 {tpl.name}
                                             </span>
-                                            <span className="text-xs text-gray-400 mt-0.5 leading-tight">
+                                            <span className="text-xs text-gray-600 mt-0.5 leading-tight">
                                                 {tpl.subtitle}
                                             </span>
                                         </button>
@@ -596,7 +597,7 @@ Terima kasih.`
                             <div className="flex items-center justify-between mb-8">
                                 <div>
                                     <h2 className="text-xl font-bold text-gray-900">Pilih Ukuran Server</h2>
-                                    <p className="text-sm text-gray-400 font-medium mt-1">
+                                    <p className="text-sm text-gray-600 font-medium mt-1">
                                       {selectedTemplate ? `Disesuaikan untuk: ${selectedTemplate}` : 'Pilih industri di Step 1 untuk rekomendasi yang lebih tepat.'}
                                     </p>
                                 </div>
@@ -650,7 +651,7 @@ Terima kasih.`
                                                             <Users size={12}/> {pkg.visitor}
                                                         </span>
                                                     </div>
-                                                    <p className="text-[11px] text-gray-400 font-medium mt-1.5">{pkg.capacityHint}</p>
+                                                    <p className="text-[11px] text-gray-600 font-medium mt-1.5">{pkg.capacityHint}</p>
                                                 </div>
                                             </div>
                                             <div className="text-left md:text-right">
@@ -815,7 +816,7 @@ Terima kasih.`
                                                                     Konsultasi Dulu
                                                                 </span>
                                                             )}
-                                                            <p className="text-[11px] text-gray-400 leading-relaxed mb-3 pr-2">
+                                                            <p className="text-[11px] text-gray-600 leading-relaxed mb-3 pr-2">
                                                                 {addon.description}
                                                             </p>
                                                             {priced ? (

@@ -32,7 +32,8 @@ import {
   Sparkles,
   Loader2,
   Wrench,
-  Camera
+  Camera,
+  Crown
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -204,6 +205,190 @@ const TEMPLATE_PREVIEWS: Record<string, {
   },
 }
 
+// --- Guided progress bar: slim track + momentum label, langkah bisa diklik ---
+function GuidedProgressBar({
+  steps,
+  current,
+  onJump,
+}: {
+  steps: { num: number; title: string }[]
+  current: number
+  onJump: (num: number) => void
+}) {
+  const total = steps.length
+  const pct = Math.round((current / total) * 100)
+  const momentum =
+    current >= total ? 'Langkah terakhir!' : current === 1 ? 'Ayo mulai' : 'Tinggal sedikit lagi'
+  return (
+    <div className="bg-white rounded-[24px] p-4 sm:p-5 apple-shadow border border-black/[0.03]">
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div className="flex items-center gap-0.5 sm:gap-1.5 min-w-0">
+          {steps.map((s) => {
+            const active = current === s.num
+            const passed = current > s.num
+            return (
+              <button
+                key={s.num}
+                onClick={() => onJump(s.num)}
+                aria-current={active ? 'step' : undefined}
+                className={`flex items-center gap-1.5 rounded-full pl-1 pr-1.5 sm:pr-2.5 py-1 transition-all active:scale-[0.97] ${
+                  active ? 'bg-blue-50' : 'hover:bg-gray-50'
+                }`}
+              >
+                <span
+                  className={`flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-black tabular-nums transition-all shrink-0 ${
+                    active
+                      ? 'bg-[#0071E3] text-white'
+                      : passed
+                      ? 'bg-blue-100 text-[#0071E3]'
+                      : 'bg-gray-100 text-gray-400'
+                  }`}
+                >
+                  {passed ? <Check size={12} strokeWidth={3.5} /> : s.num}
+                </span>
+                <span
+                  className={`text-xs font-bold whitespace-nowrap hidden sm:block ${
+                    active ? 'text-[#0071E3]' : passed ? 'text-gray-700' : 'text-gray-400'
+                  }`}
+                >
+                  {s.title}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+        <span className="text-[11px] font-bold text-gray-400 whitespace-nowrap shrink-0">
+          <span className="tabular-nums">Langkah {current}/{total}</span> ·{' '}
+          <span className="text-[#0071E3]">{momentum}</span>
+        </span>
+      </div>
+      <div className="h-1.5 rounded-full bg-gray-100 overflow-hidden">
+        <div
+          className="h-full rounded-full bg-[#0071E3] transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  )
+}
+
+// --- Server tier: outcome dulu, GB jadi chip, badge "Paling Populer" ---
+function OutcomeTierRow({
+  pkg,
+  isSelected,
+  selectedTemplate,
+  popular,
+  onSelect,
+}: {
+  pkg: HostingPackage
+  isSelected: boolean
+  selectedTemplate: string
+  popular: boolean
+  onSelect: () => void
+}) {
+  const outcome = (selectedTemplate && pkg.industryDesc?.[selectedTemplate]) ?? pkg.description
+  return (
+    <button
+      onClick={onSelect}
+      aria-pressed={isSelected}
+      className={`relative flex flex-col p-5 sm:p-6 rounded-[24px] border-2 text-left transition-all active:scale-[0.99] group ${
+        isSelected
+          ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-100'
+          : 'border-black/[0.03] hover:border-emerald-200 hover:bg-gray-50/50'
+      }`}
+    >
+      {popular && (
+        <span className="absolute -top-2.5 left-5 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest bg-[#0071E3] text-white px-2.5 py-1 rounded-full shadow-sm shadow-blue-200">
+          <Crown size={11} fill="currentColor" /> Paling Populer
+        </span>
+      )}
+      <div className="flex items-start justify-between gap-4 w-full">
+        <div className="min-w-0">
+          <p className="font-bold text-gray-900 text-lg leading-tight">{pkg.name} Server</p>
+          <p className={`text-sm leading-relaxed mt-1.5 ${isSelected ? 'text-emerald-900' : 'text-gray-500'}`}>
+            {outcome}
+          </p>
+          <div className="flex flex-wrap gap-2 mt-3">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-md">
+              <Server size={12} /> {pkg.storage}
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold rounded-md">
+              <Users size={12} /> {pkg.visitor}
+            </span>
+          </div>
+          <p className="text-[11px] text-gray-400 font-medium mt-2">{pkg.capacityHint}</p>
+        </div>
+        <div className="text-right shrink-0">
+          <p className={`text-2xl font-black tracking-tight tabular-nums sf-display-heavy ${isSelected ? 'text-emerald-700' : 'text-gray-900'}`}>
+            Rp {pkg.price.toLocaleString('id-ID')}
+          </p>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Setup &amp; Thn 1</p>
+          <div className={`mt-3 w-6 h-6 rounded-full ml-auto flex items-center justify-center border-2 transition-all ${isSelected ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-gray-200'}`}>
+            {isSelected && <Check size={13} strokeWidth={3} />}
+          </div>
+        </div>
+      </div>
+    </button>
+  )
+}
+
+// --- Bundle anchor: harga coret + % hemat (aksen gold kualitas) ---
+function BundleAnchorCard({
+  bundle,
+  active,
+  onSelect,
+}: {
+  bundle: Bundle
+  active: boolean
+  onSelect: () => void
+}) {
+  const pct = Math.round((1 - bundle.bundlePrice / bundle.normalPrice) * 100)
+  return (
+    <button
+      onClick={onSelect}
+      aria-pressed={active}
+      className={`relative flex flex-col p-5 rounded-[24px] border-2 text-left transition-all hover:-translate-y-0.5 active:scale-[0.98] h-full ${
+        active
+          ? 'border-[#0071E3] bg-blue-50/40 ring-2 ring-blue-100'
+          : 'border-black/[0.03] bg-white hover:border-blue-200 hover:bg-gray-50/50'
+      }`}
+    >
+      <span className="absolute -top-2.5 right-4 inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-widest bg-[#FBF3E2] text-[#8A5E1F] border border-[#C8962A]/50 px-2.5 py-1 rounded-full">
+        Hemat {pct}%
+      </span>
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-xl leading-none" aria-hidden="true">{bundle.emoji}</span>
+        <p className="font-bold text-gray-900 text-sm leading-tight">{bundle.name}</p>
+      </div>
+      <p className="text-[11px] text-gray-500 leading-relaxed mb-3 flex-1">{bundle.desc}</p>
+      <div className="flex items-baseline gap-2">
+        <span className="text-lg font-black text-gray-900 tracking-tight tabular-nums">
+          Rp {bundle.bundlePrice.toLocaleString('id-ID')}
+        </span>
+        <span className="text-[11px] text-gray-400 line-through tabular-nums">
+          Rp {bundle.normalPrice.toLocaleString('id-ID')}
+        </span>
+      </div>
+    </button>
+  )
+}
+
+// --- WhatsApp human-fallback, selalu tampak di tiap langkah ---
+function WaFallbackLine({ waHref }: { waHref: string }) {
+  return (
+    <a
+      href={waHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center gap-2 text-xs font-semibold text-gray-500 hover:text-[#0071E3] transition-colors py-2"
+    >
+      <MessageCircle size={14} className="text-[#25D366]" aria-hidden="true" />
+      Bingung pilih? Chat tim kami — kami bantu pilihkan
+      <ArrowRight size={13} aria-hidden="true" />
+    </a>
+  )
+}
+
 export default function SeluruhLayananPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATE_OPTIONS[0].name)
@@ -277,6 +462,12 @@ export default function SeluruhLayananPage() {
 
   // Apply Animation Hook
   const animatedSetupTotal = useAnimatedNumber(setupTotal);
+
+  // Status "Rancangan Website Anda" — baris terisi sambil user maju.
+  const serverDone = currentStep >= 2 || selectedPackage.id !== HOSTING_PACKAGES[0].id || !!selectedBundleId
+  const fiturDone = currentStep >= 3 || selectedAddons.length > 0 || !!selectedBundleId
+  // Tier pertama yg direkomendasikan utk industri terpilih → badge "Paling Populer".
+  const firstRecommendedId = HOSTING_PACKAGES.find(p => selectedTemplate && p.recommendedFor?.includes(selectedTemplate))?.id
 
   const hasPortalFeatures = useMemo(() => {
     const categories = ['lms', 'travel', 'medical']
@@ -381,38 +572,8 @@ Terima kasih.`
           {/* Left Column: Wizard */}
           <div className="lg:col-span-8 space-y-6 pb-20 flex flex-col min-h-[600px]">
             
-            {/* Stepper Header */}
-            <div className="bg-white rounded-[24px] p-2 apple-shadow border border-black/[0.03] flex items-center justify-between mb-2">
-                {STEPS.map((step, idx) => {
-                    const isActive = currentStep === step.num;
-                    const isPassed = currentStep > step.num;
-                    return (
-                        <div key={step.num} className="flex-1 flex items-center">
-                            <button
-                                onClick={() => setCurrentStep(step.num)}
-                                aria-current={isActive ? 'step' : undefined}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-2xl transition-all w-full ${
-                                    isActive ? 'bg-blue-50/50' : 'hover:bg-gray-50'
-                                }`}
-                            >
-                                <div className={`w-11 h-11 rounded-full flex items-center justify-center text-sm font-bold transition-all shrink-0 ${
-                                    isActive ? 'bg-[#0071E3] text-white shadow-md shadow-blue-200' :
-                                    isPassed ? 'bg-blue-100 text-[#0071E3]' :
-                                    'bg-gray-100 text-gray-400'
-                                }`}>
-                                    {isPassed ? <Check size={16} strokeWidth={3} /> : step.num}
-                                </div>
-                                <span className={`text-sm font-bold hidden sm:block ${isActive ? 'text-[#0071E3]' : isPassed ? 'text-gray-900' : 'text-gray-400'}`}>
-                                    {step.title}
-                                </span>
-                            </button>
-                            {idx !== STEPS.length - 1 && (
-                                <div className={`h-[2px] flex-1 mx-2 rounded-full transition-all ${isPassed ? 'bg-blue-100' : 'bg-gray-100'}`} />
-                            )}
-                        </div>
-                    )
-                })}
-            </div>
+            {/* Guided progress bar (tipis + momentum, langkah bisa diklik) */}
+            <GuidedProgressBar steps={STEPS} current={currentStep} onJump={setCurrentStep} />
 
             {/* WIZARD CONTENT AREA */}
             <div className="flex-1 transition-all duration-500 relative">
@@ -447,8 +608,8 @@ Terima kasih.`
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
-                                    <h2 className="text-xl font-bold text-gray-900">Pilih Jenis Industri</h2>
-                                    <p className="text-sm text-gray-600 font-medium mt-1">Kami akan menyesuaikan desain dasar (template) untuk Anda.</p>
+                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Bisnis Anda bergerak di bidang apa?</h2>
+                                    <p className="text-sm text-gray-600 font-medium mt-1">Kami sesuaikan desain dasar (template) dengan industri Anda.</p>
                                 </div>
                                 <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0071E3] shrink-0">
                                     <Layout size={24} />
@@ -467,7 +628,7 @@ Terima kasih.`
                                             aria-pressed={selectedTemplate === tpl.name}
                                             className={`p-4 rounded-[20px] border-2 text-left transition-all flex flex-col gap-3 group ${
                                                 isSelected 
-                                                ? 'border-[#0071E3] bg-blue-50/30 ring-4 ring-blue-50' 
+                                                ? 'border-[#0071E3] bg-blue-50/30 ring-2 ring-blue-100'
                                                 : 'border-black/[0.03] hover:border-blue-200 hover:bg-gray-50'
                                             }`}
                                         >
@@ -596,9 +757,9 @@ Terima kasih.`
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
-                                    <h2 className="text-xl font-bold text-gray-900">Pilih Ukuran Server</h2>
+                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Seberapa ramai website Anda nanti?</h2>
                                     <p className="text-sm text-gray-600 font-medium mt-1">
-                                      {selectedTemplate ? `Disesuaikan untuk: ${selectedTemplate}` : 'Pilih industri di Step 1 untuk rekomendasi yang lebih tepat.'}
+                                      {selectedTemplate ? `Server kami sesuaikan untuk: ${selectedTemplate}` : 'Pilih industri di langkah 1 untuk rekomendasi yang lebih tepat.'}
                                     </p>
                                 </div>
                                 <div className="w-12 h-12 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0">
@@ -617,56 +778,16 @@ Terima kasih.`
                             </div>
 
                             <div className="grid grid-cols-1 gap-4">
-                                {HOSTING_PACKAGES.map((pkg) => {
-                                    const isSelected = selectedPackage.id === pkg.id;
-                                    return (
-                                    <button
+                                {HOSTING_PACKAGES.map((pkg) => (
+                                    <OutcomeTierRow
                                         key={pkg.id}
-                                        onClick={() => { setSelectedPackage(pkg); setSelectedBundleId(null) }}
-                                        className={`flex flex-col p-6 rounded-[24px] border-2 transition-all group ${
-                                            isSelected 
-                                            ? 'border-emerald-500 bg-emerald-50/30 ring-4 ring-emerald-50' 
-                                            : 'border-black/[0.03] hover:border-emerald-200'
-                                        }`}
-                                    >
-                                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full mb-3">
-                                            <div className="flex items-center gap-5 mb-4 md:mb-0">
-                                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors shrink-0 ${isSelected ? 'bg-emerald-500 text-white' : 'bg-gray-50 text-gray-400 group-hover:bg-emerald-100 group-hover:text-emerald-600'}`}>
-                                                    <Database size={24} />
-                                                </div>
-                                                <div className="text-left">
-                                                    <div className="flex items-center gap-2 flex-wrap">
-                                                      <p className="font-bold text-gray-900 text-lg">{pkg.name} Server</p>
-                                                      {selectedTemplate && pkg.recommendedFor?.includes(selectedTemplate) && (
-                                                        <span className="text-[10px] font-black uppercase tracking-widest bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">
-                                                          Rekomendasi
-                                                        </span>
-                                                      )}
-                                                    </div>
-                                                    <div className="flex flex-wrap gap-2 mt-2">
-                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
-                                                            <Server size={12}/> Ruang Simpan {pkg.storage}
-                                                        </span>
-                                                        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gray-100 text-gray-600 text-[11px] font-bold uppercase tracking-tight rounded-md">
-                                                            <Users size={12}/> {pkg.visitor}
-                                                        </span>
-                                                    </div>
-                                                    <p className="text-[11px] text-gray-600 font-medium mt-1.5">{pkg.capacityHint}</p>
-                                                </div>
-                                            </div>
-                                            <div className="text-left md:text-right">
-                                                <p className={`text-2xl font-black tracking-tight ${isSelected ? 'text-emerald-700' : 'text-gray-900'}`}>
-                                                    Rp {pkg.price.toLocaleString('id-ID')}
-                                                </p>
-                                                <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Setup & Tahun Pertama</p>
-                                            </div>
-                                        </div>
-                                        <div className={`text-left text-sm leading-relaxed border-t pt-3 w-full transition-colors ${isSelected ? 'text-emerald-800 border-emerald-200/50' : 'text-gray-500 border-black/[0.03]'}`}>
-                                            {(selectedTemplate && pkg.industryDesc?.[selectedTemplate]) ?? pkg.description}
-                                        </div>
-                                    </button>
-                                    )
-                                })}
+                                        pkg={pkg}
+                                        isSelected={selectedPackage.id === pkg.id}
+                                        selectedTemplate={selectedTemplate}
+                                        popular={pkg.id === firstRecommendedId}
+                                        onSelect={() => { setSelectedPackage(pkg); setSelectedBundleId(null) }}
+                                    />
+                                ))}
                             </div>
 
                             <div className="mt-8 p-5 rounded-[20px] bg-amber-50 border border-amber-100 flex gap-4">
@@ -685,22 +806,17 @@ Terima kasih.`
                                     <Zap size={15} className="text-yellow-600 shrink-0" fill="currentColor" />
                                     <p className="text-sm font-black text-yellow-900">Hemat dengan Paket Bundling</p>
                                 </div>
-                                <p className="text-[11px] text-yellow-800 font-medium leading-relaxed mb-3">
-                                    Sudah tahu fitur yang dibutuhkan? Pilih bundle siap pakai dan hemat hingga 25% dibanding merakit manual.
+                                <p className="text-[11px] text-yellow-800 font-medium leading-relaxed mb-4">
+                                    Sudah tahu fitur yang dibutuhkan? Pilih bundle siap pakai dan hemat hingga 32% dibanding merakit manual.
                                 </p>
-                                <div className="flex flex-wrap gap-2">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-1">
                                     {BUNDLES.map(bundle => (
-                                        <button
+                                        <BundleAnchorCard
                                             key={bundle.id}
-                                            onClick={() => handleSelectBundle(bundle)}
-                                            className={`text-[11px] font-bold px-4 py-2.5 rounded-full border transition-all min-h-[44px] ${
-                                                selectedBundleId === bundle.id
-                                                    ? 'bg-yellow-400 border-yellow-400 text-yellow-900'
-                                                    : 'bg-white border-yellow-200 text-yellow-800 hover:border-yellow-400 hover:bg-yellow-50'
-                                            }`}
-                                        >
-                                            {bundle.name}
-                                        </button>
+                                            bundle={bundle}
+                                            active={selectedBundleId === bundle.id}
+                                            onSelect={() => handleSelectBundle(bundle)}
+                                        />
                                     ))}
                                 </div>
                             </div>
@@ -711,6 +827,10 @@ Terima kasih.`
                 {/* STEP 3: FITUR CUSTOM */}
                 {currentStep === 3 && (
                     <div className="space-y-8 animate-fade-in">
+                        <div>
+                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
+                            <p className="text-sm text-gray-600 font-medium mt-1">Semua opsional — pilih yang relevan, lewati sisanya. Estimasi terupdate otomatis.</p>
+                        </div>
                         {/* Smart Recommendation Callout */}
                         {hasPortalFeatures && (
                             <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-[32px] p-8 text-white apple-shadow relative overflow-hidden">
@@ -884,6 +1004,9 @@ Terima kasih.`
                 )}
             </div>
 
+            {/* WhatsApp human-fallback — selalu tampak di tiap langkah */}
+            <WaFallbackLine waHref={`https://wa.me/${WA_NUMBER}?text=${waMessage}`} />
+
           </div>
 
           {/* Right Column: Summary (Sticky) */}
@@ -891,16 +1014,32 @@ Terima kasih.`
             <div className="bg-white rounded-[32px] p-6 apple-shadow border border-black/[0.05] relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
-              <h2 className="text-xl font-black text-gray-900 mb-4 sf-display-heavy relative z-10">Estimasi Biaya</h2>
+              <div className="relative z-10 mb-4">
+                <h2 className="text-xl font-black text-gray-900 sf-display-heavy">Rancangan Website Anda</h2>
+                <p className="text-[11px] text-gray-400 font-medium mt-0.5">Terisi otomatis sambil Anda memilih.</p>
+              </div>
 
               <div
                 key={`${selectedTemplate}-${selectedPackage.id}-${selectedAddons.length}-${selectedBundleId}`}
                 className="relative z-10 animate-fade-in"
               >
-                {/* Industry label */}
-                <div className="mb-3">
-                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-0.5">Industri</p>
-                  <p className="text-base font-black text-gray-900 leading-tight">{selectedTemplate}</p>
+                {/* Growing checklist — Industri / Server / Fitur */}
+                <div className="space-y-2 mb-4">
+                  {[
+                    { label: 'Industri', value: selectedTemplate, done: true },
+                    { label: 'Server', value: serverDone ? `${selectedPackage.name} Server` : 'Pilih di langkah 2', done: serverDone },
+                    { label: 'Fitur', value: fiturDone ? (selectedAddons.length > 0 ? `${selectedAddons.length} fitur dipilih` : 'Tanpa tambahan') : 'Pilih di langkah 3', done: fiturDone },
+                  ].map((row) => (
+                    <div key={row.label} className="flex items-center gap-3">
+                      <span className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all ${row.done ? 'bg-emerald-500 text-white' : 'bg-gray-100 text-gray-300 border border-gray-200'}`}>
+                        {row.done ? <Check size={12} strokeWidth={3.5} /> : <span className="w-1.5 h-1.5 rounded-full bg-current" />}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-0.5">{row.label}</p>
+                        <p className={`text-sm font-bold leading-tight truncate ${row.done ? 'text-gray-900' : 'text-gray-400'}`}>{row.value}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
                 {/* Line items — receipt style */}
@@ -957,7 +1096,7 @@ Terima kasih.`
                 <div className="mt-4 bg-[#1D1D1F] rounded-2xl p-5 text-white">
                   <div className={setupTotal >= 4_000_000 ? 'mb-3' : ''}>
                     <p className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Setup Tahun Pertama</p>
-                    <p className="text-2xl font-black tracking-tight">
+                    <p className="text-2xl font-black tracking-tight tabular-nums">
                       Rp {animatedSetupTotal.toLocaleString('id-ID')}
                     </p>
                     <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
@@ -975,7 +1114,7 @@ Terima kasih.`
                   {setupTotal >= 4_000_000 && (
                     <div className="bg-white/10 rounded-xl p-3 mb-3">
                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
-                      <p className="text-lg font-black text-green-400">
+                      <p className="text-lg font-black text-green-400 tabular-nums">
                         Rp {Math.ceil(setupTotal * 0.5).toLocaleString('id-ID')}
                       </p>
                     </div>
@@ -983,7 +1122,7 @@ Terima kasih.`
 
                   <div className="flex justify-between items-center pt-3 border-t border-white/10">
                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Perpanjangan Thn 2+</span>
-                    <span className="text-sm font-black text-gray-300">Rp {maintainTotal.toLocaleString('id-ID')}</span>
+                    <span className="text-sm font-black text-gray-300 tabular-nums">Rp {maintainTotal.toLocaleString('id-ID')}</span>
                   </div>
                   <p className="text-[10px] text-gray-500 leading-relaxed mt-2">
                     Biaya sewa server + perawatan rutin (update keamanan, backup, bantuan teknis) — bukan biaya buat ulang website.
@@ -1060,7 +1199,7 @@ Terima kasih.`
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
           <div className="space-y-0.5">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Thn 1</span>
-              <p className="text-xl md:text-2xl font-black text-[#0071E3] tracking-tight">
+              <p className="text-xl md:text-2xl font-black text-[#0071E3] tracking-tight tabular-nums">
                   Rp {animatedSetupTotal.toLocaleString('id-ID')}
               </p>
           </div>

@@ -17,6 +17,7 @@ import {
   Smartphone,
   Sofa,
   Wine,
+  Check,
   type LucideIcon,
 } from 'lucide-react'
 import themeRegistryRaw from '@/data/theme-registry.json'
@@ -91,11 +92,29 @@ const SUBKAT_ICON: Record<string, LucideIcon> = {
   Wine,
 }
 
-// ── Kartu satu tema ───────────────────────────────────────────────────────
-function ThemeCard({ theme: t }: { theme: ThemePreviewEntry }) {
+// ── Kartu satu tema (selectable: handoff tema ke order, Fase 3) ─────────────
+function ThemeCard({
+  theme: t,
+  selected,
+  onSelect,
+}: {
+  theme: ThemePreviewEntry
+  selected: boolean
+  onSelect: () => void
+}) {
   const live = t.status === 'live' && t.thumbs
   return (
-    <article className="snap-start shrink-0 w-[72%] sm:w-auto rounded-2xl overflow-hidden bg-white/[0.04] border border-white/10 hover:border-white/25 transition-colors duration-300 group">
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-pressed={selected}
+      aria-label={`Pilih tema ${t.nama} untuk ${t.subKategoriNama}${selected ? ' (terpilih)' : ''}`}
+      className={`snap-start shrink-0 w-[72%] sm:w-auto text-left rounded-2xl overflow-hidden border transition-all duration-300 group active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 ${
+        selected
+          ? 'border-[#0071E3] ring-2 ring-[#0071E3] bg-[#0071E3]/10'
+          : 'border-white/10 bg-white/[0.04] hover:border-white/25'
+      }`}
+    >
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-800 ring-1 ring-inset ring-white/10">
         {live && t.thumbs ? (
           <img
@@ -126,6 +145,11 @@ function ThemeCard({ theme: t }: { theme: ThemePreviewEntry }) {
         >
           {live ? 'Contoh tampilan' : 'Gambar segera'}
         </span>
+        {selected && (
+          <span className="absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-lg shadow-blue-900/40">
+            <Check size={14} strokeWidth={3} aria-hidden />
+          </span>
+        )}
       </div>
       <div className="p-3.5">
         <div className="flex items-center gap-2 mb-1">
@@ -138,7 +162,7 @@ function ThemeCard({ theme: t }: { theme: ThemePreviewEntry }) {
         </div>
         <p className="text-[11px] text-gray-400 leading-snug line-clamp-2">{t.deskripsi}</p>
       </div>
-    </article>
+    </button>
   )
 }
 
@@ -146,9 +170,13 @@ function ThemeCard({ theme: t }: { theme: ThemePreviewEntry }) {
 export default function ThemeGallery({
   label,
   groups,
+  selectedThemeId,
+  onSelect,
 }: {
   label: string
   groups: SubKategoriGroup[]
+  selectedThemeId?: string
+  onSelect?: (subKategori: string, themeId: string) => void
 }) {
   const singleGroup = groups.length === 1
   return (
@@ -168,16 +196,29 @@ export default function ThemeGallery({
             )}
             <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-1 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible">
               {g.themes.map((t) => (
-                <ThemeCard key={t.themeId} theme={t} />
+                <ThemeCard
+                  key={t.themeId}
+                  theme={t}
+                  selected={selectedThemeId === t.themeId}
+                  onSelect={() => onSelect?.(t.subKategori, t.themeId)}
+                />
               ))}
             </div>
           </div>
         )
       })}
-      <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
-        Gambar di sini contoh tampilan tema kami. Konten (foto, teks, produk) diisi sesuai
-        bisnis <span className="text-gray-400 font-bold">{label}</span> Anda setelah pesan.
-      </p>
+      {selectedThemeId ? (
+        <p className="text-xs font-semibold text-[#0071E3] flex items-center gap-1.5">
+          <Check size={13} strokeWidth={3} aria-hidden /> Gaya terpilih akan diterapkan saat Anda isi
+          brief — masih bisa diubah nanti.
+        </p>
+      ) : (
+        <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
+          Ketuk tema untuk memilih gayanya. Gambar di sini contoh tampilan; konten (foto, teks,
+          produk) diisi sesuai bisnis <span className="text-gray-400 font-bold">{label}</span> Anda
+          setelah pesan.
+        </p>
+      )}
     </div>
   )
 }

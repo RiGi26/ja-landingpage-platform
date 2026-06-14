@@ -511,6 +511,8 @@ function MobileReceiptSheet({
 export default function SeluruhLayananPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATE_OPTIONS[0].name)
+  // Tema pilihan dari galeri (Fase 3 handoff) → dibawa ke /order ?subkat=&theme=.
+  const [selectedTheme, setSelectedTheme] = useState<{ subkat: string; theme: string } | null>(null)
   const [selectedPackage, setSelectedPackage] = useState<HostingPackage>(HOSTING_PACKAGES[0])
   const [selectedAddons, setSelectedAddons] = useState<Addon[]>([])
   // Program Mitra — kode referral tersimpan (RefCapture), dibaca via state
@@ -526,6 +528,7 @@ export default function SeluruhLayananPage() {
   useEffect(() => {
     setPreviewLoaded(false)
     setPreviewError(false)
+    setSelectedTheme(null) // ganti industri → reset tema pilihan galeri
   }, [selectedTemplate])
 
   const toggleGroup = (groupKey: string) => {
@@ -794,7 +797,14 @@ Terima kasih.`
                                         </p>
 
                                         {gallery ? (
-                                            <ThemeGallery label={selectedTemplate} groups={gallery.groups} />
+                                            <ThemeGallery
+                                                label={selectedTemplate}
+                                                groups={gallery.groups}
+                                                selectedThemeId={selectedTheme?.theme}
+                                                onSelect={(subkat, theme) =>
+                                                    setSelectedTheme((prev) => (prev?.theme === theme ? null : { subkat, theme }))
+                                                }
+                                            />
                                         ) : preview ? (
                                         <div>
                                             <a
@@ -1353,7 +1363,7 @@ Terima kasih.`
               </button>
           ) : (
               <a
-                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&maintain=${maintainTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}${selectedBundleId ? `&bundle=${encodeURIComponent(selectedBundleId)}` : ''}${refCode ? `&ref=${encodeURIComponent(refCode)}` : ''}`}
+                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&maintain=${maintainTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}${selectedBundleId ? `&bundle=${encodeURIComponent(selectedBundleId)}` : ''}${refCode ? `&ref=${encodeURIComponent(refCode)}` : ''}${selectedTheme ? `&subkat=${encodeURIComponent(selectedTheme.subkat)}&theme=${encodeURIComponent(selectedTheme.theme)}` : ''}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-[0.96] transition-all hover:bg-blue-600"

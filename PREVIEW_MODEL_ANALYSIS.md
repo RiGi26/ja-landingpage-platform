@@ -154,7 +154,7 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 > Keputusan §7 **DIKONFIRMASI owner via "lanjut sesuai rekomendasi" (2026-06-15)** — default rekomendasi dipakai.
 > Pengecualian sanity-check: **D1 (routing)** = keputusan produk nyata (subtitle 2 tile overlap) → diadopsi `toko_online/kuliner` tapi minta angguk eksplisit owner kalau intent beda.
 >
-> **STATUS (2026-06-15):** ✅ **FASE 1 (WB) BUILT — PR #159 hijau-open** (Typecheck+Render pass, Vercel Ready). Generator + sync siap. Berikutnya: aksi owner Fase 0 (install `sharp`, shoot tema, `npm run sync:corp-preview`) → **Fase 2 (CORP)** galeri Model B. WB kini bebas (master bersih), blocker sesi paralel hilang.
+> **STATUS (2026-06-15):** ✅ **FASE 1 (WB) MERGED** (PR #159 → master `1bae6cf`; + fix hero-crop thumbnail PR #160). ✅ **FASE 2 (CORP) CORE BUILT** — galeri Model B `ThemeGallery` + registry consumption + 12 webp (4 tema live, 5 live-noshot). Sisa: owner shoot 5 tema noshot lalu `sync:corp-preview` ulang; peripheral cleanup (404 demo, relabel, Bisnis Jasa, carousel dots) di-defer. **Fase 3 (handoff tema → pre-fill brief)** belum.
 
 ### 9.1 Keputusan (DIKONFIRMASI via "lanjut sesuai rekomendasi", 2026-06-15)
 | # | Keputusan | Diadopsi | Catatan |
@@ -182,12 +182,13 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
   4. **`SHOOT_ID` override** — peta nama sampel legacy (Atelier noir = `toko-atelier`) → `themeId`, supaya shot lama dikenali tanpa re-shoot; field internal `_shootId` dialirkan ke sync lalu **di-strip** sebelum tulis registry CORP (data CORP bersih).
 - *Gate LOLOS:* `tsc --noEmit` (strict) hijau; `npm run build:theme-registry` emit registry valid; CI Typecheck+Render pass; Vercel Ready. Konversi webp nyata = owner-run.
 
-**FASE 2 — PR di CORP `ja-corp-landing` (konsumsi registry + galeri Model B):**
-- Commit `data/theme-registry.json` + `public/theme-previews/**` (hasil Fase 1).
-- `app/seluruh-layanan/page.tsx`: ganti `TEMPLATE_PREVIEWS` hardcoded → lookup dari registry via padanan `industriToTipe(label)` (perlu helper label→tipe di corp, atau registry pakai `corpLabels[]`).
-- Industri `hasReadyThemes` → komponen **`ThemeGallery`**: grid `≥sm`, **carousel swipe di mobile** (snap + dots, no lib). Tiap kartu = `ChoiceTile` (thumbnail webp / kartu noshot + nama + swatch `mood` + microcopy `deskripsi` + badge status). Caption jujur (§6).
-- Industri tanpa tema → tetap 1 preview wakil; ganti iframe `/demo/*` 404 dgn gradient mockup; relabel demo lama jadi "contoh situs jadi pakai tema X". Tambah preview/representasi utk "Bisnis Jasa & Lainnya".
-- *Gate WAJIB:* `/ui-design` + `/make-interfaces-feel-better` (galeri/carousel) + `/website-review` (caption kejujuran). *Verifikasi:* tsc + Vercel preview; QA mobile carousel Toko Online (5–7 thumbnail), tak ada 404 iframe sbg "output saya".
+**FASE 2 — PR di CORP `ja-corp-landing` (konsumsi registry + galeri Model B): ✅ CORE DONE (PR #__, 2026-06-15).**
+- ✅ Commit `data/theme-registry.json` + `public/theme-previews/**` (12 webp hero-crop, 4 tema live). Di-generate `sync:corp-preview` (sharp jalan, semua ≤120KB @q82).
+- ✅ `app/seluruh-layanan/ThemeGallery.tsx` (komponen) + resolver `galleryForLabel(label)` (peta `LABEL_TO_REGISTRY`: "Toko Online" → semua sub-kat; "Kuliner & Makanan" → filter `kuliner`, per D1). `page.tsx` First Look: galeri kalau tile cocok registry, else preview iframe lama (NOL hapus, additive).
+- ✅ Galeri: kartu webp (`live`) / kartu fallback swatch-mood (`live-noshot`, **tak pinjam gambar tema lain**, §6) + nama + swatch + microcopy + badge jujur ("Contoh tampilan" / "Gambar segera"); grid `≥sm`, **carousel scroll-snap di mobile** (`.scrollbar-hide`, no lib). Aspect kartu 4:3.
+- ✅ Gate: `/ui-design` (JA-chrome track, match token Apple) + `/website-review` (caption kejujuran: buang "=" dev-shorthand, badge "Segera"→"Gambar segera" anti-ambigu, perbaiki frasa janggal) + `/make-interfaces` (ring-inset edge di bg gelap + reduced-motion). tsc hijau.
+- **DI-DEFER ke follow-up (di luar PR ini):** rollout non-toko tetap model lama (D4); fix 7 iframe `/demo/*` 404; relabel demo lama; preview "Bisnis Jasa & Lainnya"; **carousel dots**; responsive `<picture>` (kini kartu pakai thumb desktop). Catat di §10/follow-up.
+- *Verifikasi sisa (owner):* Vercel preview + QA mobile carousel Toko Online (cek 6 grup sub-kat + Kuliner-only); shoot 5 tema `live-noshot` → `sync:corp-preview` ulang → kartu mereka dapat gambar.
 
 **FASE 3 — PR CORP+WB (handoff tema, flag-gated):**
 - CORP: builder URL order tambah `&subkat=&theme=` saat user pilih tema spesifik.

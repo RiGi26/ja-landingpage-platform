@@ -7,8 +7,10 @@
 // Data = data/theme-registry.json (di-generate WB `npm run sync:corp-preview`).
 // Kejujuran (§6): tema `live` pakai screenshot ASLI; tema `live-noshot` pakai
 // kartu fallback (swatch warna + nama) — TIDAK pernah meminjam gambar tema lain.
-// Handoff tema ke order = Fase 3 → di sini galeri masih "inspirasi gaya" (display).
+// FASE 3b+: kartu punya DUA aksi terpisah — "Lihat preview" (lightbox halaman
+// penuh, ThemePreviewModal) dan "Pilih gaya ini" (handoff tema ke order).
 // ============================================================
+import { useState } from 'react'
 import {
   UtensilsCrossed,
   Shirt,
@@ -18,9 +20,11 @@ import {
   Sofa,
   Wine,
   Check,
+  Eye,
   type LucideIcon,
 } from 'lucide-react'
 import themeRegistryRaw from '@/data/theme-registry.json'
+import ThemePreviewModal from './ThemePreviewModal'
 
 // ── Tipe registry (cermin bentuk §5; di-generate WB, jangan edit tangan) ──────
 export type ThemeStatus = 'live' | 'live-noshot' | 'coming-soon'
@@ -28,6 +32,10 @@ export interface ViewportThumbs {
   mobile: string
   tablet: string
   desktop: string
+}
+export interface FullThumbs {
+  desktop: string
+  mobile: string
 }
 export interface ThemePreviewEntry {
   themeId: string
@@ -41,6 +49,7 @@ export interface ThemePreviewEntry {
   icon: string
   status: ThemeStatus
   thumbs: ViewportThumbs | null
+  fullThumbs: FullThumbs | null
   liveDemoUrl?: string
 }
 export interface SubKategoriGroup {
@@ -92,38 +101,69 @@ const SUBKAT_ICON: Record<string, LucideIcon> = {
   Wine,
 }
 
-// ── Kartu satu tema (selectable: handoff tema ke order, Fase 3) ─────────────
+// ── Kartu satu tema — 2 aksi: Lihat preview (thumbnail) + Pilih (footer) ──────
 function ThemeCard({
   theme: t,
   selected,
-  onSelect,
+  onToggleSelect,
+  onView,
 }: {
   theme: ThemePreviewEntry
   selected: boolean
-  onSelect: () => void
+  onToggleSelect: () => void
+  onView: () => void
 }) {
   const live = t.status === 'live' && t.thumbs
+  const canView = !!(live && t.fullThumbs)
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      aria-pressed={selected}
-      aria-label={`Pilih tema ${t.nama} untuk ${t.subKategoriNama}${selected ? ' (terpilih)' : ''}`}
-      className={`snap-start shrink-0 w-[72%] sm:w-auto text-left rounded-2xl overflow-hidden border transition-all duration-300 group active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 ${
+    <div
+      className={`snap-start shrink-0 w-[72%] sm:w-auto rounded-2xl overflow-hidden border transition-all duration-300 ${
         selected
           ? 'border-[#0071E3] ring-2 ring-[#0071E3] bg-[#0071E3]/10'
           : 'border-white/10 bg-white/[0.04] hover:border-white/25'
       }`}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-gray-800 ring-1 ring-inset ring-white/10">
-        {live && t.thumbs ? (
+      {/* Thumbnail — tombol "Lihat preview" bila tema punya gambar halaman penuh */}
+      {canView ? (
+        <button
+          type="button"
+          onClick={onView}
+          aria-label={`Lihat preview tema ${t.nama} untuk ${t.subKategoriNama}`}
+          className="group relative block w-full aspect-[4/3] overflow-hidden bg-gray-800 ring-1 ring-inset ring-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0071E3]"
+        >
           <img
-            src={t.thumbs.desktop}
+            src={t.thumbs!.desktop}
             alt={`Contoh tampilan tema ${t.nama} untuk ${t.subKategoriNama}`}
             loading="lazy"
-            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+            className="w-full h-full object-cover object-top transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
           />
-        ) : (
+          {/* Scrim + pill "Lihat preview" muncul saat hover/focus (perangkat hover) */}
+          <span
+            className="absolute inset-0 bg-black/0 group-hover:bg-black/30 group-focus-visible:bg-black/30 transition-colors"
+            aria-hidden
+          />
+          <span
+            className="absolute inset-x-0 bottom-0 flex justify-center pb-3 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 transition-all duration-300 motion-reduce:transition-none"
+            aria-hidden
+          >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 text-gray-900 text-[11px] font-bold shadow-lg">
+              <Eye size={13} /> Lihat preview
+            </span>
+          </span>
+          {/* Badge mata — cue tap utk perangkat tanpa hover (mobile) */}
+          <span
+            className="absolute bottom-2.5 right-2.5 w-7 h-7 rounded-full bg-black/55 backdrop-blur-sm grid place-items-center text-white sm:hidden"
+            aria-hidden
+          >
+            <Eye size={13} />
+          </span>
+          <span className="absolute top-2.5 left-2.5 text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-full backdrop-blur-sm bg-black/45 text-gray-200">
+            Contoh tampilan
+          </span>
+        </button>
+      ) : (
+        // Tema live-noshot / tanpa gambar penuh — kartu fallback, tak bisa dibuka.
+        <div className="relative aspect-[4/3] overflow-hidden bg-gray-800 ring-1 ring-inset ring-white/10">
           <div
             className="w-full h-full flex flex-col items-center justify-center gap-2.5 p-4 text-center"
             style={{ background: `linear-gradient(135deg, ${t.mood}33, ${t.mood}0d)` }}
@@ -137,20 +177,13 @@ function ThemeCard({
               Preview gambar segera
             </span>
           </div>
-        )}
-        <span
-          className={`absolute top-2.5 left-2.5 text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-full backdrop-blur-sm ${
-            live ? 'bg-black/45 text-gray-200' : 'bg-amber-400/20 text-amber-200'
-          }`}
-        >
-          {live ? 'Contoh tampilan' : 'Gambar segera'}
-        </span>
-        {selected && (
-          <span className="absolute top-2.5 right-2.5 w-6 h-6 rounded-full bg-[#0071E3] text-white flex items-center justify-center shadow-lg shadow-blue-900/40">
-            <Check size={14} strokeWidth={3} aria-hidden />
+          <span className="absolute top-2.5 left-2.5 text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-full backdrop-blur-sm bg-amber-400/20 text-amber-200">
+            Gambar segera
           </span>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* Info + tombol pilih */}
       <div className="p-3.5">
         <div className="flex items-center gap-2 mb-1">
           <span
@@ -160,9 +193,28 @@ function ThemeCard({
           />
           <h4 className="text-sm font-bold text-white sf-display truncate">{t.nama}</h4>
         </div>
-        <p className="text-[11px] text-gray-400 leading-snug line-clamp-2">{t.deskripsi}</p>
+        <p className="text-[11px] text-gray-400 leading-snug line-clamp-2 mb-3">{t.deskripsi}</p>
+        <button
+          type="button"
+          onClick={onToggleSelect}
+          aria-pressed={selected}
+          aria-label={selected ? `Batalkan pilih tema ${t.nama}` : `Pilih tema ${t.nama}`}
+          className={`w-full inline-flex items-center justify-center gap-1.5 h-9 rounded-full text-xs font-bold transition-all active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 focus-visible:ring-[#0071E3] ${
+            selected
+              ? 'bg-[#0071E3] text-white shadow-md shadow-blue-900/40'
+              : 'bg-white/[0.06] text-gray-200 hover:bg-white/10 ring-1 ring-inset ring-white/10'
+          }`}
+        >
+          {selected ? (
+            <>
+              <Check size={14} strokeWidth={3} aria-hidden /> Terpilih
+            </>
+          ) : (
+            'Pilih gaya ini'
+          )}
+        </button>
       </div>
-    </button>
+    </div>
   )
 }
 
@@ -172,13 +224,16 @@ export default function ThemeGallery({
   groups,
   selectedThemeId,
   onSelect,
+  onClear,
 }: {
   label: string
   groups: SubKategoriGroup[]
   selectedThemeId?: string
   onSelect?: (subKategori: string, themeId: string) => void
+  onClear?: () => void
 }) {
   const singleGroup = groups.length === 1
+  const [viewing, setViewing] = useState<ThemePreviewEntry | null>(null)
   return (
     <div className="space-y-6 animate-fade-in">
       {groups.map((g) => {
@@ -200,7 +255,10 @@ export default function ThemeGallery({
                   key={t.themeId}
                   theme={t}
                   selected={selectedThemeId === t.themeId}
-                  onSelect={() => onSelect?.(t.subKategori, t.themeId)}
+                  onToggleSelect={() =>
+                    selectedThemeId === t.themeId ? onClear?.() : onSelect?.(t.subKategori, t.themeId)
+                  }
+                  onView={() => setViewing(t)}
                 />
               ))}
             </div>
@@ -214,10 +272,19 @@ export default function ThemeGallery({
         </p>
       ) : (
         <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
-          Ketuk tema untuk memilih gayanya. Gambar di sini contoh tampilan; konten (foto, teks,
-          produk) diisi sesuai bisnis <span className="text-gray-400 font-bold">{label}</span> Anda
-          setelah pesan.
+          Ketuk gambar untuk <span className="text-gray-400 font-bold">lihat preview</span> penuh, lalu
+          pilih gayanya. Gambar di sini contoh tampilan; konten (foto, teks, produk) diisi sesuai bisnis{' '}
+          <span className="text-gray-400 font-bold">{label}</span> Anda setelah pesan.
         </p>
+      )}
+
+      {viewing && (
+        <ThemePreviewModal
+          theme={viewing}
+          selected={selectedThemeId === viewing.themeId}
+          onSelect={() => onSelect?.(viewing.subKategori, viewing.themeId)}
+          onClose={() => setViewing(null)}
+        />
       )}
     </div>
   )

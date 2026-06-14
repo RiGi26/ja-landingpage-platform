@@ -114,7 +114,7 @@ export default function ComparisonInfographic() {
                   <div className="p-4 bg-gray-50 rounded-2xl border border-gray-100 opacity-60">
                     <p className="text-[10px] font-bold text-gray-400 uppercase mb-1">Tech Stack Mereka</p>
                     <p className="text-sm font-bold text-gray-500">Teknologi konvensional</p>
-                    <p className="text-[9px] text-red-400 font-bold mt-1 tracking-widest">Teknologi konvensional</p>
+                    <p className="text-[9px] text-red-500 font-bold mt-1 tracking-widest">Sering lambat dibuka pelanggan</p>
                   </div>
                 </div>
               </div>

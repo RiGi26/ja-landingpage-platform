@@ -20,7 +20,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
   description:
-    'Bikin website bisnis siap pakai (Klinik, LMS, Farmasi, Travel) mulai Rp 600rb. Proses cepat 3 hari, terima beres tanpa coding. Cek demonya di sini!',
+    'Bikin website bisnis siap pakai (Klinik, LMS, Farmasi, Travel) mulai Rp 600rb. Proses 3–5 hari kerja, terima beres tanpa coding. Cek demonya di sini!',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://japanarena.com' },
   openGraph: {
     title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
-    description: 'Website bisnis dalam 3 hari. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
+    description: 'Website bisnis dalam 3–5 hari kerja. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
     url: 'https://japanarena.com',
     siteName: 'Japan Arena Corp',
     locale: 'id_ID',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Japan Arena Corp — Website & Sistem Bisnis UKM Indonesia',
-    description: 'Website bisnis dalam 3 hari. Mulai Rp 600.000.',
+    description: 'Website bisnis dalam 3–5 hari kerja. Mulai Rp 600.000.',
     images: ['/images/logo-light.jpg'],
   },
   robots: { index: true, follow: true },
@@ -79,7 +79,7 @@ const homepageFaqSchema = {
       name: 'Berapa lama website saya selesai?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: '1–3 hari kerja setelah brief dan DP diterima. Konten sederhana selesai lebih cepat. Website dengan fitur custom bisa lebih — kami konfirmasi timeline pasti sebelum mulai.',
+        text: '3–5 hari kerja setelah data bisnis dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
       },
     },
     {

@@ -801,9 +801,8 @@ Terima kasih.`
                                                 label={selectedTemplate}
                                                 groups={gallery.groups}
                                                 selectedThemeId={selectedTheme?.theme}
-                                                onSelect={(subkat, theme) =>
-                                                    setSelectedTheme((prev) => (prev?.theme === theme ? null : { subkat, theme }))
-                                                }
+                                                onSelect={(subkat, theme) => setSelectedTheme({ subkat, theme })}
+                                                onClear={() => setSelectedTheme(null)}
                                             />
                                         ) : preview ? (
                                         <div>

@@ -27,6 +27,10 @@
               "mobile": "/theme-previews/toko_online/kuliner/kuliner-tungku-mobile.webp",
               "tablet": "/theme-previews/toko_online/kuliner/kuliner-tungku-tablet.webp",
               "desktop": "/theme-previews/toko_online/kuliner/kuliner-tungku-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/kuliner/kuliner-tungku-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/kuliner/kuliner-tungku-mobile-full.webp"
             }
           },
           {
@@ -44,6 +48,10 @@
               "mobile": "/theme-previews/toko_online/kuliner/kuliner-pamor-mobile.webp",
               "tablet": "/theme-previews/toko_online/kuliner/kuliner-pamor-tablet.webp",
               "desktop": "/theme-previews/toko_online/kuliner/kuliner-pamor-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/kuliner/kuliner-pamor-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/kuliner/kuliner-pamor-mobile-full.webp"
             }
           }
         ]
@@ -68,6 +76,10 @@
               "mobile": "/theme-previews/toko_online/fashion/atelier-noir-mobile.webp",
               "tablet": "/theme-previews/toko_online/fashion/atelier-noir-tablet.webp",
               "desktop": "/theme-previews/toko_online/fashion/atelier-noir-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/fashion/atelier-noir-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/fashion/atelier-noir-mobile-full.webp"
             }
           },
           {
@@ -81,7 +93,8 @@
             "bg": "light",
             "icon": "Sun",
             "status": "live-noshot",
-            "thumbs": null
+            "thumbs": null,
+            "fullThumbs": null
           }
         ]
       },
@@ -101,7 +114,8 @@
             "bg": "dark",
             "icon": "Palette",
             "status": "live-noshot",
-            "thumbs": null
+            "thumbs": null,
+            "fullThumbs": null
           }
         ]
       },
@@ -125,6 +139,10 @@
               "mobile": "/theme-previews/toko_online/kecantikan/kecantikan-embun-mobile.webp",
               "tablet": "/theme-previews/toko_online/kecantikan/kecantikan-embun-tablet.webp",
               "desktop": "/theme-previews/toko_online/kecantikan/kecantikan-embun-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/kecantikan/kecantikan-embun-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/kecantikan/kecantikan-embun-mobile-full.webp"
             }
           }
         ]
@@ -145,7 +163,8 @@
             "bg": "dark",
             "icon": "Cpu",
             "status": "live-noshot",
-            "thumbs": null
+            "thumbs": null,
+            "fullThumbs": null
           }
         ]
       },
@@ -165,7 +184,8 @@
             "bg": "light",
             "icon": "Armchair",
             "status": "live-noshot",
-            "thumbs": null
+            "thumbs": null,
+            "fullThumbs": null
           }
         ]
       }
@@ -206,7 +226,8 @@
             "bg": "dark",
             "icon": "Wine",
             "status": "live-noshot",
-            "thumbs": null
+            "thumbs": null,
+            "fullThumbs": null
           }
         ]
       }

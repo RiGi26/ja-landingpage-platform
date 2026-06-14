@@ -192,7 +192,7 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 
 **FASE 3 — handoff tema (CORP+WB, WB-dulu): ✅ BUILT (2026-06-15).**
 - ✅ **WB (3a) MERGED & LIVE — PR #161 → master `3381820`** (deploy prod success): `/order` baca `?subkat=&theme=` (validasi `BESPOKE_VARIANTS`) + banner "Tema pilihan"; `payment/create` validasi ulang server + simpan `briefing_data.preselect={variant,sub_kategori}` (no migration, tak pengaruhi harga); briefing `[token]` → `BriefingForm` init sub-kat+varian dari preselect (fallback default) + **derive tipe dari tema** (fix mis-map "Kuliner & Makanan"→restaurant). Hormati guardrail (draft/skip-logic/handleSubmit utuh). Additive — param absen = perilaku lama.
-- ✅ **CORP (3b) — PR #__ (pending owner verify+merge):** kartu galeri jadi **selectable** (`<button>` aria-pressed + ring + check badge, focus-visible), state `selectedTheme` di `page.tsx` (reset saat ganti industri), CTA order append `&subkat=&theme=`. Copy: "Ketuk tema untuk memilih" / "Gaya terpilih diterapkan saat isi brief — bisa diubah".
+- ✅ **CORP (3b) — PR #65 (pending owner verify+merge):** kartu galeri jadi **selectable** (`<button>` aria-pressed + ring + check badge, focus-visible), state `selectedTheme` di `page.tsx` (reset saat ganti industri), CTA order append `&subkat=&theme=`. Copy: "Ketuk tema untuk memilih" / "Gaya terpilih diterapkan saat isi brief — bisa diubah".
 - *Verifikasi end-to-end (owner, pasca-deploy):* pilih tema di galeri CORP → CTA bawa param → /order banner "Tema pilihan" → bayar → briefing **pre-select** sub-kat+varian. CTA order → WB **prod** (`nfoa`), jadi #161 wajib live (sudah). ⚠️ alur bayar→briefing tak bisa di-tes sandbox.
 
 ### 9.3 Checklist aksi owner

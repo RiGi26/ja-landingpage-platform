@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ExternalLink, ArrowRight, Globe, Loader2 } from 'lucide-react'
+import { ExternalLink, ArrowRight, Globe, Loader2, GraduationCap } from 'lucide-react'
 
 // Deployment websitebuilder yang menyajikan situs klien published.
 const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
@@ -13,6 +13,15 @@ type Site = {
   nama_website: string
   tipe_industri: string | null
 }
+
+type Family = 'website' | 'portal'
+type Filter = 'all' | Family
+
+const FILTERS: { key: Filter; label: string }[] = [
+  { key: 'all', label: 'Semua' },
+  { key: 'website', label: 'Website' },
+  { key: 'portal', label: 'Portal & Sistem' },
+]
 
 const INDUSTRY_META: Record<string, { label: string }> = {
   toko_online: { label: 'Toko Online' },
@@ -32,6 +41,15 @@ function metaFor(tipe: string | null) {
   return { label: 'Website Custom' }
 }
 
+// Badge "Live" memakai dot SVG-style (bukan emoji) — konsisten & accessible.
+function LiveBadge() {
+  return (
+    <span className="absolute top-2 right-2 z-10 inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+      <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> Live
+    </span>
+  )
+}
+
 function PortfolioCard({ site }: { site: Site }) {
   const [loaded, setLoaded] = useState(false)
   const meta = metaFor(site.tipe_industri)
@@ -44,9 +62,7 @@ function PortfolioCard({ site }: { site: Site }) {
       rel="noopener noreferrer"
       className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
     >
-      <span className="absolute top-2 right-2 z-10 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
-        🟢 Live Sekarang
-      </span>
+      <LiveBadge />
       {/* Browser chrome */}
       <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
         <div className="flex gap-1.5">
@@ -55,11 +71,11 @@ function PortfolioCard({ site }: { site: Site }) {
           <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
         </div>
         <div className="flex-1 mx-1">
-          <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-400 font-mono text-center truncate">
+          <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono text-center truncate">
             {site.slug}.japanarena.com
           </div>
         </div>
-        <ExternalLink size={12} className="text-gray-300 group-hover:text-[#0071E3] transition-colors shrink-0" />
+        <ExternalLink size={12} className="text-gray-400 group-hover:text-[#0071E3] transition-colors shrink-0" />
       </div>
 
       {/* Live mini preview (iframe diperkecil) */}
@@ -92,26 +108,109 @@ function PortfolioCard({ site }: { site: Site }) {
       {/* Footer info */}
       <div className="px-5 py-4">
         <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
-        <span className="text-xs text-gray-400">{meta.label}</span>
-        <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">{site.slug}.japanarena.com</p>
+        <span className="text-xs text-gray-600">{meta.label}</span>
+        <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">{site.slug}.japanarena.com</p>
       </div>
     </a>
   )
 }
 
-const FALLBACK_SITES: Site[] = [
-  { slug: 'klinik-pratama', nama_website: 'Klinik Pratama Jaya', tipe_industri: 'klinik' },
-  { slug: 'rental-mobil-bali', nama_website: 'Bali Express Rental', tipe_industri: 'travel' },
-  { slug: 'toko-kue-lestari', nama_website: 'Kue Lestari Jakarta', tipe_industri: 'toko_online' },
-]
+// japanarena.id — karya andalan kami sendiri (LMS), tampil di tab Website + Portal.
+function AcademyCard() {
+  return (
+    <a
+      href="https://www.japanarena.id"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+    >
+      <LiveBadge />
+      {/* Browser chrome */}
+      <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+        </div>
+        <div className="flex-1 mx-1">
+          <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono text-center truncate">
+            www.japanarena.id
+          </div>
+        </div>
+        <ExternalLink size={12} className="text-gray-400 group-hover:text-[#0071E3] transition-colors shrink-0" />
+      </div>
+      {/* Preview */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-center px-6">
+          <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mx-auto mb-3">
+            <GraduationCap size={26} className="text-white" />
+          </div>
+          <p className="text-white font-black text-lg">Japan Arena Academy</p>
+          <p className="text-blue-200 text-sm mt-1">Sistem Pelatihan Bahasa Jepang</p>
+        </div>
+        <div className="absolute inset-0 bg-[#0071E3]/0 group-hover:bg-[#0071E3]/15 transition-all duration-300 flex items-center justify-center">
+          <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+            <ExternalLink size={13} /> Buka Website Live
+          </span>
+        </div>
+      </div>
+      {/* Footer info */}
+      <div className="px-5 py-4">
+        <h3 className="text-sm font-bold text-gray-900 truncate">Japan Arena Academy</h3>
+        <span className="text-xs text-gray-600">Website + Portal LMS</span>
+        <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">www.japanarena.id</p>
+      </div>
+    </a>
+  )
+}
+
+// CTA untuk portal lain yang baru tersedia sebagai demo (jujur: bukan klien live).
+function PortalDemoCard() {
+  return (
+    <a
+      href="/seluruh-layanan#segmen"
+      className="flex flex-col items-center justify-center text-center rounded-[28px] border-2 border-dashed border-[#0071E3]/20 bg-blue-50/40 p-8 min-h-[260px] transition-colors hover:bg-blue-50"
+    >
+      <div className="w-12 h-12 rounded-2xl bg-white apple-shadow flex items-center justify-center mb-4 text-[#0071E3]">
+        <Globe size={22} />
+      </div>
+      <p className="font-bold text-gray-900">Butuh portal lain?</p>
+      <p className="text-sm text-gray-600 mt-1.5 max-w-[15rem]">
+        Klinik, rental, apotek, dan lainnya — lihat demo sistemnya langsung sebelum mulai.
+      </p>
+      <span className="inline-flex items-center gap-1.5 text-[#0071E3] font-bold text-sm mt-4">
+        Lihat demo <ArrowRight size={15} />
+      </span>
+    </a>
+  )
+}
+
+// Tampil hanya saat belum ada situs klien published / fetch gagal — jujur, tanpa
+// situs palsu. (Sebelumnya FALLBACK_SITES menampilkan slug fiktif berlabel "Live".)
+function EmptyClientCard() {
+  return (
+    <div className="flex flex-col items-center justify-center text-center rounded-[28px] border border-dashed border-black/10 bg-gray-50 p-8 min-h-[260px]">
+      <div className="w-12 h-12 rounded-2xl bg-white apple-shadow flex items-center justify-center mb-4 text-gray-400">
+        <Globe size={22} />
+      </div>
+      <p className="font-bold text-gray-900">Daftar situs klien sedang dimuat</p>
+      <p className="text-sm text-gray-600 mt-1.5 max-w-[15rem]">
+        Mau lihat contoh yang sudah live sekarang? Lihat layanan kami.
+      </p>
+      <a href="/seluruh-layanan" className="inline-flex items-center gap-1.5 text-[#0071E3] font-bold text-sm mt-4">
+        Lihat layanan <ArrowRight size={15} />
+      </a>
+    </div>
+  )
+}
 
 export default function PortfolioGallery() {
   const [sites, setSites] = useState<Site[] | null>(null)
-  const [error, setError] = useState(false)
+  const [filter, setFilter] = useState<Filter>('all')
 
   useEffect(() => {
     if (!SUPABASE_URL || !SUPABASE_ANON) {
-      setError(true)
+      setSites([])
       return
     }
     const url =
@@ -123,83 +222,57 @@ export default function PortfolioGallery() {
     })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((data: Site[]) => setSites(data))
-      .catch(() => setError(true))
+      .catch(() => setSites([]))
   }, [])
 
-  // Gunakan data fallback jika fetch gagal atau belum ada data, 
-  // agar section tetap crawlable dan tidak kosong di sisi client.
-  const displaySites = sites && sites.length > 0 ? sites : FALLBACK_SITES
+  const clientSites = sites ?? []
+  const showWebsite = filter === 'all' || filter === 'website'
 
   return (
     <section id="portofolio" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
             Live Sekarang
           </p>
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-            {sites && sites.length > 0
-              ? <>{sites.length} Website Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
-              : <>Portfolio Klien Kami — <span className="text-[#0071E3]">Bisa Dicek Langsung</span></>
-            }
+            Karya Kami yang Sudah Live — <span className="text-[#0071E3]">Bisa Dicek Langsung</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mt-5 font-medium">
-            Bukan mockup, bukan demo — ini domain nyata yang sudah diakses pelanggan klien kami hari ini.
-            Klik kartu mana saja untuk buka langsung di tab baru.
+            {clientSites.length > 0 ? `Sudah ${clientSites.length} situs klien tayang di domain nyata. ` : ''}
+            Bukan mockup, bukan demo internal — klik kartu mana saja untuk buka langsung di tab baru.
           </p>
+        </div>
+
+        {/* Filter tab */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {FILTERS.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setFilter(f.key)}
+              aria-pressed={filter === f.key}
+              className={`min-h-[44px] px-5 rounded-full text-sm font-bold transition-all ${
+                filter === f.key
+                  ? 'bg-[#0071E3] text-white shadow-lg'
+                  : 'bg-white text-gray-600 border border-black/5 apple-shadow hover:text-gray-900'
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
 
         {/* Gallery */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displaySites.map((site) => (
-            <PortfolioCard key={site.slug} site={site} />
-          ))}
+          {showWebsite && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
+          {showWebsite && clientSites.length === 0 && <EmptyClientCard />}
 
-          {/* Japan Arena Academy — always shown */}
-          <a
-            href="https://www.japanarena.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-          >
-            <span className="absolute top-2 right-2 z-10 bg-green-100 text-green-700 text-xs font-medium px-2 py-0.5 rounded-full">
-              🟢 Live Sekarang
-            </span>
-            {/* Browser chrome */}
-            <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-              </div>
-              <div className="flex-1 mx-1">
-                <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-400 font-mono text-center truncate">
-                  www.japanarena.id
-                </div>
-              </div>
-              <ExternalLink size={12} className="text-gray-300 group-hover:text-[#0071E3] transition-colors shrink-0" />
-            </div>
-            {/* Preview */}
-            <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center">
-              <div className="text-center px-6">
-                <p className="text-4xl mb-3">🎓</p>
-                <p className="text-white font-black text-lg">Japan Arena Academy</p>
-                <p className="text-blue-200 text-sm mt-1">Sistem Pelatihan Bahasa Jepang</p>
-              </div>
-              <div className="absolute inset-0 bg-[#0071E3]/0 group-hover:bg-[#0071E3]/15 transition-all duration-300 flex items-center justify-center">
-                <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                  <ExternalLink size={13} /> Buka Website Live
-                </span>
-              </div>
-            </div>
-            {/* Footer info */}
-            <div className="px-5 py-4">
-              <h3 className="text-sm font-bold text-gray-900 truncate">Japan Arena Academy</h3>
-              <span className="text-xs text-gray-400">Website Sekolah / LMS</span>
-              <p className="text-[10px] text-gray-400 font-mono mt-1 truncate">www.japanarena.id</p>
-            </div>
-          </a>
+          {/* japanarena.id — selalu tampil (Website + Portal LMS) */}
+          <AcademyCard />
+
+          {filter === 'portal' && <PortalDemoCard />}
         </div>
 
         <p className="text-sm text-gray-500 text-center mt-6 italic">

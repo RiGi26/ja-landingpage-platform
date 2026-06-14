@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Shield, Clock,
-  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2,
+  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2, ExternalLink,
   ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
   Bus, Pill, Cross
 } from 'lucide-react'
@@ -396,44 +396,94 @@ function TrustSection() {
     )
 }
 
-function TestimonialSection() {
+// Studi kasus flagship: japanarena.id = produk LMS milik Japan Arena sendiri
+// (bukan klien pihak ketiga). Dipakai sebagai bukti nyata "website + sistem jadi
+// satu", bukan testimoni berkutip — lebih jujur & lebih kuat (angka bisa dicek).
+function FlagshipSection() {
+  const STATS = [
+    { value: '96%', label: 'Lulus JLPT N3' },
+    { value: '200+', label: 'Siswa aktif' },
+    { value: '5.0', label: 'Rating siswa' },
+  ]
   return (
-    <section className="bg-white py-24 px-4 border-t border-black/5">
-      <div className="max-w-6xl mx-auto text-center">
-        <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Kata Mereka</p>
-        <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy mb-3">
-          Yang Klien Kami Bilang
-        </h2>
-        <p className="text-gray-500 mb-12">Tanpa script, tanpa editan — apa adanya.</p>
-
-        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 max-w-lg mx-auto">
-          <p className="text-gray-700 italic text-base leading-relaxed">
-            {/* TODO: Ganti dengan kutipan testimoni asli dari klien */}
-            &ldquo;Websitenya jadi dalam 4 hari, saya kira bakal lama karena
-            saya sama sekali tidak ngerti teknologi.&rdquo;
+    <section className="bg-white py-24 lg:py-28 px-4 border-t border-black/5">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
+            <Star size={13} className="fill-[#0071E3]" /> Karya Andalan Kami
           </p>
-          <div className="mt-4">
-            <p className="font-semibold text-gray-900">
-              {/* TODO: Nama Klien */}
-              [Nama Klien]
-            </p>
-            <p className="text-sm text-gray-500">
-              {/* TODO: Jenis bisnis & kota */}
-              [Jenis Bisnis] · 📍 [Kota]
-            </p>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
+            Kami Bangun. Kami Pakai Sendiri.
+          </h2>
+          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+            japanarena.id — sekolah bahasa Jepang online milik kami. Website-nya tampil di Google,
+            sistem belajarnya jalan tiap hari buat ratusan siswa.
+          </p>
         </div>
 
-        <p className="text-center mt-6">
-          <a
-            href="https://www.japanarena.id"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-blue-500 underline"
-          >
-            Ingin lihat sistem kami langsung? Kunjungi japanarena.id →
-          </a>
-        </p>
+        <div className="grid lg:grid-cols-2 rounded-[40px] overflow-hidden border border-black/[0.04] apple-shadow bg-white">
+          {/* Kiri — narasi + angka + CTA */}
+          <div className="p-8 sm:p-10 lg:p-12 flex flex-col justify-center">
+            <p className="text-[13px] font-bold uppercase tracking-widest text-[#0071E3] mb-4">japanarena.id</p>
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
+              Satu produk, dua hal sekaligus: website yang dilihat calon murid, dan sistem yang ngurus
+              pendaftaran, kelas, ujian, sampai sertifikat otomatis. Sistem yang sama itulah yang kami
+              rakit untuk bisnis Anda.
+            </p>
+
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              {STATS.map((s) => (
+                <div key={s.label}>
+                  <div className="text-3xl md:text-4xl font-black text-gray-900 sf-display-heavy leading-none">{s.value}</div>
+                  <div className="text-xs text-gray-600 font-medium mt-2 leading-snug">{s.label}</div>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mb-8">Semua angka bisa Anda cek sendiri di japanarena.id.</p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a
+                href="https://www.japanarena.id"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
+              >
+                Buka japanarena.id <ExternalLink size={17} />
+              </a>
+              <a
+                href="/seluruh-layanan"
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
+              >
+                Mau Sistem Seperti Ini? <ArrowRight size={17} />
+              </a>
+            </div>
+            <p className="text-[13px] text-gray-500 mt-4">Website mulai Rp 600.000. Live 3–5 hari kerja.</p>
+          </div>
+
+          {/* Kanan — mock browser japanarena.id */}
+          <div className="relative bg-gradient-to-br from-blue-900 to-indigo-900 p-6 sm:p-8 min-h-[300px] lg:min-h-full flex flex-col">
+            <div className="flex items-center gap-2.5 mb-6">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+                <div className="w-2.5 h-2.5 rounded-full bg-white/30" />
+              </div>
+              <div className="flex-1 bg-white/10 border border-white/10 rounded-md px-3 py-1 text-[11px] text-blue-100 font-mono text-center truncate">
+                www.japanarena.id
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col items-center justify-center text-center py-8">
+              <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-5">
+                <GraduationCap size={32} className="text-white" />
+              </div>
+              <p className="text-white font-black text-xl sf-display">Japan Arena Academy</p>
+              <p className="text-blue-200 text-sm mt-1.5">Sistem Pelatihan Bahasa Jepang</p>
+              <span className="inline-flex items-center gap-1.5 mt-5 bg-emerald-500/15 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-400/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live sekarang
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -541,9 +591,9 @@ export default function LandingPage() {
         <GlobalFeatures />
         <SegmenSection />
         <TrustSection />
-        {/* <ProofSection /> */}
+        <ProofSection />
+        <FlagshipSection />
         <PortfolioGallery />
-        <TestimonialSection />
         <FaqSection />
 
         <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">

@@ -190,10 +190,10 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
 - **DI-DEFER ke follow-up (di luar PR ini):** rollout non-toko tetap model lama (D4); fix 7 iframe `/demo/*` 404; relabel demo lama; preview "Bisnis Jasa & Lainnya"; **carousel dots**; responsive `<picture>` (kini kartu pakai thumb desktop). Catat di §10/follow-up.
 - *Verifikasi sisa (owner):* Vercel preview + QA mobile carousel Toko Online (cek 6 grup sub-kat + Kuliner-only); shoot 5 tema `live-noshot` → `sync:corp-preview` ulang → kartu mereka dapat gambar.
 
-**FASE 3 — PR CORP+WB (handoff tema, flag-gated):**
-- CORP: builder URL order tambah `&subkat=&theme=` saat user pilih tema spesifik.
-- WB `/order` intake: baca param → pre-select sub-kategori + tema di brief form (`branding.variant`). Hormati guardrail PR sebelumnya (draft/handleSubmit/skip-logic). Gate flag sampai verified end-to-end.
-- *Verifikasi:* tema kepilih di corp → kebawa → ke-pre-fill di brief → tersimpan ke build.
+**FASE 3 — handoff tema (CORP+WB, WB-dulu): ✅ BUILT (2026-06-15).**
+- ✅ **WB (3a) MERGED & LIVE — PR #161 → master `3381820`** (deploy prod success): `/order` baca `?subkat=&theme=` (validasi `BESPOKE_VARIANTS`) + banner "Tema pilihan"; `payment/create` validasi ulang server + simpan `briefing_data.preselect={variant,sub_kategori}` (no migration, tak pengaruhi harga); briefing `[token]` → `BriefingForm` init sub-kat+varian dari preselect (fallback default) + **derive tipe dari tema** (fix mis-map "Kuliner & Makanan"→restaurant). Hormati guardrail (draft/skip-logic/handleSubmit utuh). Additive — param absen = perilaku lama.
+- ✅ **CORP (3b) — PR #65 (pending owner verify+merge):** kartu galeri jadi **selectable** (`<button>` aria-pressed + ring + check badge, focus-visible), state `selectedTheme` di `page.tsx` (reset saat ganti industri), CTA order append `&subkat=&theme=`. Copy: "Ketuk tema untuk memilih" / "Gaya terpilih diterapkan saat isi brief — bisa diubah".
+- *Verifikasi end-to-end (owner, pasca-deploy):* pilih tema di galeri CORP → CTA bawa param → /order banner "Tema pilihan" → bayar → briefing **pre-select** sub-kat+varian. CTA order → WB **prod** (`nfoa`), jadi #161 wajib live (sudah). ⚠️ alur bayar→briefing tak bisa di-tes sandbox.
 
 ### 9.3 Checklist aksi owner
 - [x] Konfirmasi/override D1–D5 (§9.1) — 2026-06-15

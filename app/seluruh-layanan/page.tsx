@@ -33,7 +33,9 @@ import {
   Loader2,
   Wrench,
   Camera,
-  Crown
+  Crown,
+  ChevronUp,
+  X
 } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -389,6 +391,122 @@ function WaFallbackLine({ waHref }: { waHref: string }) {
   )
 }
 
+// --- Proof strip: hanya klaim proses yang verifiable (bukan social-proof tak bersumber) ---
+function ProofStrip() {
+  return (
+    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-semibold text-gray-500 mt-6">
+      <span className="inline-flex items-center gap-1.5"><Zap size={13} className="text-[#0071E3]" fill="currentColor" /> Live 3–5 hari kerja</span>
+      <span className="inline-flex items-center gap-1.5"><Check size={13} strokeWidth={3} className="text-emerald-500" /> Revisi sampai puas sebelum go-live</span>
+      <span className="inline-flex items-center gap-1.5"><Shield size={13} className="text-gray-400" /> Pembayaran aman via Midtrans</span>
+    </div>
+  )
+}
+
+// --- Bottom-sheet receipt utk mobile (desktop pakai kolom kanan sticky) ---
+function MobileReceiptSheet({
+  open, onClose, selectedTemplate, selectedPackage, selectedAddons, selectedBundleId,
+  serverDone, fiturDone, setupTotal, maintainTotal, animatedSetupTotal, waHref,
+}: {
+  open: boolean; onClose: () => void
+  selectedTemplate: string; selectedPackage: HostingPackage; selectedAddons: Addon[]
+  selectedBundleId: string | null; serverDone: boolean; fiturDone: boolean
+  setupTotal: number; maintainTotal: number; animatedSetupTotal: number; waHref: string
+}) {
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
+  }, [open, onClose])
+
+  const rows = [
+    { label: 'Industri', value: selectedTemplate, done: true },
+    { label: 'Server', value: serverDone ? `${selectedPackage.name} Server` : 'Pilih di langkah 2', done: serverDone },
+    { label: 'Fitur', value: fiturDone ? (selectedAddons.length > 0 ? `${selectedAddons.length} fitur dipilih` : 'Tanpa tambahan') : 'Pilih di langkah 3', done: fiturDone },
+  ]
+
+  return (
+    <div className={`fixed inset-0 z-[60] lg:hidden ${open ? '' : 'pointer-events-none'}`} aria-hidden={!open}>
+      <div onClick={onClose} className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`} />
+      <div role="dialog" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
+        <div className="sticky top-0 bg-white pt-3 pb-2 flex flex-col items-center z-10">
+          <span className="w-10 h-1.5 rounded-full bg-gray-200" />
+        </div>
+        <div className="px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-lg font-black text-gray-900 sf-display-heavy">Rancangan Website Anda</h2>
+              <p className="text-[11px] text-gray-400 font-medium">Terisi otomatis sambil Anda memilih.</p>
+            </div>
+            <button onClick={onClose} aria-label="Tutup" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform shrink-0">
+              <X size={16} />
+            </button>
+          </div>
+
+          <div className="space-y-2 mb-4">
+            {rows.map(row => (
+              <div key={row.label} className="flex items-center gap-3">
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${row.done ? 'bg-emerald-500 text-white' : 'bg-gray-100 text-gray-300 border border-gray-200'}`}>
+                  {row.done ? <Check size={12} strokeWidth={3.5} /> : <span className="w-1.5 h-1.5 rounded-full bg-current" />}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest leading-none mb-0.5">{row.label}</p>
+                  <p className={`text-sm font-bold leading-tight truncate ${row.done ? 'text-gray-900' : 'text-gray-400'}`}>{row.value}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-black/5 pt-3">
+            {selectedBundleId ? (
+              <div className="flex justify-between items-center py-2 border-b border-black/[0.04]">
+                <span className="text-sm text-gray-700 font-medium">{BUNDLES.find(b => b.id === selectedBundleId)?.name}</span>
+                <span className="text-[10px] text-gray-400 line-through tabular-nums">Rp {BUNDLES.find(b => b.id === selectedBundleId)?.normalPrice.toLocaleString('id-ID')}</span>
+              </div>
+            ) : (
+              <>
+                <div className="flex justify-between items-center py-2.5 border-b border-black/[0.04]">
+                  <span className="text-sm text-gray-700 font-medium flex items-center gap-1.5"><Server size={12} className="text-gray-400" /> {selectedPackage.name} Server</span>
+                  <span className="text-sm font-bold text-gray-900 tabular-nums">Rp {selectedPackage.price.toLocaleString('id-ID')}</span>
+                </div>
+                {selectedAddons.map(addon => (
+                  <div key={addon.id} className="flex justify-between items-center py-2.5 border-b border-black/[0.04] last:border-0">
+                    <span className="text-sm text-gray-500 truncate pr-2">{addon.name}</span>
+                    {isPricedAddon(addon)
+                      ? <span className="text-sm font-bold text-gray-900 shrink-0 tabular-nums">Rp {addon.price.toLocaleString('id-ID')}</span>
+                      : <span className="text-[10px] font-bold text-indigo-500 shrink-0 uppercase tracking-wide">{addon.availability === 'portal' ? 'Portal' : 'Konsultasi'}</span>}
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+
+          <div className="mt-4 bg-[#1D1D1F] rounded-2xl p-5 text-white">
+            <p className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Setup Tahun Pertama</p>
+            <p className="text-2xl font-black tracking-tight tabular-nums">Rp {animatedSetupTotal.toLocaleString('id-ID')}</p>
+            {setupTotal >= 4_000_000 && (
+              <div className="bg-white/10 rounded-xl p-3 mt-3">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
+                <p className="text-lg font-black text-green-400 tabular-nums">Rp {Math.ceil(setupTotal * 0.5).toLocaleString('id-ID')}</p>
+              </div>
+            )}
+            <div className="flex justify-between items-center pt-3 mt-3 border-t border-white/10">
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Perpanjangan Thn 2+</span>
+              <span className="text-sm font-black text-gray-300 tabular-nums">Rp {maintainTotal.toLocaleString('id-ID')}</span>
+            </div>
+          </div>
+
+          <a href={waHref} target="_blank" rel="noopener noreferrer" className="mt-4 flex items-center justify-center gap-2 text-xs font-semibold text-[#0071E3] py-2">
+            <MessageCircle size={14} className="text-[#25D366]" aria-hidden="true" /> Butuh bantuan memilih? Chat tim kami
+          </a>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function SeluruhLayananPage() {
   const [currentStep, setCurrentStep] = useState(1)
   const [selectedTemplate, setSelectedTemplate] = useState(TEMPLATE_OPTIONS[0].name)
@@ -402,6 +520,7 @@ export default function SeluruhLayananPage() {
   const [expandedGroups, setExpandedGroups] = useState<string[]>(['general']) // Default open first group
   const [previewLoaded, setPreviewLoaded] = useState(false)
   const [previewError, setPreviewError] = useState(false)
+  const [sheetOpen, setSheetOpen] = useState(false)
 
   useEffect(() => {
     setPreviewLoaded(false)
@@ -565,6 +684,7 @@ Terima kasih.`
             Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah data bisnis Anda kami terima.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
+          <ProofStrip />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -830,6 +950,9 @@ Terima kasih.`
                         <div>
                             <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
                             <p className="text-sm text-gray-600 font-medium mt-1">Semua opsional — pilih yang relevan, lewati sisanya. Estimasi terupdate otomatis.</p>
+                            <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-700">
+                                <Check size={14} strokeWidth={3} /> Revisi sampai puas sebelum go-live
+                            </div>
                         </div>
                         {/* Smart Recommendation Callout */}
                         {hasPortalFeatures && (
@@ -1197,12 +1320,15 @@ Terima kasih.`
       {/* Fixed Bottom Bar (All Screens) */}
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-          <div className="space-y-0.5">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Setup Thn 1</span>
+          <button type="button" onClick={() => setSheetOpen(true)} className="space-y-0.5 text-left lg:pointer-events-none">
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
+                  Setup Thn 1
+                  <span className="lg:hidden inline-flex items-center gap-0.5 text-[#0071E3] normal-case tracking-normal"><ChevronUp size={11} /> Rincian</span>
+              </span>
               <p className="text-xl md:text-2xl font-black text-[#0071E3] tracking-tight tabular-nums">
                   Rp {animatedSetupTotal.toLocaleString('id-ID')}
               </p>
-          </div>
+          </button>
           {currentStep < 3 ? (
               <button
                   onClick={() => {
@@ -1225,6 +1351,22 @@ Terima kasih.`
           )}
         </div>
       </div>
+
+      {/* Bottom-sheet receipt (mobile) — desktop pakai kolom kanan sticky */}
+      <MobileReceiptSheet
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+        selectedTemplate={selectedTemplate}
+        selectedPackage={selectedPackage}
+        selectedAddons={selectedAddons}
+        selectedBundleId={selectedBundleId}
+        serverDone={serverDone}
+        fiturDone={fiturDone}
+        setupTotal={setupTotal}
+        maintainTotal={maintainTotal}
+        animatedSetupTotal={animatedSetupTotal}
+        waHref={`https://wa.me/${WA_NUMBER}?text=${waMessage}`}
+      />
     </div>
   )
 }

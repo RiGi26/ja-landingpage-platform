@@ -182,7 +182,7 @@ Pertanyaan minor: relabel demo tenant lama; perbaiki 7 `/demo/*` yg 404; tambah 
   4. **`SHOOT_ID` override** — peta nama sampel legacy (Atelier noir = `toko-atelier`) → `themeId`, supaya shot lama dikenali tanpa re-shoot; field internal `_shootId` dialirkan ke sync lalu **di-strip** sebelum tulis registry CORP (data CORP bersih).
 - *Gate LOLOS:* `tsc --noEmit` (strict) hijau; `npm run build:theme-registry` emit registry valid; CI Typecheck+Render pass; Vercel Ready. Konversi webp nyata = owner-run.
 
-**FASE 2 — PR di CORP `ja-corp-landing` (konsumsi registry + galeri Model B): ✅ CORE DONE (PR #__, 2026-06-15).**
+**FASE 2 — PR di CORP `ja-corp-landing` (konsumsi registry + galeri Model B): ✅ CORE DONE (PR #64, 2026-06-15).**
 - ✅ Commit `data/theme-registry.json` + `public/theme-previews/**` (12 webp hero-crop, 4 tema live). Di-generate `sync:corp-preview` (sharp jalan, semua ≤120KB @q82).
 - ✅ `app/seluruh-layanan/ThemeGallery.tsx` (komponen) + resolver `galleryForLabel(label)` (peta `LABEL_TO_REGISTRY`: "Toko Online" → semua sub-kat; "Kuliner & Makanan" → filter `kuliner`, per D1). `page.tsx` First Look: galeri kalau tile cocok registry, else preview iframe lama (NOL hapus, additive).
 - ✅ Galeri: kartu webp (`live`) / kartu fallback swatch-mood (`live-noshot`, **tak pinjam gambar tema lain**, §6) + nama + swatch + microcopy + badge jujur ("Contoh tampilan" / "Gambar segera"); grid `≥sm`, **carousel scroll-snap di mobile** (`.scrollbar-hide`, no lib). Aspect kartu 4:3.

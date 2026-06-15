@@ -92,9 +92,16 @@
             "mood": "#A9885E",
             "bg": "light",
             "icon": "Sun",
-            "status": "live-noshot",
-            "thumbs": null,
-            "fullThumbs": null
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/fashion/atelier-ivoire-mobile.webp",
+              "tablet": "/theme-previews/toko_online/fashion/atelier-ivoire-tablet.webp",
+              "desktop": "/theme-previews/toko_online/fashion/atelier-ivoire-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/fashion/atelier-ivoire-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/fashion/atelier-ivoire-mobile-full.webp"
+            }
           }
         ]
       },
@@ -162,9 +169,16 @@
             "mood": "#22D3EE",
             "bg": "dark",
             "icon": "Cpu",
-            "status": "live-noshot",
-            "thumbs": null,
-            "fullThumbs": null
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/gadget/gadget-onyx-mobile.webp",
+              "tablet": "/theme-previews/toko_online/gadget/gadget-onyx-tablet.webp",
+              "desktop": "/theme-previews/toko_online/gadget/gadget-onyx-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/gadget/gadget-onyx-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/gadget/gadget-onyx-mobile-full.webp"
+            }
           }
         ]
       },
@@ -183,9 +197,16 @@
             "mood": "#6F7A66",
             "bg": "light",
             "icon": "Armchair",
-            "status": "live-noshot",
-            "thumbs": null,
-            "fullThumbs": null
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/rumah/rumah-selaras-mobile.webp",
+              "tablet": "/theme-previews/toko_online/rumah/rumah-selaras-tablet.webp",
+              "desktop": "/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/rumah/rumah-selaras-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/rumah/rumah-selaras-mobile-full.webp"
+            }
           }
         ]
       }
@@ -225,9 +246,16 @@
             "mood": "#C9A24A",
             "bg": "dark",
             "icon": "Wine",
-            "status": "live-noshot",
-            "thumbs": null,
-            "fullThumbs": null
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/restaurant/finedining/restaurant-lux-mobile.webp",
+              "tablet": "/theme-previews/restaurant/finedining/restaurant-lux-tablet.webp",
+              "desktop": "/theme-previews/restaurant/finedining/restaurant-lux-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/restaurant/finedining/restaurant-lux-desktop-full.webp",
+              "mobile": "/theme-previews/restaurant/finedining/restaurant-lux-mobile-full.webp"
+            }
           }
         ]
       }

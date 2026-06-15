@@ -103,7 +103,7 @@ const TEMPLATE_OPTIONS = [
 ]
 
 const TEMPLATE_PREVIEWS: Record<string, {
-  demoUrl: string
+  demoUrl?: string // kosong = belum ada demo live → render mockup "Pratinjau konsep" (bukan iframe mati)
   tagline: string
   mockUrl: string
   mockupGradient: string
@@ -191,7 +191,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '📦',
   },
   'Kuliner & Makanan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/kuliner',
+    // Tampil lewat galeri tema (galleryForLabel) — preview iframe lama tak dipakai.
     tagline: 'Website kuliner yang bikin pelanggan langsung lapar & order',
     mockUrl: 'nama-kuliner.japanarena.com',
     mockupGradient: 'from-orange-700 to-yellow-900',
@@ -199,12 +199,20 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🍽️',
   },
   'Studio & Kreatif': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/studio',
+    // Demo live belum tersedia → tampil sebagai mockup "Pratinjau konsep".
     tagline: 'Portofolio & booking studio yang menonjolkan karya terbaik Anda',
     mockUrl: 'studio.japanarena.com',
     mockupGradient: 'from-purple-800 to-slate-900',
     sections: ['Hero Portofolio', 'Galeri Karya', 'Layanan & Paket', 'Booking Sesi', 'Kontak'],
     emoji: '📷',
+  },
+  'Bisnis Jasa & Lainnya': {
+    // Belum ada demo live → mockup "Pratinjau konsep" (sebelumnya: tile ini kosong).
+    tagline: 'Website jasa yang bikin pelanggan percaya & langsung menghubungi Anda',
+    mockUrl: 'jasa.japanarena.com',
+    mockupGradient: 'from-cyan-800 to-slate-900',
+    sections: ['Hero + CTA Hubungi', 'Layanan & Tarif', 'Galeri Pengerjaan', 'Testimoni', 'Kontak & Lokasi'],
+    emoji: '🔧',
   },
 }
 
@@ -781,18 +789,21 @@ Terima kasih.`
                                     const gallery = galleryForLabel(selectedTemplate)
                                     const preview = TEMPLATE_PREVIEWS[selectedTemplate]
                                     if (!gallery && !preview) return null
+                                    const hasLiveDemo = !!preview?.demoUrl // mockup-only entry → jangan oversell "live"
                                     return (
                                       <>
                                         <div className="flex items-center gap-3 mb-2">
-                                            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{gallery ? 'Tema Siap Pakai' : 'Pratinjau Template'}</p>
+                                            <div className={`w-2 h-2 rounded-full ${gallery || hasLiveDemo ? 'bg-emerald-400 animate-pulse' : 'bg-gray-500'}`} />
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{gallery ? 'Tema Siap Pakai' : hasLiveDemo ? 'Pratinjau Template' : 'Pratinjau Konsep'}</p>
                                         </div>
-                                        <h3 className="text-2xl font-black mb-1 sf-display-heavy">{gallery ? 'Pilihan Tema' : 'Preview Template'}</h3>
+                                        <h3 className="text-2xl font-black mb-1 sf-display-heavy">{gallery ? 'Pilihan Tema' : hasLiveDemo ? 'Preview Template' : 'Konsep Tampilan'}</h3>
                                         <p className="text-sm text-gray-400 font-medium mb-6">
                                             {gallery ? (
                                                 <>Beberapa gaya tema premium siap pakai untuk <span className="text-white font-bold">{selectedTemplate}</span>. Gambar di bawah cuma contoh; konten diisi sesuai bisnis Anda setelah pesan.</>
-                                            ) : (
+                                            ) : hasLiveDemo ? (
                                                 <>Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> Anda.</>
+                                            ) : (
+                                                <>Gambaran kasar struktur website <span className="text-white font-bold">{selectedTemplate}</span> Anda — bukan demo live; tampilan akhir dirancang khusus.</>
                                             )}
                                         </p>
 
@@ -805,6 +816,7 @@ Terima kasih.`
                                                 onClear={() => setSelectedTheme(null)}
                                             />
                                         ) : preview ? (
+                                        preview.demoUrl ? (
                                         <div>
                                             <a
                                                 href={preview.demoUrl}
@@ -883,6 +895,44 @@ Terima kasih.`
                                                 <ExternalLink size={10} /> Klik preview untuk melihat demo live di tab baru
                                             </p>
                                         </div>
+                                        ) : (
+                                        /* Belum ada demo live → mockup "Pratinjau konsep" yang jujur (bukan iframe/link mati) */
+                                        <div>
+                                            <div className="rounded-[20px] overflow-hidden border border-white/10">
+                                                <div className="bg-white/[0.07] px-4 py-3 flex items-center gap-2.5 border-b border-white/10">
+                                                    <div className="flex gap-1.5">
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
+                                                        <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
+                                                    </div>
+                                                    <span className="flex-1 text-[10px] font-black uppercase tracking-wider text-gray-400 text-center">
+                                                        Pratinjau konsep
+                                                    </span>
+                                                    <span className="w-3 shrink-0" aria-hidden />
+                                                </div>
+                                                <div className={`bg-gradient-to-br ${preview.mockupGradient} aspect-[4/3] p-8`}>
+                                                    <div className="text-5xl mb-4">{preview.emoji}</div>
+                                                    <div className="h-5 w-48 bg-white/30 rounded-lg mb-2" />
+                                                    <div className="h-3 w-64 max-w-full bg-white/20 rounded mb-5" />
+                                                    <div className="flex gap-2 mb-5">
+                                                        <div className="h-8 w-28 bg-white/30 rounded-full" />
+                                                        <div className="h-8 w-20 bg-white/10 rounded-full border border-white/20" />
+                                                    </div>
+                                                    <p className="text-[11px] text-white/60 italic font-medium">{preview.tagline}</p>
+                                                </div>
+                                                <div className="bg-gray-800/60 px-4 py-3 flex gap-2 flex-wrap border-t border-white/5">
+                                                    {preview.sections.map(s => (
+                                                        <span key={s} className="text-[9px] font-black bg-white/10 text-gray-400 px-2.5 py-1 rounded-full uppercase tracking-wider">
+                                                            {s}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="text-[10px] text-gray-500 font-medium mt-3 leading-relaxed">
+                                                Tampilan akhir dirancang khusus sesuai bisnis Anda — ini gambaran kasar strukturnya, bukan website jadi.
+                                            </p>
+                                        </div>
+                                        )
                                         ) : null}
                                       </>
                                     )

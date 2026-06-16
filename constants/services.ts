@@ -15,7 +15,7 @@ export interface Addon {
   name: string;
   description: string;
   price: number;
-  category: 'general' | 'lms' | 'ecommerce' | 'travel' | 'medical';
+  category: 'general' | 'lms' | 'ecommerce' | 'travel' | 'medical' | 'restaurant';
   availability: AddonAvailability;
   isPortalFeature?: boolean;
   portalName?: string;
@@ -551,6 +551,22 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         availability: 'live',
       },
     ]
+  },
+  restaurant: {
+    title: 'Restoran',
+    items: [
+      {
+        // Reservasi meja = fitur LIVE di mesin (booking → "Reservasi Meja" +
+        // route /booking). id 'resv-meja' di-alias ke `booking` di WB catalog,
+        // jadi terbawa + ter-build saat order. Cermin pola klinik (doc-sched).
+        id: 'resv-meja',
+        name: 'Reservasi Meja Online',
+        description: 'Pengunjung pesan meja online — pilih tanggal, jam, dan jumlah orang. Reservasi masuk langsung ke restoran tanpa perlu telepon.',
+        price: 300000,
+        category: 'restaurant',
+        availability: 'live',
+      },
+    ]
   }
 };
 
@@ -565,7 +581,7 @@ export const RECOMMENDED_ADDONS: Record<string, string[]> = {
   'Toko Online':            ['cart', 'checkout', 'midtrans', 'wa-auto'],
   'Website Sekolah / LPK':  ['wa-auto', 'admin-dash'],
   'Website Institusi':      ['admin-dash', 'seo', 'wa-auto', 'email-auto', 'g-sheets'],
-  'Website Restaurant':     ['admin-dash', 'wa-auto', 'midtrans', 'invoice-auto', 'seo', 'live-chat'],
+  'Website Restaurant':     ['resv-meja', 'admin-dash', 'wa-auto', 'midtrans', 'invoice-auto', 'seo', 'live-chat'],
   'Personal Branding':      ['seo', 'admin-dash', 'live-chat', 'email-auto'],
   'Blog / Media':           ['seo', 'admin-dash', 'email-auto'],
   'Travel & Rental':        ['booking', 'midtrans'],

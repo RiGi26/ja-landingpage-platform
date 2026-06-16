@@ -72,13 +72,16 @@ const THEME_REGISTRY = themeRegistryRaw as unknown as ThemeRegistry
 // ── Resolver: nama tile CORP → entri registry (+ filter sub-kat opsional) ─────
 // Tile yang sudah punya tema bespoke siap-shot di registry. Tile lain → null →
 // page.tsx pakai preview iframe lama. "Kuliner & Makanan" (D1) menyaring ke
-// sub-kat kuliner saja; "Toko Online" menampilkan seluruh sub-kat; "Website
-// Restaurant" → registry restaurant (tema fine-dining "Lux", menggantikan
-// preview iframe izakaya tunggal yang off-brand untuk kelas premium).
+// sub-kat kuliner saja; sisanya menampilkan seluruh sub-kat tipe-nya. Galeri
+// menggantikan preview iframe tunggal yang sering off-brand (mis. izakaya untuk
+// fine dining, spa untuk klinik medis) supaya pembeli lihat tema yg pas SEBELUM
+// bayar. Kunci HARUS sama persis dgn `name` di TEMPLATE_OPTIONS (page.tsx).
 const LABEL_TO_REGISTRY: Record<string, { tipe: string; subKategori?: string }> = {
   'Toko Online': { tipe: 'toko_online' },
   'Kuliner & Makanan': { tipe: 'toko_online', subKategori: 'kuliner' },
   'Website Restaurant': { tipe: 'restaurant' },
+  'Website Klinik & Spa': { tipe: 'klinik' },
+  'Website Sekolah / LPK': { tipe: 'sekolah' },
 }
 
 export function galleryForLabel(

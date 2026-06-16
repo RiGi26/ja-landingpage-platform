@@ -209,6 +209,62 @@
             }
           }
         ]
+      },
+      {
+        "id": "kesehatan",
+        "nama": "Kesehatan & Herbal",
+        "icon": "Leaf",
+        "themes": [
+          {
+            "themeId": "kesehatan-jamu",
+            "themeKey": "toko-kesehatan",
+            "subKategori": "kesehatan",
+            "subKategoriNama": "Kesehatan & Herbal",
+            "nama": "Jamu",
+            "deskripsi": "Apotek herbal bergaya warisan — kraft & kunyit, label & segel. Untuk madu, jamu, teh herbal, minyak esensial, suplemen.",
+            "mood": "#A8661A",
+            "bg": "light",
+            "icon": "Soup",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/kesehatan/kesehatan-jamu-mobile.webp",
+              "tablet": "/theme-previews/toko_online/kesehatan/kesehatan-jamu-tablet.webp",
+              "desktop": "/theme-previews/toko_online/kesehatan/kesehatan-jamu-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/kesehatan/kesehatan-jamu-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/kesehatan/kesehatan-jamu-mobile-full.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "anak",
+        "nama": "Bayi & Anak",
+        "icon": "Baby",
+        "themes": [
+          {
+            "themeId": "anak-ceria",
+            "themeKey": "toko-anak",
+            "subKategori": "anak",
+            "subKategoriNama": "Bayi & Anak",
+            "nama": "Ceria",
+            "deskripsi": "Cerah & ramah, membulat dan menyenangkan. Untuk mainan, perlengkapan bayi, baju anak, snack.",
+            "mood": "#2491C8",
+            "bg": "light",
+            "icon": "Smile",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/toko_online/anak/anak-ceria-mobile.webp",
+              "tablet": "/theme-previews/toko_online/anak/anak-ceria-tablet.webp",
+              "desktop": "/theme-previews/toko_online/anak/anak-ceria-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/toko_online/anak/anak-ceria-desktop-full.webp",
+              "mobile": "/theme-previews/toko_online/anak/anak-ceria-mobile-full.webp"
+            }
+          }
+        ]
       }
     ],
     "fallback": {
@@ -258,6 +314,62 @@
             }
           }
         ]
+      },
+      {
+        "id": "warung",
+        "nama": "Warung / Kedai",
+        "icon": "Store",
+        "themes": [
+          {
+            "themeId": "warung-hangat",
+            "themeKey": "restaurant-warung",
+            "subKategori": "warung",
+            "subKategoriNama": "Warung / Kedai",
+            "nama": "Hangat",
+            "deskripsi": "Merakyat & hangat seperti masakan rumah — krem, bata, dan mustard. Untuk warung makan, kedai, masakan rumahan, angkringan.",
+            "mood": "#C0432E",
+            "bg": "warm",
+            "icon": "Soup",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/restaurant/warung/warung-hangat-mobile.webp",
+              "tablet": "/theme-previews/restaurant/warung/warung-hangat-tablet.webp",
+              "desktop": "/theme-previews/restaurant/warung/warung-hangat-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/restaurant/warung/warung-hangat-desktop-full.webp",
+              "mobile": "/theme-previews/restaurant/warung/warung-hangat-mobile-full.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "cafe",
+        "nama": "Cafe / Coffee Shop",
+        "icon": "Coffee",
+        "themes": [
+          {
+            "themeId": "cafe-seduh",
+            "themeKey": "restaurant-cafe",
+            "subKategori": "cafe",
+            "subKategoriNama": "Cafe / Coffee Shop",
+            "nama": "Seduh",
+            "deskripsi": "Specialty warm-minimal — oat, espresso, dan aksen moka. Untuk coffee shop, manual brew, brunch, bakery cafe.",
+            "mood": "#A4642E",
+            "bg": "light",
+            "icon": "Coffee",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/restaurant/cafe/cafe-seduh-mobile.webp",
+              "tablet": "/theme-previews/restaurant/cafe/cafe-seduh-tablet.webp",
+              "desktop": "/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/restaurant/cafe/cafe-seduh-desktop-full.webp",
+              "mobile": "/theme-previews/restaurant/cafe/cafe-seduh-mobile-full.webp"
+            }
+          }
+        ]
       }
     ],
     "fallback": {
@@ -271,6 +383,144 @@
         "Lokasi & Maps"
       ],
       "emoji": "🍜"
+    }
+  },
+  "klinik": {
+    "tipe": "klinik",
+    "corpLabels": [],
+    "hasReadyThemes": true,
+    "subKategori": [
+      {
+        "id": "umum",
+        "nama": "Klinik Umum / Gigi",
+        "icon": "Stethoscope",
+        "themes": [
+          {
+            "themeId": "klinik-bersih",
+            "themeKey": "klinik-umum",
+            "subKategori": "umum",
+            "subKategoriNama": "Klinik Umum / Gigi",
+            "nama": "Klinik Bersih",
+            "deskripsi": "Biru tepercaya & menenangkan, klinis dan rapi. Untuk klinik umum, dokter gigi, poli, layanan keluarga.",
+            "mood": "#2B5BD7",
+            "bg": "light",
+            "icon": "Stethoscope",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/klinik/umum/klinik-bersih-mobile.webp",
+              "tablet": "/theme-previews/klinik/umum/klinik-bersih-tablet.webp",
+              "desktop": "/theme-previews/klinik/umum/klinik-bersih-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/klinik/umum/klinik-bersih-desktop-full.webp",
+              "mobile": "/theme-previews/klinik/umum/klinik-bersih-mobile-full.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "estetik",
+        "nama": "Skincare / Estetik",
+        "icon": "Sparkles",
+        "themes": [
+          {
+            "themeId": "estetik-lumen",
+            "themeKey": "klinik-estetik",
+            "subKategori": "estetik",
+            "subKategoriNama": "Skincare / Estetik",
+            "nama": "Lumen",
+            "deskripsi": "Editorial derma yang tenang — serif elegan, plum & orchid di atas putih lembut. Untuk klinik kecantikan, dermatologi, perawatan kulit & wajah.",
+            "mood": "#9A5C8E",
+            "bg": "light",
+            "icon": "Sparkles",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/klinik/estetik/estetik-lumen-mobile.webp",
+              "tablet": "/theme-previews/klinik/estetik/estetik-lumen-tablet.webp",
+              "desktop": "/theme-previews/klinik/estetik/estetik-lumen-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/klinik/estetik/estetik-lumen-desktop-full.webp",
+              "mobile": "/theme-previews/klinik/estetik/estetik-lumen-mobile-full.webp"
+            }
+          }
+        ]
+      },
+      {
+        "id": "wellness",
+        "nama": "Fisio / Wellness",
+        "icon": "HeartPulse",
+        "themes": [
+          {
+            "themeId": "wellness-sanara",
+            "themeKey": "klinik-wellness",
+            "subKategori": "wellness",
+            "subKategoriNama": "Fisio / Wellness",
+            "nama": "Sanara",
+            "deskripsi": "Tenang & menyembuhkan — batu hangat, teal lembut, dan bentuk daun. Untuk fisioterapi, terapi, spa medis, pusat kebugaran.",
+            "mood": "#3E8378",
+            "bg": "light",
+            "icon": "Sprout",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/klinik/wellness/wellness-sanara-mobile.webp",
+              "tablet": "/theme-previews/klinik/wellness/wellness-sanara-tablet.webp",
+              "desktop": "/theme-previews/klinik/wellness/wellness-sanara-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/klinik/wellness/wellness-sanara-desktop-full.webp",
+              "mobile": "/theme-previews/klinik/wellness/wellness-sanara-mobile-full.webp"
+            }
+          }
+        ]
+      }
+    ],
+    "fallback": {
+      "tagline": "",
+      "mockupGradient": "from-slate-800 to-slate-900",
+      "sections": [],
+      "emoji": "🌐"
+    }
+  },
+  "sekolah": {
+    "tipe": "sekolah",
+    "corpLabels": [],
+    "hasReadyThemes": true,
+    "subKategori": [
+      {
+        "id": "reguler",
+        "nama": "Sekolah Umum (SD/SMP/SMA)",
+        "icon": "GraduationCap",
+        "themes": [
+          {
+            "themeId": "reguler-almamater",
+            "themeKey": "sekolah-reguler",
+            "subKategori": "reguler",
+            "subKategoriNama": "Sekolah Umum (SD/SMP/SMA)",
+            "nama": "Almamater",
+            "deskripsi": "Wibawa akademik — navy, krem, dan emas berkelas dengan lencana sekolah. Untuk SD/SMP/SMA, sekolah favorit, yayasan, boarding school.",
+            "mood": "#15294B",
+            "bg": "light",
+            "icon": "GraduationCap",
+            "status": "live",
+            "thumbs": {
+              "mobile": "/theme-previews/sekolah/reguler/reguler-almamater-mobile.webp",
+              "tablet": "/theme-previews/sekolah/reguler/reguler-almamater-tablet.webp",
+              "desktop": "/theme-previews/sekolah/reguler/reguler-almamater-desktop.webp"
+            },
+            "fullThumbs": {
+              "desktop": "/theme-previews/sekolah/reguler/reguler-almamater-desktop-full.webp",
+              "mobile": "/theme-previews/sekolah/reguler/reguler-almamater-mobile-full.webp"
+            }
+          }
+        ]
+      }
+    ],
+    "fallback": {
+      "tagline": "",
+      "mockupGradient": "from-slate-800 to-slate-900",
+      "sections": [],
+      "emoji": "🌐"
     }
   }
 }

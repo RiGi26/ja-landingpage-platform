@@ -70,12 +70,15 @@ export type ThemeRegistry = Record<string, IndustryPreview>
 const THEME_REGISTRY = themeRegistryRaw as unknown as ThemeRegistry
 
 // ── Resolver: nama tile CORP → entri registry (+ filter sub-kat opsional) ─────
-// Hanya tile yang di-rollout Fase 2 (D4: Toko Online dulu). Tile lain → null →
+// Tile yang sudah punya tema bespoke siap-shot di registry. Tile lain → null →
 // page.tsx pakai preview iframe lama. "Kuliner & Makanan" (D1) menyaring ke
-// sub-kat kuliner saja; "Toko Online" menampilkan seluruh sub-kat.
+// sub-kat kuliner saja; "Toko Online" menampilkan seluruh sub-kat; "Website
+// Restaurant" → registry restaurant (tema fine-dining "Lux", menggantikan
+// preview iframe izakaya tunggal yang off-brand untuk kelas premium).
 const LABEL_TO_REGISTRY: Record<string, { tipe: string; subKategori?: string }> = {
   'Toko Online': { tipe: 'toko_online' },
   'Kuliner & Makanan': { tipe: 'toko_online', subKategori: 'kuliner' },
+  'Website Restaurant': { tipe: 'restaurant' },
 }
 
 export function galleryForLabel(

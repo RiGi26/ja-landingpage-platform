@@ -53,6 +53,13 @@ import ThemeGallery, { galleryForLabel } from './ThemeGallery'
 
 const WA_NUMBER = '6281296917963'
 
+// Basis URL app Website Builder (form order). Dipusatkan supaya saat custom domain
+// dipasang (mis. studio.japanarena.com) cukup ubah env var NEXT_PUBLIC_WEBSITEBUILDER_URL
+// — tak perlu sentuh kode. Fallback = domain Vercel saat ini (perilaku tak berubah).
+const WB_URL =
+  process.env.NEXT_PUBLIC_WEBSITEBUILDER_URL?.replace(/\/+$/, '') ||
+  'https://ja-websitebuilder-platform-nfoa.vercel.app'
+
 // --- CUSTOM HOOK: Odometer Animation ---
 function useAnimatedNumber(value: number, duration = 800) {
   const [displayValue, setDisplayValue] = useState(value);
@@ -495,12 +502,19 @@ function MobileReceiptSheet({
           <div className="mt-4 bg-[#1D1D1F] rounded-2xl p-5 text-white">
             <p className="text-[9px] font-bold text-gray-500 uppercase tracking-widest mb-1">Setup Tahun Pertama</p>
             <p className="text-2xl font-black tracking-tight tabular-nums">Rp {animatedSetupTotal.toLocaleString('id-ID')}</p>
-            {setupTotal >= 4_000_000 && (
+            {setupTotal >= 4_000_000 ? (
               <div className="bg-white/10 rounded-xl p-3 mt-3">
                 <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
                 <p className="text-lg font-black text-green-400 tabular-nums">Rp {Math.ceil(setupTotal * 0.5).toLocaleString('id-ID')}</p>
+                <p className="text-[10px] text-gray-400 mt-1">Sisanya dibayar sebelum website live.</p>
               </div>
-            )}
+            ) : setupTotal > 0 ? (
+              <div className="bg-white/10 rounded-xl p-3 mt-3">
+                <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · Lunas</p>
+                <p className="text-lg font-black text-green-400 tabular-nums">Rp {setupTotal.toLocaleString('id-ID')}</p>
+                <p className="text-[10px] text-gray-400 mt-1">Sekali bayar, langsung kami proses — tanpa cicilan.</p>
+              </div>
+            ) : null}
             <div className="flex justify-between items-center pt-3 mt-3 border-t border-white/10">
               <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Perpanjangan Thn 2+</span>
               <span className="text-sm font-black text-gray-300 tabular-nums">Rp {maintainTotal.toLocaleString('id-ID')}</span>
@@ -1294,25 +1308,33 @@ Terima kasih.`
                       Rp {animatedSetupTotal.toLocaleString('id-ID')}
                     </p>
                     <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                      Dengan semua fitur tambahan: maks. sekitar{" "}
-                      <span className="font-medium">Rp 4.250.000</span>
+                      Bayar sesuai fitur yang dipilih — tanpa biaya tersembunyi.
                       <span
-                        title="Estimasi jika semua fitur opsional dipilih. Anda bebas pilih hanya yang dibutuhkan."
-                        className="cursor-help text-gray-300 border border-gray-300 rounded-full w-4 h-4 flex items-center justify-center text-xs leading-none"
+                        title="Kalau semua fitur opsional ditambah, estimasi maksimal sekitar Rp 4.250.000. Anda bebas pilih hanya yang dibutuhkan."
+                        className="cursor-help text-gray-300 border border-gray-300 rounded-full w-4 h-4 flex items-center justify-center text-xs leading-none shrink-0"
                       >
                         ?
                       </span>
                     </p>
                   </div>
 
-                  {setupTotal >= 4_000_000 && (
+                  {setupTotal >= 4_000_000 ? (
                     <div className="bg-white/10 rounded-xl p-3 mb-3">
                       <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · DP 50%</p>
                       <p className="text-lg font-black text-green-400 tabular-nums">
                         Rp {Math.ceil(setupTotal * 0.5).toLocaleString('id-ID')}
                       </p>
+                      <p className="text-[10px] text-gray-400 mt-1">Sisanya dibayar sebelum website live.</p>
                     </div>
-                  )}
+                  ) : setupTotal > 0 ? (
+                    <div className="bg-white/10 rounded-xl p-3 mb-3">
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Dibayar Sekarang · Lunas</p>
+                      <p className="text-lg font-black text-green-400 tabular-nums">
+                        Rp {setupTotal.toLocaleString('id-ID')}
+                      </p>
+                      <p className="text-[10px] text-gray-400 mt-1">Sekali bayar, langsung kami proses — tanpa cicilan.</p>
+                    </div>
+                  ) : null}
 
                   <div className="flex justify-between items-center pt-3 border-t border-white/10">
                     <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Perpanjangan Thn 2+</span>
@@ -1361,7 +1383,7 @@ Terima kasih.`
           <h2 className="text-2xl font-black text-gray-900 mb-10 tracking-tight">3 Langkah Sederhana — Website Anda Live</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
-              { step: '1', icon: '💳', title: 'Bayar DP Online', desc: 'Pilih paket, bayar DP 50% lewat QRIS atau transfer. Konfirmasi masuk otomatis via WA.' },
+              { step: '1', icon: '💳', title: 'Bayar Online', desc: 'Bayar lewat QRIS atau transfer. Order Rp 4 juta ke atas cukup DP 50% dulu; di bawah itu sekali bayar lunas. Konfirmasi otomatis via WA.' },
               { step: '2', icon: '🔨', title: 'Tim Bangun (3–5 Hari)', desc: 'Tim kami bangun website sesuai industri Anda. Anda bisa pantau progres via Order ID.' },
               { step: '3', icon: '✏️', title: 'Anda Edit Sendiri & Launch', desc: 'Website live di domain Anda. Edit konten kapan saja dari dashboard — tanpa perlu hubungi kami.' },
             ].map(s => (
@@ -1412,9 +1434,7 @@ Terima kasih.`
               </button>
           ) : (
               <a
-                  href={`https://ja-websitebuilder-platform-nfoa.vercel.app/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&maintain=${maintainTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}${selectedBundleId ? `&bundle=${encodeURIComponent(selectedBundleId)}` : ''}${refCode ? `&ref=${encodeURIComponent(refCode)}` : ''}${selectedTheme ? `&subkat=${encodeURIComponent(selectedTheme.subkat)}&theme=${encodeURIComponent(selectedTheme.theme)}` : ''}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`${WB_URL}/order?industri=${encodeURIComponent(selectedTemplate)}&estimasi=${setupTotal}&maintain=${maintainTotal}&paket=${encodeURIComponent(selectedPackage.name)}&addons=${encodeURIComponent(selectedAddons.map(a => a.id).join(','))}${selectedBundleId ? `&bundle=${encodeURIComponent(selectedBundleId)}` : ''}${refCode ? `&ref=${encodeURIComponent(refCode)}` : ''}${selectedTheme ? `&subkat=${encodeURIComponent(selectedTheme.subkat)}&theme=${encodeURIComponent(selectedTheme.theme)}` : ''}`}
                   className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg active:scale-[0.96] transition-all hover:bg-blue-600"
               >
                   Buat Order & Lacak <ArrowRight size={16} />

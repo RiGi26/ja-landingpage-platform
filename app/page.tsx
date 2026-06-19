@@ -647,7 +647,7 @@ export default function LandingPage() {
                   {/* Brand Column */}
                   <div className="col-span-full md:col-span-4 space-y-6">
                       <div className="flex items-center gap-3">
-                          <Image src="/images/webzoka_logo_wide.png" alt="Webzoka" width={140} height={40} className="h-10 w-auto object-contain" />
+                          <Image src="/images/webzoka_logo_transparan.png" alt="Webzoka" width={160} height={44} className="h-11 w-auto object-contain" />
                       </div>
                       <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
                           Untuk bisnis yang sudah capek ngurus semuanya sendiri — dari website profesional sampai operasional yang berjalan otomatis. Tanpa ribet, tanpa drama.

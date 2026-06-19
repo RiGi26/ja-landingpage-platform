@@ -42,16 +42,13 @@ export default function LmsNavbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/images/Icon.png"
-              alt="Japan Arena"
-              width={32}
-              height={32}
-              className="w-8 h-8 object-contain transition-transform group-hover:scale-110"
+              src="/images/webzoka_logo_wide.png"
+              alt="Webzoka"
+              width={140}
+              height={40}
+              className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
               priority
             />
-            <span className="text-xl font-bold tracking-tight text-gray-900 hidden sm:block whitespace-nowrap">
-              Japan Arena Corp
-            </span>
           </Link>
 
           {/* Desktop Nav */}
@@ -80,7 +77,7 @@ export default function LmsNavbar() {
           {/* Right actions */}
           <div className="flex items-center gap-3">
             <a
-              href={waLink('Halo Japan Arena Corp, saya ingin lihat demo sistem untuk bisnis saya.')}
+              href={waLink('Halo Webzoka, saya ingin lihat demo sistem untuk bisnis saya.')}
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:inline-flex items-center gap-2 px-4 py-2 bg-[#0071E3] text-white text-sm font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] glow-button"

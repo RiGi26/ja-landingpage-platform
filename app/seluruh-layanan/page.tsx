@@ -649,7 +649,7 @@ export default function SeluruhLayananPage() {
     const activeBundle = selectedBundleId ? BUNDLES.find(b => b.id === selectedBundleId) : null;
     const bundleNote = activeBundle ? `\n\n*(Menggunakan Promo Rakitan: ${activeBundle.name})*` : '';
 
-    const msg = `Halo Japan Arena Corp,
+    const msg = `Halo Webzoka,
 
 Saya tertarik menggunakan layanan berikut:
 
@@ -687,7 +687,7 @@ Terima kasih.`
         {/* WhatsApp Sticky Button (Mobile) - positioned higher to avoid fixed bottom bar */}
         <div className="fixed bottom-[100px] right-6 z-40 md:hidden">
           <a
-            href={waLink('Halo Japan Arena, saya butuh bantuan merakit website.')}
+            href={waLink('Halo Webzoka, saya butuh bantuan merakit website.')}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat via WhatsApp"

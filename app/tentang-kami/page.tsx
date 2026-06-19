@@ -5,8 +5,8 @@ import { MapPin, Mail, Phone, ArrowRight, MessageCircle } from 'lucide-react'
 const WA_NUMBER = '6281296917963'
 
 export const metadata = {
-  title: 'Tentang Kami — Japan Arena Corp',
-  description: 'Japan Arena Corp adalah platform digital buatan Indonesia untuk UKM. Website builder, LMS, portal klinik, farmasi, dan travel — semuanya dalam satu ekosistem.',
+  title: 'Tentang Kami — Webzoka',
+  description: 'Webzoka adalah platform digital buatan Indonesia untuk UKM. Website builder, LMS, portal klinik, farmasi, dan travel — semuanya dalam satu ekosistem.',
 }
 
 export default function TentangKamiPage() {
@@ -30,13 +30,13 @@ export default function TentangKamiPage() {
             🇮🇩 Platform Digital Buatan Indonesia
           </p>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight tracking-tight sf-display-heavy mb-6">
-            Tentang Japan Arena Corp
+            Tentang Webzoka
           </h1>
           <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
-            Japan Arena Corp adalah perusahaan teknologi Indonesia yang membangun perangkat lunak bisnis (SaaS) untuk usaha kecil dan menengah — dari website profesional hingga sistem operasional lengkap.
+            Webzoka adalah perusahaan teknologi Indonesia yang membangun perangkat lunak bisnis (SaaS) untuk usaha kecil dan menengah — dari website profesional hingga sistem operasional lengkap.
           </p>
           <p className="text-base text-gray-500 leading-relaxed max-w-2xl mt-4">
-            Nama "Japan Arena" mencerminkan visi kami: standar kualitas dan presisi ala Jepang, dibangun dengan hati untuk pelaku bisnis Indonesia.
+            Nama "Webzoka" mencerminkan visi kami: platform digital yang kuat dan mudah, dibangun dengan hati untuk pelaku bisnis Indonesia.
           </p>
         </div>
 

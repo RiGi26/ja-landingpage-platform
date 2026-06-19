@@ -538,7 +538,7 @@ function FaqSection() {
           <p className="text-sm text-gray-600 font-medium">
             Masih ada pertanyaan?{' '}
             <a
-              href={waLink('Halo Japan Arena, saya punya pertanyaan sebelum mulai.')}
+              href={waLink('Halo Webzoka, saya punya pertanyaan sebelum mulai.')}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#0071E3] font-bold hover:underline"
@@ -577,7 +577,7 @@ export default function LandingPage() {
         {/* WhatsApp Sticky Button (Mobile) */}
         <div className="fixed bottom-6 right-6 z-50 md:hidden">
           <a
-            href={waLink('Halo Japan Arena, saya ingin tanya soal layanan.')}
+            href={waLink('Halo Webzoka, saya ingin tanya soal layanan.')}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat via WhatsApp"
@@ -610,7 +610,7 @@ export default function LandingPage() {
                 Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
                 Masih ragu?{' '}
                 <a
-                  href={waLink('Halo Japan Arena Corp, saya mau tanya dulu sebelum mulai.')}
+                  href={waLink('Halo Webzoka, saya mau tanya dulu sebelum mulai.')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#0071E3] font-bold hover:underline"
@@ -647,14 +647,13 @@ export default function LandingPage() {
                   {/* Brand Column */}
                   <div className="col-span-full md:col-span-4 space-y-6">
                       <div className="flex items-center gap-3">
-                          <Image src="/images/Icon.png" alt="Japan Arena Corp" width={40} height={40} className="object-contain" />
-                          <span className="text-xl font-bold tracking-tight text-gray-900 sf-display-heavy">Japan Arena Corp</span>
+                          <Image src="/images/webzoka_logo_wide.png" alt="Webzoka" width={140} height={40} className="h-10 w-auto object-contain" />
                       </div>
                       <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
                           Untuk bisnis yang sudah capek ngurus semuanya sendiri — dari website profesional sampai operasional yang berjalan otomatis. Tanpa ribet, tanpa drama.
                       </p>
                       <a
-                          href={waLink('Halo Japan Arena Corp, saya ingin tanya soal layanan.')}
+                          href={waLink('Halo Webzoka, saya ingin tanya soal layanan.')}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors"
@@ -721,10 +720,10 @@ export default function LandingPage() {
               <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
                   <div>
                     <p className="text-[12px] text-gray-600 font-medium">
-                        © {new Date().getFullYear()} Japan Arena Corp. All rights reserved.
+                        &copy; {new Date().getFullYear()} Webzoka. All rights reserved.
                     </p>
                     <p className="text-xs text-gray-500 mt-1">
-                      Japan Arena Corp adalah nama usaha terdaftar yang beroperasi di bawah hukum Republik Indonesia.
+                      Webzoka adalah nama usaha terdaftar yang beroperasi di bawah hukum Republik Indonesia.
                     </p>
                   </div>
                   <div className="flex gap-8 text-[12px] text-gray-600 font-medium">

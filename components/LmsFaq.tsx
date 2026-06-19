@@ -38,7 +38,7 @@ const FAQS = [
   },
   {
     q: 'Apakah bisa pakai domain dan brand sendiri?',
-    a: 'Ya, tersedia di paket Custom. Platform tampil dengan nama domain bisnis Anda (contoh: portal.bisnis-anda.com) tanpa jejak Japan Arena Platform sama sekali.',
+    a: 'Ya, tersedia di paket Custom. Platform tampil dengan nama domain bisnis Anda (contoh: portal.bisnis-anda.com) tanpa jejak Webzoka Platform sama sekali.',
   },
   {
     q: 'Apa yang terjadi jika saya berhenti berlangganan?',

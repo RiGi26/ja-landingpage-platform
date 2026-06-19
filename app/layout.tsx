@@ -18,31 +18,31 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
+  title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
   description:
     'Bikin website bisnis siap pakai (Klinik, LMS, Farmasi, Travel) mulai Rp 600rb. Proses 3–5 hari kerja, terima beres tanpa coding. Cek demonya di sini!',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
   ],
-  authors: [{ name: 'Japan Arena Corp' }],
+  authors: [{ name: 'Webzoka' }],
   verification: {
     google: 'demIw8L-D7hiN7YrFATE8fJGPbkamQh9K8pu65FYcDI',
   },
   metadataBase: new URL('https://japanarena.com'),
   alternates: { canonical: 'https://japanarena.com' },
   openGraph: {
-    title: 'Japan Arena Corp — Website & Sistem Bisnis untuk UKM Indonesia',
+    title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
     description: 'Website bisnis dalam 3–5 hari kerja. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
     url: 'https://japanarena.com',
-    siteName: 'Japan Arena Corp',
+    siteName: 'Webzoka',
     locale: 'id_ID',
     type: 'website',
-    images: [{ url: '/images/logo-light.jpg', width: 1200, height: 630, alt: 'Japan Arena Corp' }],
+    images: [{ url: '/images/logo-light.jpg', width: 1200, height: 630, alt: 'Webzoka' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Japan Arena Corp — Website & Sistem Bisnis UKM Indonesia',
+    title: 'Webzoka — Website & Sistem Bisnis UKM Indonesia',
     description: 'Website bisnis dalam 3–5 hari kerja. Mulai Rp 600.000.',
     images: ['/images/logo-light.jpg'],
   },
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Japan Arena Corp',
+  name: 'Webzoka',
   url: 'https://japanarena.com',
   logo: 'https://japanarena.com/images/Icon.png',
   description: 'Penyedia website bisnis dan portal sistem operasional untuk UKM Indonesia.',
@@ -66,7 +66,7 @@ const organizationSchema = {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'Japan Arena Corp',
+  name: 'Webzoka',
   url: 'https://japanarena.com',
 }
 

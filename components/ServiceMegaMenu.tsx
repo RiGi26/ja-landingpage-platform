@@ -10,7 +10,7 @@ const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-pla
 const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
 
 function wa(service: string) {
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Japan Arena Corp, saya tertarik dengan layanan ${service}.`)}`
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Webzoka, saya tertarik dengan layanan ${service}.`)}`
 }
 
 type ColItem = { label: string; desc: string; href: string }
@@ -72,7 +72,7 @@ const COLUMNS: Column[] = [
   },
 ]
 
-const WA_GENERAL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Halo Japan Arena, saya ingin konsultasi mengenai layanan yang tersedia.')}`
+const WA_GENERAL = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Halo Webzoka, saya ingin konsultasi mengenai layanan yang tersedia.')}`
 
 // Hover color per column index
 const HOVER_CLASSES = [

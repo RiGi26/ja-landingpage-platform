@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { X, GraduationCap, Cross, Pill, Bus, ShoppingBag, ArrowRight, ExternalLink } from 'lucide-react'
+import { X, GraduationCap, Cross, Pill, Warehouse, Bus, ShoppingBag, ArrowRight, ExternalLink } from 'lucide-react'
 
 type Demo = {
   title: string
@@ -33,6 +33,13 @@ const DEMOS: Demo[] = [
     icon: Pill,
     href: 'https://ja-pharmacy-platform.vercel.app/demo',
     color: 'bg-indigo-50 text-indigo-600',
+  },
+  {
+    title: 'Portal Stok & Operasi',
+    desc: 'Stok & lot otomatis (FEFO), pesanan, produksi & resep, laporan keuangan — operasi bisnis dalam satu portal.',
+    icon: Warehouse,
+    href: 'https://ja-stock-platform.vercel.app/demo',
+    color: 'bg-amber-50 text-amber-600',
   },
   {
     title: 'Portal Travel & Rental',

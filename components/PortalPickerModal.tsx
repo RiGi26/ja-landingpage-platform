@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, LayoutDashboard, GraduationCap, Building2, ShoppingBag, ArrowRight, LogIn, Pill } from 'lucide-react'
+import { X, LayoutDashboard, GraduationCap, Building2, ShoppingBag, ArrowRight, LogIn, Pill, Boxes } from 'lucide-react'
 
 export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   if (!isOpen) return null
@@ -30,6 +30,14 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       href: 'https://ja-pharmacy-platform.vercel.app/login',
       color: 'bg-indigo-50 text-indigo-600',
       btn: 'bg-indigo-600'
+    },
+    {
+      title: 'Portal Stok & Operasi',
+      desc: 'Stok, produksi/BOM, kasir & laporan keuangan.',
+      icon: Boxes,
+      href: 'https://stock.japanarena.id/login',
+      color: 'bg-amber-50 text-amber-600',
+      btn: 'bg-amber-600'
     },
     {
       title: 'Portal Jastip Jepang',

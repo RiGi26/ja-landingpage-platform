@@ -53,6 +53,7 @@ const COLUMNS: Column[] = [
       { label: 'Portal Klinik & Medis',  desc: 'Rekam medis, antrian, billing',   href: `${CLINIC_BASE}/demo`           },
       { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://ja-rental-platform.vercel.app/auth/login' },
       { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://ja-pharmacy-platform.vercel.app/login' },
+      { label: 'Portal Stok & Operasi',  desc: 'Stok, produksi/BOM, kasir & keuangan', href: 'https://stock.japanarena.id'   },
       { label: 'Dashboard Bisnis Pro',   desc: 'Monitoring real-time omzet',       href: wa('Dashboard Bisnis')          },
       { label: 'Membership System',      desc: 'Sistem member & plan premium',     href: wa('Membership & Langganan')    },
     ],

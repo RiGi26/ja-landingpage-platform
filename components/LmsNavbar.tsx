@@ -42,11 +42,11 @@ export default function LmsNavbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image
-              src="/images/webzoka_logo_transparan.png"
-              alt="Webzoka"
-              width={160}
-              height={44}
-              className="h-11 w-auto object-contain transition-transform group-hover:scale-105"
+              src="/images/logo-wide-clean.png"
+              alt="Webzoka — Part of Japan Arena Corp"
+              width={170}
+              height={56}
+              className="h-10 md:h-11 w-auto object-contain transition-transform group-hover:scale-105"
               priority
             />
           </Link>

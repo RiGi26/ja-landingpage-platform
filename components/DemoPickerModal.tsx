@@ -38,7 +38,7 @@ const DEMOS: Demo[] = [
     title: 'Portal Stok & Operasi',
     desc: 'Stok & lot otomatis (FEFO), pesanan, produksi & resep, laporan keuangan — operasi bisnis dalam satu portal.',
     icon: Warehouse,
-    href: 'https://stock.japanarena.id/demo',
+    href: 'https://ja-stock-platform.vercel.app/demo',
     color: 'bg-amber-50 text-amber-600',
   },
   {

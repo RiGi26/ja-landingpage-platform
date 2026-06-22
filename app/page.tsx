@@ -6,7 +6,7 @@ import {
   Lock, Check, ArrowRight, Zap, Shield, Clock,
   X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2, ExternalLink,
   ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
-  Bus, Pill, Cross
+  Bus, Pill, Cross, Boxes
 } from 'lucide-react'
 import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
@@ -104,7 +104,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
 
 function SocialProofBar() {
   const STATS = [
-    { value: '5 Platform', label: 'Siap Pakai' },
+    { value: '6 Platform', label: 'Siap Pakai' },
     { value: '3–5 hari', label: 'Waktu Live' },
     { value: '24/7', label: 'Sistem Berjalan' },
     { value: 'Mulai 600rb', label: 'Biaya Terjangkau' },
@@ -230,6 +230,16 @@ function SegmenSection() {
         href: 'https://ja-pharmacy-platform.vercel.app/demo',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
+        isExternal: true,
+      },
+      {
+        icon: Boxes,
+        label: 'Portal Stok & Operasi',
+        description: 'Kelola stok gudang, resep & produksi, pesanan, kasir, sampai laporan keuangan dalam satu portal. Kasir, dapur produksi & gudang tersinkron real-time. Cocok untuk: F&B, manufaktur UKM, retail & grosir.',
+        cta: 'Lihat Portal',
+        href: 'https://stock.japanarena.id',
+        color: 'text-amber-600',
+        bg: 'bg-amber-50',
         isExternal: true,
       },
       {
@@ -670,6 +680,7 @@ export default function LandingPage() {
                           <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
                           <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
+                          <li><a href="https://stock.japanarena.id" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
                           <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
                       </ul>
                   </div>

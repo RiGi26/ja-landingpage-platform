@@ -72,7 +72,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     plans: [
       { tier: 'Starter', price: 0, feat: ['Akses penuh semua fitur Business', 'Coba 14 hari — tanpa kartu kredit', 'Data aman setelah trial berakhir'] },
       { tier: 'Pro', price: 499000, feat: ['Unlimited Produk', 'Lacak Lot & Kadaluarsa (FEFO)', 'Laporan Omzet & HPP', '3 Pengguna'], popular: true },
-      { tier: 'Business', price: 999000, feat: ['WA Otomatis (Pembeli & Tim)', 'Modul Gaji & Slip via WA', 'Hingga 3 Brand', 'Download Excel/PDF + Priority Support'] },
+      { tier: 'Business', price: 999000, feat: ['WA Otomatis (Pembeli & Tim)', 'Modul Gaji & Slip via WA', 'Pengguna tak terbatas', 'Download Excel/PDF + Priority Support'] },
     ],
     comparison: [
       { label: 'Pantau stok & lot kadaluarsa (FEFO)', pro: true, business: true },
@@ -83,10 +83,10 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       { label: 'Download laporan (Excel/PDF)', pro: false, business: true },
       { label: 'Modul gaji & slip karyawan via WA', pro: false, business: true },
       { label: 'Laporan laba rugi + susut barang', pro: false, business: true },
-      { label: 'Jumlah brand/toko', pro: '1', business: '3' },
+      { label: 'Prioritas bantuan', pro: false, business: true },
+      { label: 'Jumlah produk & pesanan', pro: 'Tak terbatas', business: 'Tak terbatas' },
       { label: 'Anggota tim', pro: '3 orang', business: 'Tak terbatas' },
-      { label: 'Jumlah produk', pro: '100', business: 'Tak terbatas' },
-      { label: 'Storage file & foto', pro: '5 GB', business: '30 GB' },
+      { label: 'Penyimpanan foto & file', pro: 'Wajar pakai', business: 'Wajar pakai' },
     ]
   }
 ]

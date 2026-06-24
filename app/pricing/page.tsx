@@ -404,10 +404,10 @@ export default function PricingPage() {
                 <Zap size={12} fill="currentColor" /> Keuntungan Ekosistem Terintegrasi
               </div>
               <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight sf-display-heavy">
-                Gunakan Seluruh Ekosistem, Hemat Hingga <span className="text-blue-500">40%</span>
+                Gunakan Seluruh Ekosistem, Hemat <span className="text-blue-500">25%</span> dari Total
               </h2>
               <p className="text-gray-400 text-lg leading-relaxed mb-8 font-medium">
-                Bisnis Anda berkembang pesat? Gabungkan Portal Klinik, Farmasi, dan LMS dalam satu paket <span className="text-white font-black">JapanArena Business Bundle</span> untuk efisiensi maksimal dan sinkronisasi data real-time.
+                Bisnis Anda berkembang pesat? Gabungkan 3 portal atau lebih dalam satu paket <span className="text-white font-black">JapanArena Business Bundle</span> dan hemat 25% dari total langganan — kombinasi apa pun, data tersinkron real-time.
               </p>
               <div className="flex flex-wrap justify-center md:justify-start gap-6">
                 <div className="flex items-center gap-2 text-sm font-bold">
@@ -423,8 +423,9 @@ export default function PricingPage() {
             </div>
             
             <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 text-center border-dashed">
-                <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle mulai</p>
-                <div className="text-5xl font-black text-white mb-6 sf-display-heavy">Rp 1.499.000<span className="text-lg text-gray-500 font-medium">/bln</span></div>
+                <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle</p>
+                <div className="text-5xl font-black text-white mb-1 sf-display-heavy">Hemat 25%</div>
+                <p className="text-sm text-gray-400 font-medium mb-6">dari total langganan bulanan</p>
                 <a
                   href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20tertarik%20dengan%20Business%20Bundle%20untuk%20beberapa%20portal."
                   target="_blank"
@@ -434,12 +435,10 @@ export default function PricingPage() {
                   Chat Tim Kami <MessageCircle size={20} />
                 </a>
                 <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                  *Paket Business Bundle berlaku untuk langganan minimal 3 portal
-                  sekaligus (contoh: LMS + Klinik + Farmasi). Harga satuan normal:
-                  Rp 499.000–749.000/bln × 3 portal = Rp 1.497.000–2.247.000/bln.
-                  Dengan bundle: mulai Rp 1.499.000/bln —{" "}
+                  *Berlaku untuk langganan minimal 3 portal sekaligus, kombinasi
+                  apa pun. Contoh: LMS + Klinik + Travel (Rp 1.847.000/bln) →{" "}
                   <span className="font-medium text-green-400">
-                    hemat hingga Rp 748.000/bln
+                    Rp 1.385.250/bln, hemat Rp 461.750
                   </span>.
                 </p>
             </div>

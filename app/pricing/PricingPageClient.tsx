@@ -200,6 +200,21 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
           {currentPlatform.plans.map((plan, idx) => {
             const price = resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
+            const isStarter = plan.tier === 'Starter'
+            const coreTier = plan.tier === 'Business' ? 'enterprise' : 'pro'
+            // Portal dgn alur checkout self-service yang sudah jadi (saat ini hanya LMS).
+            const subscribeReady = currentPlatform.id === 'lms'
+            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Japan Arena, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
+            const ctaHref = isStarter
+              ? currentPlatform.registerUrl
+              : subscribeReady
+                ? `${currentPlatform.registerUrl}?intent=subscribe&tier=${coreTier}`
+                : chatHref
+            const ctaLabel = isStarter
+              ? 'Mulai trial 14 hari — gratis'
+              : subscribeReady
+                ? 'Mulai berlangganan'
+                : 'Chat untuk berlangganan'
             return (
             <div
               key={plan.tier}
@@ -237,7 +252,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
 
               <div className="mt-auto">
                 <Link
-                  href={plan.tier === 'Starter' ? currentPlatform.registerUrl : "https://wa.me/6281296917963"}
+                  href={ctaHref}
                   className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
                     plan.popular
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
@@ -246,7 +261,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                       : 'bg-gray-900 text-white hover:bg-black'
                   }`}
                 >
-                  {plan.tier === 'Starter' ? 'Mulai trial 14 hari — gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai berlangganan'} <ArrowRight size={16} />
+                  {ctaLabel} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>

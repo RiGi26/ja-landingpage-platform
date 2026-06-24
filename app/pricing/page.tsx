@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus } from 'lucide-react'
+import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -58,6 +58,19 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       { tier: 'Starter', price: 0, feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
       { tier: 'Pro', price: 749000, feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
       { tier: 'Business', price: 1899000, feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
+    ]
+  },
+  {
+    id: 'stock',
+    name: 'Portal Operasi (Stock)',
+    subtitle: 'Stok, pesanan & operasi bisnis',
+    icon: Boxes,
+    demoUrl: 'https://stock.webzoka.com/demo',
+    registerUrl: 'https://wa.me/6281296917963?text=' + encodeURIComponent('Halo Japan Arena, saya ingin coba trial Portal Operasi (Stock) 14 hari gratis.'),
+    plans: [
+      { tier: 'Starter', price: 0, feat: ['100 Produk', 'Kelola Pesanan & Stok', 'Resep Produksi (BOM)'] },
+      { tier: 'Pro', price: 499000, feat: ['Unlimited Produk', 'Lacak Lot & Kadaluarsa (FEFO)', 'Laporan Omzet & HPP', '3 Pengguna'], popular: true },
+      { tier: 'Business', price: 999000, feat: ['WA Otomatis (Pembeli & Tim)', 'Modul Gaji & Slip via WA', 'Hingga 3 Brand', 'Download Excel/PDF + Priority Support'] },
     ]
   }
 ]
@@ -213,6 +226,11 @@ export default function PricingPage() {
           {activeTab === 'clinic' && (
             <p className="text-xs text-gray-400">
               ¹ SATUSEHAT = sistem rekam medis resmi Kementerian Kesehatan RI, wajib bagi klinik yang terdaftar di Kemkes.
+            </p>
+          )}
+          {activeTab === 'stock' && (
+            <p className="text-sm text-gray-500">
+              📦 <span className="font-semibold text-gray-700">Cocok untuk warung & produksi:</span> pesanan dari website langsung masuk ke stok, lengkap dengan lacak lot kadaluarsa (FEFO) dan resep produksi.
             </p>
           )}
           <p className="text-sm text-gray-500">

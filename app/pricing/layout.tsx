@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Harga Langganan Portal LMS, Klinik, Farmasi, Travel | Webzoka',
+  title: 'Harga Langganan Portal LMS, Klinik, Farmasi, Travel, Operasi (Stock) | Webzoka',
   description:
-    'Portal bisnis siap pakai mulai Rp 449.000/bulan. Trial 14 hari gratis tanpa kartu kredit. Hemat 44–74% dibanding vendor lain. Tanpa setup fee.',
+    'Portal bisnis siap pakai mulai Rp 449.000/bulan. Termasuk Portal Operasi (Stock) untuk kelola stok, lot kadaluarsa & pesanan. Trial 14 hari gratis tanpa kartu kredit. Hemat 44–74% dibanding vendor lain. Tanpa setup fee.',
   keywords: [
     'harga sistem klinik', 'harga lms karyawan', 'software apotek murah',
     'sistem travel rental indonesia', 'saas bisnis indonesia', 'software bisnis ukm',
+    'software stok barang', 'sistem inventory ukm', 'aplikasi pesanan dan stok',
   ],
   alternates: { canonical: 'https://japanarena.com/pricing' },
   openGraph: {

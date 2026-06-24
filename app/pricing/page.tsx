@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes } from 'lucide-react'
+import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -104,7 +104,7 @@ export default function PricingPage() {
         <div className="mb-8 animate-fade-in">
           <Link 
             href="/" 
-            className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-blue-600 transition-colors group"
           >
             <div className="w-11 h-11 rounded-full bg-white border border-black/5 flex items-center justify-center group-hover:bg-blue-50 group-hover:border-blue-100 transition-all shadow-sm">
               <ArrowRight size={14} className="rotate-180" />
@@ -130,26 +130,30 @@ export default function PricingPage() {
         <div className="text-center mb-5">
           <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
         </div>
-        <div role="tablist" aria-label="Pilih platform" className="flex flex-wrap justify-center gap-2 mb-4">
-          {PLATFORMS.map(p => (
+        <div role="tablist" aria-label="Pilih platform" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-4">
+          {PLATFORMS.map(p => {
+            const isActive = activeTab === p.id
+            return (
             <button
               key={p.id}
+              id={`tab-${p.id}`}
               role="tab"
-              aria-selected={activeTab === p.id}
+              aria-selected={isActive}
               aria-controls={`tabpanel-${p.id}`}
               onClick={() => setActiveTab(p.id)}
-              className={`flex flex-col items-start px-6 py-3 rounded-2xl font-bold text-sm transition-all ${
-                activeTab === p.id
-                ? 'bg-blue-600 text-white shadow-lg scale-105'
-                : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-100'
+              className={`flex flex-col items-start justify-center text-left h-full min-h-[64px] px-4 py-3 rounded-2xl border font-bold text-sm transition-all ${
+                isActive
+                ? 'bg-blue-600 text-white border-blue-600 shadow-lg ring-2 ring-blue-200'
+                : 'bg-white text-gray-700 border-gray-100 hover:bg-gray-50 hover:border-gray-200'
               }`}
             >
               <div className="flex items-center gap-2">
-                <p.icon size={16} /> {p.name}
+                <p.icon size={16} className="shrink-0" /> {p.name}
               </div>
-              <span className="text-xs text-gray-500 mt-0.5">{p.subtitle}</span>
+              <span className={`text-xs mt-0.5 ${isActive ? 'text-blue-100' : 'text-gray-500'}`}>{p.subtitle}</span>
             </button>
-          ))}
+            )
+          })}
         </div>
         <div className="text-center mb-12">
           <a
@@ -162,6 +166,21 @@ export default function PricingPage() {
           </a>
         </div>
 
+        {/* Demo link — once per platform */}
+        {currentPlatform.demoUrl && (
+          <div className="text-center mb-8">
+            <Link
+              href={currentPlatform.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl border border-blue-100 bg-white text-blue-600 font-bold text-sm hover:bg-blue-50 transition-all group/demo"
+            >
+              Lihat demo {currentPlatform.name}
+              <ExternalLink size={14} className="group-hover/demo:translate-x-0.5 group-hover/demo:-translate-y-0.5 transition-transform" />
+            </Link>
+          </div>
+        )}
+
         {/* Pricing Cards */}
         <div
           role="tabpanel"
@@ -169,19 +188,19 @@ export default function PricingPage() {
           aria-labelledby={`tab-${currentPlatform.id}`}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
           {currentPlatform.plans.map((plan, idx) => (
-            <div 
+            <div
               key={plan.tier}
-              className={`relative bg-white rounded-[40px] p-8 border-2 transition-all flex flex-col ${
+              className={`relative bg-white rounded-3xl p-8 border-2 transition-all flex flex-col ${
                 plan.popular ? 'border-blue-600 shadow-2xl shadow-blue-100 ring-4 ring-blue-50' : 'border-black/[0.03] shadow-sm'
               }`}
             >
               {plan.popular && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1 shadow-lg">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wide flex items-center gap-1 shadow-lg">
                   <Sparkles size={12} /> Paling Populer
                 </div>
               )}
-              <div className="mb-8">
-                <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
+              <div className="mb-6">
+                <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-black text-gray-900 sf-display-heavy">
                     {plan.price === 0 ? 'Gratis' : `Rp ${plan.price.toLocaleString('id-ID')}`}
@@ -192,7 +211,7 @@ export default function PricingPage() {
                 </div>
               </div>
 
-              <div className="space-y-4 mb-12 flex-1">
+              <div className="space-y-3 mb-8 flex-1">
                 {plan.feat.map(f => (
                   <div key={f} className="flex items-center gap-3 text-sm text-gray-600 font-bold">
                     <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
@@ -203,21 +222,10 @@ export default function PricingPage() {
                 ))}
               </div>
 
-              <div className="mt-auto space-y-3">
-                {currentPlatform.demoUrl && (
-                  <Link
-                    href={currentPlatform.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full py-3 rounded-xl border-2 border-blue-50 text-blue-600 font-bold flex items-center justify-center gap-2 hover:bg-blue-50 transition-all text-sm group/demo"
-                  >
-                    Lihat Demo Sistem <ExternalLink size={14} className="group-hover/demo:translate-x-0.5 group-hover/demo:-translate-y-0.5 transition-transform" />
-                  </Link>
-                )}
-
+              <div className="mt-auto">
                 <Link
                   href={plan.tier === 'Starter' ? currentPlatform.registerUrl : "https://wa.me/6281296917963"}
-                  className={`w-full py-4 rounded-2xl font-black flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm uppercase tracking-widest ${
+                  className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
                     plan.popular
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
                     : plan.tier === 'Starter'
@@ -225,7 +233,7 @@ export default function PricingPage() {
                       : 'bg-gray-900 text-white hover:bg-black'
                   }`}
                 >
-                  {plan.tier === 'Starter' ? 'Mulai Trial 14 Hari — Gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai Berlangganan'} <ArrowRight size={16} />
+                  {plan.tier === 'Starter' ? 'Mulai trial 14 hari — gratis' : plan.tier === 'Business' ? 'Chat untuk Business Plan' : 'Mulai berlangganan'} <ArrowRight size={16} />
                 </Link>
               </div>
             </div>
@@ -235,22 +243,25 @@ export default function PricingPage() {
         {/* Contextual notes per platform */}
         <div className="mb-12 space-y-2 text-center">
           {activeTab === 'lms' && (
-            <p className="text-sm text-gray-500">
-              📁 <span className="font-semibold text-gray-700">Format konten yang didukung:</span> Video, PDF, Quiz, Tugas, Live Zoom — semua bisa diupload dari dashboard.
+            <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
+              <FolderOpen size={15} className="mt-0.5 shrink-0 text-gray-500" />
+              <span><span className="font-semibold text-gray-700">Format konten yang didukung:</span> Video, PDF, Quiz, Tugas, Live Zoom — semua bisa diupload dari dashboard.</span>
             </p>
           )}
           {activeTab === 'clinic' && (
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-500">
               ¹ SATUSEHAT = sistem rekam medis resmi Kementerian Kesehatan RI, wajib bagi klinik yang terdaftar di Kemkes.
             </p>
           )}
           {activeTab === 'stock' && (
-            <p className="text-sm text-gray-500">
-              📦 <span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Business.</span> Setelah trial, pilih Pro atau Business. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.
+            <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
+              <Package size={15} className="mt-0.5 shrink-0 text-gray-500" />
+              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Business.</span> Setelah trial, pilih Pro atau Business. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.</span>
             </p>
           )}
-          <p className="text-sm text-gray-500">
-            💡 <span className="font-medium text-gray-700">Harga berlaku untuk 1 akun bisnis.</span>{' '}
+          <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
+            <Lightbulb size={15} className="mt-0.5 shrink-0 text-gray-500" />
+            <span><span className="font-medium text-gray-700">Harga berlaku untuk 1 akun bisnis.</span>{' '}
             Punya lebih dari 1 cabang?{' '}
             <a
               href="https://wa.me/6281296917963?text=Saya%20ingin%20tanya%20soal%20paket%20multi-cabang%20Japan%20Arena"
@@ -260,12 +271,13 @@ export default function PricingPage() {
             >
               Tanyakan paket bundle →
             </a>
+            </span>
           </p>
         </div>
 
         {/* Feature comparison table — only for platforms that define `comparison` (currently Stock) */}
         {currentPlatform.comparison && (
-          <div className="mb-20 overflow-hidden rounded-[24px] border border-black/[0.03] bg-white shadow-sm">
+          <div className="mb-20 overflow-hidden rounded-3xl border border-black/[0.03] bg-white shadow-sm">
             <div className="px-6 py-6 border-b border-black/5 text-center">
               <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-2">Detail Fitur</p>
               <h2 className="text-2xl font-black text-gray-900 tracking-tight sf-display-heavy">
@@ -276,7 +288,7 @@ export default function PricingPage() {
               <table className="w-full min-w-[480px]">
                 <thead>
                   <tr className="border-b border-black/5 bg-gray-50/60">
-                    <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-widest text-gray-400 w-1/2">Fitur</th>
+                    <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-widest text-gray-500 w-1/2">Fitur</th>
                     <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-gray-600 w-1/4">Pro</th>
                     <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-blue-600 w-1/4">Business</th>
                   </tr>
@@ -317,7 +329,7 @@ export default function PricingPage() {
               </table>
             </div>
             <div className="px-6 py-4 border-t border-black/5 text-center">
-              <p className="text-xs text-gray-400 font-medium">
+              <p className="text-xs text-gray-500 font-medium">
                 Coba semua fitur Business gratis 14 hari — tanpa kartu kredit.
               </p>
             </div>
@@ -362,14 +374,14 @@ export default function PricingPage() {
                 a: 'Tidak. Semua fitur dalam paket langsung aktif tanpa biaya setup tambahan. Yang ada hanya biaya langganan bulanan yang tercantum.',
               },
             ].map((faq, i) => (
-              <div key={i} className="bg-[#F5F5F7] rounded-[24px] p-8 border border-black/[0.03]">
+              <div key={i} className="bg-[#F5F5F7] rounded-3xl p-8 border border-black/[0.03]">
                 <h3 className="text-base font-bold text-gray-900 mb-3">{faq.q}</h3>
                 <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
               </div>
             ))}
           </div>
           <div className="text-center mt-10">
-            <p className="text-sm text-gray-400 font-medium">
+            <p className="text-sm text-gray-500 font-medium">
               Pertanyaan lain?{' '}
               <a
                 href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20punya%20pertanyaan%20soal%20langganan."
@@ -384,12 +396,12 @@ export default function PricingPage() {
         </div>
 
         {/* ECOSYSTEM BUNDLE STRATEGY */}
-        <div className="bg-gradient-to-br from-gray-900 to-black rounded-[48px] p-8 md:p-16 text-white relative overflow-hidden shadow-2xl">
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 md:p-16 text-white relative overflow-hidden shadow-2xl">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -mr-32 -mt-32" />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-xl text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-blue-600/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-blue-500/30">
-                < Zap size={12} fill="currentColor" /> Keuntungan Ekosistem Terintegrasi
+                <Zap size={12} fill="currentColor" /> Keuntungan Ekosistem Terintegrasi
               </div>
               <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight sf-display-heavy">
                 Gunakan Seluruh Ekosistem, Hemat Hingga <span className="text-blue-500">40%</span>
@@ -410,7 +422,7 @@ export default function PricingPage() {
               </div>
             </div>
             
-            <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-[40px] p-8 text-center border-dashed">
+            <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 text-center border-dashed">
                 <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle mulai</p>
                 <div className="text-5xl font-black text-white mb-6 sf-display-heavy">Rp 1.499.000<span className="text-lg text-gray-500 font-medium">/bln</span></div>
                 <a
@@ -426,7 +438,7 @@ export default function PricingPage() {
                   sekaligus (contoh: LMS + Klinik + Farmasi). Harga satuan normal:
                   Rp 499.000–749.000/bln × 3 portal = Rp 1.497.000–2.247.000/bln.
                   Dengan bundle: mulai Rp 1.499.000/bln —{" "}
-                  <span className="font-medium text-green-600">
+                  <span className="font-medium text-green-400">
                     hemat hingga Rp 748.000/bln
                   </span>.
                 </p>

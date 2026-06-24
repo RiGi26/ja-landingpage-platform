@@ -27,24 +27,32 @@ export default function ComparisonInfographic() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           
           {/* SISI KIRI: Grafik Harga */}
-          <div className="lg:col-span-7 space-y-6">
-            <p className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-8">Perbandingan Biaya Langganan Bulanan (PRO)</p>
-            
+          <div className="lg:col-span-7 space-y-8">
+            <p className="text-sm font-bold text-gray-500 uppercase tracking-widest mb-8">Perbandingan Biaya Langganan Bulanan (PRO)</p>
+
             {COMPARISON_DATA.map((item) => (
-              <div key={item.portal} className="space-y-2 group">
-                <div className="flex justify-between items-end text-sm">
+              <div key={item.portal} className="space-y-2.5 group">
+                <div className="flex justify-between items-center text-sm">
                   <span className="font-bold text-gray-900">{item.portal}</span>
-                  <span className="text-green-600 font-black px-2 py-0.5 bg-green-50 rounded text-[10px]">HEMAT {item.save}</span>
+                  <span className="text-green-700 font-black px-2 py-0.5 bg-green-50 border border-green-100 rounded-full text-[10px]">HEMAT {item.save}</span>
                 </div>
-                <div className="relative h-12 w-full bg-gray-50 rounded-xl border border-gray-100 overflow-hidden">
-                  {/* Bar Vendor Lain */}
-                  <div className="absolute inset-y-2 left-2 bg-gray-200 rounded-lg transition-all duration-1000" style={{ width: '90%' }}>
-                    <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-gray-500 italic">Vendor Lain: Rp {item.others.toLocaleString('id-ID')}</span>
+
+                {/* Bar Vendor Lain (skala penuh = referensi) */}
+                <div className="flex items-center gap-3">
+                  <span className="hidden sm:block w-24 shrink-0 text-xs font-bold text-gray-500">Vendor Lain</span>
+                  <div className="flex-1 h-7 bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="h-full bg-gray-300 rounded-lg transition-all duration-1000" style={{ width: '100%' }} />
                   </div>
-                  {/* Bar JapanArena */}
-                  <div className="absolute inset-y-2 left-2 bg-blue-600 rounded-lg shadow-lg shadow-blue-200 transition-all duration-1000 delay-300" style={{ width: `${(item.ja / item.others) * 90}%` }}>
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-white">JapanArena: Rp {item.ja.toLocaleString('id-ID')}</span>
+                  <span className="w-28 shrink-0 text-right text-xs font-bold text-gray-600 tabular-nums">Rp {item.others.toLocaleString('id-ID')}</span>
+                </div>
+
+                {/* Bar JapanArena (proporsional terhadap vendor) */}
+                <div className="flex items-center gap-3">
+                  <span className="hidden sm:block w-24 shrink-0 text-xs font-bold text-blue-700">JapanArena</span>
+                  <div className="flex-1 h-7 bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="h-full bg-blue-600 rounded-lg shadow-sm shadow-blue-200 transition-all duration-1000 delay-300" style={{ width: `${(item.ja / item.others) * 100}%` }} />
                   </div>
+                  <span className="w-28 shrink-0 text-right text-xs font-bold text-blue-700 tabular-nums">Rp {item.ja.toLocaleString('id-ID')}</span>
                 </div>
               </div>
             ))}
@@ -68,7 +76,7 @@ export default function ComparisonInfographic() {
           <div className="lg:col-span-5 space-y-8">
             
             {/* Box Setup Fee */}
-            <div className="p-8 rounded-[40px] bg-gray-900 text-white shadow-2xl relative overflow-hidden">
+            <div className="p-8 rounded-3xl bg-gray-900 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10"><Zap size={80} /></div>
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-400 mb-6">Investasi Awal</p>
               
@@ -91,8 +99,8 @@ export default function ComparisonInfographic() {
             </div>
 
             {/* Box Technology */}
-            <div className="p-8 rounded-[40px] border-2 border-gray-100 bg-white shadow-sm">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-6">Teknologi & Kecepatan</p>
+            <div className="p-8 rounded-3xl border-2 border-gray-100 bg-white shadow-sm">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 mb-6">Teknologi & Kecepatan</p>
               
               <div className="space-y-8">
                 <div>

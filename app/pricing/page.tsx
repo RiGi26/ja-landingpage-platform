@@ -7,7 +7,9 @@ import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
-const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[] }[] = [
+type CompRow = { label: string; pro: boolean | string; business: boolean | string }
+
+const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[]; comparison?: CompRow[] }[] = [
   {
     id: 'lms',
     name: 'Portal Belajar / LMS',
@@ -68,9 +70,23 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://stock.webzoka.com/demo',
     registerUrl: 'https://wa.me/6281296917963?text=' + encodeURIComponent('Halo Japan Arena, saya ingin coba trial Portal Operasi (Stock) 14 hari gratis.'),
     plans: [
-      { tier: 'Starter', price: 0, feat: ['100 Produk', 'Kelola Pesanan & Stok', 'Resep Produksi (BOM)'] },
+      { tier: 'Starter', price: 0, feat: ['Akses penuh semua fitur Business', 'Coba 14 hari — tanpa kartu kredit', 'Data aman setelah trial berakhir'] },
       { tier: 'Pro', price: 499000, feat: ['Unlimited Produk', 'Lacak Lot & Kadaluarsa (FEFO)', 'Laporan Omzet & HPP', '3 Pengguna'], popular: true },
       { tier: 'Business', price: 999000, feat: ['WA Otomatis (Pembeli & Tim)', 'Modul Gaji & Slip via WA', 'Hingga 3 Brand', 'Download Excel/PDF + Priority Support'] },
+    ],
+    comparison: [
+      { label: 'Pantau stok & lot kadaluarsa (FEFO)', pro: true, business: true },
+      { label: 'Kelola pesanan dari website', pro: true, business: true },
+      { label: 'Resep produksi (BOM)', pro: true, business: true },
+      { label: 'Ringkasan omzet & HPP', pro: true, business: true },
+      { label: 'WA otomatis (pembeli & tim)', pro: false, business: true },
+      { label: 'Download laporan (Excel/PDF)', pro: false, business: true },
+      { label: 'Modul gaji & slip karyawan via WA', pro: false, business: true },
+      { label: 'Laporan laba rugi + susut barang', pro: false, business: true },
+      { label: 'Jumlah brand/toko', pro: '1', business: '3' },
+      { label: 'Anggota tim', pro: '3 orang', business: 'Tak terbatas' },
+      { label: 'Jumlah produk', pro: '100', business: 'Tak terbatas' },
+      { label: 'Storage file & foto', pro: '5 GB', business: '30 GB' },
     ]
   }
 ]
@@ -230,7 +246,7 @@ export default function PricingPage() {
           )}
           {activeTab === 'stock' && (
             <p className="text-sm text-gray-500">
-              📦 <span className="font-semibold text-gray-700">Cocok untuk warung & produksi:</span> pesanan dari website langsung masuk ke stok, lengkap dengan lacak lot kadaluarsa (FEFO) dan resep produksi.
+              📦 <span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Business.</span> Setelah trial, pilih Pro atau Business. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.
             </p>
           )}
           <p className="text-sm text-gray-500">
@@ -246,6 +262,67 @@ export default function PricingPage() {
             </a>
           </p>
         </div>
+
+        {/* Feature comparison table — only for platforms that define `comparison` (currently Stock) */}
+        {currentPlatform.comparison && (
+          <div className="mb-20 overflow-hidden rounded-[24px] border border-black/[0.03] bg-white shadow-sm">
+            <div className="px-6 py-6 border-b border-black/5 text-center">
+              <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-2">Detail Fitur</p>
+              <h2 className="text-2xl font-black text-gray-900 tracking-tight sf-display-heavy">
+                {currentPlatform.name} — Pro vs Business
+              </h2>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[480px]">
+                <thead>
+                  <tr className="border-b border-black/5 bg-gray-50/60">
+                    <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-widest text-gray-400 w-1/2">Fitur</th>
+                    <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-gray-600 w-1/4">Pro</th>
+                    <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-blue-600 w-1/4">Business</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-black/[0.04]">
+                  {currentPlatform.comparison.map((row) => (
+                    <tr key={row.label} className="hover:bg-gray-50/50 transition-colors">
+                      <td className="px-6 py-3.5 text-sm font-bold text-gray-600">{row.label}</td>
+                      <td className="px-4 py-3.5 text-center">
+                        {typeof row.pro === 'boolean' ? (
+                          row.pro ? (
+                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-50 border border-blue-100 mx-auto">
+                              <Check className="h-3 w-3 text-blue-600" strokeWidth={3} />
+                            </span>
+                          ) : (
+                            <span className="text-gray-300 font-bold">—</span>
+                          )
+                        ) : (
+                          <span className="text-sm font-bold text-gray-700">{row.pro}</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3.5 text-center">
+                        {typeof row.business === 'boolean' ? (
+                          row.business ? (
+                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 border border-blue-200 mx-auto">
+                              <Check className="h-3 w-3 text-blue-600" strokeWidth={3} />
+                            </span>
+                          ) : (
+                            <span className="text-gray-300 font-bold">—</span>
+                          )
+                        ) : (
+                          <span className="text-sm font-black text-blue-600">{row.business}</span>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="px-6 py-4 border-t border-black/5 text-center">
+              <p className="text-xs text-gray-400 font-medium">
+                Coba semua fitur Business gratis 14 hari — tanpa kartu kredit.
+              </p>
+            </div>
+          </div>
+        )}
 
         {/* Comparison Section */}
         <ComparisonInfographic />

@@ -3,11 +3,11 @@
 import { useEffect, useRef } from 'react'
 
 const WA_NUMBER   = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
-const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.japanarena.com'
-const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://ja-clinic-platform.vercel.app/auth/login').split('/auth/')[0]
+const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://lms.webzoka.com'
+const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://clinic.webzoka.com/auth/login').split('/auth/')[0]
 const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://ja-jastip-platform.vercel.app'
 
-const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
+const STUDIO_URL = 'https://wb.webzoka.com'
 
 function wa(service: string) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Webzoka, saya tertarik dengan layanan ${service}.`)}`
@@ -51,9 +51,9 @@ const COLUMNS: Column[] = [
     bg   : 'bg-indigo-50',
     items: [
       { label: 'Portal Klinik & Medis',  desc: 'Rekam medis, antrian, billing',   href: `${CLINIC_BASE}/demo`           },
-      { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://ja-rental-platform.vercel.app/auth/login' },
-      { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://ja-pharmacy-platform.vercel.app/login' },
-      { label: 'Portal Stok & Operasi',  desc: 'Stok, produksi/BOM, kasir & keuangan', href: 'https://stock.japanarena.id'   },
+      { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://rent.webzoka.com/auth/login' },
+      { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://pharmacy.webzoka.com/login' },
+      { label: 'Portal Stok & Operasi',  desc: 'Stok, produksi/BOM, kasir & keuangan', href: 'https://stock.webzoka.com'   },
       { label: 'Dashboard Bisnis Pro',   desc: 'Monitoring real-time omzet',       href: wa('Dashboard Bisnis')          },
       { label: 'Membership System',      desc: 'Sistem member & plan premium',     href: wa('Membership & Langganan')    },
     ],

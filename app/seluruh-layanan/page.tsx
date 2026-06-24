@@ -54,11 +54,11 @@ import ThemeGallery, { galleryForLabel } from './ThemeGallery'
 const WA_NUMBER = '6281296917963'
 
 // Basis URL app Website Builder (form order). Dipusatkan supaya saat custom domain
-// dipasang (mis. studio.japanarena.com) cukup ubah env var NEXT_PUBLIC_WEBSITEBUILDER_URL
+// dipasang (mis. studio.webzoka.com) cukup ubah env var NEXT_PUBLIC_WEBSITEBUILDER_URL
 // — tak perlu sentuh kode. Fallback = domain Vercel saat ini (perilaku tak berubah).
 const WB_URL =
   process.env.NEXT_PUBLIC_WEBSITEBUILDER_URL?.replace(/\/+$/, '') ||
-  'https://ja-websitebuilder-platform-nfoa.vercel.app'
+  'https://wb.webzoka.com'
 
 // --- CUSTOM HOOK: Odometer Animation ---
 function useAnimatedNumber(value: number, duration = 800) {
@@ -118,81 +118,81 @@ const TEMPLATE_PREVIEWS: Record<string, {
   emoji: string
 }> = {
   'Website Perusahaan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/nusa-konsultan',
+    demoUrl: 'https://wb.webzoka.com/nusa-konsultan',
     tagline: 'Tampil profesional & credible di mata klien korporat — contoh: Nusa Konsultan Digital',
-    mockUrl: 'nusa-konsultan.japanarena.com',
+    mockUrl: 'nusa-konsultan.webzoka.com',
     mockupGradient: 'from-slate-800 to-blue-900',
     sections: ['Hero Banner', 'Tentang Kami', 'Layanan', 'Portofolio', 'Kontak'],
     emoji: '🏢',
   },
   'Toko Online': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/batik-larasati',
+    demoUrl: 'https://wb.webzoka.com/batik-larasati',
     tagline: 'Toko online siap terima order & pembayaran 24/7 — contoh: Batik Larasati',
-    mockUrl: 'batik-larasati.japanarena.com',
+    mockUrl: 'batik-larasati.webzoka.com',
     mockupGradient: 'from-orange-800 to-red-900',
     sections: ['Hero + Promo', 'Katalog Produk', 'Keranjang', 'Checkout', 'Riwayat Order'],
     emoji: '🛍️',
   },
   'Website Klinik & Spa': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lumiere-spa',
+    demoUrl: 'https://wb.webzoka.com/lumiere-spa',
     tagline: 'Klinik & spa premium yang warm, terpercaya & mudah booking — contoh: Lumière Beauty & Spa',
-    mockUrl: 'lumiere-spa.japanarena.com',
+    mockUrl: 'lumiere-spa.webzoka.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
     sections: ['Hero + Jadwal Dokter', 'Layanan Klinik', 'Reservasi Online', 'Testimoni Pasien', 'Kontak & Lokasi'],
     emoji: '🏥',
   },
   'Website Sekolah / LPK': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lpk-sakura',
+    demoUrl: 'https://wb.webzoka.com/lpk-sakura',
     tagline: 'Wajah digital institusi pendidikan yang modern & terpercaya — contoh: LPK Sakura Academy',
-    mockUrl: 'lpk-sakura.japanarena.com',
+    mockUrl: 'lpk-sakura.webzoka.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
     sections: ['Hero', 'Program Studi', 'Galeri', 'Pendaftaran Online', 'Berita'],
     emoji: '🎓',
   },
   'Website Institusi': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/institusi',
+    demoUrl: 'https://wb.webzoka.com/demo/institusi',
     tagline: 'Portal informasi resmi dan terpercaya',
-    mockUrl: 'institusi.japanarena.com',
+    mockUrl: 'institusi.webzoka.com',
     mockupGradient: 'from-gray-800 to-slate-900',
     sections: ['Header Resmi', 'Pengumuman', 'Struktur Organisasi', 'Layanan', 'Kontak'],
     emoji: '🏛️',
   },
   'Website Restaurant': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/kanawa',
+    demoUrl: 'https://wb.webzoka.com/kanawa',
     tagline: 'Menu digital yang bikin pelanggan lapar duluan — contoh: Kanawa Izakaya',
-    mockUrl: 'kanawa.japanarena.com',
+    mockUrl: 'kanawa.webzoka.com',
     mockupGradient: 'from-amber-800 to-orange-900',
     sections: ['Hero Foto Makanan', 'Menu Digital', 'Reservasi Meja', 'Promo', 'Lokasi & Maps'],
     emoji: '🍜',
   },
   'Personal Branding': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/personal-branding',
+    demoUrl: 'https://wb.webzoka.com/demo/personal-branding',
     tagline: 'Personal website yang menonjolkan keahlian Anda',
-    mockUrl: 'nama.japanarena.com',
+    mockUrl: 'nama.webzoka.com',
     mockupGradient: 'from-violet-800 to-pink-900',
     sections: ['Hero Foto', 'Tentang Saya', 'Portofolio', 'Testimoni', 'Hire Me'],
     emoji: '👤',
   },
   'Blog / Media': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/blog',
+    demoUrl: 'https://wb.webzoka.com/demo/blog',
     tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
-    mockUrl: 'blog.japanarena.com',
+    mockUrl: 'blog.webzoka.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
     sections: ['Featured Post', 'Kategori', 'Artikel Terbaru', 'Newsletter', 'Author Page'],
     emoji: '📰',
   },
   'Travel & Rental': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/rental',
+    demoUrl: 'https://wb.webzoka.com/demo/rental',
     tagline: 'Rental mobil & motor profesional siap live — contoh: Nusantara Drive',
-    mockUrl: 'nusantara-drive.japanarena.com',
+    mockUrl: 'nusantara-drive.webzoka.com',
     mockupGradient: 'from-amber-800 to-orange-900',
     sections: ['Hero + Booking Form', 'Katalog Armada', 'GPS Tracking', 'Cara Pesan', 'Testimoni'],
     emoji: '🚗',
   },
   'Custom Jastip': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',
+    demoUrl: 'https://wb.webzoka.com/demo/jastip',
     tagline: 'Sistem jasa titip yang terorganisir & profesional',
-    mockUrl: 'jastip.japanarena.com',
+    mockUrl: 'jastip.webzoka.com',
     mockupGradient: 'from-rose-800 to-pink-900',
     sections: ['Hero', 'Katalog Titipan', 'Form Request', 'Status Order', 'Pembayaran'],
     emoji: '📦',
@@ -200,7 +200,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Kuliner & Makanan': {
     // Tampil lewat galeri tema (galleryForLabel) — preview iframe lama tak dipakai.
     tagline: 'Website kuliner yang bikin pelanggan langsung lapar & order',
-    mockUrl: 'nama-kuliner.japanarena.com',
+    mockUrl: 'nama-kuliner.webzoka.com',
     mockupGradient: 'from-orange-700 to-yellow-900',
     sections: ['Hero + Menu Andalan', 'Katalog Produk', 'Form Order WA', 'Lokasi & Maps', 'Promo'],
     emoji: '🍽️',
@@ -208,7 +208,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Studio & Kreatif': {
     // Demo live belum tersedia → tampil sebagai mockup "Pratinjau konsep".
     tagline: 'Portofolio & booking studio yang menonjolkan karya terbaik Anda',
-    mockUrl: 'studio.japanarena.com',
+    mockUrl: 'studio.webzoka.com',
     mockupGradient: 'from-purple-800 to-slate-900',
     sections: ['Hero Portofolio', 'Galeri Karya', 'Layanan & Paket', 'Booking Sesi', 'Kontak'],
     emoji: '📷',
@@ -216,7 +216,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   'Bisnis Jasa & Lainnya': {
     // Belum ada demo live → mockup "Pratinjau konsep" (sebelumnya: tile ini kosong).
     tagline: 'Website jasa yang bikin pelanggan percaya & langsung menghubungi Anda',
-    mockUrl: 'jasa.japanarena.com',
+    mockUrl: 'jasa.webzoka.com',
     mockupGradient: 'from-cyan-800 to-slate-900',
     sections: ['Hero + CTA Hubungi', 'Layanan & Tarif', 'Galeri Pengerjaan', 'Testimoni', 'Kontak & Lokasi'],
     emoji: '🔧',
@@ -1364,7 +1364,7 @@ Terima kasih.`
                   <Globe size={13} className="text-[#0071E3] shrink-0 mt-0.5" />
                   <p className="text-[10px] text-gray-500 leading-relaxed">
                     Domain sendiri atau subdomain gratis{' '}
-                    <span className="font-mono text-gray-400">nama.japanarena.com</span>
+                    <span className="font-mono text-gray-400">nama.webzoka.com</span>
                     {' '}—{' '}
                     <a href="#faq-domain" className="text-[#0071E3] font-bold hover:underline">baca FAQ</a>
                   </p>

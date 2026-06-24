@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
 
-const WEBSITEBUILDER_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
+const WEBSITEBUILDER_URL = 'https://wb.webzoka.com'
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 const waLink = (msg?: string) => {
   const base = `https://wa.me/${WA_NUMBER}`

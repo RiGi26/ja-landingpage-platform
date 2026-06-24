@@ -29,12 +29,12 @@ export const metadata: Metadata = {
   verification: {
     google: 'demIw8L-D7hiN7YrFATE8fJGPbkamQh9K8pu65FYcDI',
   },
-  metadataBase: new URL('https://japanarena.com'),
-  alternates: { canonical: 'https://japanarena.com' },
+  metadataBase: new URL('https://www.webzoka.com'),
+  alternates: { canonical: 'https://www.webzoka.com' },
   openGraph: {
     title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
     description: 'Website bisnis dalam 3–5 hari kerja. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
-    url: 'https://japanarena.com',
+    url: 'https://www.webzoka.com',
     siteName: 'Webzoka',
     locale: 'id_ID',
     type: 'website',
@@ -53,8 +53,8 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Webzoka',
-  url: 'https://japanarena.com',
-  logo: 'https://japanarena.com/images/Icon.png',
+  url: 'https://www.webzoka.com',
+  logo: 'https://www.webzoka.com/images/Icon.png',
   description: 'Penyedia website bisnis dan portal sistem operasional untuk UKM Indonesia.',
   contactPoint: {
     '@type': 'ContactPoint',
@@ -67,7 +67,7 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Webzoka',
-  url: 'https://japanarena.com',
+  url: 'https://www.webzoka.com',
 }
 
 const homepageFaqSchema = {

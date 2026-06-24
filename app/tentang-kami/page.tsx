@@ -70,7 +70,7 @@ export default function TentangKamiPage() {
             </li>
             <li className="flex items-start gap-3">
               <Mail size={20} className="text-[#0071E3] shrink-0 mt-0.5" />
-              <a href="mailto:contact@japanarena.com" className="hover:text-[#0071E3] transition-colors">contact@japanarena.com</a>
+              <a href="mailto:contact@webzoka.com" className="hover:text-[#0071E3] transition-colors">contact@webzoka.com</a>
             </li>
             <li className="flex items-start gap-3">
               <Phone size={20} className="text-[#0071E3] shrink-0 mt-0.5" />

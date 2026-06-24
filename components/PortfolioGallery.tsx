@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { ExternalLink, ArrowRight, Globe, Loader2, GraduationCap } from 'lucide-react'
 
 // Deployment websitebuilder yang menyajikan situs klien published.
-const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
+const STUDIO_URL = 'https://wb.webzoka.com'
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const SUPABASE_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 
@@ -72,7 +72,7 @@ function PortfolioCard({ site }: { site: Site }) {
         </div>
         <div className="flex-1 mx-1">
           <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono text-center truncate">
-            {site.slug}.japanarena.com
+            {site.slug}.webzoka.com
           </div>
         </div>
         <ExternalLink size={12} className="text-gray-400 group-hover:text-[#0071E3] transition-colors shrink-0" />
@@ -109,7 +109,7 @@ function PortfolioCard({ site }: { site: Site }) {
       <div className="px-5 py-4">
         <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
         <span className="text-xs text-gray-600">{meta.label}</span>
-        <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">{site.slug}.japanarena.com</p>
+        <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">{site.slug}.webzoka.com</p>
       </div>
     </a>
   )

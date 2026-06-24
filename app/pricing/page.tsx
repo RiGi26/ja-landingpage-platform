@@ -13,8 +13,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Belajar / LMS',
     subtitle: 'Sistem belajar & kursus online',
     icon: GraduationCap,
-    demoUrl: 'https://ja-lms-platform.vercel.app/demo',
-    registerUrl: 'https://ja-lms-platform.vercel.app/register',
+    demoUrl: 'https://lms.webzoka.com/demo',
+    registerUrl: 'https://lms.webzoka.com/register',
     plans: [
       { tier: 'Starter', price: 0, feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
       { tier: 'Pro', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
@@ -26,8 +26,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Klinik',
     subtitle: 'Manajemen pasien digital',
     icon: Cross,
-    demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
-    registerUrl: 'https://ja-clinic-platform.vercel.app/register',
+    demoUrl: 'https://clinic.webzoka.com/demo',
+    registerUrl: 'https://clinic.webzoka.com/register',
     plans: [
       { tier: 'Starter', price: 0, feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
       { tier: 'Pro', price: 599000, feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
@@ -39,7 +39,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Farmasi',
     subtitle: 'Manajemen apotek digital',
     icon: Pill,
-    demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
+    demoUrl: 'https://pharmacy.webzoka.com/demo',
     registerUrl: 'https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
     plans: [
       { tier: 'Starter', price: 0, feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
@@ -52,8 +52,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Travel & Rental',
     subtitle: 'Booking & kelola aset online',
     icon: Bus,
-    demoUrl: 'https://ja-rental-platform.vercel.app/demo',
-    registerUrl: 'https://ja-rental-platform.vercel.app/register',
+    demoUrl: 'https://rent.webzoka.com/demo',
+    registerUrl: 'https://rent.webzoka.com/register',
     plans: [
       { tier: 'Starter', price: 0, feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
       { tier: 'Pro', price: 749000, feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },

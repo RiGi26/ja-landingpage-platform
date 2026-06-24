@@ -197,7 +197,7 @@ function SegmenSection() {
         label: 'Portal Travel, Rental & Venue',
         description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
-        href: 'https://ja-rental-platform.vercel.app',
+        href: 'https://rent.webzoka.com',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
         isExternal: true,
@@ -207,7 +207,7 @@ function SegmenSection() {
         label: 'Portal Belajar / LMS',
         description: 'Untuk karyawan baru atau kursus publik — tinggal upload materi sekali. Sistem otomatis ngurus pendaftaran, ujian, sampai penerbitan sertifikat. Cocok untuk: LPK, bimbel, kursus online, sekolah.',
         cta: 'Lihat Demo',
-        href: 'https://ja-lms-platform.vercel.app/demo',
+        href: 'https://lms.webzoka.com/demo',
         color: 'text-blue-600',
         bg: 'bg-blue-50',
         isExternal: true,
@@ -217,7 +217,7 @@ function SegmenSection() {
         label: 'Portal Klinik',
         description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Termasuk integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
-        href: 'https://ja-clinic-platform.vercel.app/demo',
+        href: 'https://clinic.webzoka.com/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
         isExternal: true,
@@ -227,7 +227,7 @@ function SegmenSection() {
         label: 'Portal Farmasi',
         description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
         cta: 'Lihat Demo',
-        href: 'https://ja-pharmacy-platform.vercel.app/demo',
+        href: 'https://pharmacy.webzoka.com/demo',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
         isExternal: true,
@@ -237,7 +237,7 @@ function SegmenSection() {
         label: 'Portal Stok & Operasi',
         description: 'Kelola stok gudang, resep & produksi, pesanan, kasir, sampai laporan keuangan dalam satu portal. Kasir, dapur produksi & gudang tersinkron real-time. Cocok untuk: F&B, manufaktur UKM, retail & grosir.',
         cta: 'Lihat Portal',
-        href: 'https://stock.japanarena.id',
+        href: 'https://stock.webzoka.com',
         color: 'text-amber-600',
         bg: 'bg-amber-50',
         isExternal: true,
@@ -507,7 +507,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.japanarena.com) atau kami bantu daftarkan domain baru.',
+      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
     },
     {
       q: 'Apakah ada biaya setelah tahun pertama?',
@@ -676,11 +676,11 @@ export default function LandingPage() {
                   <div className="col-span-1 md:col-span-2 space-y-5">
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</p>
                       <ul className="space-y-3 text-sm text-gray-500">
-                          <li><a href="https://ja-lms-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
-                          <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
-                          <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
+                          <li><a href="https://lms.webzoka.com" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
+                          <li><a href="https://clinic.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
+                          <li><a href="https://pharmacy.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
-                          <li><a href="https://stock.japanarena.id" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
+                          <li><a href="https://stock.webzoka.com" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
                           <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
                       </ul>
                   </div>
@@ -695,7 +695,7 @@ export default function LandingPage() {
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
                           <li>
                             <a
-                              href="https://ja-websitebuilder-platform-nfoa.vercel.app/track"
+                              href="https://wb.webzoka.com/track"
                               className="hover:text-[#0071E3] transition-colors"
                             >
                               Lacak Pesanan
@@ -713,7 +713,7 @@ export default function LandingPage() {
                               <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>                          </li>
                           <li className="flex gap-3">
                               <Mail size={18} className="text-[#0071E3] shrink-0" />
-                              <span>contact@japanarena.com</span>
+                              <span>contact@webzoka.com</span>
                           </li>
                           <li className="flex gap-3">
                               <Phone size={18} className="text-[#0071E3] shrink-0" />

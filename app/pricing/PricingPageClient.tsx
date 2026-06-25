@@ -248,7 +248,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {currentPlatform.plans.map((plan, idx) => {
             // Tab Stock pakai harga statis (Rp + promo) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
-            const price = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
+            // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga Pro live).
+            const price = isStock ? plan.price : plan.isTrial ? 0 : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
             // Kartu gratis (Starter free non-stock ATAU Trial stock) → alur trial/register.
             const isFreeCta = plan.isTrial === true || (plan.tier === 'Starter' && price === 0)
             // Tier marketing → tier Core (subscription_plans.tier). Stock: Starter→starter,

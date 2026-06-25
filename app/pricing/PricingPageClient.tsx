@@ -19,9 +19,14 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://ja-lms-platform.vercel.app/demo',
     registerUrl: 'https://ja-lms-platform.vercel.app/register',
     plans: [
-      { tier: 'Starter', price: 0, feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
-      { tier: 'Pro', price: 499000, feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
-      { tier: 'Business', price: 1199000, feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
+        feat: ['Semua fitur paket Business', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
+      },
+      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk kelas kecil.', feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
+      { tier: 'Pro', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
+      { tier: 'Business', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ]
   },
   {
@@ -32,9 +37,14 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
     registerUrl: 'https://ja-clinic-platform.vercel.app/register',
     plans: [
-      { tier: 'Starter', price: 0, feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
-      { tier: 'Pro', price: 599000, feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
-      { tier: 'Business', price: 1499000, feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
+        feat: ['Semua fitur paket Business', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
+      },
+      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk praktik kecil.', feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
+      { tier: 'Pro', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
+      { tier: 'Business', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ]
   },
   {
@@ -45,9 +55,14 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
     registerUrl: 'https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
     plans: [
-      { tier: 'Starter', price: 0, feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
-      { tier: 'Pro', price: 449000, feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
-      { tier: 'Business', price: 999000, feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
+        feat: ['Semua fitur paket Business', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
+      },
+      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk apotek kecil.', feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
+      { tier: 'Pro', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
+      { tier: 'Business', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
     ]
   },
   {
@@ -58,9 +73,14 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://ja-rental-platform.vercel.app/demo',
     registerUrl: 'https://ja-rental-platform.vercel.app/register',
     plans: [
-      { tier: 'Starter', price: 0, feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
-      { tier: 'Pro', price: 749000, feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
-      { tier: 'Business', price: 1899000, feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
+        feat: ['Semua fitur paket Business', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
+      },
+      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk armada kecil.', feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
+      { tier: 'Pro', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
+      { tier: 'Business', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
     ]
   },
   {

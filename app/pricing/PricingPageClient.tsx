@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb } from 'lucide-react'
+import { useState, useRef, useEffect } from 'react'
+import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -113,11 +113,27 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
   const [activeTab, setActiveTab] = useState('lms')
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
+  // Mobile: kartu jadi carousel snap-scroll. Lacak kartu aktif untuk dot indikator,
+  // dan reset ke kartu pertama saat ganti tab/platform.
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const [activeCard, setActiveCard] = useState(0)
+  function onCardsScroll() {
+    const el = cardsRef.current
+    const first = el?.firstElementChild as HTMLElement | null
+    if (!el || !first) return
+    const step = first.offsetWidth + 16 // lebar kartu + gap-4
+    setActiveCard(Math.round(el.scrollLeft / step))
+  }
+  useEffect(() => {
+    cardsRef.current?.scrollTo({ left: 0 })
+    setActiveCard(0)
+  }, [activeTab])
+
   return (
     <div className="min-h-screen bg-gray-50 pb-20">
       <Navbar />
 
-      <div className="max-w-6xl mx-auto pt-32 px-4">
+      <div className="max-w-6xl mx-auto pt-24 md:pt-32 px-4">
         {/* Breadcrumb / Back Button */}
         <div className="mb-8 animate-fade-in">
           <Link 
@@ -132,7 +148,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         </div>
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-5 border border-green-100">
             <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
           </div>
@@ -201,10 +217,12 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
 
         {/* Pricing Cards */}
         <div
+          ref={cardsRef}
+          onScroll={onCardsScroll}
           role="tabpanel"
           id={`tabpanel-${currentPlatform.id}`}
           aria-labelledby={`tab-${currentPlatform.id}`}
-          className={`grid grid-cols-1 gap-8 mb-20 items-stretch ${
+          className={`flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0 mb-4 md:mb-20 items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
             currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
           }`}>
           {currentPlatform.plans.map((plan, idx) => {
@@ -234,7 +252,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             return (
             <div
               key={plan.tier}
-              className={`relative bg-white rounded-3xl p-8 border-2 transition-all flex flex-col ${
+              className={`relative bg-white rounded-3xl p-6 md:p-8 border-2 transition-all flex flex-col snap-start shrink-0 w-[80%] sm:w-[56%] md:w-auto ${
                 plan.popular ? 'border-blue-600 shadow-2xl shadow-blue-100 ring-4 ring-blue-50' : 'border-black/[0.03] shadow-sm'
               }`}
             >
@@ -243,13 +261,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                   <Sparkles size={12} /> Paling Populer
                 </div>
               )}
-              <div className="mb-6">
+              <div className="mb-5 md:mb-6">
                 <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
                 {plan.desc && (
-                  <p className="text-sm text-gray-500 font-medium mb-3 leading-snug">{plan.desc}</p>
+                  <p className="text-sm text-gray-500 font-medium mb-3 leading-snug text-pretty">{plan.desc}</p>
                 )}
                 <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-black text-gray-900 sf-display-heavy">
+                  <span className="text-3xl font-black text-gray-900 sf-display-heavy tabular-nums">
                     {price === 0 ? 'Gratis' : plan.priceLabel ? `Rp ${plan.priceLabel}` : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
@@ -263,7 +281,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 )}
               </div>
 
-              <div className="space-y-3 mb-8 flex-1">
+              <div className="space-y-2.5 md:space-y-3 mb-6 md:mb-8 flex-1">
                 {plan.feat.map(f => (
                   <div key={f} className="flex items-center gap-3 text-sm text-gray-600 font-bold">
                     <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
@@ -277,7 +295,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               <div className="mt-auto">
                 <Link
                   href={ctaHref}
-                  className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
+                  className={`w-full py-3.5 md:py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
                     plan.popular
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
                     : isFreeCta
@@ -291,6 +309,19 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             </div>
             )
           })}
+        </div>
+
+        {/* Dot indikator + hint geser — mobile only */}
+        <div className="md:hidden flex flex-col items-center gap-2 mb-10 -mt-1">
+          <div className="flex items-center gap-1.5">
+            {currentPlatform.plans.map((_, i) => (
+              <span
+                key={i}
+                className={`h-1.5 rounded-full transition-all duration-300 ${i === activeCard ? 'w-5 bg-blue-600' : 'w-1.5 bg-gray-300'}`}
+              />
+            ))}
+          </div>
+          <p className="text-[11px] font-medium text-gray-400">Geser untuk lihat paket lain →</p>
         </div>
 
         {/* Contextual notes per platform */}
@@ -393,14 +424,14 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         <ComparisonInfographic />
 
         {/* FAQ */}
-        <div className="py-20 border-t border-black/5">
-          <div className="text-center mb-12">
+        <div className="py-14 md:py-20 border-t border-black/5">
+          <div className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
-            <h2 className="text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">
+            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
               Pertanyaan Sebelum Berlangganan
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
             {[
               {
                 q: 'Apa yang terjadi setelah trial 14 hari habis?',
@@ -427,10 +458,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 a: 'Tidak. Semua fitur dalam paket langsung aktif tanpa biaya setup tambahan. Yang ada hanya biaya langganan bulanan yang tercantum.',
               },
             ].map((faq, i) => (
-              <div key={i} className="bg-[#F5F5F7] rounded-3xl p-8 border border-black/[0.03]">
-                <h3 className="text-base font-bold text-gray-900 mb-3">{faq.q}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
-              </div>
+              <details key={i} className="group bg-[#F5F5F7] rounded-2xl px-5 py-4 md:px-6 md:py-5 border border-black/[0.03] [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex items-center justify-between gap-3 cursor-pointer list-none text-[15px] md:text-base font-bold text-gray-900">
+                  <span className="text-pretty">{faq.q}</span>
+                  <ChevronDown size={18} className="shrink-0 text-gray-400 transition-transform duration-300 group-open:rotate-180" />
+                </summary>
+                <p className="mt-3 text-sm text-gray-500 leading-relaxed">{faq.a}</p>
+              </details>
             ))}
           </div>
           <div className="text-center mt-10">
@@ -499,7 +533,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         </div>
 
         {/* Footer Info */}
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+        <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
            {[
              { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu Anda daftar.' },
              { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. Anda tidak perlu urus apapun.' },

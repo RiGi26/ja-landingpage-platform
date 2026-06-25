@@ -1,11 +1,10 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
-import ComparisonInfographic from '@/components/ComparisonInfographic'
 
 type CompRow = { label: string; pro: boolean | string; business: boolean | string }
 type Plan = { tier: string; price: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
@@ -173,7 +172,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
           </div>
           <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight sf-display-heavy">
-            Sistem Portal Bisnis — <span className="text-blue-600">Hemat 44–74%</span> vs Vendor Lain
+            Sistem Portal Bisnis — <span className="text-blue-600">Satu Sistem</span> untuk Setiap Industri
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
             Pilih portal sesuai bisnis Anda. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
@@ -248,7 +247,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {currentPlatform.plans.map((plan, idx) => {
             // Tab Stock pakai harga statis (Rp + promo) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
-            const price = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
+            // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga Pro live).
+            const price = isStock ? plan.price : plan.isTrial ? 0 : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
             // Kartu gratis (Starter free non-stock ATAU Trial stock) → alur trial/register.
             const isFreeCta = plan.isTrial === true || (plan.tier === 'Starter' && price === 0)
             // Tier marketing → tier Core (subscription_plans.tier). Stock: Starter→starter,
@@ -440,9 +440,6 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           </div>
         )}
 
-        {/* Comparison Section */}
-        <ComparisonInfographic />
-
         {/* FAQ */}
         <div className="py-14 md:py-20 border-t border-black/5">
           <div className="text-center mb-8 md:mb-12">
@@ -499,56 +496,6 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 Chat tim kami
               </a>
             </p>
-          </div>
-        </div>
-
-        {/* ECOSYSTEM BUNDLE STRATEGY */}
-        <div className="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 md:p-16 text-white relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[100px] -mr-32 -mt-32" />
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="max-w-xl text-center md:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-blue-600/20 text-blue-400 text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-blue-500/30">
-                <Zap size={12} fill="currentColor" /> Keuntungan Ekosistem Terintegrasi
-              </div>
-              <h2 className="text-3xl md:text-4xl font-black mb-6 leading-tight sf-display-heavy">
-                Gunakan Seluruh Ekosistem, Hemat <span className="text-blue-500">25%</span> dari Total
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-8 font-medium">
-                Bisnis Anda berkembang pesat? Gabungkan 3 portal atau lebih dalam satu paket <span className="text-white font-black">JapanArena Business Bundle</span> dan hemat 25% dari total langganan — kombinasi apa pun, data tersinkron real-time.
-              </p>
-              <div className="flex flex-wrap justify-center md:justify-start gap-6">
-                <div className="flex items-center gap-2 text-sm font-bold">
-                  <ShieldCheck className="text-blue-500" size={20} /> Data Terintegrasi
-                </div>
-                <div className="flex items-center gap-2 text-sm font-bold text-gray-300">
-                   • Multi-User Support
-                </div>
-                <div className="flex items-center gap-2 text-sm font-bold text-gray-300">
-                   • Priority WhatsApp Access
-                </div>
-              </div>
-            </div>
-            
-            <div className="shrink-0 bg-white/5 backdrop-blur-md border border-white/10 rounded-3xl p-8 text-center border-dashed">
-                <p className="text-gray-400 text-[10px] font-black uppercase tracking-widest mb-2">Business Bundle</p>
-                <div className="text-5xl font-black text-white mb-1 sf-display-heavy">Hemat 25%</div>
-                <p className="text-sm text-gray-400 font-medium mb-6">dari total langganan bulanan</p>
-                <a
-                  href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20tertarik%20dengan%20Business%20Bundle%20untuk%20beberapa%20portal."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full bg-white text-black py-4 px-8 rounded-2xl font-black flex items-center justify-center gap-3 hover:bg-gray-200 transition-all active:scale-[0.96] shadow-xl"
-                >
-                  Chat Tim Kami <MessageCircle size={20} />
-                </a>
-                <p className="text-xs text-gray-500 mt-2 leading-relaxed">
-                  *Berlaku untuk langganan minimal 3 portal sekaligus, kombinasi
-                  apa pun. Contoh: LMS + Klinik + Travel (Rp 1.847.000/bln) →{" "}
-                  <span className="font-medium text-green-400">
-                    Rp 1.385.250/bln, hemat Rp 461.750
-                  </span>.
-                </p>
-            </div>
           </div>
         </div>
 

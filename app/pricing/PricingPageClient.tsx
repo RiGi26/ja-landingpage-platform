@@ -24,12 +24,12 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
-        feat: ['Semua fitur paket Business', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk kelas kecil.', feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
-      { tier: 'Pro', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
-      { tier: 'Business', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
+      { tier: 'Starter', price: 249000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
+      { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
+      { tier: 'Pro', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ]
   },
   {
@@ -42,12 +42,12 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
-        feat: ['Semua fitur paket Business', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk praktik kecil.', feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
-      { tier: 'Pro', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
-      { tier: 'Business', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
+      { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
+      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
+      { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ]
   },
   {
@@ -60,12 +60,12 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
-        feat: ['Semua fitur paket Business', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk apotek kecil.', feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
-      { tier: 'Pro', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
-      { tier: 'Business', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
+      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
+      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
+      { tier: 'Pro', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
     ]
   },
   {
@@ -78,12 +78,12 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Business, 14 hari penuh.',
-        feat: ['Semua fitur paket Business', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 0, desc: 'Mulai gratis untuk armada kecil.', feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
-      { tier: 'Pro', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
-      { tier: 'Business', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
+      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
+      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
+      { tier: 'Pro', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
     ]
   },
   {
@@ -140,13 +140,16 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
 ]
 
 // Harga otoritatif dari Core DB (lihat /api/public/plans). Key: `${platform}:${coreTier}`.
-// Tier marketing → tier Core: Pro→pro, Business→enterprise. Starter selalu gratis.
+// Tier tampilan → tier Core (enum): Starter→starter, Growth→pro, Pro→enterprise.
+// (Semua portal kini skema seragam Starter/Growth/Pro; semua berbayar, Trial gratis.)
 export type PriceMap = Record<string, number>
 
+function coreTierOf(tier: string): 'starter' | 'pro' | 'enterprise' {
+  return tier === 'Pro' ? 'enterprise' : tier === 'Growth' ? 'pro' : 'starter'
+}
+
 function resolvePrice(platformId: string, tier: string, fallback: number, priceMap?: PriceMap): number {
-  if (tier === 'Starter') return 0
-  const coreTier = tier === 'Business' ? 'enterprise' : 'pro'
-  const live = priceMap?.[`${platformId}:${coreTier}`]
+  const live = priceMap?.[`${platformId}:${coreTierOf(tier)}`]
   return typeof live === 'number' && live > 0 ? live : fallback
 }
 
@@ -269,15 +272,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {currentPlatform.plans.map((plan, idx) => {
             // Tab Stock pakai harga statis (Rp + promo) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
-            // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga Pro live).
+            // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga live).
             const price = isStock ? plan.price : plan.isTrial ? 0 : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
-            // Kartu gratis (Starter free non-stock ATAU Trial stock) → alur trial/register.
-            const isFreeCta = plan.isTrial === true || (plan.tier === 'Starter' && price === 0)
-            // Tier marketing → tier Core (subscription_plans.tier). Stock: Starter→starter,
-            // Growth→pro, Pro→enterprise. Lainnya: Business→enterprise, selain itu pro.
-            const coreTier = isStock
-              ? (plan.tier === 'Pro' ? 'enterprise' : plan.tier === 'Growth' ? 'pro' : 'starter')
-              : (plan.tier === 'Business' ? 'enterprise' : 'pro')
+            // Hanya Trial yang gratis → alur trial/register. Starter kini BERBAYAR.
+            const isFreeCta = plan.isTrial === true
+            // Tier tampilan → tier Core (enum), seragam semua portal:
+            // Starter→starter, Growth→pro, Pro→enterprise.
+            const coreTier = coreTierOf(plan.tier)
             // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock).
             const subscribeReady = currentPlatform.id === 'lms' || isStock
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Japan Arena, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
@@ -472,7 +473,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             {[
               {
                 q: 'Apa yang terjadi setelah trial 14 hari habis?',
-                a: 'Akses fitur dibatasi ke paket gratis. Tidak ada charge otomatis, tidak ada kartu kredit yang ditagih. Anda bisa pilih paket berbayar kapan saja — atau tetap di akses terbatas.',
+                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — Anda yang menentukan kapan mulai berlangganan.',
               },
               {
                 q: 'Apakah bisa upgrade atau downgrade paket?',

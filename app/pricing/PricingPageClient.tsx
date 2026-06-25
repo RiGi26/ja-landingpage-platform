@@ -8,8 +8,9 @@ import Navbar from '@/components/LmsNavbar'
 import ComparisonInfographic from '@/components/ComparisonInfographic'
 
 type CompRow = { label: string; pro: boolean | string; business: boolean | string }
+type Plan = { tier: string; price: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
 
-const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: { tier: string; price: number; feat: string[]; popular?: boolean }[]; comparison?: CompRow[] }[] = [
+const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: Plan[]; comparison?: CompRow[] }[] = [
   {
     id: 'lms',
     name: 'Portal Belajar / LMS',
@@ -70,23 +71,29 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     demoUrl: 'https://stock.webzoka.com/demo',
     registerUrl: 'https://wa.me/6281296917963?text=' + encodeURIComponent('Halo Japan Arena, saya ingin coba trial Portal Operasi (Stock) 14 hari gratis.'),
     plans: [
-      { tier: 'Starter', price: 0, feat: ['Akses penuh semua fitur Business', 'Coba 14 hari — tanpa kartu kredit', 'Data aman setelah trial berakhir'] },
-      { tier: 'Pro', price: 499000, feat: ['Unlimited Produk', 'Lacak Lot & Kadaluarsa (FEFO)', 'Laporan Omzet & HPP', '3 Pengguna'], popular: true },
-      { tier: 'Business', price: 999000, feat: ['WA Otomatis (Pembeli & Tim)', 'Modul Gaji & Slip via WA', 'Pengguna tak terbatas', 'Download Excel/PDF + Priority Support'] },
-    ],
-    comparison: [
-      { label: 'Pantau stok & lot kadaluarsa (FEFO)', pro: true, business: true },
-      { label: 'Kelola pesanan dari website', pro: true, business: true },
-      { label: 'Resep produksi (BOM)', pro: true, business: true },
-      { label: 'Ringkasan omzet & HPP', pro: true, business: true },
-      { label: 'WA otomatis (pembeli & tim)', pro: false, business: true },
-      { label: 'Download laporan (Excel/PDF)', pro: false, business: true },
-      { label: 'Modul gaji & slip karyawan via WA', pro: false, business: true },
-      { label: 'Laporan laba rugi + susut barang', pro: false, business: true },
-      { label: 'Prioritas bantuan', pro: false, business: true },
-      { label: 'Jumlah produk & pesanan', pro: 'Tak terbatas', business: 'Tak terbatas' },
-      { label: 'Anggota tim', pro: '3 orang', business: 'Tak terbatas' },
-      { label: 'Penyimpanan foto & file', pro: 'Wajar pakai', business: 'Wajar pakai' },
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim', 'Akun & hak akses tim tanpa batas', 'Tanpa kartu kredit'],
+      },
+      {
+        tier: 'Starter', price: 500000, priceLabel: '500rb', cta: 'Pilih Starter',
+        promo: 'Bulan 1 gratis, lalu Rp 250rb (bln 2-4)',
+        desc: 'Untuk mulai rapikan pesanan & pembayaran harian.',
+        feat: ['Dashboard ringkasan omzet & pesanan harian', 'Kelola pesanan (status: menunggu → dikirim)', 'Invoice & label pengiriman otomatis', 'Notifikasi WhatsApp ke pelanggan otomatis', 'Manajemen produk & katalog', '1 akun admin'],
+      },
+      {
+        tier: 'Growth', price: 750000, priceLabel: '750rb', popular: true, cta: 'Pilih Growth',
+        promo: 'Bulan 1 gratis, lalu Rp 375rb (bln 2-4)',
+        desc: 'Untuk yang sudah rutin restock & butuh kontrol stok.',
+        feat: ['Semua fitur Starter', 'Stok & lot tracking + stok opname', 'Pemantauan kadaluarsa (expiry monitoring)', 'Manajemen pemasok (purchase order)', 'Laporan keuangan & arus kas otomatis', 'Sampai 3 akun tim & hak akses', 'Verifikasi pembayaran manual & COD'],
+      },
+      {
+        tier: 'Pro', price: 1000000, priceLabel: '1jt', cta: 'Pilih Pro',
+        promo: 'Bulan 1 gratis, lalu Rp 500rb (bln 2-4)',
+        desc: 'Untuk produksi skala besar & tim yang berkembang.',
+        feat: ['Semua fitur Growth', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim produksi', 'Akun & hak akses tim tanpa batas', 'Konfigurasi & white-label penuh', 'Prioritas dukungan teknis'],
+      },
     ]
   }
 ]
@@ -197,24 +204,29 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           role="tabpanel"
           id={`tabpanel-${currentPlatform.id}`}
           aria-labelledby={`tab-${currentPlatform.id}`}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20 items-stretch">
+          className={`grid grid-cols-1 gap-8 mb-20 items-stretch ${
+            currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
+          }`}>
           {currentPlatform.plans.map((plan, idx) => {
-            const price = resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
-            const isStarter = plan.tier === 'Starter'
+            // Tab Stock pakai harga statis (Rp + promo) — bypass resolvePrice/priceMap Core.
+            const isStock = currentPlatform.id === 'stock'
+            const price = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
+            // Kartu gratis (Starter free non-stock ATAU Trial stock) → alur trial/register.
+            const isFreeCta = plan.isTrial === true || (plan.tier === 'Starter' && price === 0)
             const coreTier = plan.tier === 'Business' ? 'enterprise' : 'pro'
             // Portal dgn alur checkout self-service yang sudah jadi (saat ini hanya LMS).
             const subscribeReady = currentPlatform.id === 'lms'
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Japan Arena, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
-            const ctaHref = isStarter
+            const ctaHref = isFreeCta
               ? currentPlatform.registerUrl
               : subscribeReady
                 ? `${currentPlatform.registerUrl}?intent=subscribe&tier=${coreTier}`
                 : chatHref
-            const ctaLabel = isStarter
+            const ctaLabel = plan.cta ?? (isFreeCta
               ? 'Mulai trial 14 hari — gratis'
               : subscribeReady
                 ? 'Mulai berlangganan'
-                : 'Chat untuk berlangganan'
+                : 'Chat untuk berlangganan')
             return (
             <div
               key={plan.tier}
@@ -229,14 +241,22 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               )}
               <div className="mb-6">
                 <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
+                {plan.desc && (
+                  <p className="text-sm text-gray-500 font-medium mb-3 leading-snug">{plan.desc}</p>
+                )}
                 <div className="flex items-baseline gap-1">
                   <span className="text-3xl font-black text-gray-900 sf-display-heavy">
-                    {price === 0 ? 'Gratis' : `Rp ${price.toLocaleString('id-ID')}`}
+                    {price === 0 ? 'Gratis' : plan.priceLabel ? `Rp ${plan.priceLabel}` : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
                     <span className="text-gray-400 text-sm font-medium">/bulan</span>
                   )}
                 </div>
+                {plan.promo && (
+                  <div className="mt-3 inline-flex items-center rounded-lg bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 border border-blue-100">
+                    {plan.promo}
+                  </div>
+                )}
               </div>
 
               <div className="space-y-3 mb-8 flex-1">
@@ -256,7 +276,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                   className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
                     plan.popular
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
-                    : plan.tier === 'Starter'
+                    : isFreeCta
                       ? 'bg-blue-50 text-blue-600 hover:bg-blue-100'
                       : 'bg-gray-900 text-white hover:bg-black'
                   }`}
@@ -285,7 +305,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {activeTab === 'stock' && (
             <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
               <Package size={15} className="mt-0.5 shrink-0 text-gray-500" />
-              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Business.</span> Setelah trial, pilih Pro atau Business. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.</span>
+              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Setelah trial, pilih Starter, Growth, atau Pro. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.</span>
             </p>
           )}
           <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">

@@ -69,7 +69,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     subtitle: 'Stok, pesanan & operasi bisnis',
     icon: Boxes,
     demoUrl: 'https://stock.webzoka.com/demo',
-    registerUrl: 'https://wa.me/6281296917963?text=' + encodeURIComponent('Halo Japan Arena, saya ingin coba trial Portal Operasi (Stock) 14 hari gratis.'),
+    registerUrl: 'https://stock.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
@@ -213,9 +213,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             const price = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
             // Kartu gratis (Starter free non-stock ATAU Trial stock) → alur trial/register.
             const isFreeCta = plan.isTrial === true || (plan.tier === 'Starter' && price === 0)
-            const coreTier = plan.tier === 'Business' ? 'enterprise' : 'pro'
-            // Portal dgn alur checkout self-service yang sudah jadi (saat ini hanya LMS).
-            const subscribeReady = currentPlatform.id === 'lms'
+            // Tier marketing → tier Core (subscription_plans.tier). Stock: Starter→starter,
+            // Growth→pro, Pro→enterprise. Lainnya: Business→enterprise, selain itu pro.
+            const coreTier = isStock
+              ? (plan.tier === 'Pro' ? 'enterprise' : plan.tier === 'Growth' ? 'pro' : 'starter')
+              : (plan.tier === 'Business' ? 'enterprise' : 'pro')
+            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock).
+            const subscribeReady = currentPlatform.id === 'lms' || isStock
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Japan Arena, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
             const ctaHref = isFreeCta
               ? currentPlatform.registerUrl

@@ -5,7 +5,6 @@ import { Check, Sparkles, Building2, Zap, ShieldCheck, ArrowRight, MessageCircle
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
-import ComparisonInfographic from '@/components/ComparisonInfographic'
 
 type CompRow = { label: string; pro: boolean | string; business: boolean | string }
 type Plan = { tier: string; price: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
@@ -440,9 +439,6 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             </div>
           </div>
         )}
-
-        {/* Comparison Section */}
-        <ComparisonInfographic />
 
         {/* FAQ */}
         <div className="py-14 md:py-20 border-t border-black/5">

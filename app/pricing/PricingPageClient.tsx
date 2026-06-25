@@ -6,10 +6,14 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 
-type CompRow = { label: string; pro: boolean | string; business: boolean | string }
 type Plan = { tier: string; price: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
+// Tabel banding fitur per-paket. Hanya isi untuk portal yang gating tier-nya
+// SUDAH ditegakkan app (mis. Stock) — jangan jual beda fitur yang belum nyata.
+// `tiers` sejajar dgn `cols`: boolean = centang/strip, string = nilai (mis. "3", "Tanpa batas").
+type MatrixRow = { label: string; tiers: (boolean | string)[] }
+type FeatureMatrix = { cols: string[]; rows: MatrixRow[]; note?: string }
 
-const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: Plan[]; comparison?: CompRow[] }[] = [
+const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: Plan[]; featureMatrix?: FeatureMatrix }[] = [
   {
     id: 'lms',
     name: 'Portal Belajar / LMS',
@@ -113,7 +117,25 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Untuk produksi skala besar & tim yang berkembang.',
         feat: ['Semua fitur Growth', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim produksi', 'Akun & hak akses tim tanpa batas', 'Konfigurasi & white-label penuh', 'Prioritas dukungan teknis'],
       },
-    ]
+    ],
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Dashboard & laporan ringkas', tiers: [true, true, true] },
+        { label: 'Kelola pesanan & invoice/label', tiers: [true, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [true, true, true] },
+        { label: 'Produk & katalog', tiers: [true, true, true] },
+        { label: 'Stok & Lot + Stok Opname', tiers: [false, true, true] },
+        { label: 'Pemantauan kadaluarsa', tiers: [false, true, true] },
+        { label: 'Pemasok & Purchase Order', tiers: [false, true, true] },
+        { label: 'Laporan keuangan & arus kas', tiers: [false, true, true] },
+        { label: 'Resep / BOM & Produksi', tiers: [false, false, true] },
+        { label: 'Perencanaan produksi (MRP)', tiers: [false, false, true] },
+        { label: 'SDM & Penggajian', tiers: [false, false, true] },
+        { label: 'Jumlah akun tim', tiers: ['1', '3', 'Tanpa batas'] },
+      ],
+    },
   }
 ]
 
@@ -379,63 +401,61 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           </p>
         </div>
 
-        {/* Feature comparison table — only for platforms that define `comparison` (currently Stock) */}
-        {currentPlatform.comparison && (
-          <div className="mb-20 overflow-hidden rounded-3xl border border-black/[0.03] bg-white shadow-sm">
-            <div className="px-6 py-6 border-b border-black/5 text-center">
-              <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-2">Detail Fitur</p>
-              <h2 className="text-2xl font-black text-gray-900 tracking-tight sf-display-heavy">
-                {currentPlatform.name} — Pro vs Business
+        {/* Feature comparison table — data-driven, hanya untuk portal yg punya featureMatrix
+            (gating tier-nya sudah ditegakkan app; saat ini Stock). */}
+        {currentPlatform.featureMatrix && (
+          <div className="mb-16 md:mb-20">
+            <div className="text-center mb-8 md:mb-10">
+              <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
+                Fitur lengkap tiap paket
               </h2>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[480px]">
-                <thead>
-                  <tr className="border-b border-black/5 bg-gray-50/60">
-                    <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-widest text-gray-500 w-1/2">Fitur</th>
-                    <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-gray-600 w-1/4">Pro</th>
-                    <th className="px-4 py-4 text-center text-xs font-black uppercase tracking-widest text-blue-600 w-1/4">Business</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-black/[0.04]">
-                  {currentPlatform.comparison.map((row) => (
-                    <tr key={row.label} className="hover:bg-gray-50/50 transition-colors">
-                      <td className="px-6 py-3.5 text-sm font-bold text-gray-600">{row.label}</td>
-                      <td className="px-4 py-3.5 text-center">
-                        {typeof row.pro === 'boolean' ? (
-                          row.pro ? (
-                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-50 border border-blue-100 mx-auto">
-                              <Check className="h-3 w-3 text-blue-600" strokeWidth={3} />
-                            </span>
-                          ) : (
-                            <span className="text-gray-300 font-bold">—</span>
-                          )
-                        ) : (
-                          <span className="text-sm font-bold text-gray-700">{row.pro}</span>
-                        )}
-                      </td>
-                      <td className="px-4 py-3.5 text-center">
-                        {typeof row.business === 'boolean' ? (
-                          row.business ? (
-                            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 border border-blue-200 mx-auto">
-                              <Check className="h-3 w-3 text-blue-600" strokeWidth={3} />
-                            </span>
-                          ) : (
-                            <span className="text-gray-300 font-bold">—</span>
-                          )
-                        ) : (
-                          <span className="text-sm font-black text-blue-600">{row.business}</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="px-6 py-4 border-t border-black/5 text-center">
-              <p className="text-xs text-gray-500 font-medium">
-                Coba semua fitur Business gratis 14 hari — tanpa kartu kredit.
+              <p className="text-gray-500 text-sm md:text-base font-medium max-w-md mx-auto mt-3 text-pretty">
+                Semua paket berjalan di portal yang sama — kamu hanya membuka modul sesuai kebutuhan.
               </p>
+            </div>
+            <div className="overflow-hidden rounded-3xl border border-black/[0.04] bg-white shadow-sm">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[520px]">
+                  <thead>
+                    <tr className="border-b border-black/5 bg-gray-50/70">
+                      <th scope="col" className="px-5 md:px-6 py-4 text-left text-xs font-black uppercase tracking-widest text-gray-500 w-1/2">Modul / Fitur</th>
+                      {currentPlatform.featureMatrix.cols.map((c) => {
+                        const popular = currentPlatform.plans.find(p => p.tier === c)?.popular
+                        return (
+                          <th key={c} scope="col" className={`px-4 py-4 text-center text-xs font-black uppercase tracking-widest ${popular ? 'text-blue-600' : 'text-gray-600'}`}>{c}</th>
+                        )
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-black/[0.04]">
+                    {currentPlatform.featureMatrix.rows.map((row) => (
+                      <tr key={row.label} className="hover:bg-gray-50/50 transition-colors">
+                        <th scope="row" className="px-5 md:px-6 py-3.5 text-left text-sm font-bold text-gray-600">{row.label}</th>
+                        {row.tiers.map((v, i) => (
+                          <td key={i} className="px-4 py-3.5 text-center">
+                            {typeof v === 'boolean' ? (
+                              v ? (
+                                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-50 border border-blue-100 mx-auto" aria-label="termasuk">
+                                  <Check className="h-3 w-3 text-blue-600" strokeWidth={3} />
+                                </span>
+                              ) : (
+                                <span className="text-gray-300 font-bold" aria-label="tidak termasuk">—</span>
+                              )
+                            ) : (
+                              <span className="text-sm font-black text-gray-700 tabular-nums">{v}</span>
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {currentPlatform.featureMatrix.note && (
+                <div className="px-5 md:px-6 py-4 border-t border-black/5 text-center">
+                  <p className="text-xs text-gray-500 font-medium text-pretty">{currentPlatform.featureMatrix.note}</p>
+                </div>
+              )}
             </div>
           </div>
         )}

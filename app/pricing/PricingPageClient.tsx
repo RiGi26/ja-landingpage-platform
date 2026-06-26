@@ -100,12 +100,31 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'User/kasir tanpa batas', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['500 SKU Obat', 'Kasir Digital', 'Manajemen Stok', 'Cetak Struk Otomatis', 'Laporan Transaksi'] },
-      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua fitur Starter', 'Unlimited SKU', 'Alert Stok Habis Otomatis', 'Multi-Kasir', 'Laporan Harian'], popular: true },
-      { tier: 'Pro', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Semua fitur Growth', 'Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
-    ]
+      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['POS + barcode', 'Master obat & inventory', 'Shift kasir + rekap', '1 user'] },
+      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua Starter', 'Stok opname + monitoring expiry', 'Laporan & analitik (Excel/PDF)', 'Notifikasi WhatsApp', '3 user'], popular: true },
+      { tier: 'Pro', price: 999000, desc: 'Untuk apotek yang terintegrasi penuh.', feat: ['Semua Growth', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware (QZ Tray)', 'User tanpa batas'] },
+    ],
+    // Gating per-tier ditegakkan server (Farmasi — page+API guard + seat kasir).
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'POS / kasir (+ barcode)', tiers: [true, true, true] },
+        { label: 'Master obat', tiers: [true, true, true] },
+        { label: 'Inventory & terima stok', tiers: [true, true, true] },
+        { label: 'Shift kasir + rekap', tiers: [true, true, true] },
+        { label: 'Stok opname', tiers: [false, true, true] },
+        { label: 'Monitoring expiry + retur/musnah', tiers: [false, true, true] },
+        { label: 'Laporan & analitik (Excel/PDF)', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Integrasi resep klinik (webhook)', tiers: [false, false, true] },
+        { label: 'Mode offline (PWA) + sinkron', tiers: [false, false, true] },
+        { label: 'Cetak struk hardware (QZ Tray)', tiers: [false, false, true] },
+        { label: 'Jumlah user/kasir', tiers: ['1', '3', 'Tanpa batas'] },
+      ],
+    },
   },
   {
     id: 'travel',

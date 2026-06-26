@@ -3,7 +3,7 @@
 // supaya tidak ada fitur yang dijual berharga-tetap padahal belum bisa di-deploy.
 //  - 'live'   : ada jalur kode yang merender/menjalankan → fitur otomatis website.
 //  - 'manual' : layanan setup nyata yang dikerjakan tim (bukan tombol di renderer).
-//  - 'portal' : fitur milik produk portal terpisah (LMS / JapanArena Go / Klinik),
+//  - 'portal' : fitur milik produk portal terpisah (LMS / Webzoka Go / Klinik),
 //               bukan add-on website builder → arahkan ke /pricing, jangan dihargai
 //               sebagai bagian estimasi website.
 //  - 'soon'   : belum terbangun di mesin pengiriman → tawarkan sebagai "konsultasi
@@ -443,7 +443,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
     ]
   },
   travel: {
-    title: 'JapanArena Go (Travel)',
+    title: 'Webzoka Go (Travel)',
     items: [
       {
         id: 'booking',
@@ -453,7 +453,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'live',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
       },
       {
@@ -464,7 +464,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'portal',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
       },
       {
@@ -475,7 +475,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'portal',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
         disclaimer: 'Termasuk setup integrasi GPS. Biaya data GPS per armada ditagih terpisah sesuai provider GPS pilihan Anda (mulai Rp 50.000/unit/bulan).',
       },
@@ -487,7 +487,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'portal',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
       },
       {
@@ -498,7 +498,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'portal',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
       },
       {
@@ -509,7 +509,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         category: 'travel',
         availability: 'portal',
         isPortalFeature: true,
-        portalName: 'JapanArena Go',
+        portalName: 'Webzoka Go',
         portalLink: '/pricing',
       },
     ]

@@ -26,7 +26,7 @@ const waLink = (msg?: string): string => {
 
 function HeroSection({ onDemo }: { onDemo: () => void }) {
   return (
-    <section className="relative bg-[#F5F5F7] pt-32 pb-24 px-4 overflow-hidden">
+    <section className="relative bg-[#F5F5F7] pt-28 pb-16 px-4 overflow-hidden">
       {/* Dot grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.35]"
@@ -41,27 +41,27 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
       <div className="absolute bottom-0 left-0 w-[400px] h-[300px] opacity-20" style={{background: 'radial-gradient(ellipse 60% 60% at 0% 100%, #E0F2FE, transparent)'}} />
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-          <div className="space-y-8 animate-fade-up">
+          <div className="space-y-6 animate-fade-up">
             <p className="text-[11px] text-gray-500 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
             <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
               Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
               Berhenti Jadi Admin<br />
               <span className="text-[#0071E3]">di Bisnis Kamu Sendiri.</span>
             </h1>
 
-            <p className="text-lg md:text-xl font-medium text-blue-600 mt-2 mb-4">
+            <p className="text-base md:text-lg font-medium text-blue-600 mt-2 mb-4">
               Belum punya website? Tampil di Google mulai{" "}
               <span className="font-bold">Rp 600.000</span>{" "}
               — siap dalam 3–5 hari kerja.
             </p>
 
-            <p className="text-xl text-gray-500 leading-relaxed max-w-lg">
+            <p className="text-lg text-gray-500 leading-relaxed max-w-lg">
               Buat pemilik bisnis yang udah capek ngurusin semua operasional sendirian. Tiap hari HP penuh chat nanya ketersediaan, catat booking manual, sampai rekap uang malam-malam. Kami buatin sistem otomatis supaya bisnis tetap jalan walau kamu lagi tidur.
             </p>
 
@@ -147,11 +147,11 @@ function ProofSection() {
   ]
 
   return (
-    <section className="bg-white py-24 lg:py-28 px-4 border-t border-black/5">
+    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Bukti, Bukan Janji</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
             Kami Lebih Suka Tunjukkan<br className="hidden md:block" /> daripada Sekadar Berjanji.
           </h2>
           <p className="text-gray-500 mt-4 max-w-xl mx-auto">
@@ -255,11 +255,11 @@ function SegmenSection() {
     ]
 
     return (
-        <section id="segmen" className="bg-white py-24 lg:py-32 px-4">
+        <section id="segmen" className="bg-white py-16 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Anda</p>
-                    <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
                     <p className="text-gray-500 mt-4 max-w-xl mx-auto">
@@ -288,35 +288,40 @@ function SegmenSection() {
                             </p>
                           </div>
                         )}
-                        <div
-                          className={`group flex flex-col p-6 rounded-[32px] transition-all duration-500 hover:-translate-y-2 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm ${
-                            isFeatured
-                              ? 'bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 hover:shadow-2xl hover:shadow-blue-300'
-                              : 'bg-white border border-black/[0.03] apple-shadow hover:shadow-2xl'
-                          }`}
-                        >
-                            <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${
-                              isFeatured ? 'bg-white/20 text-white' : `${p.bg} ${p.color}`
-                            }`}>
+                        {isFeatured ? (
+                          /* Kartu unggulan = banner full-width horizontal (bukan kartu sempit kesepian) */
+                          <a
+                            href={p.href}
+                            className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1"
+                          >
+                            <div className="w-14 h-14 shrink-0 rounded-[12px] bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                                 <IconComponent size={26} />
                             </div>
-                            {isFeatured && (
-                              <span className="text-[10px] font-black uppercase tracking-widest text-white mb-2">Produk Unggulan</span>
-                            )}
-                            <h3 className={`text-xl font-bold mb-3 sf-display ${isFeatured ? 'text-white' : 'text-gray-900'}`}>{p.label}</h3>
-                            <p className={`text-sm leading-relaxed mb-8 flex-1 ${isFeatured ? 'text-blue-50' : 'text-gray-500'}`}>{p.description}</p>
+                            <div className="flex-1 min-w-0">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-blue-100">Produk Unggulan</span>
+                                <h3 className="text-xl sm:text-2xl font-bold text-white sf-display mt-1 mb-2">{p.label}</h3>
+                                <p className="text-sm leading-relaxed text-blue-50 max-w-2xl">{p.description}</p>
+                            </div>
+                            <span className="shrink-0 inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0071E3] group-hover:bg-blue-50 transition-all">
+                                {p.cta} <ArrowRight size={16} />
+                            </span>
+                          </a>
+                        ) : (
+                          <div className="group flex flex-col p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm">
+                            <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
+                                <IconComponent size={26} />
+                            </div>
+                            <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
+                            <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
                             <a
                               href={p.href}
                               {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                              className={`w-full py-3 rounded-full text-center text-sm font-bold transition-all ${
-                                isFeatured
-                                  ? 'bg-white text-[#0071E3] hover:bg-blue-50'
-                                  : 'bg-gray-900 text-white hover:bg-black'
-                              }`}
+                              className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
                             >
                                 {p.cta}
                             </a>
-                        </div>
+                          </div>
+                        )}
                         </div>
                         )
                     })}
@@ -334,7 +339,7 @@ function GlobalFeatures() {
     ]
 
     return (
-        <section id="fitur" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
+        <section id="fitur" className="bg-[#F5F5F7] py-16 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                     {FEATURES.map((f, i) => (
@@ -367,14 +372,14 @@ function TrustSection() {
     ]
 
     return (
-        <section className="bg-[#F5F5F7] py-24 px-4 border-t border-black/5">
+        <section className="bg-[#F5F5F7] py-16 lg:py-20 px-4 border-t border-black/5">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">Pesan Senin, Website Rilis Jumat —<br className="hidden md:block" /> Tanpa Kamu Harus Ngerti Coding</h2>
+                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">Pesan Senin, Website Rilis Jumat —<br className="hidden md:block" /> Tanpa Kamu Harus Ngerti Coding</h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     {STEPS.map((s, i) => (
                         <div key={i} className={`relative p-8 rounded-[40px] bg-white border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
@@ -388,7 +393,7 @@ function TrustSection() {
                     ))}
                 </div>
 
-                <div className="pt-20 border-t border-black/5">
+                <div className="pt-16 border-t border-black/5">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {BADGES.map((b, i) => (
                             <div key={i} className="flex flex-col items-center text-center">
@@ -416,13 +421,13 @@ function FlagshipSection() {
     { value: '5.0', label: 'Rating siswa' },
   ]
   return (
-    <section className="bg-white py-24 lg:py-28 px-4 border-t border-black/5">
+    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
             <Star size={13} className="fill-[#0071E3]" /> Karya Andalan Kami
           </p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
             Kami Bangun. Kami Pakai Sendiri.
           </h2>
           <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
@@ -528,11 +533,11 @@ function FaqSection() {
   ]
 
   return (
-    <section className="bg-white py-24 px-4 border-t border-black/5">
+    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight sf-display-heavy">
+          <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">
             Pertanyaan yang Sering Ditanya
           </h2>
         </div>
@@ -607,13 +612,13 @@ export default function LandingPage() {
         <PortfolioGallery />
         <FaqSection />
 
-        <section id="harga" className="py-32 bg-[#070B14] relative overflow-hidden">
+        <section id="harga" className="py-20 lg:py-24 bg-[#070B14] relative overflow-hidden">
           {/* Background mesh */}
           <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)'}} />
           <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(ellipse 60% 60% at 80% 80%, #3B82F6, transparent)'}} />
           <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
               <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
-              <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
+              <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
                 Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">

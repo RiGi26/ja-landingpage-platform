@@ -235,7 +235,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-5 border border-green-100">
             <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
           </div>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight sf-display-heavy">
+          <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight sf-display-heavy">
             Sistem Portal Bisnis — <span className="text-blue-600">Satu Sistem</span> untuk Setiap Industri
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
@@ -334,7 +334,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             return (
             <div
               key={plan.tier}
-              className={`relative bg-white rounded-3xl p-6 md:p-8 border-2 transition-all flex flex-col snap-start shrink-0 w-[80%] sm:w-[56%] md:w-auto ${
+              className={`relative bg-white rounded-3xl p-5 md:p-6 border-2 transition-all flex flex-col snap-start shrink-0 w-[80%] sm:w-[56%] md:w-auto ${
                 plan.popular ? 'border-blue-600 shadow-2xl shadow-blue-100 ring-4 ring-blue-50' : 'border-black/[0.03] shadow-sm'
               }`}
             >
@@ -348,8 +348,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 {plan.desc && (
                   <p className="text-sm text-gray-500 font-medium mb-3 leading-snug text-pretty">{plan.desc}</p>
                 )}
-                <div className="flex items-baseline gap-1">
-                  <span className="text-3xl font-black text-gray-900 sf-display-heavy tabular-nums">
+                <div className="flex flex-wrap items-baseline gap-x-1.5">
+                  <span className="text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
                     {price === 0 ? 'Gratis' : plan.priceLabel ? `Rp ${plan.priceLabel}` : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
@@ -446,7 +446,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {currentPlatform.featureMatrix && (
           <div className="mb-16 md:mb-20">
             <div className="text-center mb-8 md:mb-10">
-              <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
+              <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
                 Fitur lengkap tiap paket
               </h2>
               <p className="text-gray-500 text-sm md:text-base font-medium max-w-md mx-auto mt-3 text-pretty">
@@ -504,7 +504,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         <div className="py-14 md:py-20 border-t border-black/5">
           <div className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
-            <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
+            <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
               Pertanyaan Sebelum Berlangganan
             </h2>
           </div>

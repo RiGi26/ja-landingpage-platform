@@ -30,7 +30,27 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       { tier: 'Starter', price: 249000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Sertifikat Otomatis'] },
       { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
       { tier: 'Pro', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
-    ]
+    ],
+    // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
+    // + Fase A.1 (multi-pengajar, sertifikat, kuota siswa) — 2026-06-26.
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Materi & sesi belajar (BAB)', tiers: [true, true, true] },
+        { label: 'Kuis & ujian (mock test)', tiers: [true, true, true] },
+        { label: 'Flashcard (spaced repetition)', tiers: [true, true, true] },
+        { label: 'Manajemen & absensi siswa', tiers: [true, true, true] },
+        { label: 'Laporan + ekspor CSV', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Jadwal kelas live + reminder', tiers: [false, true, true] },
+        { label: 'Keuangan & invoice', tiers: [false, true, true] },
+        { label: 'Multi-pengajar', tiers: [false, false, true] },
+        { label: 'Sertifikat kelulusan', tiers: [false, false, true] },
+        { label: 'Blog / artikel publik', tiers: [false, false, true] },
+        { label: 'Jumlah siswa aktif', tiers: ['100', '500', 'Tanpa batas'] },
+      ],
+    },
   },
   {
     id: 'clinic',
@@ -48,7 +68,26 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
       { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
       { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
-    ]
+    ],
+    // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).
+    // Custom domain/white-label dikontrol superadmin → tak ditampilkan di sini.
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Antrian & appointment', tiers: [true, true, true] },
+        { label: 'Database pasien', tiers: [true, true, true] },
+        { label: 'Rekam medis + resep (SOAP/ICD-10)', tiers: [true, true, true] },
+        { label: 'Surat keterangan (sakit/sehat/rujukan)', tiers: [true, true, true] },
+        { label: 'Billing & pembayaran (+ struk WA)', tiers: [false, true, true] },
+        { label: 'Apotek / stok obat', tiers: [false, true, true] },
+        { label: 'Laporan & analitik (+ ekspor)', tiers: [false, true, true] },
+        { label: 'Jadwal staf / shift', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Booking link pasien + QR', tiers: [false, false, true] },
+        { label: 'Jumlah dokter', tiers: ['1', '3', 'Tanpa batas'] },
+      ],
+    },
   },
   {
     id: 'pharmacy',

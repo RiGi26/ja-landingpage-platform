@@ -20,7 +20,7 @@ export default function ComparisonInfographic() {
             <TrendingDown size={14} /> Analisis Efisiensi Biaya 2026
           </div>
           <h2 className="text-4xl font-black text-gray-900 tracking-tight mb-4">
-            Beralih ke JapanArena, Pangkas Operasional Hingga <span className="text-green-600">75%</span>
+            Beralih ke Webzoka, Pangkas Operasional Hingga <span className="text-green-600">75%</span>
           </h2>
         </div>
 
@@ -48,7 +48,7 @@ export default function ComparisonInfographic() {
 
                 {/* Bar JapanArena (proporsional terhadap vendor) */}
                 <div className="flex items-center gap-3">
-                  <span className="hidden sm:block w-24 shrink-0 text-xs font-bold text-blue-700">JapanArena</span>
+                  <span className="hidden sm:block w-24 shrink-0 text-xs font-bold text-blue-700">Webzoka</span>
                   <div className="flex-1 h-7 bg-gray-100 rounded-lg overflow-hidden">
                     <div className="h-full bg-blue-600 rounded-lg shadow-sm shadow-blue-200 transition-all duration-1000 delay-300" style={{ width: `${(item.ja / item.others) * 100}%` }} />
                   </div>
@@ -91,7 +91,7 @@ export default function ComparisonInfographic() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3 text-white">
                     <CheckCircle2 className="text-blue-500 shadow-glow" size={20} />
-                    <span className="font-bold">JapanArena (Setup Fee)</span>
+                    <span className="font-bold">Webzoka (Setup Fee)</span>
                   </div>
                   <span className="font-black text-2xl text-blue-500">GRATIS</span>
                 </div>

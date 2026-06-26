@@ -281,7 +281,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             const coreTier = coreTierOf(plan.tier)
             // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock).
             const subscribeReady = currentPlatform.id === 'lms' || isStock
-            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Japan Arena, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
+            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
             const ctaHref = isFreeCta
               ? currentPlatform.registerUrl
               : subscribeReady

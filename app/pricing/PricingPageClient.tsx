@@ -31,9 +31,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500+ Siswa', 'Unlimited Kursus', 'Sertifikat Otomatis', 'Laporan Progres'], popular: true },
       { tier: 'Pro', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ],
-    // Hanya fitur yang gating per-tier-nya SUDAH ditegakkan server (LMS Fase A,
-    // 2026-06-26). Multi-pengajar, sertifikat, dan kuota siswa belum di-hard-enforce
-    // (Fase A.1) → sengaja TIDAK ditampilkan agar tak menjual beda yang belum nyata.
+    // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
+    // + Fase A.1 (multi-pengajar, sertifikat, kuota siswa) — 2026-06-26.
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
       note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
@@ -46,7 +45,10 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
         { label: 'Jadwal kelas live + reminder', tiers: [false, true, true] },
         { label: 'Keuangan & invoice', tiers: [false, true, true] },
+        { label: 'Multi-pengajar', tiers: [false, false, true] },
+        { label: 'Sertifikat kelulusan', tiers: [false, false, true] },
         { label: 'Blog / artikel publik', tiers: [false, false, true] },
+        { label: 'Jumlah siswa aktif', tiers: ['100', '500', 'Tanpa batas'] },
       ],
     },
   },

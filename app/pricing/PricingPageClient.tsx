@@ -65,9 +65,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Rekam Medis Digital', 'Booking Online'] },
-      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Laporan Harian'], popular: true },
-      { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
+      { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
+      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
+      { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ],
     // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).
     // Custom domain/white-label dikontrol superadmin → tak ditampilkan di sini.
@@ -102,9 +102,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['500 SKU Obat', 'Kasir Digital', 'Laporan Transaksi'] },
-      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Unlimited SKU', 'Alert Stok Habis Otomatis', 'Laporan Harian', 'Multi-Kasir'], popular: true },
-      { tier: 'Pro', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
+      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['500 SKU Obat', 'Kasir Digital', 'Manajemen Stok', 'Cetak Struk Otomatis', 'Laporan Transaksi'] },
+      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua fitur Starter', 'Unlimited SKU', 'Alert Stok Habis Otomatis', 'Multi-Kasir', 'Laporan Harian'], popular: true },
+      { tier: 'Pro', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Semua fitur Growth', 'Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
     ]
   },
   {
@@ -120,9 +120,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['10 Unit Aset', 'Booking Online', 'Konfirmasi Otomatis'] },
-      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
-      { tier: 'Pro', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
+      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['10 Unit Aset', 'Booking Online', 'Kalender Booking', 'Konfirmasi Otomatis', 'Manajemen Pelanggan'] },
+      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua fitur Starter', 'Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
+      { tier: 'Pro', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Semua fitur Growth', 'Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
     ]
   },
   {

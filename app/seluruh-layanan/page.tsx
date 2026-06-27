@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { getStoredRef } from '../RefCapture'
 import {
   Check,
@@ -828,8 +829,9 @@ Terima kasih.`
                                 })}
                             </div>
 
-                            {/* Mobile bottom-sheet pemilih industri */}
-                            {templateSheetOpen && (
+                            {/* Mobile bottom-sheet pemilih industri — portal ke body agar
+                                lepas dari ancestor ber-transform & di atas bar harga/FAB */}
+                            {templateSheetOpen && createPortal(
                               <div className="sm:hidden fixed inset-0 z-[100]">
                                 <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={() => setTemplateSheetOpen(false)} />
                                 <div role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
@@ -842,7 +844,7 @@ Terima kasih.`
                                       <X size={18} />
                                     </button>
                                   </div>
-                                  <div className="overflow-y-auto px-3 pb-4 space-y-1.5">
+                                  <div className="flex-1 min-h-0 overflow-y-auto px-3 pb-4 space-y-1.5">
                                     {TEMPLATE_OPTIONS.map((tpl) => {
                                       const Icon = tpl.icon
                                       const isSelected = selectedTemplate === tpl.name
@@ -867,7 +869,8 @@ Terima kasih.`
                                     })}
                                   </div>
                                 </div>
-                              </div>
+                              </div>,
+                              document.body
                             )}
                         </section>
 

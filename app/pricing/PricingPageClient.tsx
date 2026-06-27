@@ -27,8 +27,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 249000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Kuis & Ujian'] },
-      { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Unlimited Kursus', 'Laporan Progres'], popular: true },
+      { tier: 'Starter', price: 249000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa'] },
+      { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Unlimited Kursus', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
       { tier: 'Pro', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ],
     // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
@@ -395,7 +395,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           role="tabpanel"
           id={`tabpanel-${currentPlatform.id}`}
           aria-labelledby={`tab-${currentPlatform.id}`}
-          className={`flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0 mb-4 md:mb-20 items-start md:items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+          className={`flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pb-2 md:pb-0 mb-4 md:mb-20 items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
             currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
           }`}>
           {currentPlatform.plans.map((plan, idx) => {

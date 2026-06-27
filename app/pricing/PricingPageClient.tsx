@@ -137,12 +137,29 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online', 'Notif WA otomatis', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['10 Unit Aset', 'Booking Online', 'Kalender Booking', 'Konfirmasi Otomatis', 'Manajemen Pelanggan'] },
-      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua fitur Starter', 'Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
-      { tier: 'Pro', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Semua fitur Growth', 'Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
-    ]
+      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
+      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
+      { tier: 'Pro', price: 1899000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
+    ],
+    // Gating per-tier ditegakkan server (Travel — page guard + API guard).
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Armada + reminder servis', tiers: [true, true, true] },
+        { label: 'Rute & jadwal', tiers: [true, true, true] },
+        { label: 'Booking + konfirmasi bayar manual', tiers: [true, true, true] },
+        { label: 'E-ticket & invoice PDF (QR)', tiers: [true, true, true] },
+        { label: 'Driver roster + rating', tiers: [true, true, true] },
+        { label: 'Pembayaran online (Midtrans)', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Laporan & analitik', tiers: [false, true, true] },
+        { label: 'GPS live tracking', tiers: [false, false, true] },
+        { label: 'Modul rental self-drive (deposit)', tiers: [false, false, true] },
+      ],
+    },
   },
   {
     id: 'stock',

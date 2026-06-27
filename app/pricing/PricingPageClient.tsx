@@ -100,12 +100,31 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited SKU Obat', 'Multi-Cabang', 'Integrasi Supplier', 'Multi-Kasir', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'User/kasir tanpa batas', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['500 SKU Obat', 'Kasir Digital', 'Manajemen Stok', 'Cetak Struk Otomatis', 'Laporan Transaksi'] },
-      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua fitur Starter', 'Unlimited SKU', 'Alert Stok Habis Otomatis', 'Multi-Kasir', 'Laporan Harian'], popular: true },
-      { tier: 'Pro', price: 999000, desc: 'Untuk apotek multi-cabang.', feat: ['Semua fitur Growth', 'Multi-Cabang', 'Custom Domain', 'Integrasi Supplier', 'Priority Support'] },
-    ]
+      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['POS + barcode', 'Master obat & inventory', 'Shift kasir + rekap', '1 user'] },
+      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua Starter', 'Stok opname + monitoring expiry', 'Laporan & analitik (Excel/PDF)', 'Notifikasi WhatsApp', '3 user'], popular: true },
+      { tier: 'Pro', price: 999000, desc: 'Untuk apotek yang terintegrasi penuh.', feat: ['Semua Growth', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware (QZ Tray)', 'User tanpa batas'] },
+    ],
+    // Gating per-tier ditegakkan server (Farmasi — page+API guard + seat kasir).
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'POS / kasir (+ barcode)', tiers: [true, true, true] },
+        { label: 'Master obat', tiers: [true, true, true] },
+        { label: 'Inventory & terima stok', tiers: [true, true, true] },
+        { label: 'Shift kasir + rekap', tiers: [true, true, true] },
+        { label: 'Stok opname', tiers: [false, true, true] },
+        { label: 'Monitoring expiry + retur/musnah', tiers: [false, true, true] },
+        { label: 'Laporan & analitik (Excel/PDF)', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Integrasi resep klinik (webhook)', tiers: [false, false, true] },
+        { label: 'Mode offline (PWA) + sinkron', tiers: [false, false, true] },
+        { label: 'Cetak struk hardware (QZ Tray)', tiers: [false, false, true] },
+        { label: 'Jumlah user/kasir', tiers: ['1', '3', 'Tanpa batas'] },
+      ],
+    },
   },
   {
     id: 'travel',
@@ -118,12 +137,29 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Unit Aset', 'Anti Double Booking', 'Multi-Lokasi', 'Notif WA Otomatis', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online', 'Notif WA otomatis', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['10 Unit Aset', 'Booking Online', 'Kalender Booking', 'Konfirmasi Otomatis', 'Manajemen Pelanggan'] },
-      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua fitur Starter', 'Unlimited Unit', 'Anti Double Booking', 'Notif WA Otomatis', 'Laporan Pendapatan'], popular: true },
-      { tier: 'Pro', price: 1899000, desc: 'Untuk operator multi-lokasi.', feat: ['Semua fitur Growth', 'Multi-Lokasi', 'Custom Domain', 'API Pembayaran', 'Priority Support'] },
-    ]
+      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
+      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
+      { tier: 'Pro', price: 1899000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
+    ],
+    // Gating per-tier ditegakkan server (Travel — page guard + API guard).
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Armada + reminder servis', tiers: [true, true, true] },
+        { label: 'Rute & jadwal', tiers: [true, true, true] },
+        { label: 'Booking + konfirmasi bayar manual', tiers: [true, true, true] },
+        { label: 'E-ticket & invoice PDF (QR)', tiers: [true, true, true] },
+        { label: 'Driver roster + rating', tiers: [true, true, true] },
+        { label: 'Pembayaran online (Midtrans)', tiers: [false, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
+        { label: 'Laporan & analitik', tiers: [false, true, true] },
+        { label: 'GPS live tracking', tiers: [false, false, true] },
+        { label: 'Modul rental self-drive (deposit)', tiers: [false, false, true] },
+      ],
+    },
   },
   {
     id: 'stock',

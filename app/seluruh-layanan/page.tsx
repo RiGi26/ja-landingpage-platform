@@ -35,6 +35,7 @@ import {
   Camera,
   Crown,
   ChevronUp,
+  ChevronDown,
   X
 } from 'lucide-react'
 import Link from 'next/link'
@@ -553,6 +554,21 @@ export default function SeluruhLayananPage() {
     setSelectedTheme(null) // ganti industri → reset tema pilihan galeri
   }, [selectedTemplate])
 
+  // Mobile: pemilih industri jadi bottom-sheet (ringkas, ganti grid 13 kartu).
+  const [templateSheetOpen, setTemplateSheetOpen] = useState(false)
+  const selectedTpl = TEMPLATE_OPTIONS.find(t => t.name === selectedTemplate) || TEMPLATE_OPTIONS[0]
+  useEffect(() => {
+    if (!templateSheetOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setTemplateSheetOpen(false) }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [templateSheetOpen])
+
   const toggleGroup = (groupKey: string) => {
     setExpandedGroups(prev => 
       prev.includes(groupKey) 
@@ -762,8 +778,26 @@ Terima kasih.`
                                 </div>
                             </div>
 
-                            {/* Bento Grid Template Selection */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                            {/* Mobile: tombol ringkas pengganti grid → buka bottom-sheet */}
+                            <button
+                                type="button"
+                                onClick={() => setTemplateSheetOpen(true)}
+                                aria-haspopup="dialog"
+                                aria-expanded={templateSheetOpen}
+                                className="sm:hidden w-full flex items-center gap-3 text-left px-4 py-3.5 rounded-2xl border-2 border-[#0071E3] bg-blue-50/30 ring-2 ring-blue-100 active:scale-[0.99] transition-transform"
+                            >
+                                <span className="w-10 h-10 rounded-xl bg-[#0071E3] text-white flex items-center justify-center shrink-0">
+                                    <selectedTpl.icon size={20} />
+                                </span>
+                                <span className="flex-1 min-w-0">
+                                    <span className="block text-sm font-bold text-blue-900 truncate">{selectedTpl.name}</span>
+                                    <span className="block text-xs text-gray-600 truncate">{selectedTpl.subtitle}</span>
+                                </span>
+                                <ChevronDown size={20} className={`shrink-0 text-gray-400 transition-transform duration-300 ${templateSheetOpen ? 'rotate-180' : ''}`} />
+                            </button>
+
+                            {/* Bento Grid Template Selection (tablet & desktop) */}
+                            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 gap-3">
                                 {TEMPLATE_OPTIONS.map((tpl) => {
                                     const Icon = tpl.icon;
                                     const isSelected = selectedTemplate === tpl.name;
@@ -793,6 +827,48 @@ Terima kasih.`
                                     )
                                 })}
                             </div>
+
+                            {/* Mobile bottom-sheet pemilih industri */}
+                            {templateSheetOpen && (
+                              <div className="sm:hidden fixed inset-0 z-[100]">
+                                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={() => setTemplateSheetOpen(false)} />
+                                <div role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
+                                  <div className="pt-3 flex justify-center shrink-0">
+                                    <span className="h-1.5 w-10 rounded-full bg-gray-200" />
+                                  </div>
+                                  <div className="flex items-center justify-between px-5 pt-2 pb-3 shrink-0">
+                                    <p className="text-sm font-black text-gray-900">Pilih bidang industri</p>
+                                    <button type="button" onClick={() => setTemplateSheetOpen(false)} aria-label="Tutup" className="w-9 h-9 -mr-1 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors">
+                                      <X size={18} />
+                                    </button>
+                                  </div>
+                                  <div className="overflow-y-auto px-3 pb-4 space-y-1.5">
+                                    {TEMPLATE_OPTIONS.map((tpl) => {
+                                      const Icon = tpl.icon
+                                      const isSelected = selectedTemplate === tpl.name
+                                      return (
+                                        <button
+                                          key={tpl.name}
+                                          type="button"
+                                          aria-current={isSelected ? 'true' : undefined}
+                                          onClick={() => { setSelectedTemplate(tpl.name); setTemplateSheetOpen(false) }}
+                                          className={`w-full flex items-center gap-3 text-left px-3 py-3 rounded-2xl border transition-colors ${isSelected ? 'bg-blue-50 border-blue-200' : 'bg-white border-transparent hover:bg-gray-50'}`}
+                                        >
+                                          <span className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isSelected ? 'bg-[#0071E3] text-white' : 'bg-gray-100 text-gray-500'}`}>
+                                            <Icon size={20} />
+                                          </span>
+                                          <span className="flex-1 min-w-0">
+                                            <span className={`block text-sm font-bold truncate ${isSelected ? 'text-blue-900' : 'text-gray-800'}`}>{tpl.name}</span>
+                                            <span className="block text-xs text-gray-600 truncate">{tpl.subtitle}</span>
+                                          </span>
+                                          {isSelected && <Check size={18} className="shrink-0 text-[#0071E3]" strokeWidth={3} />}
+                                        </button>
+                                      )
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            )}
                         </section>
 
                         {/* First Look: Template Preview */}

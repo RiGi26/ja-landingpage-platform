@@ -131,6 +131,15 @@ h1, h2, h3, h4, h5, h6 {
   animation: scaleIn 0.2s ease forwards;
 }
 
+/* animate-slide-up — bottom-sheet pemilih portal (mobile) di /pricing */
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* ── Scroll-reveal (IntersectionObserver adds .is-visible) ───────────────── */
 .reveal {
   opacity: 0;
@@ -164,7 +173,8 @@ h1, h2, h3, h4, h5, h6 {
   .animate-fade-in,
   .animate-fade-in-up,
   .animate-fade-in-down,
-  .animate-scale-pop {
+  .animate-scale-pop,
+  .animate-slide-up {
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;

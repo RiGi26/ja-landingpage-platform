@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -196,6 +196,21 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
   const [activeTab, setActiveTab] = useState('lms')
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
+  // Mobile: pemilih portal jadi bottom-sheet (hemat ruang & scalable saat portal bertambah).
+  // Escape + scroll-lock body selama sheet terbuka — pola sama dgn DemoPickerModal.
+  const [sheetOpen, setSheetOpen] = useState(false)
+  useEffect(() => {
+    if (!sheetOpen) return
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSheetOpen(false) }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [sheetOpen])
+
   // Mobile: kartu jadi carousel snap-scroll. Lacak kartu aktif untuk dot indikator,
   // dan reset ke kartu pertama saat ganti tab/platform.
   const cardsRef = useRef<HTMLDivElement>(null)
@@ -247,7 +262,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         <div className="text-center mb-5">
           <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
         </div>
-        <div role="tablist" aria-label="Pilih platform" className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-4">
+        {/* Desktop: grid penuh. Mobile: dirampingkan jadi tombol + bottom-sheet di bawah. */}
+        <div role="tablist" aria-label="Pilih platform" className="hidden md:grid sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-4">
           {PLATFORMS.map(p => {
             const isActive = activeTab === p.id
             return (
@@ -272,6 +288,80 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             )
           })}
         </div>
+
+        {/* Mobile: tombol trigger menampilkan portal terpilih → buka bottom-sheet */}
+        <button
+          type="button"
+          onClick={() => setSheetOpen(true)}
+          aria-haspopup="dialog"
+          aria-expanded={sheetOpen}
+          className="md:hidden w-full flex items-center gap-3 text-left px-4 py-3.5 mb-4 rounded-2xl border border-gray-200 bg-white shadow-sm font-bold text-sm active:scale-[0.98] transition-transform"
+        >
+          <span className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+            <currentPlatform.icon size={18} />
+          </span>
+          <span className="flex-1 min-w-0">
+            <span className="block text-gray-900 truncate">{currentPlatform.name}</span>
+            <span className="block text-xs font-medium text-gray-500 truncate">{currentPlatform.subtitle}</span>
+          </span>
+          <ChevronDown size={18} className={`shrink-0 text-gray-400 transition-transform duration-300 ${sheetOpen ? 'rotate-180' : ''}`} />
+        </button>
+
+        {/* Bottom-sheet pemilih portal (mobile only) */}
+        {sheetOpen && (
+          <div className="md:hidden fixed inset-0 z-[100]">
+            <div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in"
+              onClick={() => setSheetOpen(false)}
+            />
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label="Pilih platform"
+              className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]"
+            >
+              <div className="pt-3 flex justify-center shrink-0">
+                <span className="h-1.5 w-10 rounded-full bg-gray-200" />
+              </div>
+              <div className="flex items-center justify-between px-5 pt-2 pb-3 shrink-0">
+                <p className="text-sm font-black text-gray-900">Pilih portal</p>
+                <button
+                  type="button"
+                  onClick={() => setSheetOpen(false)}
+                  aria-label="Tutup"
+                  className="w-9 h-9 -mr-1 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="overflow-y-auto px-3 pb-4 space-y-1.5">
+                {PLATFORMS.map(p => {
+                  const isActive = activeTab === p.id
+                  return (
+                    <button
+                      key={p.id}
+                      type="button"
+                      aria-current={isActive ? 'true' : undefined}
+                      onClick={() => { setActiveTab(p.id); setSheetOpen(false) }}
+                      className={`w-full flex items-center gap-3 text-left px-3 py-3 rounded-2xl border transition-colors ${
+                        isActive ? 'bg-blue-50 border-blue-200' : 'bg-white border-transparent hover:bg-gray-50'
+                      }`}
+                    >
+                      <span className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${isActive ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                        <p.icon size={18} />
+                      </span>
+                      <span className="flex-1 min-w-0">
+                        <span className={`block text-sm font-bold truncate ${isActive ? 'text-blue-700' : 'text-gray-900'}`}>{p.name}</span>
+                        <span className="block text-xs font-medium text-gray-500 truncate">{p.subtitle}</span>
+                      </span>
+                      {isActive && <Check size={18} className="shrink-0 text-blue-600" strokeWidth={3} />}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="text-center mb-12">
           <a
             href="https://wa.me/6281296917963?text=Halo%20Japan%20Arena%2C%20saya%20tidak%20yakin%20platform%20mana%20yang%20cocok%20untuk%20bisnis%20saya."

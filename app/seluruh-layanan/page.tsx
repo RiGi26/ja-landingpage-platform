@@ -52,15 +52,9 @@ import {
   isPricedAddon
 } from '@/constants/services'
 import ThemeGallery, { galleryForLabel } from './ThemeGallery'
+import { WB_URL } from '@/constants/site'
 
 const WA_NUMBER = '6281296917963'
-
-// Basis URL app Website Builder (form order). Dipusatkan supaya saat custom domain
-// dipasang (mis. studio.japanarena.com) cukup ubah env var NEXT_PUBLIC_WEBSITEBUILDER_URL
-// — tak perlu sentuh kode. Fallback = domain Vercel saat ini (perilaku tak berubah).
-const WB_URL =
-  process.env.NEXT_PUBLIC_WEBSITEBUILDER_URL?.replace(/\/+$/, '') ||
-  'https://ja-websitebuilder-platform-nfoa.vercel.app'
 
 // --- CUSTOM HOOK: Odometer Animation ---
 function useAnimatedNumber(value: number, duration = 800) {
@@ -120,7 +114,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   emoji: string
 }> = {
   'Website Perusahaan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/nusa-konsultan',
+    demoUrl: `${WB_URL}/nusa-konsultan`,
     tagline: 'Tampil profesional & credible di mata klien korporat — contoh: Nusa Konsultan Digital',
     mockUrl: 'nusa-konsultan.japanarena.com',
     mockupGradient: 'from-slate-800 to-blue-900',
@@ -128,7 +122,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏢',
   },
   'Toko Online': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/batik-larasati',
+    demoUrl: `${WB_URL}/batik-larasati`,
     tagline: 'Toko online siap terima order & pembayaran 24/7 — contoh: Batik Larasati',
     mockUrl: 'batik-larasati.japanarena.com',
     mockupGradient: 'from-orange-800 to-red-900',
@@ -136,7 +130,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🛍️',
   },
   'Website Klinik & Spa': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lumiere-spa',
+    demoUrl: `${WB_URL}/lumiere-spa`,
     tagline: 'Klinik & spa premium yang warm, terpercaya & mudah booking — contoh: Lumière Beauty & Spa',
     mockUrl: 'lumiere-spa.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
@@ -144,7 +138,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏥',
   },
   'Website Sekolah / LPK': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lpk-sakura',
+    demoUrl: `${WB_URL}/lpk-sakura`,
     tagline: 'Wajah digital institusi pendidikan yang modern & terpercaya — contoh: LPK Sakura Academy',
     mockUrl: 'lpk-sakura.japanarena.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
@@ -152,7 +146,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🎓',
   },
   'Website Institusi': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/institusi',
+    demoUrl: `${WB_URL}/demo/institusi`,
     tagline: 'Portal informasi resmi dan terpercaya',
     mockUrl: 'institusi.japanarena.com',
     mockupGradient: 'from-gray-800 to-slate-900',
@@ -160,7 +154,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏛️',
   },
   'Website Restaurant': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/kanawa',
+    demoUrl: `${WB_URL}/kanawa`,
     tagline: 'Menu digital yang bikin pelanggan lapar duluan — contoh: Kanawa Izakaya',
     mockUrl: 'kanawa.japanarena.com',
     mockupGradient: 'from-amber-800 to-orange-900',
@@ -168,7 +162,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🍜',
   },
   'Personal Branding': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/personal-branding',
+    demoUrl: `${WB_URL}/demo/personal-branding`,
     tagline: 'Personal website yang menonjolkan keahlian Anda',
     mockUrl: 'nama.japanarena.com',
     mockupGradient: 'from-violet-800 to-pink-900',
@@ -176,7 +170,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '👤',
   },
   'Blog / Media': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/blog',
+    demoUrl: `${WB_URL}/demo/blog`,
     tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
     mockUrl: 'blog.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
@@ -184,7 +178,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '📰',
   },
   'Travel & Rental': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/rental',
+    demoUrl: `${WB_URL}/demo/rental`,
     tagline: 'Rental mobil & motor profesional siap live — contoh: Nusantara Drive',
     mockUrl: 'nusantara-drive.japanarena.com',
     mockupGradient: 'from-amber-800 to-orange-900',
@@ -192,7 +186,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🚗',
   },
   'Custom Jastip': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',
+    demoUrl: `${WB_URL}/demo/jastip`,
     tagline: 'Sistem jasa titip yang terorganisir & profesional',
     mockUrl: 'jastip.japanarena.com',
     mockupGradient: 'from-rose-800 to-pink-900',

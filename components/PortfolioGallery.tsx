@@ -2,9 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { ExternalLink, ArrowRight, Globe, Loader2, GraduationCap } from 'lucide-react'
+import { WB_URL as STUDIO_URL } from '@/constants/site'
 
-// Deployment websitebuilder yang menyajikan situs klien published.
-const STUDIO_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const SUPABASE_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
 

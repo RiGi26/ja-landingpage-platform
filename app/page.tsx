@@ -14,6 +14,7 @@ import PortfolioGallery from '@/components/PortfolioGallery'
 import DemoPickerModal from '@/components/DemoPickerModal'
 import Image from 'next/image'
 import Link from 'next/link'
+import { WB_URL } from '@/constants/site'
 
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 
@@ -700,7 +701,7 @@ export default function LandingPage() {
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
                           <li>
                             <a
-                              href="https://ja-websitebuilder-platform-nfoa.vercel.app/track"
+                              href={`${WB_URL}/track`}
                               className="hover:text-[#0071E3] transition-colors"
                             >
                               Lacak Pesanan

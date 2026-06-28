@@ -133,7 +133,7 @@ function ProofSection() {
     {
       icon: Globe2,
       title: 'Karya yang Bisa Dicek Langsung',
-      desc: 'Situs klien kami sudah tayang di domain nyata — bukan mockup. Gulir ke bawah, klik mana saja, buka sendiri di tab baru.',
+      desc: 'Produk yang kami pakai sendiri tiap hari — japanarena.id — sudah tayang di domain nyata, bukan mockup. Gulir ke bawah, klik, buka sendiri di tab baru.',
       cta: 'Lihat karya live ↓',
       href: '#portofolio',
     },

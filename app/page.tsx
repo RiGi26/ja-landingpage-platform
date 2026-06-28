@@ -12,6 +12,7 @@ import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
 import DemoPickerModal from '@/components/DemoPickerModal'
+import PortalSystemsAccordion from '@/components/PortalSystemsAccordion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { WB_URL } from '@/constants/site'
@@ -272,65 +273,74 @@ function SegmenSection() {
                     </p>
                 </div>
 
-                <div className="flex flex-wrap justify-center gap-6">
-                    {PORTALS.map((p, index) => {
-                        const isFeatured = index === 0
-                        const IconComponent = p.icon
-                        return (
-                        <div key={p.label} className="contents">
-                        {/* Divider sebelum portal cards — muncul setelah featured card */}
-                        {index === 1 && (
-                          <div className="w-full py-3 sm:py-2">
-                            <div className="hidden sm:flex items-center gap-4">
-                              <div className="flex-1 h-px bg-black/5" />
-                              <p className="text-[12px] font-bold text-gray-600 uppercase tracking-widest text-center whitespace-nowrap">
-                                Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
-                              </p>
-                              <div className="flex-1 h-px bg-black/5" />
-                            </div>
-                            <p className="sm:hidden text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center leading-relaxed">
-                              Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
-                            </p>
-                          </div>
-                        )}
-                        {isFeatured ? (
-                          /* Kartu unggulan = banner full-width horizontal (bukan kartu sempit kesepian) */
-                          <a
-                            href={p.href}
-                            className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1"
-                          >
-                            <div className="w-14 h-14 shrink-0 rounded-[12px] bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <IconComponent size={26} />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <span className="text-[10px] font-black uppercase tracking-widest text-blue-100">Produk Unggulan</span>
-                                <h3 className="text-xl sm:text-2xl font-bold text-white sf-display mt-1 mb-2">{p.label}</h3>
-                                <p className="text-sm leading-relaxed text-blue-50 max-w-2xl">{p.description}</p>
-                            </div>
-                            <span className="shrink-0 inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0071E3] group-hover:bg-blue-50 transition-all">
-                                {p.cta} <ArrowRight size={16} />
-                            </span>
-                          </a>
-                        ) : (
-                          <div className="group flex flex-col p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm">
-                            <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
-                                <IconComponent size={26} />
-                            </div>
-                            <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
-                            <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
-                            <a
-                              href={p.href}
-                              {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                              className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
-                            >
-                                {p.cta}
-                            </a>
-                          </div>
-                        )}
+                {(() => {
+                  const featured = PORTALS[0]
+                  const systems = PORTALS.slice(1)
+                  const FeaturedIcon = featured.icon
+                  return (
+                    <div className="flex flex-col items-center gap-6">
+                      {/* Kartu unggulan = banner full-width horizontal (semua viewport, BUKAN dropdown) */}
+                      <a
+                        href={featured.href}
+                        className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1"
+                      >
+                        <div className="w-14 h-14 shrink-0 rounded-[12px] bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <FeaturedIcon size={26} />
                         </div>
-                        )
-                    })}
-                </div>
+                        <div className="flex-1 min-w-0">
+                            <span className="text-[10px] font-black uppercase tracking-widest text-blue-100">Produk Unggulan</span>
+                            <h3 className="text-xl sm:text-2xl font-bold text-white sf-display mt-1 mb-2">{featured.label}</h3>
+                            <p className="text-sm leading-relaxed text-blue-50 max-w-2xl">{featured.description}</p>
+                        </div>
+                        <span className="shrink-0 inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0071E3] group-hover:bg-blue-50 transition-all">
+                            {featured.cta} <ArrowRight size={16} />
+                        </span>
+                      </a>
+
+                      {/* Divider sebelum portal sistem */}
+                      <div className="w-full py-3 sm:py-2">
+                        <div className="hidden sm:flex items-center gap-4">
+                          <div className="flex-1 h-px bg-black/5" />
+                          <p className="text-[12px] font-bold text-gray-600 uppercase tracking-widest text-center whitespace-nowrap">
+                            Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
+                          </p>
+                          <div className="flex-1 h-px bg-black/5" />
+                        </div>
+                        <p className="sm:hidden text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center leading-relaxed">
+                          Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
+                        </p>
+                      </div>
+
+                      {/* Desktop: grid kartu (tidak berubah) */}
+                      <div className="hidden sm:flex flex-wrap justify-center gap-6 w-full">
+                        {systems.map((p) => {
+                          const IconComponent = p.icon
+                          return (
+                            <div key={p.label} className="group flex flex-col p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm">
+                              <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
+                                  <IconComponent size={26} />
+                              </div>
+                              <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
+                              <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
+                              <a
+                                href={p.href}
+                                {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
+                              >
+                                  {p.cta}
+                              </a>
+                            </div>
+                          )
+                        })}
+                      </div>
+
+                      {/* Mobile: accordion ringkas (skala saat portal bertambah) */}
+                      <div className="sm:hidden w-full">
+                        <PortalSystemsAccordion portals={systems} />
+                      </div>
+                    </div>
+                  )
+                })()}
             </div>
         </section>
     )

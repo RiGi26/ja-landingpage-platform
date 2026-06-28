@@ -715,18 +715,9 @@ Terima kasih.`
       <Navbar />
 
       <main className="max-w-6xl mx-auto pt-32 px-4">
-        {/* WhatsApp Sticky Button (Mobile) - positioned higher to avoid fixed bottom bar */}
-        <div className="fixed bottom-[100px] right-6 z-40 md:hidden">
-          <a
-            href={waLink('Halo Webzoka, saya butuh bantuan merakit website.')}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat via WhatsApp"
-            className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
-          >
-            <MessageCircle size={28} aria-hidden="true" />
-          </a>
-        </div>
+        {/* Tombol chat WhatsApp didok di dalam bar bawah (lihat bar fixed di
+            bagian akhir) — bukan FAB melayang, supaya tak menutupi progress-bar
+            atau kartu add-on saat di-scroll di mobile. */}
 
         {/* Header */}
         <div className="mb-12 animate-fade-up">
@@ -1506,8 +1497,8 @@ Terima kasih.`
 
       {/* Fixed Bottom Bar (All Screens) */}
       <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-          <button type="button" onClick={() => setSheetOpen(true)} className="space-y-0.5 text-left lg:pointer-events-none">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between gap-3">
+          <button type="button" onClick={() => setSheetOpen(true)} className="space-y-0.5 text-left lg:pointer-events-none min-w-0">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1.5">
                   Setup Thn 1
                   <span className="lg:hidden inline-flex items-center gap-0.5 text-[#0071E3] normal-case tracking-normal"><ChevronUp size={11} /> Rincian</span>
@@ -1516,6 +1507,17 @@ Terima kasih.`
                   Rp {animatedSetupTotal.toLocaleString('id-ID')}
               </p>
           </button>
+          <div className="flex items-center gap-2 shrink-0">
+          {/* Chat WhatsApp (mobile) — didok di bar, tak melayang menutupi konten */}
+          <a
+              href={waLink('Halo Webzoka, saya butuh bantuan merakit website.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat bantuan via WhatsApp"
+              className="md:hidden flex items-center justify-center w-11 h-11 rounded-xl bg-[#25D366] text-white shadow-sm active:scale-90 transition-transform shrink-0"
+          >
+              <MessageCircle size={20} aria-hidden="true" />
+          </a>
           {currentStep < 3 ? (
               <button
                   onClick={() => {
@@ -1534,6 +1536,7 @@ Terima kasih.`
                   Buat Order & Lacak <ArrowRight size={16} />
               </a>
           )}
+          </div>
         </div>
       </div>
 

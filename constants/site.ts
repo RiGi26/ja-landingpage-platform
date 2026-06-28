@@ -1,5 +1,5 @@
 // Konstanta URL infrastruktur yang dipakai lintas komponen. Dipusatkan di sini
-// supaya saat domain berubah (mis. custom domain studio.japanarena.com) cukup
+// supaya saat domain berubah (mis. custom domain studio.webzoka.com) cukup
 // ubah satu env var — tak perlu menyentuh banyak file. Semua fallback memakai
 // domain produksi saat ini sehingga perilaku tidak berubah bila env belum diisi.
 

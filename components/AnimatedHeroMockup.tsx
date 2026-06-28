@@ -64,7 +64,7 @@ export default function AnimatedHeroMockup() {
                       <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
                   </div>
                   <div className="bg-white rounded-lg px-4 py-1 text-[10px] font-mono text-gray-400 border border-black/5 flex items-center gap-2">
-                      <Lock size={10} className="text-gray-300" /> dashboard.japanarena.com
+                      <Lock size={10} className="text-gray-300" /> dashboard.webzoka.com
                   </div>
               </div>
 

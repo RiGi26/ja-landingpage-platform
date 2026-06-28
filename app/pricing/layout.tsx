@@ -9,11 +9,11 @@ export const metadata: Metadata = {
     'sistem travel rental indonesia', 'saas bisnis indonesia', 'software bisnis ukm',
     'software stok barang', 'sistem inventory ukm', 'aplikasi pesanan dan stok',
   ],
-  alternates: { canonical: 'https://japanarena.com/pricing' },
+  alternates: { canonical: 'https://webzoka.com/pricing' },
   openGraph: {
     title: 'Harga Portal Bisnis — Mulai Rp 449.000/bulan | Webzoka',
     description: 'Trial 14 hari gratis. Hemat 44–74% vs vendor lain. Tanpa setup fee, tanpa kontrak.',
-    url: 'https://japanarena.com/pricing',
+    url: 'https://webzoka.com/pricing',
     type: 'website',
   },
 }

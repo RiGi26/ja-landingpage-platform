@@ -517,7 +517,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.japanarena.com) atau kami bantu daftarkan domain baru.',
+      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
     },
     {
       q: 'Apakah ada biaya setelah tahun pertama?',
@@ -723,7 +723,7 @@ export default function LandingPage() {
                               <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>                          </li>
                           <li className="flex gap-3">
                               <Mail size={18} className="text-[#0071E3] shrink-0" />
-                              <span>contact@japanarena.com</span>
+                              <span>contact@webzoka.com</span>
                           </li>
                           <li className="flex gap-3">
                               <Phone size={18} className="text-[#0071E3] shrink-0" />

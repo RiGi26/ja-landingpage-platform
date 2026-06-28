@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/out/'],
     },
-    sitemap: 'https://japanarena.com/sitemap.xml',
+    sitemap: 'https://webzoka.com/sitemap.xml',
   }
 }

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://japanarena.com'
+  const base = 'https://webzoka.com'
   const now = new Date()
 
   return [

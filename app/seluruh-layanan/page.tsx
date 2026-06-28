@@ -558,6 +558,15 @@ export default function SeluruhLayananPage() {
   const selectedTpl = TEMPLATE_OPTIONS.find(t => t.name === selectedTemplate) || TEMPLATE_OPTIONS[0]
   useDialogA11y(templateSheetOpen, closeTemplateSheet, templateSheetRef)
 
+  // Saat pindah langkah, bawa awal wizard ke viewport. Pakai ref + scrollIntoView
+  // (bukan offset absolut 150px yang menebak tinggi header) supaya akurat di tiap
+  // viewport; scroll-margin pada elemen mengkompensasi navbar sticky.
+  const wizardRef = useRef<HTMLDivElement>(null)
+  const scrollToWizard = useCallback(
+    () => wizardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    [],
+  )
+
   const toggleGroup = (groupKey: string) => {
     setExpandedGroups(prev => 
       prev.includes(groupKey) 
@@ -584,7 +593,7 @@ export default function SeluruhLayananPage() {
     // Auto-advance to Step 3 (Fitur) since Bundle already defines the Server
     setTimeout(() => {
         setCurrentStep(3);
-        window.scrollTo({ top: 150, behavior: 'smooth' });
+        scrollToWizard();
     }, 400); // Slight delay for visual feedback of selection before jumping
   }
 
@@ -721,7 +730,7 @@ Terima kasih.`
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Wizard */}
-          <div className="lg:col-span-8 space-y-6 pb-20 flex flex-col min-h-[600px]">
+          <div ref={wizardRef} className="lg:col-span-8 space-y-6 pb-20 flex flex-col min-h-[600px] scroll-mt-24">
             
             {/* Guided progress bar (tipis + momentum, langkah bisa diklik) */}
             <GuidedProgressBar steps={STEPS} current={currentStep} onJump={setCurrentStep} />
@@ -890,6 +899,7 @@ Terima kasih.`
 
                                         {gallery ? (
                                             <ThemeGallery
+                                                key={selectedTemplate}
                                                 label={selectedTemplate}
                                                 groups={gallery.groups}
                                                 selectedThemeId={selectedTheme?.theme}
@@ -1265,7 +1275,7 @@ Terima kasih.`
                 {currentStep < 3 ? (
                     <button
                         onClick={() => {
-                            window.scrollTo({ top: 150, behavior: 'smooth' });
+                            scrollToWizard();
                             setCurrentStep(prev => prev + 1);
                         }}
                         className="flex items-center gap-2 px-8 py-3 bg-[#0071E3] text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-lg shadow-blue-200"
@@ -1492,7 +1502,7 @@ Terima kasih.`
           {currentStep < 3 ? (
               <button
                   onClick={() => {
-                      window.scrollTo({ top: 150, behavior: 'smooth' });
+                      scrollToWizard();
                       setCurrentStep(prev => prev + 1);
                   }}
                   className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-[0.96] transition-all"

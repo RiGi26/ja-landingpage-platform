@@ -134,7 +134,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
         />
       </head>
-      <body className="antialiased"><RefCapture />{children}</body>
+      {/* #app-shell membungkus konten halaman. Dialog/sheet di-portal ke <body>
+          sehingga jadi sibling shell ini — useDialogA11y men-`inert` shell saat
+          dialog terbuka tanpa ikut menonaktifkan dialog-nya. */}
+      <body className="antialiased"><RefCapture /><div id="app-shell">{children}</div></body>
     </html>
   )
 }

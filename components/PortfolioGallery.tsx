@@ -114,6 +114,33 @@ function PortfolioCard({ site }: { site: Site }) {
   )
 }
 
+// Placeholder selama data situs klien di-fetch — cegah kedip EmptyClientCard
+// sebelum kartu asli muncul. Meniru kerangka PortfolioCard (chrome + preview).
+function SkeletonCard() {
+  return (
+    <div
+      className="flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden"
+      aria-hidden="true"
+    >
+      <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+          <div className="w-2.5 h-2.5 rounded-full bg-gray-200" />
+        </div>
+        <div className="flex-1 mx-1">
+          <div className="h-5 rounded-md bg-gray-100 animate-pulse" />
+        </div>
+      </div>
+      <div className="w-full aspect-[4/3] bg-gray-200 animate-pulse" />
+      <div className="px-5 py-4 space-y-2">
+        <div className="h-3.5 w-2/3 rounded bg-gray-200 animate-pulse" />
+        <div className="h-3 w-1/3 rounded bg-gray-100 animate-pulse" />
+      </div>
+    </div>
+  )
+}
+
 // japanarena.id — karya andalan kami sendiri (LMS), tampil di tab Website + Portal.
 function AcademyCard() {
   return (
@@ -264,9 +291,10 @@ export default function PortfolioGallery() {
         </div>
 
         {/* Gallery */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {showWebsite && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
-          {showWebsite && clientSites.length === 0 && <EmptyClientCard />}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-busy={sites === null}>
+          {showWebsite && sites === null && [0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+          {showWebsite && sites !== null && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
+          {showWebsite && sites !== null && clientSites.length === 0 && <EmptyClientCard />}
 
           {/* japanarena.id — selalu tampil (Website + Portal LMS) */}
           <AcademyCard />

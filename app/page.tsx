@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
-  Lock, Check, ArrowRight, Zap, Shield, Clock,
+  Lock, Check, ArrowRight, Zap, Clock,
   X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2, ExternalLink,
   ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
   Bus, Pill, Cross, Boxes
@@ -92,7 +92,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Live 3–5 Hari Kerja</span>
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Data Anda Tidak Bocor</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Domain Sendiri</span>
             </div>
           </div>
 
@@ -340,7 +340,7 @@ function GlobalFeatures() {
     const FEATURES = [
         { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
         { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
-        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Data setiap bisnis disimpan terpisah—nggak bakal bercampur, nggak bisa diintip, dan tiap data dienkripsi.', icon: Shield },
+        { title: 'Pelanggan Pesan Sendiri, 24 Jam', desc: 'Booking dan order jalan otomatis lewat sistem — pelanggan bisa pesan & bayar kapan saja, walau kamu lagi tidur. Tanpa harus standby balas chat.', icon: Clock },
     ]
 
     return (

@@ -11,7 +11,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Belajar (LMS)',
       desc: 'Login ke dashboard kursus atau sekolah Anda.',
       icon: GraduationCap,
-      href: 'https://ja-lms-platform.vercel.app/auth/login',
+      href: 'https://lms.webzoka.com/auth/login',
       color: 'bg-blue-50 text-blue-600',
       btn: 'bg-blue-600'
     },
@@ -19,7 +19,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Klinik & Medis',
       desc: 'Manajemen rekam medis dan antrean pasien.',
       icon: Building2,
-      href: 'https://ja-clinic-platform.vercel.app/auth/login',
+      href: 'https://klinik.webzoka.com/auth/login',
       color: 'bg-emerald-50 text-emerald-600',
       btn: 'bg-emerald-600'
     },
@@ -27,7 +27,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Farmasi (Apotek)',
       desc: 'Manajemen stok obat dan kasir apotek terpadu.',
       icon: Pill,
-      href: 'https://ja-pharmacy-platform.vercel.app/login',
+      href: 'https://apotek.webzoka.com/login',
       color: 'bg-indigo-50 text-indigo-600',
       btn: 'bg-indigo-600'
     },
@@ -35,7 +35,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Stok & Operasi',
       desc: 'Stok, produksi/BOM, kasir & laporan keuangan.',
       icon: Boxes,
-      href: 'https://stock.japanarena.id/login',
+      href: 'https://stock.webzoka.com/login',
       color: 'bg-amber-50 text-amber-600',
       btn: 'bg-amber-600'
     },
@@ -43,7 +43,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Jastip Jepang',
       desc: 'Hitung biaya dan kelola pesanan titipan.',
       icon: ShoppingBag,
-      href: 'https://ja-jastip-platform.vercel.app',
+      href: 'https://jastip.webzoka.com',
       color: 'bg-red-50 text-red-600',
       btn: 'bg-red-600'
     },
@@ -51,7 +51,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Travel & Rental',
       desc: 'Manajemen armada, e-ticketing, dan live tracking.',
       icon: LayoutDashboard,
-      href: 'https://ja-rental-platform.vercel.app/auth/login',
+      href: 'https://rental.webzoka.com/auth/login',
       color: 'bg-sky-50 text-sky-600',
       btn: 'bg-sky-600'
     }

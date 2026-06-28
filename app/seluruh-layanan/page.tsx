@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { getStoredRef } from '../RefCapture'
 import {
@@ -53,6 +53,7 @@ import {
 } from '@/constants/services'
 import ThemeGallery, { galleryForLabel } from './ThemeGallery'
 import { WB_URL } from '@/constants/site'
+import { useDialogA11y } from './useDialogA11y'
 
 const WA_NUMBER = '6281296917963'
 
@@ -424,14 +425,8 @@ function MobileReceiptSheet({
   selectedBundleId: string | null; serverDone: boolean; fiturDone: boolean
   setupTotal: number; maintainTotal: number; animatedSetupTotal: number; waHref: string
 }) {
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
-  }, [open, onClose])
+  const dialogRef = useRef<HTMLDivElement>(null)
+  useDialogA11y(open, onClose, dialogRef)
 
   const rows = [
     { label: 'Industri', value: selectedTemplate, done: true },
@@ -439,10 +434,15 @@ function MobileReceiptSheet({
     { label: 'Fitur', value: fiturDone ? (selectedAddons.length > 0 ? `${selectedAddons.length} fitur dipilih` : 'Tanpa tambahan') : 'Pilih di langkah 3', done: fiturDone },
   ]
 
-  return (
+  // Portal ke <body> — sheet ini bersarang di dalam ancestor ber-transform
+  // (animate-fade-in), yang membuat `position:fixed` ter-anchor ke ancestor,
+  // bukan viewport. Render hanya di klien.
+  if (typeof document === 'undefined') return null
+
+  return createPortal(
     <div className={`fixed inset-0 z-[60] lg:hidden ${open ? '' : 'pointer-events-none'}`} aria-hidden={!open}>
       <div onClick={onClose} className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`} />
-      <div role="dialog" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
         <div className="sticky top-0 bg-white pt-3 pb-2 flex flex-col items-center z-10">
           <span className="w-10 h-1.5 rounded-full bg-gray-200" />
         </div>
@@ -522,7 +522,8 @@ function MobileReceiptSheet({
           </a>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -542,6 +543,7 @@ export default function SeluruhLayananPage() {
   const [previewLoaded, setPreviewLoaded] = useState(false)
   const [previewError, setPreviewError] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
+  const closeReceiptSheet = useCallback(() => setSheetOpen(false), [])
 
   useEffect(() => {
     setPreviewLoaded(false)
@@ -551,18 +553,10 @@ export default function SeluruhLayananPage() {
 
   // Mobile: pemilih industri jadi bottom-sheet (ringkas, ganti grid 13 kartu).
   const [templateSheetOpen, setTemplateSheetOpen] = useState(false)
+  const templateSheetRef = useRef<HTMLDivElement>(null)
+  const closeTemplateSheet = useCallback(() => setTemplateSheetOpen(false), [])
   const selectedTpl = TEMPLATE_OPTIONS.find(t => t.name === selectedTemplate) || TEMPLATE_OPTIONS[0]
-  useEffect(() => {
-    if (!templateSheetOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setTemplateSheetOpen(false) }
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [templateSheetOpen])
+  useDialogA11y(templateSheetOpen, closeTemplateSheet, templateSheetRef)
 
   const toggleGroup = (groupKey: string) => {
     setExpandedGroups(prev => 
@@ -827,8 +821,8 @@ Terima kasih.`
                                 lepas dari ancestor ber-transform & di atas bar harga/FAB */}
                             {templateSheetOpen && createPortal(
                               <div className="sm:hidden fixed inset-0 z-[100]">
-                                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={() => setTemplateSheetOpen(false)} />
-                                <div role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
+                                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={closeTemplateSheet} />
+                                <div ref={templateSheetRef} role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
                                   <div className="pt-3 flex justify-center shrink-0">
                                     <span className="h-1.5 w-10 rounded-full bg-gray-200" />
                                   </div>
@@ -1519,7 +1513,7 @@ Terima kasih.`
       {/* Bottom-sheet receipt (mobile) — desktop pakai kolom kanan sticky */}
       <MobileReceiptSheet
         open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
+        onClose={closeReceiptSheet}
         selectedTemplate={selectedTemplate}
         selectedPackage={selectedPackage}
         selectedAddons={selectedAddons}

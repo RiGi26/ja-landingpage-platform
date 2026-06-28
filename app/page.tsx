@@ -14,6 +14,7 @@ import PortfolioGallery from '@/components/PortfolioGallery'
 import DemoPickerModal from '@/components/DemoPickerModal'
 import Image from 'next/image'
 import Link from 'next/link'
+import { WB_URL } from '@/constants/site'
 
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 
@@ -21,6 +22,10 @@ const waLink = (msg?: string): string => {
   const base = `https://wa.me/${WA_NUMBER}`
   return msg ? `${base}?text=${encodeURIComponent(msg)}` : base
 }
+
+// Pesan WhatsApp generik "tanya dulu sebelum mulai" — satu kalimat konsisten
+// untuk semua CTA tanya-jawab umum (hero, FAQ, footer, CTA akhir).
+const WA_TANYA_UMUM = 'Halo Webzoka, saya ingin tanya soal layanan dulu sebelum mulai.'
 
 // ─── Sections ───────────────────────────────────────────────────────────────
 
@@ -553,7 +558,7 @@ function FaqSection() {
           <p className="text-sm text-gray-600 font-medium">
             Masih ada pertanyaan?{' '}
             <a
-              href={waLink('Halo Webzoka, saya punya pertanyaan sebelum mulai.')}
+              href={waLink(WA_TANYA_UMUM)}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#0071E3] font-bold hover:underline"
@@ -592,7 +597,7 @@ export default function LandingPage() {
         {/* WhatsApp Sticky Button (Mobile) */}
         <div className="fixed bottom-6 right-6 z-50 md:hidden">
           <a
-            href={waLink('Halo Webzoka, saya ingin tanya soal layanan.')}
+            href={waLink(WA_TANYA_UMUM)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat via WhatsApp"
@@ -625,7 +630,7 @@ export default function LandingPage() {
                 Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
                 Masih ragu?{' '}
                 <a
-                  href={waLink('Halo Webzoka, saya mau tanya dulu sebelum mulai.')}
+                  href={waLink(WA_TANYA_UMUM)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#0071E3] font-bold hover:underline"
@@ -668,7 +673,7 @@ export default function LandingPage() {
                           Untuk bisnis yang sudah capek ngurus semuanya sendiri — dari website profesional sampai operasional yang berjalan otomatis. Tanpa ribet, tanpa drama.
                       </p>
                       <a
-                          href={waLink('Halo Webzoka, saya ingin tanya soal layanan.')}
+                          href={waLink(WA_TANYA_UMUM)}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-2 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors"
@@ -700,7 +705,7 @@ export default function LandingPage() {
                           <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
                           <li>
                             <a
-                              href="https://ja-websitebuilder-platform-nfoa.vercel.app/track"
+                              href={`${WB_URL}/track`}
                               className="hover:text-[#0071E3] transition-colors"
                             >
                               Lacak Pesanan

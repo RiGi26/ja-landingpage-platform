@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { getStoredRef } from '../RefCapture'
 import {
@@ -52,15 +52,10 @@ import {
   isPricedAddon
 } from '@/constants/services'
 import ThemeGallery, { galleryForLabel } from './ThemeGallery'
+import { WB_URL } from '@/constants/site'
+import { useDialogA11y } from './useDialogA11y'
 
 const WA_NUMBER = '6281296917963'
-
-// Basis URL app Website Builder (form order). Dipusatkan supaya saat custom domain
-// dipasang (mis. studio.japanarena.com) cukup ubah env var NEXT_PUBLIC_WEBSITEBUILDER_URL
-// — tak perlu sentuh kode. Fallback = domain Vercel saat ini (perilaku tak berubah).
-const WB_URL =
-  process.env.NEXT_PUBLIC_WEBSITEBUILDER_URL?.replace(/\/+$/, '') ||
-  'https://ja-websitebuilder-platform-nfoa.vercel.app'
 
 // --- CUSTOM HOOK: Odometer Animation ---
 function useAnimatedNumber(value: number, duration = 800) {
@@ -120,7 +115,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   emoji: string
 }> = {
   'Website Perusahaan': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/nusa-konsultan',
+    demoUrl: `${WB_URL}/nusa-konsultan`,
     tagline: 'Tampil profesional & credible di mata klien korporat — contoh: Nusa Konsultan Digital',
     mockUrl: 'nusa-konsultan.japanarena.com',
     mockupGradient: 'from-slate-800 to-blue-900',
@@ -128,7 +123,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏢',
   },
   'Toko Online': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/batik-larasati',
+    demoUrl: `${WB_URL}/batik-larasati`,
     tagline: 'Toko online siap terima order & pembayaran 24/7 — contoh: Batik Larasati',
     mockUrl: 'batik-larasati.japanarena.com',
     mockupGradient: 'from-orange-800 to-red-900',
@@ -136,7 +131,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🛍️',
   },
   'Website Klinik & Spa': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lumiere-spa',
+    demoUrl: `${WB_URL}/lumiere-spa`,
     tagline: 'Klinik & spa premium yang warm, terpercaya & mudah booking — contoh: Lumière Beauty & Spa',
     mockUrl: 'lumiere-spa.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
@@ -144,7 +139,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏥',
   },
   'Website Sekolah / LPK': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/lpk-sakura',
+    demoUrl: `${WB_URL}/lpk-sakura`,
     tagline: 'Wajah digital institusi pendidikan yang modern & terpercaya — contoh: LPK Sakura Academy',
     mockUrl: 'lpk-sakura.japanarena.com',
     mockupGradient: 'from-indigo-800 to-purple-900',
@@ -152,7 +147,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🎓',
   },
   'Website Institusi': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/institusi',
+    demoUrl: `${WB_URL}/demo/institusi`,
     tagline: 'Portal informasi resmi dan terpercaya',
     mockUrl: 'institusi.japanarena.com',
     mockupGradient: 'from-gray-800 to-slate-900',
@@ -160,7 +155,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🏛️',
   },
   'Website Restaurant': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/kanawa',
+    demoUrl: `${WB_URL}/kanawa`,
     tagline: 'Menu digital yang bikin pelanggan lapar duluan — contoh: Kanawa Izakaya',
     mockUrl: 'kanawa.japanarena.com',
     mockupGradient: 'from-amber-800 to-orange-900',
@@ -168,7 +163,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🍜',
   },
   'Personal Branding': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/personal-branding',
+    demoUrl: `${WB_URL}/demo/personal-branding`,
     tagline: 'Personal website yang menonjolkan keahlian Anda',
     mockUrl: 'nama.japanarena.com',
     mockupGradient: 'from-violet-800 to-pink-900',
@@ -176,7 +171,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '👤',
   },
   'Blog / Media': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/blog',
+    demoUrl: `${WB_URL}/demo/blog`,
     tagline: 'Platform konten yang SEO-friendly & mudah dikelola',
     mockUrl: 'blog.japanarena.com',
     mockupGradient: 'from-emerald-800 to-teal-900',
@@ -184,7 +179,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '📰',
   },
   'Travel & Rental': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/rental',
+    demoUrl: `${WB_URL}/demo/rental`,
     tagline: 'Rental mobil & motor profesional siap live — contoh: Nusantara Drive',
     mockUrl: 'nusantara-drive.japanarena.com',
     mockupGradient: 'from-amber-800 to-orange-900',
@@ -192,7 +187,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
     emoji: '🚗',
   },
   'Custom Jastip': {
-    demoUrl: 'https://ja-websitebuilder-platform-nfoa.vercel.app/demo/jastip',
+    demoUrl: `${WB_URL}/demo/jastip`,
     tagline: 'Sistem jasa titip yang terorganisir & profesional',
     mockUrl: 'jastip.japanarena.com',
     mockupGradient: 'from-rose-800 to-pink-900',
@@ -430,14 +425,8 @@ function MobileReceiptSheet({
   selectedBundleId: string | null; serverDone: boolean; fiturDone: boolean
   setupTotal: number; maintainTotal: number; animatedSetupTotal: number; waHref: string
 }) {
-  useEffect(() => {
-    if (!open) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev }
-  }, [open, onClose])
+  const dialogRef = useRef<HTMLDivElement>(null)
+  useDialogA11y(open, onClose, dialogRef)
 
   const rows = [
     { label: 'Industri', value: selectedTemplate, done: true },
@@ -445,10 +434,15 @@ function MobileReceiptSheet({
     { label: 'Fitur', value: fiturDone ? (selectedAddons.length > 0 ? `${selectedAddons.length} fitur dipilih` : 'Tanpa tambahan') : 'Pilih di langkah 3', done: fiturDone },
   ]
 
-  return (
+  // Portal ke <body> — sheet ini bersarang di dalam ancestor ber-transform
+  // (animate-fade-in), yang membuat `position:fixed` ter-anchor ke ancestor,
+  // bukan viewport. Render hanya di klien.
+  if (typeof document === 'undefined') return null
+
+  return createPortal(
     <div className={`fixed inset-0 z-[60] lg:hidden ${open ? '' : 'pointer-events-none'}`} aria-hidden={!open}>
       <div onClick={onClose} className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`} />
-      <div role="dialog" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
         <div className="sticky top-0 bg-white pt-3 pb-2 flex flex-col items-center z-10">
           <span className="w-10 h-1.5 rounded-full bg-gray-200" />
         </div>
@@ -528,7 +522,8 @@ function MobileReceiptSheet({
           </a>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
 
@@ -548,27 +543,38 @@ export default function SeluruhLayananPage() {
   const [previewLoaded, setPreviewLoaded] = useState(false)
   const [previewError, setPreviewError] = useState(false)
   const [sheetOpen, setSheetOpen] = useState(false)
+  const closeReceiptSheet = useCallback(() => setSheetOpen(false), [])
 
   useEffect(() => {
     setPreviewLoaded(false)
     setPreviewError(false)
     setSelectedTheme(null) // ganti industri → reset tema pilihan galeri
+    // Pra-centang add-on rekomendasi industri (RECOMMENDED_ADDONS hanya berisi
+    // fitur deployable — lihat catatan di services.ts; user bebas membatalkan).
+    // Set add-on manual membatalkan paket rakitan aktif agar tak bentrok.
+    const recIds = RECOMMENDED_ADDONS[selectedTemplate] ?? []
+    const recAddons = Object.values(ADDON_GROUPS)
+      .flatMap(g => g.items)
+      .filter(a => recIds.includes(a.id))
+    setSelectedAddons(recAddons)
+    setSelectedBundleId(null)
   }, [selectedTemplate])
 
   // Mobile: pemilih industri jadi bottom-sheet (ringkas, ganti grid 13 kartu).
   const [templateSheetOpen, setTemplateSheetOpen] = useState(false)
+  const templateSheetRef = useRef<HTMLDivElement>(null)
+  const closeTemplateSheet = useCallback(() => setTemplateSheetOpen(false), [])
   const selectedTpl = TEMPLATE_OPTIONS.find(t => t.name === selectedTemplate) || TEMPLATE_OPTIONS[0]
-  useEffect(() => {
-    if (!templateSheetOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setTemplateSheetOpen(false) }
-    document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [templateSheetOpen])
+  useDialogA11y(templateSheetOpen, closeTemplateSheet, templateSheetRef)
+
+  // Saat pindah langkah, bawa awal wizard ke viewport. Pakai ref + scrollIntoView
+  // (bukan offset absolut 150px yang menebak tinggi header) supaya akurat di tiap
+  // viewport; scroll-margin pada elemen mengkompensasi navbar sticky.
+  const wizardRef = useRef<HTMLDivElement>(null)
+  const scrollToWizard = useCallback(
+    () => wizardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    [],
+  )
 
   const toggleGroup = (groupKey: string) => {
     setExpandedGroups(prev => 
@@ -596,7 +602,7 @@ export default function SeluruhLayananPage() {
     // Auto-advance to Step 3 (Fitur) since Bundle already defines the Server
     setTimeout(() => {
         setCurrentStep(3);
-        window.scrollTo({ top: 150, behavior: 'smooth' });
+        scrollToWizard();
     }, 400); // Slight delay for visual feedback of selection before jumping
   }
 
@@ -733,7 +739,7 @@ Terima kasih.`
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Wizard */}
-          <div className="lg:col-span-8 space-y-6 pb-20 flex flex-col min-h-[600px]">
+          <div ref={wizardRef} className="lg:col-span-8 space-y-6 pb-20 flex flex-col min-h-[600px] scroll-mt-24">
             
             {/* Guided progress bar (tipis + momentum, langkah bisa diklik) */}
             <GuidedProgressBar steps={STEPS} current={currentStep} onJump={setCurrentStep} />
@@ -833,8 +839,8 @@ Terima kasih.`
                                 lepas dari ancestor ber-transform & di atas bar harga/FAB */}
                             {templateSheetOpen && createPortal(
                               <div className="sm:hidden fixed inset-0 z-[100]">
-                                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={() => setTemplateSheetOpen(false)} />
-                                <div role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
+                                <div className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in" onClick={closeTemplateSheet} />
+                                <div ref={templateSheetRef} role="dialog" aria-modal="true" aria-label="Pilih bidang industri" className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]">
                                   <div className="pt-3 flex justify-center shrink-0">
                                     <span className="h-1.5 w-10 rounded-full bg-gray-200" />
                                   </div>
@@ -902,6 +908,7 @@ Terima kasih.`
 
                                         {gallery ? (
                                             <ThemeGallery
+                                                key={selectedTemplate}
                                                 label={selectedTemplate}
                                                 groups={gallery.groups}
                                                 selectedThemeId={selectedTheme?.theme}
@@ -1113,7 +1120,7 @@ Terima kasih.`
                     <div className="space-y-8 animate-fade-in">
                         <div>
                             <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
-                            <p className="text-sm text-gray-600 font-medium mt-1">Semua opsional — pilih yang relevan, lewati sisanya. Estimasi terupdate otomatis.</p>
+                            <p className="text-sm text-gray-600 font-medium mt-1">Yang umum dipakai sudah kami centang — hapus yang tak perlu atau tambah lainnya. Estimasi terupdate otomatis.</p>
                             <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-700">
                                 <Check size={14} strokeWidth={3} /> Revisi sampai puas sebelum go-live
                             </div>
@@ -1277,7 +1284,7 @@ Terima kasih.`
                 {currentStep < 3 ? (
                     <button
                         onClick={() => {
-                            window.scrollTo({ top: 150, behavior: 'smooth' });
+                            scrollToWizard();
                             setCurrentStep(prev => prev + 1);
                         }}
                         className="flex items-center gap-2 px-8 py-3 bg-[#0071E3] text-white rounded-full font-bold hover:bg-blue-600 transition-all shadow-lg shadow-blue-200"
@@ -1504,7 +1511,7 @@ Terima kasih.`
           {currentStep < 3 ? (
               <button
                   onClick={() => {
-                      window.scrollTo({ top: 150, behavior: 'smooth' });
+                      scrollToWizard();
                       setCurrentStep(prev => prev + 1);
                   }}
                   className="flex items-center gap-2 px-6 md:px-8 py-3 bg-[#0071E3] text-white rounded-xl font-bold text-sm shadow-lg shadow-blue-200 active:scale-[0.96] transition-all"
@@ -1525,7 +1532,7 @@ Terima kasih.`
       {/* Bottom-sheet receipt (mobile) — desktop pakai kolom kanan sticky */}
       <MobileReceiptSheet
         open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
+        onClose={closeReceiptSheet}
         selectedTemplate={selectedTemplate}
         selectedPackage={selectedPackage}
         selectedAddons={selectedAddons}

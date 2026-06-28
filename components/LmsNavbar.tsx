@@ -5,8 +5,8 @@ import { Menu, X, LogIn, MessageCircle } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import PortalPickerModal from './PortalPickerModal'
+import { WB_URL as WEBSITEBUILDER_URL } from '@/constants/site'
 
-const WEBSITEBUILDER_URL = 'https://ja-websitebuilder-platform-nfoa.vercel.app'
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 const waLink = (msg?: string) => {
   const base = `https://wa.me/${WA_NUMBER}`

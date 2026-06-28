@@ -27,7 +27,7 @@ const pricingFaqSchema = {
       name: 'Apa yang terjadi setelah trial 14 hari habis?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Akses fitur dibatasi ke paket gratis. Tidak ada charge otomatis, tidak ada kartu kredit yang ditagih. Anda bisa pilih paket berbayar kapan saja.',
+        text: 'Akses fitur dibatasi ke paket gratis. Tidak ada charge otomatis, tidak ada kartu kredit yang ditagih. kamu bisa pilih paket berbayar kapan saja.',
       },
     },
     {
@@ -51,7 +51,7 @@ const pricingFaqSchema = {
       name: 'Apakah data saya aman kalau berhenti berlangganan?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Data Anda tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
+        text: 'Data kamu tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
       },
     },
   ],

@@ -9,9 +9,9 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
   const PORTALS = [
     {
       title: 'Portal Belajar (LMS)',
-      desc: 'Login ke dashboard kursus atau sekolah Anda.',
+      desc: 'Login ke dashboard kursus atau sekolah kamu.',
       icon: GraduationCap,
-      href: 'https://ja-lms-platform.vercel.app/auth/login',
+      href: 'https://lms.webzoka.com/auth/login',
       color: 'bg-blue-50 text-blue-600',
       btn: 'bg-blue-600'
     },
@@ -19,7 +19,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Klinik & Medis',
       desc: 'Manajemen rekam medis dan antrean pasien.',
       icon: Building2,
-      href: 'https://ja-clinic-platform.vercel.app/auth/login',
+      href: 'https://klinik.webzoka.com/auth/login',
       color: 'bg-emerald-50 text-emerald-600',
       btn: 'bg-emerald-600'
     },
@@ -27,7 +27,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Farmasi (Apotek)',
       desc: 'Manajemen stok obat dan kasir apotek terpadu.',
       icon: Pill,
-      href: 'https://ja-pharmacy-platform.vercel.app/login',
+      href: 'https://apotek.webzoka.com/login',
       color: 'bg-indigo-50 text-indigo-600',
       btn: 'bg-indigo-600'
     },
@@ -35,7 +35,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Stok & Operasi',
       desc: 'Stok, produksi/BOM, kasir & laporan keuangan.',
       icon: Boxes,
-      href: 'https://stock.japanarena.id/login',
+      href: 'https://stock.webzoka.com/login',
       color: 'bg-amber-50 text-amber-600',
       btn: 'bg-amber-600'
     },
@@ -43,7 +43,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Jastip Jepang',
       desc: 'Hitung biaya dan kelola pesanan titipan.',
       icon: ShoppingBag,
-      href: 'https://ja-jastip-platform.vercel.app',
+      href: 'https://jastip.webzoka.com',
       color: 'bg-red-50 text-red-600',
       btn: 'bg-red-600'
     },
@@ -51,7 +51,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Travel & Rental',
       desc: 'Manajemen armada, e-ticketing, dan live tracking.',
       icon: LayoutDashboard,
-      href: 'https://ja-rental-platform.vercel.app/auth/login',
+      href: 'https://rental.webzoka.com/auth/login',
       color: 'bg-sky-50 text-sky-600',
       btn: 'bg-sky-600'
     }
@@ -67,8 +67,8 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
         <div className="p-6 md:p-10">
           <div className="flex justify-between items-start mb-6 md:mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Anda</h2>
-              <p className="text-sm text-gray-500 mt-1">Silakan login ke layanan yang Anda gunakan.</p>
+              <h2 className="text-2xl md:text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Kamu</h2>
+              <p className="text-sm text-gray-500 mt-1">Silakan login ke layanan yang kamu gunakan.</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors shrink-0">
               <X size={20} />
@@ -101,7 +101,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Enterprise Access Active</span>
             </div>
-            <p className="text-[11px] text-gray-400">Punya domain kustom? Silakan login langsung via domain Anda.</p>
+            <p className="text-[11px] text-gray-400">Punya domain kustom? Silakan login langsung via domain kamu.</p>
           </div>
         </div>
       </div>

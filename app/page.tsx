@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
-  Lock, Check, ArrowRight, Zap, Shield, Clock,
+  Lock, Check, ArrowRight, Zap, Clock,
   X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2, ExternalLink,
   ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
   Bus, Pill, Cross, Boxes
@@ -92,7 +92,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
             <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Live 3–5 Hari Kerja</span>
               <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Data Anda Tidak Bocor</span>
+              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Domain Sendiri</span>
             </div>
           </div>
 
@@ -133,7 +133,7 @@ function ProofSection() {
     {
       icon: Globe2,
       title: 'Karya yang Bisa Dicek Langsung',
-      desc: 'Situs klien kami sudah tayang di domain nyata — bukan mockup. Gulir ke bawah, klik mana saja, buka sendiri di tab baru.',
+      desc: 'Produk yang kami pakai sendiri tiap hari — japanarena.id — sudah tayang di domain nyata, bukan mockup. Gulir ke bawah, klik, buka sendiri di tab baru.',
       cta: 'Lihat karya live ↓',
       href: '#portofolio',
     },
@@ -145,7 +145,7 @@ function ProofSection() {
     {
       icon: BarChart2,
       title: 'Biaya Jujur Sejak Awal',
-      desc: 'Estimasi final muncul di kalkulator sebelum Anda bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
+      desc: 'Estimasi final muncul di kalkulator sebelum kamu bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
       cta: 'Hitung estimasi →',
       href: '/seluruh-layanan',
     },
@@ -160,7 +160,7 @@ function ProofSection() {
             Kami Lebih Suka Tunjukkan<br className="hidden md:block" /> daripada Sekadar Berjanji.
           </h2>
           <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa Anda buktikan sendiri sekarang.
+            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa kamu buktikan sendiri sekarang.
           </p>
         </div>
 
@@ -190,7 +190,7 @@ function SegmenSection() {
       {
         icon: Globe2,
         label: 'Katalog Website',
-        description: 'Pelanggan Anda sedang cari bisnis seperti milik Anda di Google sekarang. Apakah Anda muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
+        description: 'Pelanggan kamu sedang cari bisnis seperti milik kamu di Google sekarang. Apakah kamu muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',
@@ -202,7 +202,7 @@ function SegmenSection() {
         label: 'Portal Travel, Rental & Venue',
         description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
-        href: 'https://ja-rental-platform.vercel.app',
+        href: 'https://rental.webzoka.com',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
         isExternal: true,
@@ -212,7 +212,7 @@ function SegmenSection() {
         label: 'Portal Belajar / LMS',
         description: 'Untuk karyawan baru atau kursus publik — tinggal upload materi sekali. Sistem otomatis ngurus pendaftaran, ujian, sampai penerbitan sertifikat. Cocok untuk: LPK, bimbel, kursus online, sekolah.',
         cta: 'Lihat Demo',
-        href: 'https://ja-lms-platform.vercel.app/demo',
+        href: 'https://lms.webzoka.com/demo',
         color: 'text-blue-600',
         bg: 'bg-blue-50',
         isExternal: true,
@@ -220,9 +220,9 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Termasuk integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
+        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Siap integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
-        href: 'https://ja-clinic-platform.vercel.app/demo',
+        href: 'https://klinik.webzoka.com/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
         isExternal: true,
@@ -232,7 +232,7 @@ function SegmenSection() {
         label: 'Portal Farmasi',
         description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
         cta: 'Lihat Demo',
-        href: 'https://ja-pharmacy-platform.vercel.app/demo',
+        href: 'https://apotek.webzoka.com/demo',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
         isExternal: true,
@@ -242,7 +242,7 @@ function SegmenSection() {
         label: 'Portal Stok & Operasi',
         description: 'Kelola stok gudang, resep & produksi, pesanan, kasir, sampai laporan keuangan dalam satu portal. Kasir, dapur produksi & gudang tersinkron real-time. Cocok untuk: F&B, manufaktur UKM, retail & grosir.',
         cta: 'Lihat Portal',
-        href: 'https://stock.japanarena.id',
+        href: 'https://stock.webzoka.com',
         color: 'text-amber-600',
         bg: 'bg-amber-50',
         isExternal: true,
@@ -250,9 +250,9 @@ function SegmenSection() {
       {
         icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
-        description: 'Titip barang dari Jepang langsung ke rumah Anda. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
+        description: 'Titip barang dari Jepang langsung ke rumah kamu. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
         cta: 'Mulai Titip Barang',
-        href: 'https://ja-jastip-platform.vercel.app',
+        href: 'https://jastip.webzoka.com',
         color: 'text-red-600',
         bg: 'bg-red-50',
         isExternal: true,
@@ -263,7 +263,7 @@ function SegmenSection() {
         <section id="segmen" className="bg-white py-16 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-10">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Anda</p>
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Kamu</p>
                     <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
@@ -338,9 +338,9 @@ function SegmenSection() {
 
 function GlobalFeatures() {
     const FEATURES = [
-        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
+        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa kamu perlu ingat-ingat.', icon: MessageCircle },
         { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
-        { title: 'Data Bisnis Anda Tidak Bocor', desc: 'Data setiap bisnis disimpan terpisah—nggak bakal bercampur, nggak bisa diintip, dan tiap data dienkripsi.', icon: Shield },
+        { title: 'Pelanggan Pesan Sendiri, 24 Jam', desc: 'Booking dan order jalan otomatis lewat sistem — pelanggan bisa pesan & bayar kapan saja, walau kamu lagi tidur. Tanpa harus standby balas chat.', icon: Clock },
     ]
 
     return (
@@ -365,15 +365,15 @@ function GlobalFeatures() {
 function TrustSection() {
     const STEPS = [
         { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
-        { t: 'Isi Data Bisnis Anda — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, Anda bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
+        { t: 'Isi Data Bisnis kamu — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, kamu bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
     ]
 
     const BADGES = [
         { t: 'Data Pembeli Aman', d: 'Nomor & transaksi pelanggan tersimpan terkunci — tidak bocor, tidak dijual', i: ShieldCheck },
         { t: 'Tidak Akan Hilang', d: 'Mau se-error apa pun sistemnya nanti, data kamu tetap aman karena otomatis di-backup tiap hari', i: HardDrive },
         { t: 'Anti-Ngadat Saat Rame', d: 'Pelanggan tetap bisa buka & pesan walau pengunjung membludak', i: Globe2 },
-        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp Anda sendiri', i: Zap },
+        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp kamu sendiri', i: Zap },
     ]
 
     return (
@@ -448,7 +448,7 @@ function FlagshipSection() {
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
               Satu produk, dua hal sekaligus: website yang dilihat calon murid, dan sistem yang ngurus
               pendaftaran, kelas, ujian, sampai sertifikat otomatis. Sistem yang sama itulah yang kami
-              rakit untuk bisnis Anda.
+              rakit untuk bisnis kamu.
             </p>
 
             <div className="grid grid-cols-3 gap-4 mb-4">
@@ -459,7 +459,7 @@ function FlagshipSection() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-gray-500 mb-8">Semua angka bisa Anda cek sendiri di japanarena.id.</p>
+            <p className="text-xs text-gray-500 mb-8">Semua angka bisa kamu cek sendiri di japanarena.id.</p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a
@@ -517,7 +517,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
+      a: 'Ya. Kami bantu pointing domain kamu ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
     },
     {
       q: 'Apakah ada biaya setelah tahun pertama?',
@@ -529,7 +529,7 @@ function FaqSection() {
     },
     {
       q: 'Apa bedanya website builder dengan portal (LMS, klinik, dll)?',
-      a: 'Website builder untuk tampilan online bisnis Anda — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
+      a: 'Website builder untuk tampilan online bisnis kamu — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
     },
     {
       q: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
@@ -627,7 +627,7 @@ export default function LandingPage() {
                 Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
+                Pilih industri kamu di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
                 Masih ragu?{' '}
                 <a
                   href={waLink(WA_TANYA_UMUM)}
@@ -686,11 +686,11 @@ export default function LandingPage() {
                   <div className="col-span-1 md:col-span-2 space-y-5">
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</p>
                       <ul className="space-y-3 text-sm text-gray-500">
-                          <li><a href="https://ja-lms-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
-                          <li><a href="https://ja-clinic-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
-                          <li><a href="https://ja-pharmacy-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
-                          <li><a href="https://ja-jastip-platform.vercel.app" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
-                          <li><a href="https://stock.japanarena.id" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
+                          <li><a href="https://lms.webzoka.com" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
+                          <li><a href="https://klinik.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
+                          <li><a href="https://apotek.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
+                          <li><a href="https://jastip.webzoka.com" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
+                          <li><a href="https://stock.webzoka.com" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
                           <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
                       </ul>
                   </div>
@@ -700,9 +700,8 @@ export default function LandingPage() {
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><Link href="/tentang-kami" className="hover:text-[#0071E3] transition-colors">Tentang Kami</Link></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Karir</span></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Blog Edukasi</span></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
+                          <li><Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link></li>
+                          <li><Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link></li>
                           <li>
                             <a
                               href={`${WB_URL}/track`}
@@ -748,9 +747,8 @@ export default function LandingPage() {
                     </p>
                   </div>
                   <div className="flex gap-8 text-[12px] text-gray-600 font-medium">
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Kebijakan Privasi</span>
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Syarat & Ketentuan</span>
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Cookie Policy</span>
+                      <Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link>
+                      <Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link>
                   </div>
               </div>
           </div>

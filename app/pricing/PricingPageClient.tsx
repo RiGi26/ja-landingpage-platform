@@ -19,8 +19,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Belajar / LMS',
     subtitle: 'Sistem belajar & kursus online',
     icon: GraduationCap,
-    demoUrl: 'https://ja-lms-platform.vercel.app/demo',
-    registerUrl: 'https://ja-lms-platform.vercel.app/register',
+    demoUrl: 'https://lms.webzoka.com/demo',
+    registerUrl: 'https://lms.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
@@ -57,16 +57,16 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Klinik',
     subtitle: 'Manajemen pasien digital',
     icon: Cross,
-    demoUrl: 'https://ja-clinic-platform.vercel.app/demo',
-    registerUrl: 'https://ja-clinic-platform.vercel.app/register',
+    demoUrl: 'https://klinik.webzoka.com/demo',
+    registerUrl: 'https://klinik.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
       },
       { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
-      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
+      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
       { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ],
     // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).
@@ -94,7 +94,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Farmasi',
     subtitle: 'Manajemen apotek digital',
     icon: Pill,
-    demoUrl: 'https://ja-pharmacy-platform.vercel.app/demo',
+    demoUrl: 'https://apotek.webzoka.com/demo',
     registerUrl: 'https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
     plans: [
       {
@@ -131,8 +131,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Travel & Rental',
     subtitle: 'Booking & kelola aset online',
     icon: Bus,
-    demoUrl: 'https://ja-rental-platform.vercel.app/demo',
-    registerUrl: 'https://ja-rental-platform.vercel.app/register',
+    demoUrl: 'https://rental.webzoka.com/demo',
+    registerUrl: 'https://rental.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
@@ -290,7 +290,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             Sistem Portal Bisnis — <span className="text-blue-600">Satu Sistem</span> untuk Setiap Industri
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Pilih portal sesuai bisnis Anda. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
+            Pilih portal sesuai bisnis kamu. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
           </p>
         </div>
 
@@ -638,7 +638,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             {[
               {
                 q: 'Apa yang terjadi setelah trial 14 hari habis?',
-                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — Anda yang menentukan kapan mulai berlangganan.',
+                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — kamu yang menentukan kapan mulai berlangganan.',
               },
               {
                 q: 'Apakah bisa upgrade atau downgrade paket?',
@@ -650,7 +650,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               },
               {
                 q: 'Apakah data saya aman kalau berhenti berlangganan?',
-                a: 'Data Anda tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
+                a: 'Data kamu tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
               },
               {
                 q: 'Apakah portal ini bisa dipakai bersamaan dengan website builder?',
@@ -688,8 +688,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Footer Info */}
         <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
            {[
-             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu Anda daftar.' },
-             { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. Anda tidak perlu urus apapun.' },
+             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu kamu daftar.' },
+             { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. kamu tidak perlu urus apapun.' },
              { t: 'Data Tidak Bisa Diintip', d: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Enkripsi aktif dari hari pertama, backup harian.' },
            ].map(item => (
              <div key={item.t} className="group">

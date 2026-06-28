@@ -6,11 +6,11 @@ import { ChevronDown } from 'lucide-react'
 const FAQS = [
   {
     q: 'Bisa coba dulu sebelum bayar?',
-    a: 'Ya. Ada trial gratis 14 hari dengan akses semua fitur Premium — tanpa kartu kredit, tanpa komitmen. Setelah 14 hari, Anda bisa upgrade atau akun otomatis terkunci (data tetap aman).',
+    a: 'Ya. Ada trial gratis 14 hari dengan akses semua fitur Premium — tanpa kartu kredit, tanpa komitmen. Setelah 14 hari, kamu bisa upgrade atau akun otomatis terkunci (data tetap aman).',
   },
   {
     q: 'Berapa lama waktu setup?',
-    a: 'Paket Premium: 1–3 hari kerja. Tim kami yang handle semua setup teknis — Anda hanya perlu siapkan konten dan data. Paket Custom diestimasi setelah diskusi kebutuhan spesifik.',
+    a: 'Paket Premium: 1–3 hari kerja. Tim kami yang handle semua setup teknis — kamu hanya perlu siapkan konten dan data. Paket Custom diestimasi setelah diskusi kebutuhan spesifik.',
   },
   {
     q: 'Berapa jumlah siswa/user yang bisa didaftarkan?',
@@ -22,7 +22,7 @@ const FAQS = [
   },
   {
     q: 'Apakah data saya aman?',
-    a: 'Data disimpan di Supabase (PostgreSQL) dengan enkripsi penuh dan Row Level Security. Setiap client mendapat database terpisah — data Anda tidak bercampur dengan client lain.',
+    a: 'Data disimpan di Supabase (PostgreSQL) dengan enkripsi penuh dan Row Level Security. Setiap client mendapat database terpisah — data kamu tidak bercampur dengan client lain.',
   },
   {
     q: 'Apakah ada kontrak jangka panjang?',
@@ -34,15 +34,15 @@ const FAQS = [
   },
   {
     q: 'Apakah bisa custom untuk bisnis non-pendidikan?',
-    a: 'Ya. Sistem ini sudah diadaptasi untuk klinik & medis, UMKM, jasa titip, penulis & blogger, dan bisnis korporat. Konsultasikan kebutuhan spesifik Anda via WA.',
+    a: 'Ya. Sistem ini sudah diadaptasi untuk klinik & medis, UMKM, jasa titip, penulis & blogger, dan bisnis korporat. Konsultasikan kebutuhan spesifik kamu via WA.',
   },
   {
     q: 'Apakah bisa pakai domain dan brand sendiri?',
-    a: 'Ya, tersedia di paket Custom. Platform tampil dengan nama domain bisnis Anda (contoh: portal.bisnis-anda.com) tanpa jejak Webzoka Platform sama sekali.',
+    a: 'Ya, tersedia di paket Custom. Platform tampil dengan nama domain bisnis kamu (contoh: portal.bisnis-anda.com) tanpa jejak Webzoka Platform sama sekali.',
   },
   {
     q: 'Apa yang terjadi jika saya berhenti berlangganan?',
-    a: 'Akun Anda akan dinonaktifkan di akhir periode langganan. Data tetap disimpan selama 30 hari sehingga Anda punya waktu untuk export jika diperlukan. Setelah 30 hari, data dihapus permanen.',
+    a: 'Akun kamu akan dinonaktifkan di akhir periode langganan. Data tetap disimpan selama 30 hari sehingga kamu punya waktu untuk export jika diperlukan. Setelah 30 hari, data dihapus permanen.',
   },
 ]
 

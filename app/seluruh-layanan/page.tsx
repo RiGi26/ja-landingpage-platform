@@ -164,7 +164,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   },
   'Personal Branding': {
     demoUrl: `${WB_URL}/demo/personal-branding`,
-    tagline: 'Personal website yang menonjolkan keahlian Anda',
+    tagline: 'Personal website yang menonjolkan keahlian kamu',
     mockUrl: 'nama.webzoka.com',
     mockupGradient: 'from-violet-800 to-pink-900',
     sections: ['Hero Foto', 'Tentang Saya', 'Portofolio', 'Testimoni', 'Hire Me'],
@@ -204,7 +204,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   },
   'Studio & Kreatif': {
     // Demo live belum tersedia → tampil sebagai mockup "Pratinjau konsep".
-    tagline: 'Portofolio & booking studio yang menonjolkan karya terbaik Anda',
+    tagline: 'Portofolio & booking studio yang menonjolkan karya terbaik kamu',
     mockUrl: 'studio.webzoka.com',
     mockupGradient: 'from-purple-800 to-slate-900',
     sections: ['Hero Portofolio', 'Galeri Karya', 'Layanan & Paket', 'Booking Sesi', 'Kontak'],
@@ -212,7 +212,7 @@ const TEMPLATE_PREVIEWS: Record<string, {
   },
   'Bisnis Jasa & Lainnya': {
     // Belum ada demo live → mockup "Pratinjau konsep" (sebelumnya: tile ini kosong).
-    tagline: 'Website jasa yang bikin pelanggan percaya & langsung menghubungi Anda',
+    tagline: 'Website jasa yang bikin pelanggan percaya & langsung menghubungi kamu',
     mockUrl: 'jasa.webzoka.com',
     mockupGradient: 'from-cyan-800 to-slate-900',
     sections: ['Hero + CTA Hubungi', 'Layanan & Tarif', 'Galeri Pengerjaan', 'Testimoni', 'Kontak & Lokasi'],
@@ -442,15 +442,15 @@ function MobileReceiptSheet({
   return createPortal(
     <div className={`fixed inset-0 z-[60] lg:hidden ${open ? '' : 'pointer-events-none'}`} aria-hidden={!open}>
       <div onClick={onClose} className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`} />
-      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label="Rancangan Website Anda" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
+      <div ref={dialogRef} role="dialog" aria-modal="true" aria-label="Rancangan Website Kamu" className={`absolute left-0 bottom-0 w-full bg-white rounded-t-[28px] shadow-2xl max-h-[85vh] overflow-y-auto transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${open ? 'translate-y-0' : 'translate-y-full'}`}>
         <div className="sticky top-0 bg-white pt-3 pb-2 flex flex-col items-center z-10">
           <span className="w-10 h-1.5 rounded-full bg-gray-200" />
         </div>
         <div className="px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-lg font-black text-gray-900 sf-display-heavy">Rancangan Website Anda</h2>
-              <p className="text-[11px] text-gray-400 font-medium">Terisi otomatis sambil Anda memilih.</p>
+              <h2 className="text-lg font-black text-gray-900 sf-display-heavy">Rancangan Website Kamu</h2>
+              <p className="text-[11px] text-gray-400 font-medium">Terisi otomatis sambil kamu memilih.</p>
             </div>
             <button onClick={onClose} aria-label="Tutup" className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 active:scale-90 transition-transform shrink-0">
               <X size={16} />
@@ -639,7 +639,7 @@ export default function SeluruhLayananPage() {
   // Apply Animation Hook
   const animatedSetupTotal = useAnimatedNumber(setupTotal);
 
-  // Status "Rancangan Website Anda" — baris terisi sambil user maju.
+  // Status "Rancangan Website Kamu" — baris terisi sambil user maju.
   const serverDone = currentStep >= 2 || selectedPackage.id !== HOSTING_PACKAGES[0].id || !!selectedBundleId
   const fiturDone = currentStep >= 3 || selectedAddons.length > 0 || !!selectedBundleId
   // Tier pertama yg direkomendasikan utk industri terpilih → badge "Paling Populer".
@@ -729,7 +729,7 @@ Terima kasih.`
             <span className="text-[#0071E3]">Transparan Mulai Rp 600.000.</span>
           </h1>
           <p className="text-lg text-gray-500 max-w-2xl font-medium">
-            Pilih template, server, dan fitur. Website Anda live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah data bisnis Anda kami terima.
+            Pilih template, server, dan fitur. Website kamu live dalam <span className="text-gray-900 font-semibold">3–5 hari kerja</span> setelah data bisnis kamu kami terima.
             Tanpa biaya tersembunyi, biaya perpanjangan transparan sejak awal.
           </p>
           <ProofStrip />
@@ -776,8 +776,8 @@ Terima kasih.`
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
-                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Bisnis Anda bergerak di bidang apa?</h2>
-                                    <p className="text-sm text-gray-600 font-medium mt-1">Kami sesuaikan desain dasar (template) dengan industri Anda.</p>
+                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Bisnis kamu bergerak di bidang apa?</h2>
+                                    <p className="text-sm text-gray-600 font-medium mt-1">Kami sesuaikan desain dasar (template) dengan industri kamu.</p>
                                 </div>
                                 <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-[#0071E3] shrink-0">
                                     <Layout size={24} />
@@ -897,11 +897,11 @@ Terima kasih.`
                                         <h3 className="text-2xl font-black mb-1 sf-display-heavy">{gallery ? 'Pilihan Tema' : hasLiveDemo ? 'Preview Template' : 'Konsep Tampilan'}</h3>
                                         <p className="text-sm text-gray-400 font-medium mb-6">
                                             {gallery ? (
-                                                <>Beberapa gaya tema premium siap pakai untuk <span className="text-white font-bold">{selectedTemplate}</span>. Gambar di bawah cuma contoh; konten diisi sesuai bisnis Anda setelah pesan.</>
+                                                <>Beberapa gaya tema premium siap pakai untuk <span className="text-white font-bold">{selectedTemplate}</span>. Gambar di bawah cuma contoh; konten diisi sesuai bisnis kamu setelah pesan.</>
                                             ) : hasLiveDemo ? (
-                                                <>Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> Anda.</>
+                                                <>Begini kira-kira tampilan website <span className="text-white font-bold">{selectedTemplate}</span> kamu.</>
                                             ) : (
-                                                <>Gambaran kasar struktur website <span className="text-white font-bold">{selectedTemplate}</span> Anda — bukan demo live; tampilan akhir dirancang khusus.</>
+                                                <>Gambaran kasar struktur website <span className="text-white font-bold">{selectedTemplate}</span> kamu — bukan demo live; tampilan akhir dirancang khusus.</>
                                             )}
                                         </p>
 
@@ -1028,7 +1028,7 @@ Terima kasih.`
                                                 </div>
                                             </div>
                                             <p className="text-[10px] text-gray-500 font-medium mt-3 leading-relaxed">
-                                                Tampilan akhir dirancang khusus sesuai bisnis Anda — ini gambaran kasar strukturnya, bukan website jadi.
+                                                Tampilan akhir dirancang khusus sesuai bisnis kamu — ini gambaran kasar strukturnya, bukan website jadi.
                                             </p>
                                         </div>
                                         )
@@ -1047,7 +1047,7 @@ Terima kasih.`
                         <section className="bg-white rounded-[32px] p-5 md:p-8 apple-shadow border border-black/[0.03]">
                             <div className="flex items-center justify-between mb-8">
                                 <div>
-                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Seberapa ramai website Anda nanti?</h2>
+                                    <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Seberapa ramai website kamu nanti?</h2>
                                     <p className="text-sm text-gray-600 font-medium mt-1">
                                       {selectedTemplate ? `Server kami sesuaikan untuk: ${selectedTemplate}` : 'Pilih industri di langkah 1 untuk rekomendasi yang lebih tepat.'}
                                     </p>
@@ -1061,9 +1061,9 @@ Terima kasih.`
                             <div className="mb-6 p-5 rounded-[20px] bg-emerald-50/60 border border-emerald-100 flex gap-4">
                                 <Info className="text-emerald-600 shrink-0" size={22} />
                                 <p className="text-sm text-emerald-900 leading-relaxed font-medium">
-                                    <strong>Server itu seperti &ldquo;rumah&rdquo; website Anda di internet.</strong>{' '}
+                                    <strong>Server itu seperti &ldquo;rumah&rdquo; website kamu di internet.</strong>{' '}
                                     Makin banyak foto, produk, dan pengunjung, makin besar rumah yang dibutuhkan.
-                                    Tenang — Anda bisa pindah ke rumah yang lebih besar kapan saja tanpa membongkar website.
+                                    Tenang — kamu bisa pindah ke rumah yang lebih besar kapan saja tanpa membongkar website.
                                 </p>
                             </div>
 
@@ -1118,7 +1118,7 @@ Terima kasih.`
                 {currentStep === 3 && (
                     <div className="space-y-8 animate-fade-in">
                         <div>
-                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
+                            <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang kamu butuhkan?</h2>
                             <p className="text-sm text-gray-600 font-medium mt-1">{selectedAddons.length > 0 ? 'Yang umum dipakai sudah kami centang — hapus yang tak perlu atau tambah lainnya.' : 'Semua opsional — pilih yang relevan, lewati sisanya.'} Estimasi terupdate otomatis.</p>
                             <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-700">
                                 <Check size={14} strokeWidth={3} /> Revisi sampai puas sebelum go-live
@@ -1135,7 +1135,7 @@ Terima kasih.`
                                     <div className="flex-1 text-center md:text-left">
                                         <h3 className="text-lg font-bold mb-1">Butuh fitur {hasPortalFeatures.portalName}?</h3>
                                         <p className="text-white/80 text-sm font-medium leading-relaxed">
-                                            Anda sedang mencoba merakit fitur yang sudah tersedia sebagai Produk Jadi di ekosistem kami. 
+                                            Kamu sedang mencoba merakit fitur yang sudah tersedia sebagai Produk Jadi di ekosistem kami. 
                                             Lebih hemat dan tidak perlu biaya setup custom per fitur!
                                         </p>
                                     </div>
@@ -1153,7 +1153,7 @@ Terima kasih.`
                             <div className="flex items-start gap-3 px-5 py-4 rounded-2xl bg-amber-50 border border-amber-100">
                                 <Sparkles size={18} className="text-amber-500 shrink-0 mt-0.5" fill="currentColor" />
                                 <p className="text-sm text-amber-900 font-medium leading-relaxed">
-                                    Fitur bertanda <span className="font-black">Rekomendasi</span> kami sarankan untuk industri <span className="font-black">{selectedTemplate}</span>. Tetap opsional — pilih sesuai kebutuhan Anda.
+                                    Fitur bertanda <span className="font-black">Rekomendasi</span> kami sarankan untuk industri <span className="font-black">{selectedTemplate}</span>. Tetap opsional — pilih sesuai kebutuhan kamu.
                                 </p>
                             </div>
                         )}
@@ -1308,8 +1308,8 @@ Terima kasih.`
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
               <div className="relative z-10 mb-4">
-                <h2 className="text-xl font-black text-gray-900 sf-display-heavy">Rancangan Website Anda</h2>
-                <p className="text-[11px] text-gray-400 font-medium mt-0.5">Terisi otomatis sambil Anda memilih.</p>
+                <h2 className="text-xl font-black text-gray-900 sf-display-heavy">Rancangan Website Kamu</h2>
+                <p className="text-[11px] text-gray-400 font-medium mt-0.5">Terisi otomatis sambil kamu memilih.</p>
               </div>
 
               <div
@@ -1395,7 +1395,7 @@ Terima kasih.`
                     <p className="text-xs text-gray-400 mt-1 flex items-center gap-1">
                       Bayar sesuai fitur yang dipilih — tanpa biaya tersembunyi.
                       <span
-                        title="Kalau semua fitur opsional ditambah, estimasi maksimal sekitar Rp 4.250.000. Anda bebas pilih hanya yang dibutuhkan."
+                        title="Kalau semua fitur opsional ditambah, estimasi maksimal sekitar Rp 4.250.000. kamu bebas pilih hanya yang dibutuhkan."
                         className="cursor-help text-gray-300 border border-gray-300 rounded-full w-4 h-4 flex items-center justify-center text-xs leading-none shrink-0"
                       >
                         ?
@@ -1464,13 +1464,13 @@ Terima kasih.`
       {/* Post-Order Steps */}
       <section className="bg-white py-16 mt-20 border-t border-black/5">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Setelah Anda Order</p>
-          <h2 className="text-2xl font-black text-gray-900 mb-10 tracking-tight">3 Langkah Sederhana — Website Anda Live</h2>
+          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Setelah Kamu Order</p>
+          <h2 className="text-2xl font-black text-gray-900 mb-10 tracking-tight">3 Langkah Sederhana — Website Kamu Live</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {[
               { step: '1', icon: '💳', title: 'Bayar Online', desc: 'Bayar lewat QRIS atau transfer. Order Rp 4 juta ke atas cukup DP 50% dulu; di bawah itu sekali bayar lunas. Konfirmasi otomatis via WA.' },
-              { step: '2', icon: '🔨', title: 'Tim Bangun (3–5 Hari)', desc: 'Tim kami bangun website sesuai industri Anda. Anda bisa pantau progres via Order ID.' },
-              { step: '3', icon: '✏️', title: 'Anda Edit Sendiri & Launch', desc: 'Website live di domain Anda. Edit konten kapan saja dari dashboard — tanpa perlu hubungi kami.' },
+              { step: '2', icon: '🔨', title: 'Tim Bangun (3–5 Hari)', desc: 'Tim kami bangun website sesuai industri kamu. kamu bisa pantau progres via Order ID.' },
+              { step: '3', icon: '✏️', title: 'Kamu Edit Sendiri & Launch', desc: 'Website live di domain kamu. Edit konten kapan saja dari dashboard — tanpa perlu hubungi kami.' },
             ].map(s => (
               <div key={s.step} className="flex flex-col items-center p-6 bg-[#F5F5F7] rounded-[24px]">
                 <span className="text-3xl mb-3">{s.icon}</span>

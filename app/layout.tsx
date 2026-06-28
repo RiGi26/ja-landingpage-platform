@@ -87,7 +87,7 @@ const homepageFaqSchema = {
       name: 'Apakah saya bisa pakai domain sendiri?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis atau kami bantu daftarkan domain baru.',
+        text: 'Ya. Kami bantu pointing domain kamu ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis atau kami bantu daftarkan domain baru.',
       },
     },
     {

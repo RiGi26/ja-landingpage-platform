@@ -118,7 +118,7 @@ export const HOSTING_PACKAGES: HostingPackage[] = [
   {
     id: 'enterprise', name: 'Enterprise', storage: '250GB+', capacityHint: '250GB+ — tanpa batas wajar untuk platform besar', visitor: 'Sangat tinggi',
     price: 10000000, maintain: 7500000,
-    description: 'Server khusus milik Anda sendiri untuk platform dengan puluhan ribu pengguna aktif — tidak dipakai bareng bisnis lain.',
+    description: 'Server khusus milik kamu sendiri untuk platform dengan puluhan ribu pengguna aktif — tidak dipakai bareng bisnis lain.',
   },
 ];
 
@@ -129,7 +129,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'admin-dash',
         name: 'Dashboard Admin',
-        description: 'Panel khusus untuk Anda kelola isi website sendiri — update foto, teks, harga, atau hapus konten tanpa perlu hubungi tim teknis.',
+        description: 'Panel khusus untuk kamu kelola isi website sendiri — update foto, teks, harga, atau hapus konten tanpa perlu hubungi tim teknis.',
         price: 250000,
         category: 'general',
         availability: 'live',
@@ -145,7 +145,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'wa-auto',
         name: 'WhatsApp Order Integration',
-        description: 'Order dan pertanyaan masuk langsung ke WhatsApp Anda: semua tombol pesan di website tersambung ke nomor Anda dengan format pesan terisi otomatis (produk, jumlah, halaman asal) — pembeli tinggal kirim, Anda tinggal balas.',
+        description: 'Order dan pertanyaan masuk langsung ke WhatsApp kamu: semua tombol pesan di website tersambung ke nomor kamu dengan format pesan terisi otomatis (produk, jumlah, halaman asal) — pembeli tinggal kirim, kamu tinggal balas.',
         price: 300000,
         category: 'general',
         availability: 'live',
@@ -153,7 +153,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'g-sheets',
         name: 'Google Sheets Integration',
-        description: 'Data dari website (order, pendaftaran, form kontak) otomatis tercatat ke Google Sheets yang bisa Anda akses kapan saja dari perangkat apapun.',
+        description: 'Data dari website (order, pendaftaran, form kontak) otomatis tercatat ke Google Sheets yang bisa kamu akses kapan saja dari perangkat apapun.',
         price: 150000,
         category: 'general',
         availability: 'manual',
@@ -166,7 +166,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         price: 200000,
         category: 'general',
         availability: 'manual',
-        disclaimer: 'Layanan setup yang dikonfigurasi oleh tim kami (bukan tombol instan). Format nota disesuaikan dengan brand Anda saat pembuatan website.',
+        disclaimer: 'Layanan setup yang dikonfigurasi oleh tim kami (bukan tombol instan). Format nota disesuaikan dengan brand kamu saat pembuatan website.',
       },
       {
         id: 'seo',
@@ -179,7 +179,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'live-chat',
         name: 'Live Chat',
-        description: 'Kotak chat muncul di sudut website sehingga pengunjung bisa langsung tanya-jawab real-time dengan tim Anda tanpa keluar dari halaman.',
+        description: 'Kotak chat muncul di sudut website sehingga pengunjung bisa langsung tanya-jawab real-time dengan tim kamu tanpa keluar dari halaman.',
         price: 100000,
         category: 'general',
         availability: 'live',
@@ -195,7 +195,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'api',
         name: 'API Integration',
-        description: 'Koneksi website ke sistem eksternal yang sudah Anda pakai (ERP, aplikasi kasir, platform logistik, dll) agar data tidak perlu diinput dua kali.',
+        description: 'Koneksi website ke sistem eksternal yang sudah kamu pakai (ERP, aplikasi kasir, platform logistik, dll) agar data tidak perlu diinput dua kali.',
         price: 450000,
         category: 'general',
         availability: 'manual',
@@ -208,7 +208,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         price: 200000,
         category: 'general',
         availability: 'manual',
-        disclaimer: 'Layanan setup yang dikonfigurasi oleh tim kami (bukan tombol instan). Termasuk integrasi ke penyedia email pilihan Anda.',
+        disclaimer: 'Layanan setup yang dikonfigurasi oleh tim kami (bukan tombol instan). Termasuk integrasi ke penyedia email pilihan kamu.',
       },
       {
         id: 'crm',
@@ -221,7 +221,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'blog',
         name: 'Blog / Halaman Berita',
-        description: 'Halaman artikel yang bisa Anda kelola sendiri — tulis berita, promo, atau konten edukasi langsung dari dashboard admin. Mendukung gambar, kategori, dan tanggal publish.',
+        description: 'Halaman artikel yang bisa kamu kelola sendiri — tulis berita, promo, atau konten edukasi langsung dari dashboard admin. Mendukung gambar, kategori, dan tanggal publish.',
         price: 200000,
         category: 'general',
         availability: 'live',
@@ -231,7 +231,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'career',
         name: 'Portal Lowongan Kerja',
-        description: 'Section karier di website Anda — ajakan bergabung dengan tombol kirim lamaran (via WhatsApp/email). Cocok untuk perusahaan yang sedang berkembang.',
+        description: 'Section karier di website kamu — ajakan bergabung dengan tombol kirim lamaran (via WhatsApp/email). Cocok untuk perusahaan yang sedang berkembang.',
         price: 300000,
         category: 'general',
         availability: 'live',
@@ -240,7 +240,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'newsletter',
         name: 'Newsletter System',
-        description: 'Band ajakan berlangganan info & promo di website Anda — pengunjung mendaftar lewat WhatsApp sehingga langsung masuk daftar kontak Anda.',
+        description: 'Band ajakan berlangganan info & promo di website kamu — pengunjung mendaftar lewat WhatsApp sehingga langsung masuk daftar kontak kamu.',
         price: 200000,
         category: 'general',
         availability: 'live',
@@ -377,7 +377,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'checkout',
         name: 'Checkout System',
-        description: 'Halaman checkout lengkap di website Anda sendiri: pembeli mengisi alamat, melihat ringkasan pesanan, dan konfirmasi order sebelum bayar.',
+        description: 'Halaman checkout lengkap di website kamu sendiri: pembeli mengisi alamat, melihat ringkasan pesanan, dan konfirmasi order sebelum bayar.',
         price: 200000,
         category: 'ecommerce',
         availability: 'live',
@@ -385,7 +385,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'track-pack',
         name: 'Tracking Paket',
-        description: 'Customer cek status pengiriman paket mereka langsung di website pakai nomor resi — mengurangi pertanyaan "paket saya sudah sampai mana?" ke WA Anda.',
+        description: 'Customer cek status pengiriman paket mereka langsung di website pakai nomor resi — mengurangi pertanyaan "paket saya sudah sampai mana?" ke WA kamu.',
         price: 250000,
         category: 'ecommerce',
         availability: 'soon',
@@ -409,7 +409,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'voucher',
         name: 'Voucher & Promo',
-        description: 'Sistem kode promo yang bisa Anda buat sendiri: diskon persentase, potongan nominal, minimum pembelian, atau batas penggunaan — untuk kampanye promosi kapan saja.',
+        description: 'Sistem kode promo yang bisa kamu buat sendiri: diskon persentase, potongan nominal, minimum pembelian, atau batas penggunaan — untuk kampanye promosi kapan saja.',
         price: 150000,
         category: 'ecommerce',
         availability: 'soon',
@@ -426,7 +426,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
       {
         id: 'vendor',
         name: 'Multi-Seller Portal Basic',
-        description: 'Beberapa penjual bisa daftarkan produk di website Anda; tiap seller punya dashboard sendiri untuk kelola produk dan lihat laporan penjualan mereka.',
+        description: 'Beberapa penjual bisa daftarkan produk di website kamu; tiap seller punya dashboard sendiri untuk kelola produk dan lihat laporan penjualan mereka.',
         price: 2000000,
         category: 'ecommerce',
         availability: 'soon',
@@ -477,7 +477,7 @@ export const ADDON_GROUPS: Record<string, { title: string; items: Addon[] }> = {
         isPortalFeature: true,
         portalName: 'Webzoka Go',
         portalLink: '/pricing',
-        disclaimer: 'Termasuk setup integrasi GPS. Biaya data GPS per armada ditagih terpisah sesuai provider GPS pilihan Anda (mulai Rp 50.000/unit/bulan).',
+        disclaimer: 'Termasuk setup integrasi GPS. Biaya data GPS per armada ditagih terpisah sesuai provider GPS pilihan kamu (mulai Rp 50.000/unit/bulan).',
       },
       {
         id: 'driver-sched',
@@ -613,7 +613,7 @@ export const BUNDLES: Bundle[] = [
     id: 'toko-online',
     emoji: '🛒',
     name: 'Toko Online Basic',
-    desc: 'Semua yang dibutuhkan untuk mulai berjualan online: keranjang belanja, checkout, pembayaran otomatis (Midtrans), dan order masuk langsung ke WhatsApp Anda.',
+    desc: 'Semua yang dibutuhkan untuk mulai berjualan online: keranjang belanja, checkout, pembayaran otomatis (Midtrans), dan order masuk langsung ke WhatsApp kamu.',
     hostingId: 'starter',
     addonIds: ['cart', 'checkout', 'midtrans', 'wa-auto'],
     normalPrice: 2350000,

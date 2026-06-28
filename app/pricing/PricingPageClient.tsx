@@ -290,7 +290,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             Sistem Portal Bisnis — <span className="text-blue-600">Satu Sistem</span> untuk Setiap Industri
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Pilih portal sesuai bisnis Anda. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
+            Pilih portal sesuai bisnis kamu. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
           </p>
         </div>
 
@@ -638,7 +638,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             {[
               {
                 q: 'Apa yang terjadi setelah trial 14 hari habis?',
-                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — Anda yang menentukan kapan mulai berlangganan.',
+                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — kamu yang menentukan kapan mulai berlangganan.',
               },
               {
                 q: 'Apakah bisa upgrade atau downgrade paket?',
@@ -650,7 +650,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               },
               {
                 q: 'Apakah data saya aman kalau berhenti berlangganan?',
-                a: 'Data Anda tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
+                a: 'Data kamu tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
               },
               {
                 q: 'Apakah portal ini bisa dipakai bersamaan dengan website builder?',
@@ -688,8 +688,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Footer Info */}
         <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
            {[
-             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu Anda daftar.' },
-             { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. Anda tidak perlu urus apapun.' },
+             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu kamu daftar.' },
+             { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. kamu tidak perlu urus apapun.' },
              { t: 'Data Tidak Bisa Diintip', d: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Enkripsi aktif dari hari pertama, backup harian.' },
            ].map(item => (
              <div key={item.t} className="group">

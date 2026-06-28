@@ -9,7 +9,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
   const PORTALS = [
     {
       title: 'Portal Belajar (LMS)',
-      desc: 'Login ke dashboard kursus atau sekolah Anda.',
+      desc: 'Login ke dashboard kursus atau sekolah kamu.',
       icon: GraduationCap,
       href: 'https://lms.webzoka.com/auth/login',
       color: 'bg-blue-50 text-blue-600',
@@ -67,8 +67,8 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
         <div className="p-6 md:p-10">
           <div className="flex justify-between items-start mb-6 md:mb-8">
             <div>
-              <h2 className="text-2xl md:text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Anda</h2>
-              <p className="text-sm text-gray-500 mt-1">Silakan login ke layanan yang Anda gunakan.</p>
+              <h2 className="text-2xl md:text-3xl sf-display-heavy text-[#1D1D1F]">Pilih Portal Kamu</h2>
+              <p className="text-sm text-gray-500 mt-1">Silakan login ke layanan yang kamu gunakan.</p>
             </div>
             <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors shrink-0">
               <X size={20} />
@@ -101,7 +101,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 <span className="text-xs font-medium text-gray-400 uppercase tracking-widest">Enterprise Access Active</span>
             </div>
-            <p className="text-[11px] text-gray-400">Punya domain kustom? Silakan login langsung via domain Anda.</p>
+            <p className="text-[11px] text-gray-400">Punya domain kustom? Silakan login langsung via domain kamu.</p>
           </div>
         </div>
       </div>

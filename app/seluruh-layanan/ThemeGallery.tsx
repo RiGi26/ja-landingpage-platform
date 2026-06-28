@@ -337,14 +337,14 @@ export default function ThemeGallery({
       })}
       {selectedThemeId ? (
         <p className="text-xs font-semibold text-[#0071E3] flex items-center gap-1.5">
-          <Check size={13} strokeWidth={3} aria-hidden /> Gaya terpilih akan diterapkan saat Anda isi
+          <Check size={13} strokeWidth={3} aria-hidden /> Gaya terpilih akan diterapkan saat kamu isi
           brief — masih bisa diubah nanti.
         </p>
       ) : (
         <p className="text-[10px] text-gray-500 font-medium leading-relaxed">
           Ketuk gambar untuk <span className="text-gray-400 font-bold">lihat preview</span> penuh, lalu
           pilih gayanya. Gambar di sini contoh tampilan; konten (foto, teks, produk) diisi sesuai bisnis{' '}
-          <span className="text-gray-400 font-bold">{label}</span> Anda setelah pesan.
+          <span className="text-gray-400 font-bold">{label}</span> kamu setelah pesan.
         </p>
       )}
 

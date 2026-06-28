@@ -303,7 +303,7 @@ export default function PortfolioGallery() {
         </div>
 
         <p className="text-sm text-gray-500 text-center mt-6 italic">
-          Semua website di atas bisa Anda buka sekarang di browser — bukan mockup, bukan demo internal.
+          Semua website di atas bisa kamu buka sekarang di browser — bukan mockup, bukan demo internal.
         </p>
 
         {/* CTA */}

@@ -145,7 +145,7 @@ function ProofSection() {
     {
       icon: BarChart2,
       title: 'Biaya Jujur Sejak Awal',
-      desc: 'Estimasi final muncul di kalkulator sebelum Anda bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
+      desc: 'Estimasi final muncul di kalkulator sebelum kamu bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
       cta: 'Hitung estimasi →',
       href: '/seluruh-layanan',
     },
@@ -160,7 +160,7 @@ function ProofSection() {
             Kami Lebih Suka Tunjukkan<br className="hidden md:block" /> daripada Sekadar Berjanji.
           </h2>
           <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa Anda buktikan sendiri sekarang.
+            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa kamu buktikan sendiri sekarang.
           </p>
         </div>
 
@@ -190,7 +190,7 @@ function SegmenSection() {
       {
         icon: Globe2,
         label: 'Katalog Website',
-        description: 'Pelanggan Anda sedang cari bisnis seperti milik Anda di Google sekarang. Apakah Anda muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
+        description: 'Pelanggan kamu sedang cari bisnis seperti milik kamu di Google sekarang. Apakah kamu muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',
@@ -250,7 +250,7 @@ function SegmenSection() {
       {
         icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
-        description: 'Titip barang dari Jepang langsung ke rumah Anda. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
+        description: 'Titip barang dari Jepang langsung ke rumah kamu. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
         cta: 'Mulai Titip Barang',
         href: 'https://jastip.webzoka.com',
         color: 'text-red-600',
@@ -263,7 +263,7 @@ function SegmenSection() {
         <section id="segmen" className="bg-white py-16 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-10">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Anda</p>
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Kamu</p>
                     <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
                     </h2>
@@ -338,7 +338,7 @@ function SegmenSection() {
 
 function GlobalFeatures() {
     const FEATURES = [
-        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa Anda perlu ingat-ingat.', icon: MessageCircle },
+        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa kamu perlu ingat-ingat.', icon: MessageCircle },
         { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
         { title: 'Pelanggan Pesan Sendiri, 24 Jam', desc: 'Booking dan order jalan otomatis lewat sistem — pelanggan bisa pesan & bayar kapan saja, walau kamu lagi tidur. Tanpa harus standby balas chat.', icon: Clock },
     ]
@@ -365,15 +365,15 @@ function GlobalFeatures() {
 function TrustSection() {
     const STEPS = [
         { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
-        { t: 'Isi Data Bisnis Anda — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, Anda bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
+        { t: 'Isi Data Bisnis kamu — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
+        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, kamu bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
     ]
 
     const BADGES = [
         { t: 'Data Pembeli Aman', d: 'Nomor & transaksi pelanggan tersimpan terkunci — tidak bocor, tidak dijual', i: ShieldCheck },
         { t: 'Tidak Akan Hilang', d: 'Mau se-error apa pun sistemnya nanti, data kamu tetap aman karena otomatis di-backup tiap hari', i: HardDrive },
         { t: 'Anti-Ngadat Saat Rame', d: 'Pelanggan tetap bisa buka & pesan walau pengunjung membludak', i: Globe2 },
-        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp Anda sendiri', i: Zap },
+        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp kamu sendiri', i: Zap },
     ]
 
     return (
@@ -448,7 +448,7 @@ function FlagshipSection() {
             <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8">
               Satu produk, dua hal sekaligus: website yang dilihat calon murid, dan sistem yang ngurus
               pendaftaran, kelas, ujian, sampai sertifikat otomatis. Sistem yang sama itulah yang kami
-              rakit untuk bisnis Anda.
+              rakit untuk bisnis kamu.
             </p>
 
             <div className="grid grid-cols-3 gap-4 mb-4">
@@ -459,7 +459,7 @@ function FlagshipSection() {
                 </div>
               ))}
             </div>
-            <p className="text-xs text-gray-500 mb-8">Semua angka bisa Anda cek sendiri di japanarena.id.</p>
+            <p className="text-xs text-gray-500 mb-8">Semua angka bisa kamu cek sendiri di japanarena.id.</p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a
@@ -517,7 +517,7 @@ function FaqSection() {
     },
     {
       q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain Anda ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
+      a: 'Ya. Kami bantu pointing domain kamu ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
     },
     {
       q: 'Apakah ada biaya setelah tahun pertama?',
@@ -529,7 +529,7 @@ function FaqSection() {
     },
     {
       q: 'Apa bedanya website builder dengan portal (LMS, klinik, dll)?',
-      a: 'Website builder untuk tampilan online bisnis Anda — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
+      a: 'Website builder untuk tampilan online bisnis kamu — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
     },
     {
       q: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
@@ -627,7 +627,7 @@ export default function LandingPage() {
                 Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
               </h2>
               <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Pilih industri Anda di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
+                Pilih industri kamu di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
                 Masih ragu?{' '}
                 <a
                   href={waLink(WA_TANYA_UMUM)}

@@ -6,10 +6,11 @@
 // Dipisah dari aksi "pilih" di kartu (ThemeGallery) supaya user bisa MELIHAT
 // dulu sebelum memutuskan. Aksesibel: role=dialog, focus trap, Esc, scroll-lock.
 // ============================================================
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { X, Monitor, Smartphone, Check, ArrowRight } from 'lucide-react'
 import type { ThemePreviewEntry } from './ThemeGallery'
+import { useDialogA11y } from './useDialogA11y'
 
 type Viewport = 'desktop' | 'mobile'
 
@@ -26,54 +27,10 @@ export default function ThemePreviewModal({
 }) {
   const [viewport, setViewport] = useState<Viewport>('desktop')
   const dialogRef = useRef<HTMLDivElement>(null)
-  const closeBtnRef = useRef<HTMLButtonElement>(null)
 
-  // Scroll-lock body + simpan/​kembalikan fokus + Esc & focus-trap.
-  useEffect(() => {
-    const prevFocus = document.activeElement as HTMLElement | null
-    const prevOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    closeBtnRef.current?.focus()
-
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        e.preventDefault()
-        onClose()
-        return
-      }
-      if (e.key !== 'Tab') return
-      const root = dialogRef.current
-      if (!root) return
-      const focusables = root.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      )
-      if (focusables.length === 0) return
-      const first = focusables[0]
-      const last = focusables[focusables.length - 1]
-      const active = document.activeElement
-      // Re-tangkap bila fokus sempat lolos ke luar dialog (trap boundary-only
-      // tak menutup kasus ini sendiri — bg tidak inert).
-      if (!root.contains(active)) {
-        e.preventDefault()
-        first.focus()
-        return
-      }
-      if (e.shiftKey && active === first) {
-        e.preventDefault()
-        last.focus()
-      } else if (!e.shiftKey && active === last) {
-        e.preventDefault()
-        first.focus()
-      }
-    }
-
-    document.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      document.body.style.overflow = prevOverflow
-      prevFocus?.focus?.()
-    }
-  }, [onClose])
+  // Modal hanya ter-mount saat dibuka → selalu "open". Hook menangani scroll-lock,
+  // simpan/kembalikan fokus, Esc, focus-trap, dan inert latar (#app-shell).
+  useDialogA11y(true, onClose, dialogRef)
 
   const src = t.fullThumbs?.[viewport]
   const titleId = `theme-preview-${t.themeId}`
@@ -110,7 +67,6 @@ export default function ThemePreviewModal({
             <p className="text-[11px] text-gray-400 truncate">{t.subKategoriNama} · contoh tampilan</p>
           </div>
           <button
-            ref={closeBtnRef}
             type="button"
             onClick={onClose}
             aria-label="Tutup preview"

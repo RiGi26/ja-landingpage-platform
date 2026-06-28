@@ -8,6 +8,23 @@ import { useEffect, RefObject } from 'react'
 const FOCUSABLE =
   'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
+// Penghitung dialog terbuka — di-`inert`-kan konten halaman (#app-shell) hanya
+// saat ada dialog, dan baru dilepas setelah dialog TERAKHIR tertutup (cegah
+// salah-lepas saat dua dialog tumpang-tindih). Shell ada di app/layout.tsx;
+// dialog di-portal ke <body> (sibling shell) jadi tak ikut ter-inert.
+let openDialogCount = 0
+function setShellInert(active: boolean) {
+  const shell = document.getElementById('app-shell')
+  if (!shell) return
+  if (active) {
+    openDialogCount += 1
+    if (openDialogCount === 1) shell.toggleAttribute('inert', true)
+  } else {
+    openDialogCount = Math.max(0, openDialogCount - 1)
+    if (openDialogCount === 0) shell.toggleAttribute('inert', false)
+  }
+}
+
 export function useDialogA11y(
   open: boolean,
   onClose: () => void,
@@ -18,6 +35,7 @@ export function useDialogA11y(
     const prevFocus = document.activeElement as HTMLElement | null
     const prevOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    setShellInert(true)
 
     // Fokus awal ke elemen fokusabel pertama di dalam dialog.
     dialogRef.current?.querySelector<HTMLElement>(FOCUSABLE)?.focus()
@@ -54,6 +72,7 @@ export function useDialogA11y(
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = prevOverflow
+      setShellInert(false)
       prevFocus?.focus?.()
     }
   }, [open, onClose, dialogRef])

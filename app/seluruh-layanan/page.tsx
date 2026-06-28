@@ -545,10 +545,18 @@ export default function SeluruhLayananPage() {
   const [sheetOpen, setSheetOpen] = useState(false)
   const closeReceiptSheet = useCallback(() => setSheetOpen(false), [])
 
+  const didInitTemplate = useRef(false)
   useEffect(() => {
     setPreviewLoaded(false)
     setPreviewError(false)
     setSelectedTheme(null) // ganti industri → reset tema pilihan galeri
+    // Mount pertama: JANGAN pra-centang — biarkan estimasi mulai hosting-only
+    // (cocok dgn headline "Mulai Rp 600.000"). Pra-centang baru jalan saat user
+    // benar-benar mengganti industri.
+    if (!didInitTemplate.current) {
+      didInitTemplate.current = true
+      return
+    }
     // Pra-centang add-on rekomendasi industri (RECOMMENDED_ADDONS hanya berisi
     // fitur deployable — lihat catatan di services.ts; user bebas membatalkan).
     // Set add-on manual membatalkan paket rakitan aktif agar tak bentrok.
@@ -1120,7 +1128,7 @@ Terima kasih.`
                     <div className="space-y-8 animate-fade-in">
                         <div>
                             <h2 className="text-xl sm:text-2xl font-black text-gray-900 sf-display-heavy tracking-tight">Ada fitur tambahan yang Anda butuhkan?</h2>
-                            <p className="text-sm text-gray-600 font-medium mt-1">Yang umum dipakai sudah kami centang — hapus yang tak perlu atau tambah lainnya. Estimasi terupdate otomatis.</p>
+                            <p className="text-sm text-gray-600 font-medium mt-1">{selectedAddons.length > 0 ? 'Yang umum dipakai sudah kami centang — hapus yang tak perlu atau tambah lainnya.' : 'Semua opsional — pilih yang relevan, lewati sisanya.'} Estimasi terupdate otomatis.</p>
                             <div className="mt-3 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-100 text-xs font-semibold text-emerald-700">
                                 <Check size={14} strokeWidth={3} /> Revisi sampai puas sebelum go-live
                             </div>

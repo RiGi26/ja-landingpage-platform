@@ -63,10 +63,10 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
       },
       { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
-      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
+      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
       { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ],
     // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).

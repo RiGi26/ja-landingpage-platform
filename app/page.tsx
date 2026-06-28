@@ -220,7 +220,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
-        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Termasuk integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
+        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Siap integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
         href: 'https://ja-clinic-platform.vercel.app/demo',
         color: 'text-emerald-600',

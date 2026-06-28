@@ -700,9 +700,8 @@ export default function LandingPage() {
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><Link href="/tentang-kami" className="hover:text-[#0071E3] transition-colors">Tentang Kami</Link></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Karir</span></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Blog Edukasi</span></li>
-                          <li><span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Partner Kami</span></li>
+                          <li><Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link></li>
+                          <li><Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link></li>
                           <li>
                             <a
                               href={`${WB_URL}/track`}
@@ -748,9 +747,8 @@ export default function LandingPage() {
                     </p>
                   </div>
                   <div className="flex gap-8 text-[12px] text-gray-600 font-medium">
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Kebijakan Privasi</span>
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Syarat & Ketentuan</span>
-                      <span className="opacity-40 cursor-not-allowed select-none" aria-disabled="true" title="Segera hadir">Cookie Policy</span>
+                      <Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link>
+                      <Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link>
                   </div>
               </div>
           </div>

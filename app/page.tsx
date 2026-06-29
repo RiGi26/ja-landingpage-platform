@@ -204,7 +204,7 @@ function SegmenSection() {
         short: 'Travel & Rental',
         description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
-        href: 'https://rent.webzoka.com/auth/login',
+        href: 'https://rent.webzoka.com/demo',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
         isExternal: true,

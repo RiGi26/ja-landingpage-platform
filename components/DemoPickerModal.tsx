@@ -45,7 +45,7 @@ const DEMOS: Demo[] = [
     title: 'Portal Travel & Rental',
     desc: 'Booking armada, e-ticketing, slot otomatis, live tracking.',
     icon: Bus,
-    href: 'https://rent.webzoka.com/auth/login',
+    href: 'https://rent.webzoka.com/demo',
     color: 'bg-sky-50 text-sky-600',
   },
   {

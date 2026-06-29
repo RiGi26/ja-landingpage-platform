@@ -12,7 +12,7 @@ import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
 import DemoPickerModal from '@/components/DemoPickerModal'
-import PortalSystemsAccordion from '@/components/PortalSystemsAccordion'
+import PortalSystemsGrid from '@/components/PortalSystemsGrid'
 import Image from 'next/image'
 import Link from 'next/link'
 import { WB_URL } from '@/constants/site'
@@ -201,6 +201,7 @@ function SegmenSection() {
       {
         icon: Bus,
         label: 'Portal Travel, Rental & Venue',
+        short: 'Travel & Rental',
         description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
         href: 'https://rental.webzoka.com',
@@ -211,6 +212,7 @@ function SegmenSection() {
       {
         icon: GraduationCap,
         label: 'Portal Belajar / LMS',
+        short: 'Belajar / LMS',
         description: 'Untuk karyawan baru atau kursus publik — tinggal upload materi sekali. Sistem otomatis ngurus pendaftaran, ujian, sampai penerbitan sertifikat. Cocok untuk: LPK, bimbel, kursus online, sekolah.',
         cta: 'Lihat Demo',
         href: 'https://lms.webzoka.com/demo',
@@ -221,6 +223,7 @@ function SegmenSection() {
       {
         icon: Cross,
         label: 'Portal Klinik',
+        short: 'Klinik',
         description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Siap integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
         href: 'https://klinik.webzoka.com/demo',
@@ -231,6 +234,7 @@ function SegmenSection() {
       {
         icon: Pill,
         label: 'Portal Farmasi',
+        short: 'Farmasi',
         description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
         cta: 'Lihat Demo',
         href: 'https://apotek.webzoka.com/demo',
@@ -241,6 +245,7 @@ function SegmenSection() {
       {
         icon: Boxes,
         label: 'Portal Stok & Operasi',
+        short: 'Stok & Operasi',
         description: 'Kelola stok gudang, resep & produksi, pesanan, kasir, sampai laporan keuangan dalam satu portal. Kasir, dapur produksi & gudang tersinkron real-time. Cocok untuk: F&B, manufaktur UKM, retail & grosir.',
         cta: 'Lihat Portal',
         href: 'https://stock.webzoka.com',
@@ -251,6 +256,7 @@ function SegmenSection() {
       {
         icon: ShoppingBag,
         label: 'Layanan Jastip Jepang',
+        short: 'Jastip',
         description: 'Titip barang dari Jepang langsung ke rumah kamu. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
         cta: 'Mulai Titip Barang',
         href: 'https://jastip.webzoka.com',
@@ -334,9 +340,9 @@ function SegmenSection() {
                         })}
                       </div>
 
-                      {/* Mobile: accordion ringkas (skala saat portal bertambah) */}
+                      {/* Mobile: grid kotak 3-kolom + bottom-sheet detail (skala saat portal bertambah) */}
                       <div className="sm:hidden w-full">
-                        <PortalSystemsAccordion portals={systems} />
+                        <PortalSystemsGrid portals={systems} />
                       </div>
                     </div>
                   )

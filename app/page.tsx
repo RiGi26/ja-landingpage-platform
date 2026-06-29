@@ -269,7 +269,7 @@ function SegmenSection() {
     return (
         <section id="segmen" className="bg-white py-16 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-10">
+                <div className="reveal text-center mb-10">
                     <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Kamu</p>
                     <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
@@ -285,10 +285,12 @@ function SegmenSection() {
                   const FeaturedIcon = featured.icon
                   return (
                     <div className="flex flex-col items-center gap-6">
-                      {/* Kartu unggulan = banner full-width horizontal (semua viewport, BUKAN dropdown) */}
+                      {/* Kartu unggulan = banner full-width horizontal (semua viewport, BUKAN dropdown).
+                          Wrapper .reveal memegang entrance; <a> tetap punya hover-lift + active:scale. */}
+                      <div className="reveal w-full">
                       <a
                         href={featured.href}
-                        className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1"
+                        className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1 active:scale-[0.99]"
                       >
                         <div className="w-14 h-14 shrink-0 rounded-[12px] bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
                             <FeaturedIcon size={26} />
@@ -302,6 +304,7 @@ function SegmenSection() {
                             {featured.cta} <ArrowRight size={16} />
                         </span>
                       </a>
+                      </div>
 
                       {/* Divider sebelum portal sistem */}
                       <div className="w-full py-3 sm:py-2">
@@ -317,24 +320,32 @@ function SegmenSection() {
                         </p>
                       </div>
 
-                      {/* Desktop: grid kartu (tidak berubah) */}
+                      {/* Desktop: grid kartu — entrance stagger (.reveal) + press depth.
+                          Wrapper .reveal memegang entrance (transform); kartu di dalam
+                          memegang hover-lift + active:scale agar transform tidak bentrok. */}
                       <div className="hidden sm:flex flex-wrap justify-center gap-6 w-full">
-                        {systems.map((p) => {
+                        {systems.map((p, i) => {
                           const IconComponent = p.icon
                           return (
-                            <div key={p.label} className="group flex flex-col p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm">
-                              <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
-                                  <IconComponent size={26} />
+                            <div
+                              key={p.label}
+                              className="reveal flex w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm"
+                              style={{ transitionDelay: `${i * 70}ms` }}
+                            >
+                              <div className="group flex flex-col w-full p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]">
+                                <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
+                                    <IconComponent size={26} />
+                                </div>
+                                <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
+                                <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
+                                <a
+                                  href={p.href}
+                                  {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                  className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
+                                >
+                                    {p.cta}
+                                </a>
                               </div>
-                              <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
-                              <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
-                              <a
-                                href={p.href}
-                                {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                                className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
-                              >
-                                  {p.cta}
-                              </a>
                             </div>
                           )
                         })}

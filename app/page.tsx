@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import {
   Users, MessageCircle, FileText, BookOpen, GraduationCap,
   Lock, Check, ArrowRight, Zap, Clock,
-  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, ShoppingBag, BarChart2, ExternalLink,
+  X, Star, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, WashingMachine, BarChart2, ExternalLink,
   ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
   Bus, Pill, Cross, Boxes
 } from 'lucide-react'
@@ -254,14 +254,14 @@ function SegmenSection() {
         isExternal: true,
       },
       {
-        icon: ShoppingBag,
-        label: 'Layanan Jastip Jepang',
-        short: 'Jastip',
-        description: 'Titip barang dari Jepang langsung ke rumah kamu. Rincian biaya jelas, pengiriman terlacak, tidak perlu khawatir barang hilang.',
-        cta: 'Mulai Titip Barang',
-        href: 'https://jastip.webzoka.com',
-        color: 'text-red-600',
-        bg: 'bg-red-50',
+        icon: WashingMachine,
+        label: 'Webzoka Laundry',
+        short: 'Laundry',
+        description: 'Kelola laundry kiloan dari satu portal — terima cucian & timbang, lacak proses cuci, antar-jemput, sampai notifikasi WA otomatis ke pelanggan. Label QR per kantong biar tidak ada cucian tertukar. Cocok untuk: laundry kiloan, laundry satuan, dry clean.',
+        cta: 'Lihat Demo',
+        href: 'https://laundry.webzoka.com/demo',
+        color: 'text-cyan-600',
+        bg: 'bg-cyan-50',
         isExternal: true,
       },
     ]
@@ -705,7 +705,7 @@ export default function LandingPage() {
                           <li><a href="https://lms.webzoka.com" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
                           <li><a href="https://clinic.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
                           <li><a href="https://pharmacy.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
-                          <li><a href="https://jastip.webzoka.com" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
+                          <li><a href="https://laundry.webzoka.com" className="hover:text-[#0071E3] transition-colors">Laundry Kiloan</a></li>
                           <li><a href="https://stock.webzoka.com" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
                           <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
                       </ul>

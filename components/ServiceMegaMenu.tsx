@@ -6,7 +6,7 @@ import { WB_URL as STUDIO_URL } from '@/constants/site'
 const WA_NUMBER   = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
 const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://lms.webzoka.com'
 const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://clinic.webzoka.com/auth/login').split('/auth/')[0]
-const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://jastip.webzoka.com'
+const LAUNDRY_URL = process.env.NEXT_PUBLIC_LAUNDRY_URL ?? 'https://laundry.webzoka.com'
 
 function wa(service: string) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Halo Webzoka, saya tertarik dengan layanan ${service}.`)}`
@@ -53,6 +53,7 @@ const COLUMNS: Column[] = [
       { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://rent.webzoka.com/auth/login' },
       { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://pharmacy.webzoka.com/login' },
       { label: 'Portal Stok & Operasi',  desc: 'Stok, produksi/BOM, kasir & keuangan', href: 'https://stock.webzoka.com'   },
+      { label: 'Laundry Kiloan',         desc: 'Order, proses cuci, antar-jemput & saldo', href: `${LAUNDRY_URL}/demo`    },
       { label: 'Dashboard Bisnis Pro',   desc: 'Monitoring real-time omzet',       href: wa('Dashboard Bisnis')          },
       { label: 'Membership System',      desc: 'Sistem member & plan premium',     href: wa('Membership & Langganan')    },
     ],

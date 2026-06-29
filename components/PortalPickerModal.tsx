@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { X, LayoutDashboard, GraduationCap, Building2, ShoppingBag, ArrowRight, LogIn, Pill, Boxes } from 'lucide-react'
+import { X, LayoutDashboard, GraduationCap, Building2, WashingMachine, ArrowRight, LogIn, Pill, Boxes } from 'lucide-react'
 
 export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   if (!isOpen) return null
@@ -40,12 +40,12 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       btn: 'bg-amber-600'
     },
     {
-      title: 'Portal Jastip Jepang',
-      desc: 'Hitung biaya dan kelola pesanan titipan.',
-      icon: ShoppingBag,
-      href: 'https://jastip.webzoka.com',
-      color: 'bg-red-50 text-red-600',
-      btn: 'bg-red-600'
+      title: 'Portal Laundry Kiloan',
+      desc: 'Kelola order, proses cuci, antar-jemput & saldo pelanggan.',
+      icon: WashingMachine,
+      href: 'https://laundry.webzoka.com/login',
+      color: 'bg-cyan-50 text-cyan-600',
+      btn: 'bg-cyan-600'
     },
     {
       title: 'Portal Travel & Rental',

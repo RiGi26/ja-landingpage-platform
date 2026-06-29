@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import { X, GraduationCap, Cross, Pill, Warehouse, Bus, ShoppingBag, ArrowRight, ExternalLink } from 'lucide-react'
+import { X, GraduationCap, Cross, Pill, Warehouse, Bus, WashingMachine, ArrowRight, ExternalLink } from 'lucide-react'
 
 type Demo = {
   title: string
@@ -49,11 +49,11 @@ const DEMOS: Demo[] = [
     color: 'bg-sky-50 text-sky-600',
   },
   {
-    title: 'Layanan Jastip Jepang',
-    desc: 'Hitung biaya titip, kelola pesanan, pelacakan pengiriman.',
-    icon: ShoppingBag,
-    href: 'https://jastip.webzoka.com',
-    color: 'bg-red-50 text-red-600',
+    title: 'Portal Laundry Kiloan',
+    desc: 'Intake & timbang, proses cuci, antar-jemput, label QR, notifikasi WA.',
+    icon: WashingMachine,
+    href: 'https://laundry.webzoka.com/demo',
+    color: 'bg-cyan-50 text-cyan-600',
   },
 ]
 

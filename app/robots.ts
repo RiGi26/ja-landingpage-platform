@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/out/'],
     },
-    sitemap: 'https://webzoka.com/sitemap.xml',
+    sitemap: 'https://www.webzoka.com/sitemap.xml',
   }
 }

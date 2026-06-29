@@ -57,8 +57,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Klinik',
     subtitle: 'Manajemen pasien digital',
     icon: Cross,
-    demoUrl: 'https://klinik.webzoka.com/demo',
-    registerUrl: 'https://klinik.webzoka.com/register',
+    demoUrl: 'https://clinic.webzoka.com/demo',
+    registerUrl: 'https://clinic.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
@@ -94,7 +94,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Farmasi',
     subtitle: 'Manajemen apotek digital',
     icon: Pill,
-    demoUrl: 'https://apotek.webzoka.com/demo',
+    demoUrl: 'https://pharmacy.webzoka.com/demo',
     registerUrl: 'https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
     plans: [
       {
@@ -131,8 +131,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Travel & Rental',
     subtitle: 'Booking & kelola aset online',
     icon: Bus,
-    demoUrl: 'https://rental.webzoka.com/demo',
-    registerUrl: 'https://rental.webzoka.com/register',
+    demoUrl: 'https://rent.webzoka.com/auth/login',
+    registerUrl: 'https://rent.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',

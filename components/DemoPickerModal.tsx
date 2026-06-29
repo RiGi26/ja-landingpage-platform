@@ -24,14 +24,14 @@ const DEMOS: Demo[] = [
     title: 'Portal Klinik & Medis',
     desc: 'Rekam medis digital, antrean pasien, jadwal dokter, booking online.',
     icon: Cross,
-    href: 'https://klinik.webzoka.com/demo',
+    href: 'https://clinic.webzoka.com/demo',
     color: 'bg-emerald-50 text-emerald-600',
   },
   {
     title: 'Portal Farmasi (Apotek)',
     desc: 'Kasir digital, stok obat otomatis, laporan harian tanpa rekap manual.',
     icon: Pill,
-    href: 'https://apotek.webzoka.com/demo',
+    href: 'https://pharmacy.webzoka.com/demo',
     color: 'bg-indigo-50 text-indigo-600',
   },
   {
@@ -45,7 +45,7 @@ const DEMOS: Demo[] = [
     title: 'Portal Travel & Rental',
     desc: 'Booking armada, e-ticketing, slot otomatis, live tracking.',
     icon: Bus,
-    href: 'https://rental.webzoka.com',
+    href: 'https://rent.webzoka.com/auth/login',
     color: 'bg-sky-50 text-sky-600',
   },
   {

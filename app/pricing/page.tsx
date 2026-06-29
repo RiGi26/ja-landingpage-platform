@@ -5,7 +5,7 @@ import PricingPageClient, { type PriceMap } from './PricingPageClient'
 // (stale-while-revalidate), bukan di jalur kritis request user.
 export const revalidate = 300
 
-const SUPERADMIN_URL = (process.env.SUPERADMIN_URL || 'https://ja-superadmin-platform.vercel.app').replace(/\/+$/, '')
+const SUPERADMIN_URL = (process.env.SUPERADMIN_URL || 'https://superadmin.webzoka.com').replace(/\/+$/, '')
 
 type ApiPlan = { platform: string; tier: string; priceMonthly: number }
 

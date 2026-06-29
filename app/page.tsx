@@ -204,7 +204,7 @@ function SegmenSection() {
         short: 'Travel & Rental',
         description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
         cta: 'Lihat Demo',
-        href: 'https://rental.webzoka.com',
+        href: 'https://rent.webzoka.com/auth/login',
         color: 'text-sky-600',
         bg: 'bg-sky-50',
         isExternal: true,
@@ -226,7 +226,7 @@ function SegmenSection() {
         short: 'Klinik',
         description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Siap integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
         cta: 'Lihat Demo',
-        href: 'https://klinik.webzoka.com/demo',
+        href: 'https://clinic.webzoka.com/demo',
         color: 'text-emerald-600',
         bg: 'bg-emerald-50',
         isExternal: true,
@@ -237,7 +237,7 @@ function SegmenSection() {
         short: 'Farmasi',
         description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
         cta: 'Lihat Demo',
-        href: 'https://apotek.webzoka.com/demo',
+        href: 'https://pharmacy.webzoka.com/demo',
         color: 'text-indigo-600',
         bg: 'bg-indigo-50',
         isExternal: true,
@@ -703,8 +703,8 @@ export default function LandingPage() {
                       <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</p>
                       <ul className="space-y-3 text-sm text-gray-500">
                           <li><a href="https://lms.webzoka.com" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
-                          <li><a href="https://klinik.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
-                          <li><a href="https://apotek.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
+                          <li><a href="https://clinic.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
+                          <li><a href="https://pharmacy.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
                           <li><a href="https://jastip.webzoka.com" className="hover:text-[#0071E3] transition-colors">Jastip Smart System</a></li>
                           <li><a href="https://stock.webzoka.com" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
                           <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>

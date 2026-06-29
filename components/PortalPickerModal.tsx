@@ -19,7 +19,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Klinik & Medis',
       desc: 'Manajemen rekam medis dan antrean pasien.',
       icon: Building2,
-      href: 'https://klinik.webzoka.com/auth/login',
+      href: 'https://clinic.webzoka.com/auth/login',
       color: 'bg-emerald-50 text-emerald-600',
       btn: 'bg-emerald-600'
     },
@@ -27,7 +27,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Farmasi (Apotek)',
       desc: 'Manajemen stok obat dan kasir apotek terpadu.',
       icon: Pill,
-      href: 'https://apotek.webzoka.com/login',
+      href: 'https://pharmacy.webzoka.com/login',
       color: 'bg-indigo-50 text-indigo-600',
       btn: 'bg-indigo-600'
     },
@@ -51,7 +51,7 @@ export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean
       title: 'Portal Travel & Rental',
       desc: 'Manajemen armada, e-ticketing, dan live tracking.',
       icon: LayoutDashboard,
-      href: 'https://rental.webzoka.com/auth/login',
+      href: 'https://rent.webzoka.com/auth/login',
       color: 'bg-sky-50 text-sky-600',
       btn: 'bg-sky-600'
     }

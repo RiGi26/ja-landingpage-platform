@@ -4,8 +4,8 @@ import { useEffect, useRef } from 'react'
 import { WB_URL as STUDIO_URL } from '@/constants/site'
 
 const WA_NUMBER   = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
-const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://app.webzoka.com'
-const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://klinik.webzoka.com/auth/login').split('/auth/')[0]
+const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://lms.webzoka.com'
+const CLINIC_BASE = (process.env.NEXT_PUBLIC_CLINIC_URL ?? 'https://clinic.webzoka.com/auth/login').split('/auth/')[0]
 const JASTIP_URL  = process.env.NEXT_PUBLIC_JASTIP_URL ?? 'https://jastip.webzoka.com'
 
 function wa(service: string) {
@@ -50,8 +50,8 @@ const COLUMNS: Column[] = [
     bg   : 'bg-indigo-50',
     items: [
       { label: 'Portal Klinik & Medis',  desc: 'Rekam medis, antrian, billing',   href: `${CLINIC_BASE}/demo`           },
-      { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://rental.webzoka.com/auth/login' },
-      { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://apotek.webzoka.com/login' },
+      { label: 'Sistem Travel & Rental', desc: 'Manajemen armada & e-ticketing',   href: 'https://rent.webzoka.com/auth/login' },
+      { label: 'Apotek & Farmasi',       desc: 'Stok obat & POS Kasir',            href: 'https://pharmacy.webzoka.com/login' },
       { label: 'Portal Stok & Operasi',  desc: 'Stok, produksi/BOM, kasir & keuangan', href: 'https://stock.webzoka.com'   },
       { label: 'Dashboard Bisnis Pro',   desc: 'Monitoring real-time omzet',       href: wa('Dashboard Bisnis')          },
       { label: 'Membership System',      desc: 'Sistem member & plan premium',     href: wa('Membership & Langganan')    },

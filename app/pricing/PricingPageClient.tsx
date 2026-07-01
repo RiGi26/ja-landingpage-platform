@@ -247,6 +247,14 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
     return () => { alive = false }
   }, [])
 
+  // Deep-link: /pricing?platform=lms langsung membuka tab portal terkait (mis. dari
+  // kartu combo "Website + Portal" di landing). Baca sekali saat mount — halaman ini
+  // static export, jadi ambil dari window.location (bukan useSearchParams/Suspense).
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get('platform')
+    if (wanted && PLATFORMS.some(p => p.id === wanted)) setActiveTab(wanted)
+  }, [])
+
   // Mobile: pemilih portal jadi bottom-sheet (hemat ruang & scalable saat portal bertambah).
   // Escape + scroll-lock body selama sheet terbuka — pola sama dgn DemoPickerModal.
   const [sheetOpen, setSheetOpen] = useState(false)

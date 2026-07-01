@@ -16,6 +16,7 @@ import PortalSystemsGrid from '@/components/PortalSystemsGrid'
 import Image from 'next/image'
 import Link from 'next/link'
 import { WB_URL } from '@/constants/site'
+import { WEBSITE_PORTAL_COMBOS, WEBSITE_FROM_PRICE, PORTAL_START_PRICE } from '@/constants/combos'
 
 const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
 
@@ -363,6 +364,108 @@ function SegmenSection() {
     )
 }
 
+// Combo "Website + Portal" — jembatan tepat setelah SegmenSection (customer baru
+// lihat Website & Portal terpisah → di sini ditawari sekaligus). Harga jujur &
+// dipisah: Website sekali + Portal per bulan. Data: constants/combos.ts.
+function WebsitePortalPaketSection() {
+    const rp = (n: number) => `Rp ${n.toLocaleString('id-ID')}`
+    // Pesan WA khusus untuk portal yang belum jadi kartu unggulan.
+    const waComboLain = 'Halo Webzoka, saya mau tanya paket Website + Portal (bundling website & sistem).'
+
+    return (
+        <section id="paket-combo" className="bg-white py-16 lg:py-24 px-4">
+            <div className="max-w-6xl mx-auto">
+                <div className="reveal text-center mb-10">
+                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 inline-flex items-center gap-2">
+                        <LayoutGrid size={14} /> Paket Lengkap
+                    </p>
+                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
+                        Butuh Dua-duanya?<br className="hidden md:block" /> Ambil Website + Portal Sekaligus.
+                    </h2>
+                    <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+                        Website biar pelanggan menemukan kamu, portal biar operasional jalan otomatis. Satu paket — live dalam hitungan hari.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {WEBSITE_PORTAL_COMBOS.map((c, i) => {
+                        const ComboIcon = c.icon
+                        const portalFrom = PORTAL_START_PRICE[c.portalId] ?? 0
+                        return (
+                            <div
+                                key={c.id}
+                                className="reveal flex"
+                                style={{ transitionDelay: `${i * 70}ms` }}
+                            >
+                                <div className="group flex flex-col w-full p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]">
+                                    {/* Ikon combo: Website (Globe2) + Portal */}
+                                    <div className="flex items-center gap-2 mb-6">
+                                        <div className="w-14 h-14 rounded-[8px] bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                            <Globe2 size={26} />
+                                        </div>
+                                        <span className="text-gray-300 font-black text-2xl">+</span>
+                                        <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center group-hover:scale-110 transition-transform ${c.bg} ${c.color}`}>
+                                            <ComboIcon size={26} />
+                                        </div>
+                                    </div>
+
+                                    <h3 className="text-lg font-bold mb-3 sf-display text-gray-900 leading-snug">
+                                        Website + {c.portalLabel}
+                                    </h3>
+                                    <p className="text-sm leading-relaxed mb-6 flex-1 text-gray-500">{c.tagline}</p>
+
+                                    {/* Harga jujur & dipisah: sekali vs per bulan */}
+                                    <div className="rounded-2xl bg-[#F5F5F7] p-4 mb-5 space-y-2.5">
+                                        <div className="flex items-baseline justify-between gap-2">
+                                            <span className="text-[13px] text-gray-500">Website <span className="text-gray-400">· sekali</span></span>
+                                            <span className="text-[15px] font-bold text-gray-900">mulai {rp(WEBSITE_FROM_PRICE)}</span>
+                                        </div>
+                                        <div className="h-px bg-black/5" />
+                                        <div className="flex items-baseline justify-between gap-2">
+                                            <span className="text-[13px] text-gray-500">Portal <span className="text-gray-400">· /bln</span></span>
+                                            <span className="text-[15px] font-bold text-gray-900">mulai {rp(portalFrom)}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <Link
+                                            href={c.pricingHref}
+                                            className="flex-1 py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
+                                        >
+                                            Lihat Paket
+                                        </Link>
+                                        <a
+                                            href={c.demoHref}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="shrink-0 inline-flex items-center gap-1.5 px-4 py-3 rounded-full text-sm font-bold text-gray-700 border border-black/10 hover:bg-gray-50 transition-all"
+                                        >
+                                            Demo <ExternalLink size={14} />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                <p className="reveal text-center text-sm text-gray-500 mt-8">
+                    Portal lain (Farmasi, Stok &amp; Operasi, Laundry) juga bisa dipaketkan bareng website.{' '}
+                    <a
+                        href={waLink(waComboLain)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#0071E3] font-bold hover:underline"
+                    >
+                        Chat tim kami
+                    </a>
+                    .
+                </p>
+            </div>
+        </section>
+    )
+}
+
 function GlobalFeatures() {
     const FEATURES = [
         { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa kamu perlu ingat-ingat.', icon: MessageCircle },
@@ -638,6 +741,7 @@ export default function LandingPage() {
         <SocialProofBar />
         <GlobalFeatures />
         <SegmenSection />
+        <WebsitePortalPaketSection />
         <TrustSection />
         <ProofSection />
         <FlagshipSection />

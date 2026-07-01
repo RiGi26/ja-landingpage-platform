@@ -494,8 +494,9 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             // Tier tampilan → tier Core (enum), seragam semua portal:
             // Starter→starter, Growth→pro, Pro→enterprise.
             const coreTier = coreTierOf(plan.tier)
-            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock).
-            const subscribeReady = currentPlatform.id === 'lms' || isStock
+            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik).
+            // Klinik: register→provision Core→direct-pay Snap→sync (UAT E2E PASS 2026-07-01).
+            const subscribeReady = currentPlatform.id === 'lms' || currentPlatform.id === 'clinic' || isStock
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
             const ctaHref = isFreeCta
               ? currentPlatform.registerUrl

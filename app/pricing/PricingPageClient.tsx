@@ -6,7 +6,7 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 
-type Plan = { tier: string; price: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
+type Plan = { tier: string; price: number; priceYearly?: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
 // Tabel banding fitur per-paket. Hanya isi untuk portal yang gating tier-nya
 // SUDAH ditegakkan app (mis. Stock) — jangan jual beda fitur yang belum nyata.
 // `tiers` sejajar dgn `cols`: boolean = centang/strip, string = nilai (mis. "3", "Tanpa batas").
@@ -27,9 +27,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 249000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa'] },
-      { tier: 'Growth', price: 499000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Unlimited Kursus', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
-      { tier: 'Pro', price: 1199000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
+      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Unlimited Kursus', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
+      { tier: 'Pro', price: 899000, priceYearly: 8990000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
     ],
     // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
     // + Fase A.1 (multi-pengajar, sertifikat, kuota siswa) — 2026-06-26.
@@ -65,9 +65,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 299000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
-      { tier: 'Growth', price: 599000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
-      { tier: 'Pro', price: 1499000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
+      { tier: 'Starter', price: 199000, priceYearly: 1990000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
+      { tier: 'Growth', price: 499000, priceYearly: 4990000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
+      { tier: 'Pro', price: 1199000, priceYearly: 11990000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
     ],
     // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).
     // Custom domain/white-label dikontrol superadmin → tak ditampilkan di sini.
@@ -102,9 +102,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'User/kasir tanpa batas', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 199000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['POS + barcode', 'Master obat & inventory', 'Shift kasir + rekap', '1 user'] },
-      { tier: 'Growth', price: 449000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua Starter', 'Stok opname + monitoring expiry', 'Laporan & analitik (Excel/PDF)', 'Notifikasi WhatsApp', '3 user'], popular: true },
-      { tier: 'Pro', price: 999000, desc: 'Untuk apotek yang terintegrasi penuh.', feat: ['Semua Growth', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware (QZ Tray)', 'User tanpa batas'] },
+      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['POS + barcode', 'Master obat & inventory', 'Shift kasir + rekap', '1 user'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua Starter', 'Stok opname + monitoring expiry', 'Laporan & analitik (Excel/PDF)', 'Notifikasi WhatsApp', '3 user'], popular: true },
+      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk apotek yang terintegrasi penuh.', feat: ['Semua Growth', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware (QZ Tray)', 'User tanpa batas'] },
     ],
     // Gating per-tier ditegakkan server (Farmasi — page+API guard + seat kasir).
     featureMatrix: {
@@ -139,9 +139,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
         feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online', 'Notif WA otomatis', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 349000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
-      { tier: 'Growth', price: 749000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
-      { tier: 'Pro', price: 1899000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
+      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
+      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
     ],
     // Gating per-tier ditegakkan server (Travel — page guard + API guard).
     featureMatrix: {
@@ -175,20 +175,17 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         feat: ['Semua fitur paket Pro', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim', 'Akun & hak akses tim tanpa batas', 'Tanpa kartu kredit'],
       },
       {
-        tier: 'Starter', price: 500000, priceLabel: '500rb', cta: 'Pilih Starter',
-        promo: 'Bulan 1 gratis, lalu Rp 250rb (bln 2-4)',
+        tier: 'Starter', price: 199000, priceYearly: 1990000, priceLabel: '199rb', cta: 'Pilih Starter',
         desc: 'Untuk mulai rapikan pesanan & pembayaran harian.',
         feat: ['Dashboard ringkasan omzet & pesanan harian', 'Kelola pesanan (status: menunggu → dikirim)', 'Invoice & label pengiriman otomatis', 'Notifikasi WhatsApp ke pelanggan otomatis', 'Manajemen produk & katalog', '1 akun admin'],
       },
       {
-        tier: 'Growth', price: 750000, priceLabel: '750rb', popular: true, cta: 'Pilih Growth',
-        promo: 'Bulan 1 gratis, lalu Rp 375rb (bln 2-4)',
+        tier: 'Growth', price: 399000, priceYearly: 3990000, priceLabel: '399rb', popular: true, cta: 'Pilih Growth',
         desc: 'Untuk yang sudah rutin restock & butuh kontrol stok.',
         feat: ['Semua fitur Starter', 'Stok & lot tracking + stok opname', 'Pemantauan kadaluarsa (expiry monitoring)', 'Manajemen pemasok (purchase order)', 'Laporan keuangan & arus kas otomatis', 'Sampai 3 akun tim & hak akses', 'Verifikasi pembayaran manual & COD'],
       },
       {
-        tier: 'Pro', price: 1000000, priceLabel: '1jt', cta: 'Pilih Pro',
-        promo: 'Bulan 1 gratis, lalu Rp 500rb (bln 2-4)',
+        tier: 'Pro', price: 899000, priceYearly: 8990000, priceLabel: '899rb', cta: 'Pilih Pro',
         desc: 'Untuk produksi skala besar & tim yang berkembang.',
         feat: ['Semua fitur Growth', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim produksi', 'Akun & hak akses tim tanpa batas', 'Konfigurasi & white-label penuh', 'Prioritas dukungan teknis'],
       },
@@ -223,13 +220,14 @@ function coreTierOf(tier: string): 'starter' | 'pro' | 'enterprise' {
   return tier === 'Pro' ? 'enterprise' : tier === 'Growth' ? 'pro' : 'starter'
 }
 
-function resolvePrice(platformId: string, tier: string, fallback: number, priceMap?: PriceMap): number {
-  const live = priceMap?.[`${platformId}:${coreTierOf(tier)}`]
+function resolvePrice(platformId: string, tier: string, fallback: number, period: 'monthly' | 'yearly', priceMap?: PriceMap): number {
+  const live = priceMap?.[`${platformId}:${coreTierOf(tier)}:${period}`]
   return typeof live === 'number' && live > 0 ? live : fallback
 }
 
 export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap }) {
   const [activeTab, setActiveTab] = useState('lms')
+  const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
   // Mobile: pemilih portal jadi bottom-sheet (hemat ruang & scalable saat portal bertambah).
@@ -424,6 +422,37 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           </div>
         )}
 
+        {/* Toggle Bulanan / Tahunan */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+            <button
+              type="button"
+              onClick={() => setBillingPeriod('monthly')}
+              aria-pressed={billingPeriod === 'monthly'}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
+                billingPeriod === 'monthly' ? 'bg-blue-600 text-white shadow' : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Bulanan
+            </button>
+            <button
+              type="button"
+              onClick={() => setBillingPeriod('yearly')}
+              aria-pressed={billingPeriod === 'yearly'}
+              className={`px-5 py-2 rounded-full text-sm font-bold transition-all inline-flex items-center gap-1.5 ${
+                billingPeriod === 'yearly' ? 'bg-blue-600 text-white shadow' : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              Tahunan
+              <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                billingPeriod === 'yearly' ? 'bg-white/20 text-white' : 'bg-green-50 text-green-700'
+              }`}>
+                2 bln gratis
+              </span>
+            </button>
+          </div>
+        </div>
+
         {/* Pricing Cards */}
         <div
           ref={cardsRef}
@@ -435,10 +464,14 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
           }`}>
           {currentPlatform.plans.map((plan, idx) => {
-            // Tab Stock pakai harga statis (Rp + promo) — bypass resolvePrice/priceMap Core.
+            // Tab Stock pakai harga statis (Rp) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
+            // Fallback tahunan = priceYearly bila ada, else bulanan × 10 (2 bln gratis).
+            const yearlyFallback = plan.priceYearly ?? plan.price * 10
+            const monthlyPrice = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, 'monthly', priceMap)
+            const yearlyPrice = isStock ? yearlyFallback : resolvePrice(currentPlatform.id, plan.tier, yearlyFallback, 'yearly', priceMap)
             // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga live).
-            const price = isStock ? plan.price : plan.isTrial ? 0 : resolvePrice(currentPlatform.id, plan.tier, plan.price, priceMap)
+            const price = plan.isTrial ? 0 : (billingPeriod === 'yearly' ? yearlyPrice : monthlyPrice)
             // Hanya Trial yang gratis → alur trial/register. Starter kini BERBAYAR.
             const isFreeCta = plan.isTrial === true
             // Tier tampilan → tier Core (enum), seragam semua portal:
@@ -446,11 +479,11 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             const coreTier = coreTierOf(plan.tier)
             // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock).
             const subscribeReady = currentPlatform.id === 'lms' || isStock
-            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier}.`)}`
+            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
             const ctaHref = isFreeCta
               ? currentPlatform.registerUrl
               : subscribeReady
-                ? `${currentPlatform.registerUrl}?intent=subscribe&tier=${coreTier}`
+                ? `${currentPlatform.registerUrl}?intent=subscribe&tier=${coreTier}&period=${billingPeriod}`
                 : chatHref
             const ctaLabel = plan.cta ?? (isFreeCta
               ? 'Mulai trial 14 hari — gratis'
@@ -476,12 +509,21 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 )}
                 <div className="flex flex-wrap items-baseline gap-x-1.5">
                   <span className="text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
-                    {price === 0 ? 'Gratis' : plan.priceLabel ? `Rp ${plan.priceLabel}` : `Rp ${price.toLocaleString('id-ID')}`}
+                    {price === 0
+                      ? 'Gratis'
+                      : (billingPeriod === 'monthly' && plan.priceLabel)
+                        ? `Rp ${plan.priceLabel}`
+                        : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
-                    <span className="text-gray-400 text-sm font-medium">/bulan</span>
+                    <span className="text-gray-400 text-sm font-medium">/{billingPeriod === 'yearly' ? 'tahun' : 'bulan'}</span>
                   )}
                 </div>
+                {billingPeriod === 'yearly' && price !== 0 && (
+                  <p className="mt-1.5 text-xs font-bold text-green-600">
+                    ≈ Rp {Math.round(price / 12).toLocaleString('id-ID')}/bln · hemat 2 bulan
+                  </p>
+                )}
                 {plan.promo && (
                   <div className="mt-3 inline-flex items-center rounded-lg bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 border border-blue-100">
                     {plan.promo}

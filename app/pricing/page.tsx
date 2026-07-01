@@ -7,7 +7,7 @@ export const revalidate = 300
 
 const SUPERADMIN_URL = (process.env.SUPERADMIN_URL || 'https://superadmin.webzoka.com').replace(/\/+$/, '')
 
-type ApiPlan = { platform: string; tier: string; priceMonthly: number }
+type ApiPlan = { platform: string; tier: string; priceMonthly: number; priceYearly?: number }
 
 async function getPriceMap(): Promise<PriceMap | undefined> {
   try {
@@ -15,9 +15,12 @@ async function getPriceMap(): Promise<PriceMap | undefined> {
     if (!res.ok) return undefined
     const data = (await res.json()) as { plans?: ApiPlan[] }
     if (!data.plans?.length) return undefined
+    // Key: `${platform}:${coreTier}:${period}`. Dua entri per plan (monthly/yearly)
+    // agar toggle Bulanan/Tahunan bisa resolve harga live dari SSOT.
     const map: PriceMap = {}
     for (const p of data.plans) {
-      if (typeof p.priceMonthly === 'number') map[`${p.platform}:${p.tier}`] = p.priceMonthly
+      if (typeof p.priceMonthly === 'number') map[`${p.platform}:${p.tier}:monthly`] = p.priceMonthly
+      if (typeof p.priceYearly === 'number' && p.priceYearly > 0) map[`${p.platform}:${p.tier}:yearly`] = p.priceYearly
     }
     return map
   } catch {

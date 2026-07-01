@@ -95,7 +95,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     subtitle: 'Manajemen apotek digital',
     icon: Pill,
     demoUrl: 'https://pharmacy.webzoka.com/demo',
-    registerUrl: 'https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20ingin%20coba%20trial%20Portal%20Farmasi%2014%20hari%20gratis.',
+    registerUrl: 'https://pharmacy.webzoka.com/register',
     plans: [
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
@@ -494,9 +494,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             // Tier tampilan → tier Core (enum), seragam semua portal:
             // Starter→starter, Growth→pro, Pro→enterprise.
             const coreTier = coreTierOf(plan.tier)
-            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik).
-            // Klinik: register→provision Core→direct-pay Snap→sync (UAT E2E PASS 2026-07-01).
-            const subscribeReady = currentPlatform.id === 'lms' || currentPlatform.id === 'clinic' || isStock
+            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik + Farmasi).
+            // Klinik & Farmasi: register→provision Core→direct-pay Snap→sync (UAT E2E PASS 2026-07-01).
+            const subscribeReady =
+              currentPlatform.id === 'lms' ||
+              currentPlatform.id === 'clinic' ||
+              currentPlatform.id === 'pharmacy' ||
+              isStock
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
             const ctaHref = isFreeCta
               ? currentPlatform.registerUrl

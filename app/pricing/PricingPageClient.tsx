@@ -225,10 +225,27 @@ function resolvePrice(platformId: string, tier: string, fallback: number, period
   return typeof live === 'number' && live > 0 ? live : fallback
 }
 
+// URL publik superadmin (Core) — endpoint status kampanye promo. Non-rahasia.
+const SUPERADMIN_URL = 'https://superadmin.webzoka.com'
+
+type CampaignStatus = { active: boolean; discountPct: number; tier: string; months: number }
+
 export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap }) {
   const [activeTab, setActiveTab] = useState('lms')
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
+
+  // Status kampanye promo (Fase 2) — fetch client-side saat mount agar badge
+  // reflek toggle owner tanpa redeploy (halaman ini static export).
+  const [campaign, setCampaign] = useState<CampaignStatus | null>(null)
+  useEffect(() => {
+    let alive = true
+    fetch(`${SUPERADMIN_URL}/api/public/campaign`)
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (alive && d && typeof d.active === 'boolean') setCampaign(d) })
+      .catch(() => { /* badge cukup tak muncul bila gagal */ })
+    return () => { alive = false }
+  }, [])
 
   // Mobile: pemilih portal jadi bottom-sheet (hemat ruang & scalable saat portal bertambah).
   // Escape + scroll-lock body selama sheet terbuka — pola sama dgn DemoPickerModal.
@@ -527,6 +544,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 {plan.promo && (
                   <div className="mt-3 inline-flex items-center rounded-lg bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 border border-blue-100">
                     {plan.promo}
+                  </div>
+                )}
+                {/* Badge promo kampanye — hanya tier yg dikampanyekan (Pro), Bulanan,
+                    saat kampanye aktif. Diskon nyata diterapkan di checkout. */}
+                {campaign?.active && billingPeriod === 'monthly' && coreTier === campaign.tier && (
+                  <div className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-green-50 text-green-700 text-xs font-bold px-3 py-1.5 border border-green-100">
+                    <Sparkles size={12} /> Hemat {campaign.discountPct}% — {campaign.months} bulan pertama
                   </div>
                 )}
               </div>

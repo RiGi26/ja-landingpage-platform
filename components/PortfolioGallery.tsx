@@ -27,6 +27,7 @@ const INDUSTRY_META: Record<string, { label: string }> = {
   restaurant: { label: 'Restaurant' },
   klinik: { label: 'Klinik & Beauty' },
   perusahaan: { label: 'Perusahaan' },
+  corporate: { label: 'Perusahaan' },
   sekolah: { label: 'Sekolah / LPK' },
   institusi: { label: 'Institusi' },
   personal_branding: { label: 'Personal Branding' },
@@ -239,9 +240,11 @@ export default function PortfolioGallery() {
       setSites([])
       return
     }
+    // Hanya situs terkurasi (show_in_portfolio=true) — cegah situs uji/internal
+    // (mis. *-test) bocor ke galeri publik. Owner opt-in per situs via kolom flag.
     const url =
       `${SUPABASE_URL}/rest/v1/landing_pages` +
-      `?status=eq.published&select=slug,nama_website,tipe_industri&order=created_at.asc`
+      `?status=eq.published&show_in_portfolio=eq.true&select=slug,nama_website,tipe_industri&order=created_at.asc`
 
     fetch(url, {
       headers: { apikey: SUPABASE_ANON, Authorization: `Bearer ${SUPABASE_ANON}` },

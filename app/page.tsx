@@ -11,6 +11,7 @@ import {
 import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
+import Testimonials from '@/components/Testimonials'
 import DemoPickerModal from '@/components/DemoPickerModal'
 import PortalSystemsGrid from '@/components/PortalSystemsGrid'
 import Image from 'next/image'
@@ -383,7 +384,7 @@ function WebsitePortalPaketSection() {
                         Butuh Dua-duanya?<br className="hidden md:block" /> Ambil Website + Portal Sekaligus.
                     </h2>
                     <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                        Website biar pelanggan menemukan kamu, portal biar operasional jalan otomatis. Satu paket — live dalam hitungan hari.
+                        Website biar pelanggan menemukan kamu, portal biar operasional jalan otomatis. Satu tim, satu proses onboarding, live bareng — nggak usah urus dua vendor.
                     </p>
                 </div>
 
@@ -414,7 +415,9 @@ function WebsitePortalPaketSection() {
                                     </h3>
                                     <p className="text-sm leading-relaxed mb-6 flex-1 text-gray-500">{c.tagline}</p>
 
-                                    {/* Harga jujur & dipisah: sekali vs per bulan */}
+                                    {/* Harga jujur & dipisah: sekali vs per bulan, plus estimasi
+                                        bulan pertama (website sekali + portal 1 bln) — biar pembeli
+                                        tak perlu menghitung sendiri. Murni penjumlahan, tanpa klaim hemat. */}
                                     <div className="rounded-2xl bg-[#F5F5F7] p-4 mb-5 space-y-2.5">
                                         <div className="flex items-baseline justify-between gap-2">
                                             <span className="text-[13px] text-gray-500">Website <span className="text-gray-400">· sekali</span></span>
@@ -424,6 +427,11 @@ function WebsitePortalPaketSection() {
                                         <div className="flex items-baseline justify-between gap-2">
                                             <span className="text-[13px] text-gray-500">Portal <span className="text-gray-400">· /bln</span></span>
                                             <span className="text-[15px] font-bold text-gray-900">mulai {rp(portalFrom)}</span>
+                                        </div>
+                                        <div className="h-px bg-black/5" />
+                                        <div className="flex items-baseline justify-between gap-2">
+                                            <span className="text-[13px] font-semibold text-gray-600">Estimasi bulan pertama</span>
+                                            <span className="text-[15px] font-black text-[#0071E3]">mulai {rp(WEBSITE_FROM_PRICE + portalFrom)}</span>
                                         </div>
                                     </div>
 
@@ -450,7 +458,7 @@ function WebsitePortalPaketSection() {
                 </div>
 
                 <p className="reveal text-center text-sm text-gray-500 mt-8">
-                    Portal lain (Farmasi, Stok &amp; Operasi, Laundry) juga bisa dipaketkan bareng website.{' '}
+                    Portal Laundry juga bisa dipaketkan bareng website.{' '}
                     <a
                         href={waLink(waComboLain)}
                         target="_blank"
@@ -460,6 +468,12 @@ function WebsitePortalPaketSection() {
                         Chat tim kami
                     </a>
                     .
+                </p>
+
+                {/* ROI anchor jujur: bandingkan biaya langganan dgn ongkos admin manual —
+                    membingkai portal sebagai penghematan, bukan pengeluaran. */}
+                <p className="reveal text-center text-[13px] text-gray-400 mt-3 max-w-lg mx-auto">
+                    Langganan portal mulai Rp 149.000/bln — kira-kira setara upah admin sehari, tapi jalan otomatis 24/7 sepanjang bulan.
                 </p>
             </div>
         </section>
@@ -706,6 +720,9 @@ function FaqSection() {
 
 export default function LandingPage() {
   const [demoOpen, setDemoOpen] = useState(false)
+  // Sticky CTA mobile muncul setelah user melewati hero (>700px) — jaga aksi utama
+  // selalu terjangkau tanpa scroll balik ke atas.
+  const [showSticky, setShowSticky] = useState(false)
 
   useEffect(() => {
     const els = document.querySelectorAll('.reveal')
@@ -717,6 +734,13 @@ export default function LandingPage() {
     return () => io.disconnect()
   }, [])
 
+  useEffect(() => {
+    const onScroll = () => setShowSticky(window.scrollY > 700)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -724,8 +748,9 @@ export default function LandingPage() {
       <DemoPickerModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
 
       <main>
-        {/* WhatsApp Sticky Button (Mobile) */}
-        <div className="fixed bottom-6 right-6 z-50 md:hidden">
+        {/* WhatsApp Sticky Button (Mobile) — disembunyikan saat sticky CTA bar muncul
+            supaya tidak menumpuk di pojok yang sama. */}
+        <div className={`fixed bottom-6 right-6 z-50 md:hidden transition-opacity ${showSticky ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <a
             href={waLink(WA_TANYA_UMUM)}
             target="_blank"
@@ -734,6 +759,28 @@ export default function LandingPage() {
             className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
           >
             <MessageCircle size={28} aria-hidden="true" />
+          </a>
+        </div>
+
+        {/* Sticky CTA bar (Mobile) — aksi utama selalu terjangkau setelah scroll. */}
+        <div
+          className={`fixed inset-x-0 bottom-0 z-50 md:hidden p-3 bg-white/95 backdrop-blur border-t border-black/10 flex items-center gap-2.5 transition-transform duration-300 ${showSticky ? 'translate-y-0' : 'translate-y-full'}`}
+          style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
+        >
+          <Link
+            href="/seluruh-layanan"
+            className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#0071E3] text-white font-bold text-sm active:scale-[0.97] transition-transform"
+          >
+            Rakit Website Sekarang <ArrowRight size={16} aria-hidden="true" />
+          </Link>
+          <a
+            href={waLink(WA_TANYA_UMUM)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat via WhatsApp"
+            className="shrink-0 flex items-center justify-center w-12 h-12 bg-[#25D366] text-white rounded-full active:scale-90 transition-transform"
+          >
+            <MessageCircle size={24} aria-hidden="true" />
           </a>
         </div>
 
@@ -746,6 +793,7 @@ export default function LandingPage() {
         <ProofSection />
         <FlagshipSection />
         <PortfolioGallery />
+        <Testimonials />
         <FaqSection />
 
         <section id="harga" className="py-20 lg:py-24 bg-[#070B14] relative overflow-hidden">

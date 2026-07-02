@@ -12,6 +12,7 @@ import Navbar from '@/components/LmsNavbar'
 import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
 import PortfolioGallery from '@/components/PortfolioGallery'
 import Testimonials from '@/components/Testimonials'
+import MobileCardScroller from '@/components/MobileCardScroller'
 import DemoPickerModal from '@/components/DemoPickerModal'
 import PortalSystemsGrid from '@/components/PortalSystemsGrid'
 import Image from 'next/image'
@@ -34,7 +35,7 @@ const WA_TANYA_UMUM = 'Halo Webzoka, saya ingin tanya soal layanan dulu sebelum 
 
 function HeroSection({ onDemo }: { onDemo: () => void }) {
   return (
-    <section className="relative bg-[#F5F5F7] pt-28 pb-16 px-4 overflow-hidden">
+    <section className="relative bg-[#F5F5F7] pt-24 pb-12 lg:pt-28 lg:pb-16 px-4 overflow-hidden">
       {/* Dot grid pattern */}
       <div
         className="absolute inset-0 opacity-[0.35]"
@@ -49,7 +50,7 @@ function HeroSection({ onDemo }: { onDemo: () => void }) {
       <div className="absolute bottom-0 left-0 w-[400px] h-[300px] opacity-20" style={{background: 'radial-gradient(ellipse 60% 60% at 0% 100%, #E0F2FE, transparent)'}} />
       
       <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           <div className="space-y-6 animate-fade-up">
             <p className="text-[11px] text-gray-500 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
@@ -135,51 +136,51 @@ function ProofSection() {
   const PILLARS = [
     {
       icon: Globe2,
-      title: 'Karya yang Bisa Dicek Langsung',
-      desc: 'Produk yang kami pakai sendiri tiap hari — japanarena.id — sudah tayang di domain nyata, bukan mockup. Gulir ke bawah, klik, buka sendiri di tab baru.',
-      cta: 'Lihat karya live ↓',
+      title: 'Karya Bisa Dicek Langsung',
+      desc: 'japanarena.id tayang di domain nyata, bukan mockup — buka & cek sendiri.',
+      cta: 'Lihat karya ↓',
       href: '#portofolio',
     },
     {
       icon: ShieldCheck,
       title: 'Integrasi Resmi, Bukan Tempelan',
-      desc: 'Pembayaran lewat Midtrans, notifikasi lewat WhatsApp Gateway resmi. Bukan akalan, bukan plugin asal jalan.',
+      desc: 'Bayar via Midtrans, notif via WhatsApp Gateway resmi — bukan plugin akalan.',
     },
     {
       icon: BarChart2,
       title: 'Biaya Jujur Sejak Awal',
-      desc: 'Estimasi final muncul di kalkulator sebelum kamu bayar sepeser pun. Biaya renewal pun sudah tertera — tidak ada tagihan kejutan.',
+      desc: 'Estimasi & biaya renewal muncul sebelum kamu bayar — tanpa tagihan kejutan.',
       cta: 'Hitung estimasi →',
       href: '/seluruh-layanan',
     },
   ]
 
   return (
-    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Bukti, Bukan Janji</p>
-          <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
-            Kami Lebih Suka Tunjukkan<br className="hidden md:block" /> daripada Sekadar Berjanji.
+    <section className="bg-white py-12 lg:py-16 px-4 border-t border-black/5">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-6 lg:mb-8">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-2">Bukti, Bukan Janji</p>
+          <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
+            Kami tunjukkan, bukan sekadar janji.
           </h2>
-          <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-            Belum ada ratusan testimoni berbayar di sini. Yang ada: hal-hal yang bisa kamu buktikan sendiri sekarang.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Strip padat: ikon + satu-baris (bukan kartu tinggi) — kurangi tinggi & monoton */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
           {PILLARS.map((p, i) => (
-            <div key={p.title} className={`flex flex-col p-8 rounded-[32px] bg-[#F5F5F7] border border-black/[0.03] apple-shadow reveal reveal-delay-${i + 1}`}>
-              <div className="w-14 h-14 rounded-2xl bg-white apple-shadow flex items-center justify-center mb-6 text-[#0071E3]">
-                <p.icon size={26} />
+            <div key={p.title} className={`flex sm:flex-col gap-3.5 reveal reveal-delay-${i + 1}`}>
+              <div className="w-11 h-11 rounded-xl bg-[#F5F5F7] flex items-center justify-center text-[#0071E3] shrink-0">
+                <p.icon size={22} />
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2 sf-display">{p.title}</h3>
-              <p className="text-sm text-gray-600 leading-relaxed flex-1">{p.desc}</p>
-              {p.cta && p.href && (
-                <a href={p.href} className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors mt-5">
-                  {p.cta}
-                </a>
-              )}
+              <div className="min-w-0">
+                <h3 className="text-[15px] font-bold text-gray-900 mb-1 sf-display">{p.title}</h3>
+                <p className="text-[13px] text-gray-500 leading-relaxed">{p.desc}</p>
+                {p.cta && p.href && (
+                  <a href={p.href} className="inline-flex items-center gap-1 text-[13px] font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors mt-1.5">
+                    {p.cta}
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
@@ -269,9 +270,9 @@ function SegmenSection() {
     ]
 
     return (
-        <section id="segmen" className="bg-white py-16 lg:py-24 px-4">
+        <section id="segmen" className="bg-white py-12 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
-                <div className="reveal text-center mb-10">
+                <div className="reveal text-center mb-6 lg:mb-10">
                     <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Kamu</p>
                     <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
                         Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
@@ -374,9 +375,9 @@ function WebsitePortalPaketSection() {
     const waComboLain = 'Halo Webzoka, saya mau tanya paket Website + Portal (bundling website & sistem).'
 
     return (
-        <section id="paket-combo" className="bg-white py-16 lg:py-24 px-4">
+        <section id="paket-combo" className="bg-white py-12 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
-                <div className="reveal text-center mb-10">
+                <div className="reveal text-center mb-6 lg:mb-10">
                     <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 inline-flex items-center gap-2">
                         <LayoutGrid size={14} /> Paket Lengkap
                     </p>
@@ -388,16 +389,12 @@ function WebsitePortalPaketSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {WEBSITE_PORTAL_COMBOS.map((c, i) => {
+                <MobileCardScroller desktopGrid="md:grid-cols-3" hint="Geser untuk lihat paket lain →">
+                    {WEBSITE_PORTAL_COMBOS.map((c) => {
                         const ComboIcon = c.icon
                         const portalFrom = PORTAL_START_PRICE[c.portalId] ?? 0
                         return (
-                            <div
-                                key={c.id}
-                                className="reveal flex"
-                                style={{ transitionDelay: `${i * 70}ms` }}
-                            >
+                            <div key={c.id} className="flex w-full">
                                 <div className="group flex flex-col w-full p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]">
                                     {/* Ikon combo: Website (Globe2) + Portal */}
                                     <div className="flex items-center gap-2 mb-6">
@@ -455,7 +452,7 @@ function WebsitePortalPaketSection() {
                             </div>
                         )
                     })}
-                </div>
+                </MobileCardScroller>
 
                 <p className="reveal text-center text-sm text-gray-500 mt-8">
                     Portal Laundry juga bisa dipaketkan bareng website.{' '}
@@ -488,9 +485,9 @@ function GlobalFeatures() {
     ]
 
     return (
-        <section id="fitur" className="bg-[#F5F5F7] py-16 lg:py-24 px-4">
+        <section id="fitur" className="bg-[#F5F5F7] py-12 lg:py-24 px-4">
             <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                     {FEATURES.map((f, i) => (
                         <div key={f.title} className={`flex flex-col items-center text-center group reveal reveal-delay-${i + 1}`}>
                             <div className="w-16 h-16 bg-white rounded-3xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-105 transition-transform">
@@ -521,32 +518,32 @@ function TrustSection() {
     ]
 
     return (
-        <section className="bg-[#F5F5F7] py-16 lg:py-20 px-4 border-t border-black/5">
+        <section className="bg-[#F5F5F7] py-12 lg:py-20 px-4 border-t border-black/5">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-10">
+                <div className="text-center mb-6 lg:mb-10">
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
                     <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">Pesan Senin, Website Rilis Jumat —<br className="hidden md:block" /> Tanpa Kamu Harus Ngerti Coding</h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 mb-10 lg:mb-16">
                     {STEPS.map((s, i) => (
-                        <div key={i} className={`relative p-8 rounded-[40px] bg-white border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
+                        <div key={i} className={`relative p-6 rounded-[28px] bg-white border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
                             <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
-                            <div className="w-14 h-14 bg-[#F5F5F7] rounded-lg flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-110 transition-transform">
-                                <s.i size={28} />
+                            <div className="w-12 h-12 bg-[#F5F5F7] rounded-lg flex items-center justify-center mb-4 text-[#0071E3] group-hover:scale-110 transition-transform">
+                                <s.i size={24} />
                             </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3">{s.t}</h3>
+                            <h3 className="text-lg font-bold text-gray-900 mb-2">{s.t}</h3>
                             <p className="text-sm text-gray-500 leading-relaxed">{s.d}</p>
                             {'extra' in s && <p className="text-sm text-gray-500 mt-1">{(s as { extra: string }).extra}</p>}
                         </div>
                     ))}
                 </div>
 
-                <div className="pt-16 border-t border-black/5">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="pt-10 lg:pt-16 border-t border-black/5">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 lg:gap-8">
                         {BADGES.map((b, i) => (
                             <div key={i} className="flex flex-col items-center text-center">
-                                <div className="w-10 h-10 rounded-full bg-blue-50 text-[#0071E3] flex items-center justify-center mb-4">
+                                <div className="w-10 h-10 rounded-full bg-blue-50 text-[#0071E3] flex items-center justify-center mb-2.5">
                                     <b.i size={20} />
                                 </div>
                                 <h4 className="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-1">{b.t}</h4>
@@ -570,9 +567,9 @@ function FlagshipSection() {
     { value: '5.0', label: 'Rating siswa' },
   ]
   return (
-    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
+    <section className="bg-white py-12 lg:py-20 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-6 lg:mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
             <Star size={13} className="fill-[#0071E3]" /> Karya Andalan Kami
           </p>
@@ -682,23 +679,33 @@ function FaqSection() {
   ]
 
   return (
-    <section className="bg-white py-16 lg:py-20 px-4 border-t border-black/5">
+    <section className="bg-white py-12 lg:py-20 px-4 border-t border-black/5">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 lg:mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
           <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">
             Pertanyaan yang Sering Ditanya
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Accordion (tertutup default) — hemat scroll besar di mobile & desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
           {FAQS.map((faq, i) => (
-            <div key={i} className="bg-[#F5F5F7] rounded-[24px] p-8 border border-black/[0.03]">
-              <h3 className="text-base font-bold text-gray-900 mb-3">{faq.q}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{faq.a}</p>
-            </div>
+            <details
+              key={i}
+              className="group bg-[#F5F5F7] rounded-2xl border border-black/[0.03] [&_summary::-webkit-details-marker]:hidden"
+            >
+              <summary className="flex items-center justify-between gap-3 cursor-pointer list-none p-5 lg:p-6">
+                <h3 className="text-[15px] font-bold text-gray-900">{faq.q}</h3>
+                <ChevronRight
+                  size={18}
+                  className="shrink-0 text-gray-400 transition-transform duration-300 group-open:rotate-90"
+                />
+              </summary>
+              <p className="px-5 lg:px-6 pb-5 lg:pb-6 -mt-1 text-sm text-gray-500 leading-relaxed">{faq.a}</p>
+            </details>
           ))}
         </div>
-        <div className="text-center mt-10">
+        <div className="text-center mt-8 lg:mt-10">
           <p className="text-sm text-gray-600 font-medium">
             Masih ada pertanyaan?{' '}
             <a
@@ -796,7 +803,7 @@ export default function LandingPage() {
         <Testimonials />
         <FaqSection />
 
-        <section id="harga" className="py-20 lg:py-24 bg-[#070B14] relative overflow-hidden">
+        <section id="harga" className="py-14 lg:py-24 bg-[#070B14] relative overflow-hidden">
           {/* Background mesh */}
           <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)'}} />
           <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(ellipse 60% 60% at 80% 80%, #3B82F6, transparent)'}} />

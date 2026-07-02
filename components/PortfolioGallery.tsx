@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { ExternalLink, ArrowRight, Globe, Loader2, GraduationCap } from 'lucide-react'
 import { WB_URL as STUDIO_URL } from '@/constants/site'
+import MobileCardScroller from '@/components/MobileCardScroller'
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? ''
 const SUPABASE_ANON = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ''
@@ -258,14 +259,14 @@ export default function PortfolioGallery() {
   const showWebsite = filter === 'all' || filter === 'website'
 
   return (
-    <section id="portofolio" className="bg-[#F5F5F7] py-24 lg:py-32 px-4">
+    <section id="portofolio" className="bg-[#F5F5F7] py-14 lg:py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 lg:mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 flex items-center justify-center gap-2">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
             Live Sekarang
           </p>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
             Karya Kami yang Sudah Live — <span className="text-[#0071E3]">Bisa Dicek Langsung</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mt-5 font-medium">
@@ -275,7 +276,7 @@ export default function PortfolioGallery() {
         </div>
 
         {/* Filter tab */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div className="flex flex-wrap justify-center gap-2 mb-6 lg:mb-8">
           {FILTERS.map((f) => (
             <button
               key={f.key}
@@ -293,8 +294,8 @@ export default function PortfolioGallery() {
           ))}
         </div>
 
-        {/* Gallery */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-busy={sites === null}>
+        {/* Gallery — mobile: carousel geser + dot; desktop: grid */}
+        <MobileCardScroller desktopGrid="md:grid-cols-2 lg:grid-cols-3" hint="Geser untuk lihat karya lain →">
           {showWebsite && sites === null && [0, 1, 2].map((i) => <SkeletonCard key={i} />)}
           {showWebsite && sites !== null && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
           {showWebsite && sites !== null && clientSites.length === 0 && <EmptyClientCard />}
@@ -303,14 +304,14 @@ export default function PortfolioGallery() {
           <AcademyCard />
 
           {filter === 'portal' && <PortalDemoCard />}
-        </div>
+        </MobileCardScroller>
 
         <p className="text-sm text-gray-500 text-center mt-6 italic">
           Semua website di atas bisa kamu buka sekarang di browser — bukan mockup, bukan demo internal.
         </p>
 
         {/* CTA */}
-        <div className="text-center mt-14 space-y-3">
+        <div className="text-center mt-10 lg:mt-14 space-y-3">
           <a
             href="/seluruh-layanan"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"

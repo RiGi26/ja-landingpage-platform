@@ -9,13 +9,13 @@ export default function Testimonials() {
   if (items.length === 0) return null
 
   return (
-    <section id="testimoni" className="bg-white py-24 lg:py-32 px-4">
+    <section id="testimoni" className="bg-white py-14 lg:py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="reveal text-center mb-12">
+        <div className="reveal text-center mb-6 lg:mb-10">
           <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">
             Kata Mereka
           </p>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
             Yang Sudah Jalan Bareng Kami
           </h2>
         </div>

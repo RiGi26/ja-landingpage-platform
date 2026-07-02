@@ -14,13 +14,11 @@ type Site = {
   tipe_industri: string | null
 }
 
-type Family = 'website' | 'portal'
-type Filter = 'all' | Family
-
-const FILTERS: { key: Filter; label: string }[] = [
-  { key: 'all', label: 'Semua' },
-  { key: 'website', label: 'Website' },
-  { key: 'portal', label: 'Portal & Sistem' },
+// Statistik flagship japanarena.id (produk milik kami sendiri) — angka bisa dicek.
+const JA_STATS = [
+  { value: '96%', label: 'Lulus JLPT N3' },
+  { value: '200+', label: 'Siswa aktif' },
+  { value: '5.0', label: 'Rating siswa' },
 ]
 
 const INDUSTRY_META: Record<string, { label: string }> = {
@@ -42,6 +40,14 @@ function metaFor(tipe: string | null) {
   return { label: 'Website Custom' }
 }
 
+// Klien yang situsnya tersambung ke Portal (bukan website saja) — tampilkan
+// "Website + Portal X" seperti japanarena, bukan sekadar label industri.
+const PORTAL_CLIENT_LABEL: Record<string, string> = {
+  'bakso-tini': 'Website + Portal Operasi',
+  'mamazafran-food': 'Website + Portal Operasi',
+  'kamy-physio': 'Website + Portal Klinik',
+}
+
 // Badge "Live" memakai dot SVG-style (bukan emoji) — konsisten & accessible.
 function LiveBadge() {
   return (
@@ -53,7 +59,8 @@ function LiveBadge() {
 
 function PortfolioCard({ site }: { site: Site }) {
   const [loaded, setLoaded] = useState(false)
-  const meta = metaFor(site.tipe_industri)
+  const portalLabel = PORTAL_CLIENT_LABEL[site.slug]
+  const sublabel = portalLabel ?? metaFor(site.tipe_industri).label
   const liveUrl = `${STUDIO_URL}/${site.slug}`
 
   return (
@@ -109,7 +116,7 @@ function PortfolioCard({ site }: { site: Site }) {
       {/* Footer info */}
       <div className="px-5 py-4">
         <h3 className="text-sm font-bold text-gray-900 truncate">{site.nama_website}</h3>
-        <span className="text-xs text-gray-600">{meta.label}</span>
+        <span className={`text-xs ${portalLabel ? 'text-[#0071E3] font-semibold' : 'text-gray-600'}`}>{sublabel}</span>
         <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">{site.slug}.webzoka.com</p>
       </div>
     </a>
@@ -143,73 +150,43 @@ function SkeletonCard() {
   )
 }
 
-// japanarena.id — karya andalan kami sendiri (LMS), tampil di tab Website + Portal.
-function AcademyCard() {
+// Highlight flagship: japanarena.id = produk (Website + Portal LMS) milik Japan
+// Arena sendiri, dipakai tiap hari. Menggantikan FlagshipSection lama — angka bisa
+// dicek, jadi lead-in galeri sekaligus bukti "website + sistem jadi satu".
+function FlagshipHighlight() {
   return (
-    <a
-      href="https://www.japanarena.id"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative group flex flex-col rounded-[28px] bg-white border border-black/[0.04] apple-shadow overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-    >
-      <LiveBadge />
-      {/* Browser chrome */}
-      <div className="bg-gray-50 px-4 py-3 flex items-center gap-2.5 border-b border-black/5">
-        <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-400/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-400/70" />
-        </div>
-        <div className="flex-1 mx-1">
-          <div className="bg-white border border-black/5 rounded-md px-3 py-1 text-[10px] text-gray-500 font-mono text-center truncate">
-            www.japanarena.id
+    <div className="mb-8 lg:mb-10 rounded-[28px] overflow-hidden border border-black/[0.04] bg-gradient-to-br from-blue-900 to-indigo-900 text-white">
+      <div className="p-6 sm:p-8 flex flex-col md:flex-row md:items-center gap-6">
+        <div className="flex-1 min-w-0">
+          <p className="text-[11px] font-bold uppercase tracking-widest text-blue-200 mb-2 flex items-center gap-2">
+            <GraduationCap size={14} /> Kami Bangun. Kami Pakai Sendiri.
+          </p>
+          <h3 className="text-lg sm:text-xl font-black sf-display-heavy leading-tight">
+            japanarena.id — Website + Portal LMS milik kami
+          </h3>
+          <p className="text-sm text-blue-100/80 leading-relaxed mt-2 max-w-xl">
+            Sekolah bahasa Jepang online kami: website tampil di Google, sistemnya ngurus pendaftaran,
+            kelas, ujian, sampai sertifikat — jalan tiap hari buat ratusan siswa. Sistem yang sama kami rakit buat kamu.
+          </p>
+          <div className="flex gap-6 mt-5">
+            {JA_STATS.map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl sm:text-3xl font-black sf-display-heavy leading-none">{s.value}</div>
+                <div className="text-[11px] text-blue-200 font-medium mt-1.5 leading-snug">{s.label}</div>
+              </div>
+            ))}
           </div>
         </div>
-        <ExternalLink size={12} className="text-gray-400 group-hover:text-[#0071E3] transition-colors shrink-0" />
+        <a
+          href="https://www.japanarena.id"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white text-gray-900 font-bold rounded-full transition-all hover:bg-blue-50 active:scale-[0.96] shadow-lg"
+        >
+          Buka japanarena.id <ExternalLink size={16} />
+        </a>
       </div>
-      {/* Preview */}
-      <div className="relative w-full aspect-[4/3] overflow-hidden bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center">
-        <div className="text-center px-6">
-          <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mx-auto mb-3">
-            <GraduationCap size={26} className="text-white" />
-          </div>
-          <p className="text-white font-black text-lg">Japan Arena Academy</p>
-          <p className="text-blue-200 text-sm mt-1">Sistem Pelatihan Bahasa Jepang</p>
-        </div>
-        <div className="absolute inset-0 bg-[#0071E3]/0 group-hover:bg-[#0071E3]/15 transition-all duration-300 flex items-center justify-center">
-          <span className="bg-white text-gray-900 font-black text-xs px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <ExternalLink size={13} /> Buka Website Live
-          </span>
-        </div>
-      </div>
-      {/* Footer info */}
-      <div className="px-5 py-4">
-        <h3 className="text-sm font-bold text-gray-900 truncate">Japan Arena Academy</h3>
-        <span className="text-xs text-gray-600">Website + Portal LMS</span>
-        <p className="text-[10px] text-gray-500 font-mono mt-1 truncate">www.japanarena.id</p>
-      </div>
-    </a>
-  )
-}
-
-// CTA untuk portal lain yang baru tersedia sebagai demo (jujur: bukan klien live).
-function PortalDemoCard() {
-  return (
-    <a
-      href="/seluruh-layanan#segmen"
-      className="flex flex-col items-center justify-center text-center rounded-[28px] border-2 border-dashed border-[#0071E3]/20 bg-blue-50/40 p-8 min-h-[260px] transition-colors hover:bg-blue-50"
-    >
-      <div className="w-12 h-12 rounded-2xl bg-white apple-shadow flex items-center justify-center mb-4 text-[#0071E3]">
-        <Globe size={22} />
-      </div>
-      <p className="font-bold text-gray-900">Butuh portal lain?</p>
-      <p className="text-sm text-gray-600 mt-1.5 max-w-[15rem]">
-        Klinik, rental, apotek, dan lainnya — lihat demo sistemnya langsung sebelum mulai.
-      </p>
-      <span className="inline-flex items-center gap-1.5 text-[#0071E3] font-bold text-sm mt-4">
-        Lihat demo <ArrowRight size={15} />
-      </span>
-    </a>
+    </div>
   )
 }
 
@@ -234,7 +211,6 @@ function EmptyClientCard() {
 
 export default function PortfolioGallery() {
   const [sites, setSites] = useState<Site[] | null>(null)
-  const [filter, setFilter] = useState<Filter>('all')
 
   useEffect(() => {
     if (!SUPABASE_URL || !SUPABASE_ANON) {
@@ -256,7 +232,6 @@ export default function PortfolioGallery() {
   }, [])
 
   const clientSites = sites ?? []
-  const showWebsite = filter === 'all' || filter === 'website'
 
   return (
     <section id="portofolio" className="bg-[#F5F5F7] py-14 lg:py-24 px-4">
@@ -270,44 +245,23 @@ export default function PortfolioGallery() {
             Karya Kami yang Sudah Live — <span className="text-[#0071E3]">Bisa Dicek Langsung</span>
           </h2>
           <p className="text-lg text-gray-500 max-w-2xl mx-auto mt-5 font-medium">
-            {clientSites.length > 0 ? `Sudah ${clientSites.length} situs klien tayang di domain nyata. ` : ''}
+            {clientSites.length > 0 ? `Sudah ${clientSites.length} bisnis jalan pakai Website + Portal kami. ` : ''}
             Bukan mockup, bukan demo internal — klik kartu mana saja untuk buka langsung di tab baru.
           </p>
         </div>
 
-        {/* Filter tab */}
-        <div className="flex flex-wrap justify-center gap-2 mb-6 lg:mb-8">
-          {FILTERS.map((f) => (
-            <button
-              key={f.key}
-              type="button"
-              onClick={() => setFilter(f.key)}
-              aria-pressed={filter === f.key}
-              className={`min-h-[44px] px-5 rounded-full text-sm font-bold transition-all ${
-                filter === f.key
-                  ? 'bg-[#0071E3] text-white shadow-lg'
-                  : 'bg-white text-gray-600 border border-black/5 apple-shadow hover:text-gray-900'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
+        {/* Flagship kami sendiri sebagai lead-in */}
+        <FlagshipHighlight />
 
         {/* Gallery — mobile: carousel geser + dot; desktop: grid */}
         <MobileCardScroller desktopGrid="md:grid-cols-2 lg:grid-cols-3" hint="Geser untuk lihat karya lain →">
-          {showWebsite && sites === null && [0, 1, 2].map((i) => <SkeletonCard key={i} />)}
-          {showWebsite && sites !== null && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
-          {showWebsite && sites !== null && clientSites.length === 0 && <EmptyClientCard />}
-
-          {/* japanarena.id — selalu tampil (Website + Portal LMS) */}
-          <AcademyCard />
-
-          {filter === 'portal' && <PortalDemoCard />}
+          {sites === null && [0, 1, 2].map((i) => <SkeletonCard key={i} />)}
+          {sites !== null && clientSites.map((site) => <PortfolioCard key={site.slug} site={site} />)}
+          {sites !== null && clientSites.length === 0 && <EmptyClientCard />}
         </MobileCardScroller>
 
         <p className="text-sm text-gray-500 text-center mt-6 italic">
-          Semua website di atas bisa kamu buka sekarang di browser — bukan mockup, bukan demo internal.
+          Semua situs di atas bisa kamu buka sekarang di browser — bukan mockup, bukan demo internal.
         </p>
 
         {/* CTA */}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, FolderOpen, Package, Lightbulb, ChevronDown, X } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, WashingMachine, FolderOpen, Package, Lightbulb, ChevronDown, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
@@ -209,6 +209,46 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         { label: 'Resep / BOM & Produksi', tiers: [false, false, true] },
         { label: 'Perencanaan produksi (MRP)', tiers: [false, false, true] },
         { label: 'SDM & Penggajian', tiers: [false, false, true] },
+        { label: 'Jumlah akun tim', tiers: ['1', '3', 'Tanpa batas'] },
+      ],
+    },
+  },
+  {
+    id: 'laundry',
+    name: 'Portal Laundry',
+    subtitle: 'Manajemen laundry digital',
+    icon: WashingMachine,
+    demoUrl: 'https://laundry.webzoka.com/demo',
+    registerUrl: 'https://laundry.webzoka.com/register',
+    plans: [
+      {
+        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
+        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
+        feat: ['Semua fitur paket Pro', 'SDM & Penggajian', 'Branding sendiri (white-label)', 'Staf tanpa batas', 'Antar-jemput & saldo pelanggan', 'Tanpa kartu kredit'],
+      },
+      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk laundry yang baru mulai rapikan order.', feat: ['Order laundry (kiloan & satuan) + timbang', 'Tier kecepatan + ETA (Reguler/Express/Kilat)', 'Status proses cuci (diterima → selesai)', 'Label & QR per kantong + scanner', 'Antar-jemput & saldo pelanggan', 'Notifikasi WhatsApp otomatis', '1 akun admin'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk laundry yang butuh kontrol keuangan.', feat: ['Semua fitur Starter', 'Laporan & keuangan (omzet, arus kas, biaya)', 'Sampai 3 akun tim & hak akses'], popular: true },
+      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk laundry dengan tim & multi-staf.', feat: ['Semua fitur Growth', 'SDM & Penggajian', 'Branding sendiri (white-label)', 'Staf tanpa batas', 'Prioritas dukungan teknis'] },
+    ],
+    // Fitur laundry = jasa: modul stok/BOM/MRP/supplier warisan stock DISEMBUNYIKAN (tak diiklankan).
+    // Diferensiasi jujur: Starter = semua operasi laundry · Growth = +laporan/keuangan · Pro = +SDM+white-label.
+    // Self-checkout BELUM wired (billing masih tag 'stock' + paket laundry belum di Core) → laundry TIDAK
+    // masuk subscribeReady → tier berbayar pakai CTA "Chat untuk berlangganan". Flip saat billing di-rewire.
+    featureMatrix: {
+      cols: ['Starter', 'Growth', 'Pro'],
+      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      rows: [
+        { label: 'Order laundry (kiloan & satuan) + timbang', tiers: [true, true, true] },
+        { label: 'Tier kecepatan + ETA (Reguler/Express/Kilat)', tiers: [true, true, true] },
+        { label: 'Status proses cuci (diterima → selesai)', tiers: [true, true, true] },
+        { label: 'Label & QR per kantong + scanner', tiers: [true, true, true] },
+        { label: 'Antar-jemput (pickup & delivery)', tiers: [true, true, true] },
+        { label: 'Pelanggan + saldo/deposit', tiers: [true, true, true] },
+        { label: 'Layanan & harga', tiers: [true, true, true] },
+        { label: 'Notifikasi WhatsApp otomatis', tiers: [true, true, true] },
+        { label: 'Laporan & keuangan (arus kas & biaya)', tiers: [false, true, true] },
+        { label: 'SDM & penggajian', tiers: [false, false, true] },
+        { label: 'Branding sendiri (white-label)', tiers: [false, false, true] },
         { label: 'Jumlah akun tim', tiers: ['1', '3', 'Tanpa batas'] },
       ],
     },
@@ -633,6 +673,12 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
               <Package size={15} className="mt-0.5 shrink-0 text-gray-500" />
               <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Setelah trial, pilih Starter, Growth, atau Pro. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.</span>
+            </p>
+          )}
+          {activeTab === 'laundry' && (
+            <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
+              <WashingMachine size={15} className="mt-0.5 shrink-0 text-gray-500" />
+              <span><span className="font-semibold text-gray-700">Baru diluncurkan.</span> Mulai gratis dari Demo atau Trial 14 hari; aktivasi langganan dibantu tim kami via WhatsApp.</span>
             </p>
           )}
           <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">

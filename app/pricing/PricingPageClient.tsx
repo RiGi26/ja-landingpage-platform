@@ -177,17 +177,17 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         feat: ['Semua fitur paket Pro', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim', 'Akun & hak akses tim tanpa batas', 'Tanpa kartu kredit'],
       },
       {
-        tier: 'Starter', price: 199000, priceYearly: 1990000, priceLabel: '199rb', cta: 'Pilih Starter',
+        tier: 'Starter', price: 199000, priceYearly: 1990000, priceLabel: '199rb',
         desc: 'Untuk mulai rapikan pesanan & pembayaran harian.',
         feat: ['Dashboard ringkasan omzet & pesanan harian', 'Kelola pesanan (status: menunggu → dikirim)', 'Invoice & label pengiriman otomatis', 'Notifikasi WhatsApp ke pelanggan otomatis', 'Manajemen produk & katalog', 'CRM pelanggan (riwayat + segmen)', 'Kode promo & diskon', '1 akun admin'],
       },
       {
-        tier: 'Growth', price: 399000, priceYearly: 3990000, priceLabel: '399rb', popular: true, cta: 'Pilih Growth',
+        tier: 'Growth', price: 399000, priceYearly: 3990000, priceLabel: '399rb', popular: true,
         desc: 'Untuk yang sudah rutin restock & butuh kontrol stok.',
         feat: ['Semua fitur Starter', 'Stok & lot tracking + stok opname', 'Pemantauan kadaluarsa (expiry monitoring)', 'Manajemen pemasok (purchase order)', 'Laporan keuangan & arus kas otomatis', 'Sampai 3 akun tim & hak akses', 'Verifikasi pembayaran manual & COD'],
       },
       {
-        tier: 'Pro', price: 899000, priceYearly: 8990000, priceLabel: '899rb', cta: 'Pilih Pro',
+        tier: 'Pro', price: 899000, priceYearly: 8990000, priceLabel: '899rb',
         desc: 'Untuk produksi skala besar & tim yang berkembang.',
         feat: ['Semua fitur Growth', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim produksi', 'Akun & hak akses tim tanpa batas', 'Konfigurasi & white-label penuh', 'Prioritas dukungan teknis'],
       },

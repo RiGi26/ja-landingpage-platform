@@ -232,8 +232,8 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     ],
     // Fitur laundry = jasa: modul stok/BOM/MRP/supplier warisan stock DISEMBUNYIKAN (tak diiklankan).
     // Diferensiasi jujur: Starter = semua operasi laundry · Growth = +laporan/keuangan · Pro = +SDM+white-label.
-    // Self-checkout BELUM wired (billing masih tag 'stock' + paket laundry belum di Core) → laundry TIDAK
-    // masuk subscribeReady → tier berbayar pakai CTA "Chat untuk berlangganan". Flip saat billing di-rewire.
+    // Self-checkout WIRED 2026-07-05 (billing tag 'laundry' + paket laundry di Core) → laundry masuk
+    // subscribeReady → tier berbayar pakai CTA "Mulai berlangganan" (register?intent=subscribe).
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
       note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
@@ -546,13 +546,15 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             // Tier tampilan → tier Core (enum), seragam semua portal:
             // Starter→starter, Growth→pro, Pro→enterprise.
             const coreTier = coreTierOf(plan.tier)
-            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik + Farmasi + Rental).
+            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik + Farmasi + Rental + Laundry).
             // Rental: register→provision Core→direct-pay Snap→sync (UAT E2E PASS 2026-07-02, platform 'rental').
+            // Laundry: register→provision Core (platform 'laundry')→billing→Snap→sync (wired 2026-07-05).
             const subscribeReady =
               currentPlatform.id === 'lms' ||
               currentPlatform.id === 'clinic' ||
               currentPlatform.id === 'pharmacy' ||
               currentPlatform.id === 'rental' ||
+              currentPlatform.id === 'laundry' ||
               isStock
             const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
             const ctaHref = isFreeCta
@@ -678,7 +680,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {activeTab === 'laundry' && (
             <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
               <WashingMachine size={15} className="mt-0.5 shrink-0 text-gray-500" />
-              <span><span className="font-semibold text-gray-700">Baru diluncurkan.</span> Mulai gratis dari Demo atau Trial 14 hari; aktivasi langganan dibantu tim kami via WhatsApp.</span>
+              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Coba dulu dari Demo atau langsung mulai trial; setelah trial, pilih Starter, Growth, atau Pro dan bayar aman via Midtrans.</span>
             </p>
           )}
           <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">

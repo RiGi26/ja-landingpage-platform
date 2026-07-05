@@ -6,7 +6,7 @@ import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
 
-type Plan = { tier: string; price: number; priceYearly?: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean; priceLabel?: string }
+type Plan = { tier: string; price: number; priceYearly?: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean }
 // Tabel banding fitur per-paket. Hanya isi untuk portal yang gating tier-nya
 // SUDAH ditegakkan app (mis. Stock) — jangan jual beda fitur yang belum nyata.
 // `tiers` sejajar dgn `cols`: boolean = centang/strip, string = nilai (mis. "3", "Tanpa batas").
@@ -177,17 +177,17 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         feat: ['Semua fitur paket Pro', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim', 'Akun & hak akses tim tanpa batas', 'Tanpa kartu kredit'],
       },
       {
-        tier: 'Starter', price: 199000, priceYearly: 1990000, priceLabel: '199rb',
+        tier: 'Starter', price: 199000, priceYearly: 1990000,
         desc: 'Untuk mulai rapikan pesanan & pembayaran harian.',
         feat: ['Dashboard ringkasan omzet & pesanan harian', 'Kelola pesanan (status: menunggu → dikirim)', 'Invoice & label pengiriman otomatis', 'Notifikasi WhatsApp ke pelanggan otomatis', 'Manajemen produk & katalog', 'CRM pelanggan (riwayat + segmen)', 'Kode promo & diskon', '1 akun admin'],
       },
       {
-        tier: 'Growth', price: 399000, priceYearly: 3990000, priceLabel: '399rb', popular: true,
+        tier: 'Growth', price: 399000, priceYearly: 3990000, popular: true,
         desc: 'Untuk yang sudah rutin restock & butuh kontrol stok.',
         feat: ['Semua fitur Starter', 'Stok & lot tracking + stok opname', 'Pemantauan kadaluarsa (expiry monitoring)', 'Manajemen pemasok (purchase order)', 'Laporan keuangan & arus kas otomatis', 'Sampai 3 akun tim & hak akses', 'Verifikasi pembayaran manual & COD'],
       },
       {
-        tier: 'Pro', price: 899000, priceYearly: 8990000, priceLabel: '899rb',
+        tier: 'Pro', price: 899000, priceYearly: 8990000,
         desc: 'Untuk produksi skala besar & tim yang berkembang.',
         feat: ['Semua fitur Growth', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim produksi', 'Akun & hak akses tim tanpa batas', 'Konfigurasi & white-label penuh', 'Prioritas dukungan teknis'],
       },
@@ -586,11 +586,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 )}
                 <div className="flex flex-wrap items-baseline gap-x-1.5">
                   <span className="text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
-                    {price === 0
-                      ? 'Gratis'
-                      : (billingPeriod === 'monthly' && plan.priceLabel)
-                        ? `Rp ${plan.priceLabel}`
-                        : `Rp ${price.toLocaleString('id-ID')}`}
+                    {price === 0 ? 'Gratis' : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
                     <span className="text-gray-400 text-sm font-medium">/{billingPeriod === 'yearly' ? 'tahun' : 'bulan'}</span>

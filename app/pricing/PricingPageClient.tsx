@@ -366,7 +366,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
         </div>
         {/* Desktop: grid penuh. Mobile: dirampingkan jadi tombol + bottom-sheet di bawah. */}
-        <div role="tablist" aria-label="Pilih platform" className="hidden md:grid sm:grid-cols-3 lg:grid-cols-5 gap-2 mb-4">
+        <div role="tablist" aria-label="Pilih platform" className="hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4">
           {PLATFORMS.map(p => {
             const isActive = activeTab === p.id
             return (
@@ -377,7 +377,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               aria-selected={isActive}
               aria-controls={`tabpanel-${p.id}`}
               onClick={() => setActiveTab(p.id)}
-              className={`flex flex-col items-start justify-center text-left h-full min-h-[64px] px-4 py-3 rounded-2xl border font-bold text-sm transition-all ${
+              className={`flex flex-col items-start justify-center text-left h-full min-h-[64px] px-4 py-3 rounded-2xl border font-bold text-sm transition-all md:basis-[calc(33.333%-6px)] lg:basis-[calc(20%-6px)] md:grow-0 md:shrink-0 ${
                 isActive
                 ? 'bg-blue-600 text-white border-blue-600 shadow-lg ring-2 ring-blue-200'
                 : 'bg-white text-gray-700 border-gray-100 hover:bg-gray-50 hover:border-gray-200'

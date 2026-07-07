@@ -194,7 +194,7 @@ function SegmenSection() {
       {
         icon: Globe2,
         label: 'Katalog Website',
-        description: 'Pelanggan kamu sedang cari bisnis seperti milik kamu di Google sekarang. Apakah kamu muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
+        description: 'Pelanggan kamu sedang cari bisnis seperti milik kamu di Google sekarang. Apakah kamu muncul? Website dengan sistem booking dan katalog — semua kontennya bisa kamu edit sendiri kapan saja lewat dashboard, tanpa coding. Live dalam 3–5 hari. Mulai Rp 600.000.',
         cta: 'Mulai Rakit Website',
         href: '/seluruh-layanan',
         color: 'text-blue-600',

@@ -25,11 +25,11 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Siswa & Kursus', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'Unlimited Siswa', 'Multi-Pengajar', 'Sertifikat Kelulusan', 'Priority Support', 'Tanpa kartu kredit'],
       },
-      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', '10 Kursus', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa', 'Portal Wali Murid'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Unlimited Kursus', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
-      { tier: 'Pro', price: 899000, priceYearly: 8990000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Custom Domain', 'Laporan Progres Angkatan', 'Priority Support'] },
+      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', 'Mock Test JLPT', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa', 'Portal Wali Murid'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Keuangan & Invoice', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
+      { tier: 'Pro', price: 899000, priceYearly: 8990000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Multi-Pengajar', 'Blog / Artikel Publik', 'Priority Support'] },
     ],
     // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
     // + Fase A.1 (multi-pengajar, sertifikat, kuota siswa) — 2026-06-26.

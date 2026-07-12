@@ -15,7 +15,8 @@ const waLink = (msg?: string) => {
 
 const NAV_LINKS = [
   { label: 'Buat Website', href: '/seluruh-layanan' },
-  { label: 'Sistem Bisnis', href: '/pricing' },
+  // "Sistem Bisnis" saja tidak mengomunikasikan bahwa ini halaman harga.
+  { label: 'Harga Sistem Bisnis', href: '/pricing' },
 ]
 
 export default function LmsNavbar() {
@@ -104,7 +105,7 @@ export default function LmsNavbar() {
 
             <button
               onClick={() => setOpen(o => !o)}
-              className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
+              className="md:hidden w-11 h-11 flex items-center justify-center rounded-xl hover:bg-gray-100 transition-colors"
               aria-label={open ? 'Tutup menu' : 'Buka menu'}
               aria-expanded={open}
             >
@@ -115,30 +116,57 @@ export default function LmsNavbar() {
 
         {/* Mobile Drawer */}
         {open && (
-          <div className="md:hidden absolute top-full left-0 w-full border-t border-black/5 bg-white shadow-2xl p-6 flex flex-col gap-4 animate-fade-in-down">
-            <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-1">
-              Home
-            </Link>
-            {NAV_LINKS.map(l => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="block text-lg font-bold text-gray-900 py-1"
-              >
-                {l.label}
+          <>
+            {/* Scrim — batas menu vs konten halaman, sekaligus area tap untuk menutup.
+                Absolute (bukan fixed): header ber-backdrop-blur jadi containing block. */}
+            <div
+              className="md:hidden absolute top-full left-0 w-full h-screen bg-black/40"
+              onClick={() => setOpen(false)}
+              aria-hidden="true"
+            />
+            <div className="md:hidden absolute top-full left-0 w-full border-t border-black/5 bg-white shadow-2xl p-6 flex flex-col gap-2 animate-fade-in-down">
+              <Link href="/" onClick={() => setOpen(false)} className="block text-lg font-bold text-gray-900 py-2.5">
+                Home
               </Link>
-            ))}
+              {NAV_LINKS.map(l => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block text-lg font-bold text-gray-900 py-2.5"
+                >
+                  {l.label}
+                </Link>
+              ))}
 
-            <div className="pt-4 border-t border-black/5">
-              <button
-                onClick={() => { setOpen(false); setIsPickerOpen(true) }}
-                className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-blue-600 text-white font-black transition-transform active:scale-[0.96]"
-              >
-                <LogIn size={18} /> Masuk Layanan
-              </button>
+              {/* CTA konversi — drawer sebelumnya hanya menawarkan login (pelanggan lama),
+                  tak ada jalan bagi pengunjung baru untuk mulai. */}
+              <div className="pt-4 mt-2 border-t border-black/5 flex flex-col gap-2.5">
+                <a
+                  href={waLink('Halo Webzoka, saya ingin konsultasi soal website / sistem untuk bisnis saya.')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-[#0071E3] text-white font-black transition-transform active:scale-[0.96]"
+                >
+                  <MessageCircle size={18} /> Konsultasi Gratis
+                </a>
+                <button
+                  onClick={() => { setOpen(false); setIsPickerOpen(true) }}
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl bg-white text-gray-900 border border-gray-200 font-bold transition-transform active:scale-[0.96]"
+                >
+                  <LogIn size={18} /> Masuk Layanan
+                </button>
+                <a
+                  href={`${WEBSITEBUILDER_URL}/track`}
+                  onClick={() => setOpen(false)}
+                  className="text-center text-sm font-medium text-gray-500 hover:text-gray-700 py-2.5"
+                >
+                  Lacak pesanan →
+                </a>
+              </div>
             </div>
-          </div>
+          </>
         )}
       </header>
 

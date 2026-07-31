@@ -106,7 +106,7 @@ export const WEBSITE_PORTAL_COMBOS: WebsitePortalCombo[] = [
     icon: Boxes,
     color: 'text-indigo-600',
     bg: 'bg-indigo-50',
-    demoHref: 'https://stock.webzoka.com',
+    demoHref: 'https://stock.webzoka.com/demo',
     pricingHref: '/pricing?platform=stock',
   },
 ];

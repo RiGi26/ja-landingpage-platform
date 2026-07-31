@@ -133,7 +133,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     name: 'Portal Travel & Rental',
     subtitle: 'Booking & kelola aset online',
     icon: Bus,
-    demoUrl: 'https://rent.webzoka.com/auth/login',
+    demoUrl: 'https://rent.webzoka.com/demo',
     registerUrl: 'https://rent.webzoka.com/register',
     plans: [
       {

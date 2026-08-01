@@ -28,11 +28,14 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         feat: ['Semua fitur paket Pro', 'Unlimited Siswa', 'Multi-Pengajar', 'Sertifikat Kelulusan', 'Priority Support', 'Tanpa kartu kredit'],
       },
       { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', 'Materi & Sesi Belajar', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa', 'Portal Wali Murid'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Keuangan & Invoice', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live'], popular: true },
-      { tier: 'Pro', price: 899000, priceYearly: 8990000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Multi-Pengajar', 'Blog / Artikel Publik', 'Priority Support'] },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Keuangan & Invoice', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live', 'Remidial (Buku Salah)', 'Ranking & Streak', 'Quiz Dadakan'], popular: true },
+      { tier: 'Pro', price: 899000, priceYearly: 8990000, desc: 'Untuk sekolah & lembaga besar.', feat: ['Unlimited Siswa', 'Sertifikat Kelulusan', 'Multi-Pengajar', 'Blog / Artikel Publik', 'Analitik & Radar Siswa', 'Priority Support'] },
     ],
     // Semua baris gating-nya ditegakkan server: Fase A (laporan/WA/jadwal/keuangan/blog)
     // + Fase A.1 (multi-pengajar, sertifikat, kuota siswa) — 2026-06-26.
+    // + Wave 1 mirror dari japan-arena-lms (2026-08-01): remidial/ranking/quiz
+    // dadakan/insights — gating server ditegakkan di lib/entitlements.ts,
+    // lihat MIRROR_PLAYBOOK.md §7 di ja-lms-platform untuk prosedurnya.
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
       note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
@@ -46,9 +49,13 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
         { label: 'Jadwal kelas live + reminder', tiers: [false, true, true] },
         { label: 'Keuangan & invoice', tiers: [false, true, true] },
+        { label: 'Remidial (Buku Salah + drill)', tiers: [false, true, true] },
+        { label: 'Ranking & streak belajar', tiers: [false, true, true] },
+        { label: 'Quiz dadakan (pop quiz live)', tiers: [false, true, true] },
         { label: 'Multi-pengajar', tiers: [false, false, true] },
         { label: 'Sertifikat kelulusan', tiers: [false, false, true] },
         { label: 'Blog / artikel publik', tiers: [false, false, true] },
+        { label: 'Analitik & radar siswa', tiers: [false, false, true] },
         { label: 'Jumlah siswa aktif', tiers: ['100', '500', 'Tanpa batas'] },
       ],
     },

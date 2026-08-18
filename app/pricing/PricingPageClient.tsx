@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, WashingMachine, FolderOpen, Package, Lightbulb, ChevronDown, X } from 'lucide-react'
+import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, WashingMachine, FolderOpen, Package, Lightbulb, ChevronDown, X, MessageCircle } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/LmsNavbar'
+import SiteFooter from '@/components/SiteFooter'
 
 type Plan = { tier: string; price: number; priceYearly?: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean }
 // Tabel banding fitur per-paket. Hanya isi untuk portal yang gating tier-nya
@@ -342,8 +343,18 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
     setActiveCard(0)
   }, [activeTab])
 
+  // Sticky CTA bar (mobile) — pola sama dgn beranda: aksi utama tetap terjangkau
+  // setelah user scroll jauh dari kartu paket (halaman ini panjang: kartu → matriks → FAQ).
+  const [showSticky, setShowSticky] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setShowSticky(window.scrollY > 600)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
 
       <div className="max-w-6xl mx-auto pt-24 md:pt-32 px-4">
@@ -719,7 +730,9 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 Semua paket berjalan di portal yang sama — kamu hanya membuka modul sesuai kebutuhan.
               </p>
             </div>
-            <div className="overflow-hidden rounded-3xl border border-black/[0.04] bg-white shadow-sm">
+            <div className="relative overflow-hidden rounded-3xl border border-black/[0.04] bg-white shadow-sm">
+              {/* Fade kanan — afordans bahwa tabel masih berlanjut ke samping di layar sempit. */}
+              <div className="md:hidden pointer-events-none absolute top-0 bottom-0 right-0 w-10 bg-gradient-to-l from-white to-transparent z-10" />
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[520px]">
                   <thead>
@@ -763,6 +776,10 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 </div>
               )}
             </div>
+            {/* Hint geser — tanpa ini kolom paket lain tak terlihat sama sekali di 390px. */}
+            <p className="md:hidden mt-3 text-center text-[11px] font-medium text-gray-500">
+              Geser tabel ke samping untuk lihat kolom {currentPlatform.featureMatrix.cols.slice(1).join(' & ')} →
+            </p>
           </div>
         )}
 
@@ -838,6 +855,80 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
              </div>
            ))}
         </div>
+      </div>
+
+      {/* CTA penutup — sebelumnya halaman berhenti di sini tanpa aksi apa pun: setelah
+          selesai baca FAQ satu-satunya jalan konversi adalah scroll balik ke kartu paket. */}
+      <section className="mt-16 md:mt-24 py-14 md:py-20 bg-[#070B14] relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{ backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)' }}
+        />
+        <div className="max-w-3xl mx-auto text-center px-4 relative z-10">
+          <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-5">Mulai Sekarang</p>
+          <h2 className="text-2xl md:text-4xl font-black text-white mb-5 tracking-tight sf-display-heavy leading-[1.15] text-balance">
+            Siap coba {currentPlatform.name}?
+          </h2>
+          <p className="text-gray-400 mb-9 text-base md:text-lg leading-relaxed text-pretty">
+            Trial 14 hari, tanpa kartu kredit. Tidak ada charge otomatis — kamu yang menentukan kapan mulai berlangganan.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+            <Link
+              href={currentPlatform.registerUrl}
+              className="inline-flex items-center justify-center gap-2 bg-[#0071E3] text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-[#005BB5] active:scale-[0.96] transition-all"
+            >
+              Mulai Trial 14 Hari <ArrowRight size={18} />
+            </Link>
+            {currentPlatform.demoUrl && (
+              <Link
+                href={currentPlatform.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-8 py-4 rounded-full font-bold hover:bg-white/20 active:scale-[0.96] transition-all backdrop-blur-sm"
+              >
+                Lihat Demo <ExternalLink size={16} />
+              </Link>
+            )}
+          </div>
+          <p className="text-gray-500 text-sm font-medium mt-6">
+            Masih ragu?{' '}
+            <a
+              href={`https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya masih menimbang paket untuk ${currentPlatform.name}.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0071E3] font-bold hover:underline"
+            >
+              Chat tim kami dulu
+            </a>
+            {' '}— gratis, tanpa script jualan.
+          </p>
+        </div>
+      </section>
+
+      <SiteFooter />
+
+      {/* Sticky CTA bar (mobile) — mengikuti portal yang sedang dipilih di tab. */}
+      <div
+        className={`fixed inset-x-0 bottom-0 z-50 md:hidden p-3 bg-white/95 backdrop-blur border-t border-black/10 flex items-center gap-2.5 transition-transform duration-300 ${
+          showSticky ? 'translate-y-0' : 'translate-y-full'
+        }`}
+        style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
+      >
+        <Link
+          href={currentPlatform.registerUrl}
+          className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#0071E3] text-white font-bold text-sm active:scale-[0.97] transition-transform"
+        >
+          Mulai Trial 14 Hari <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+        <a
+          href={`https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin tanya soal paket ${currentPlatform.name}.`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat via WhatsApp"
+          className="shrink-0 flex items-center justify-center w-12 h-12 bg-[#25D366] text-white rounded-full active:scale-90 transition-transform"
+        >
+          <MessageCircle size={24} aria-hidden="true" />
+        </a>
       </div>
     </div>
   )

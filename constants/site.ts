@@ -3,6 +3,11 @@
 // ubah satu env var — tak perlu menyentuh banyak file. Semua fallback memakai
 // domain produksi saat ini sehingga perilaku tidak berubah bila env belum diisi.
 
+/** Canonical public origin for the corporate information site. */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/+$/, '') ||
+  'https://www.webzoka.com'
+
 /** Basis URL app Website Builder (form /order, /track, preview situs publish). */
 export const WB_URL =
   process.env.NEXT_PUBLIC_WEBSITEBUILDER_URL?.replace(/\/+$/, '') ||

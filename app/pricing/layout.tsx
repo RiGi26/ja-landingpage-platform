@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/constants/site'
 
 export const metadata: Metadata = {
   title: 'Harga Langganan Portal LMS, Klinik, Farmasi, Travel, Operasi (Stock) & Laundry | Webzoka',
@@ -10,11 +11,11 @@ export const metadata: Metadata = {
     'software stok barang', 'sistem inventory ukm', 'aplikasi pesanan dan stok',
     'software laundry', 'aplikasi laundry kiloan', 'kasir laundry',
   ],
-  alternates: { canonical: 'https://www.webzoka.com/pricing' },
+  alternates: { canonical: `${SITE_URL}/pricing` },
   openGraph: {
     title: 'Harga Portal Bisnis — Mulai Rp 149.000/bulan | Webzoka',
     description: 'Trial 14 hari gratis. Bayar tahunan hemat 2 bulan. Tanpa setup fee, tanpa kontrak.',
-    url: 'https://www.webzoka.com/pricing',
+    url: `${SITE_URL}/pricing`,
     type: 'website',
   },
 }

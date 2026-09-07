@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Syne, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import RefCapture from './RefCapture'
+import { SITE_URL } from '@/constants/site'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -29,12 +30,12 @@ export const metadata: Metadata = {
   verification: {
     google: 'demIw8L-D7hiN7YrFATE8fJGPbkamQh9K8pu65FYcDI',
   },
-  metadataBase: new URL('https://www.webzoka.com'),
-  alternates: { canonical: 'https://www.webzoka.com' },
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: SITE_URL },
   openGraph: {
     title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
     description: 'Website bisnis dalam 3–5 hari kerja. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
-    url: 'https://www.webzoka.com',
+    url: SITE_URL,
     siteName: 'Webzoka',
     locale: 'id_ID',
     type: 'website',
@@ -53,8 +54,8 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Webzoka',
-  url: 'https://www.webzoka.com',
-  logo: 'https://www.webzoka.com/images/Icon.png',
+  url: SITE_URL,
+  logo: `${SITE_URL}/images/Icon.png`,
   description: 'Penyedia website bisnis dan portal sistem operasional untuk UKM Indonesia.',
   contactPoint: {
     '@type': 'ContactPoint',
@@ -67,7 +68,7 @@ const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
   name: 'Webzoka',
-  url: 'https://www.webzoka.com',
+  url: SITE_URL,
 }
 
 const homepageFaqSchema = {

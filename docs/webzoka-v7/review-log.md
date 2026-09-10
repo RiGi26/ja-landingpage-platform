@@ -88,3 +88,31 @@
 **Remaining:** No P0/P1/P2 items remain within the approved polish scope. Deferred dependencies remain Hub route approval, attributable proof, renewal/commercial source approval, and route-by-route validation for unsupported demos. The documented left-navigation shell parity is deferred because implementing it would be a structural round outside this polish scope.
 
 **Next review gate:** Chat visual approval of this polish round, plus an explicit decision on whether the existing shell should receive a separate structural left-rail round. No merge or production deployment is authorized by this entry.
+
+## 2026-09-10 — Structural left-navigation shell round
+
+**Status:** Implemented, validated on a new Preview, and ready for Chat visual approval. No merge or production deployment performed.
+
+**Decision:** Replace the V7 public homepage's desktop top-navigation shell with the approved V6-style left-navigation concept while preserving the richer editorial content canvas. Use a persistent 244px rail at desktop, keep Beranda as the active Public default, group navigation into Jelajahi and Pelajari, keep Webzoka Hub pending without a fake URL, and keep WhatsApp consultation visually subordinate in the rail. At mobile sizes, use only a compact brand/menu bar and an accessible drawer.
+
+**Scope completed:** Added the requested sidebar IA: Beranda; Solusi, Webzoka Store, Karya, Harga; Artikel, FAQ, Komitmen Kami; Webzoka Hub with subtle `Segera`; and a quiet consultation action. Existing homepage section order, buyer-facing positioning, Website → Portal → Bundle order, signature section, proof treatment, pricing, FAQ, final CTA, and mobile sticky-CTA behavior were preserved. Because no Artikel route exists, Artikel is visibly unavailable rather than linked to an invented destination. Komitmen Kami uses an honest anchor to the existing trust section.
+
+**Source changes:** `app/page.tsx` and `app/globals.css`. `app/layout.tsx` and `docs/webzoka-v7/visual-blueprint.md` did not require changes. The blueprint already documents the approved left-shell behavior.
+
+**Fresh validation evidence:**
+
+- Local `npx tsc --noEmit`: exit 0.
+- Local `npm run build`: exit 0; all static routes prerendered.
+- `git diff --check`: exit 0.
+- `npm run lint`: unavailable because `next lint` still opens the repository's interactive ESLint setup prompt; no lint configuration was added.
+- New Preview: `https://ja-landingpage-platform-7ooyytzdn-rigi26s-projects.vercel.app`.
+- Deployment: `dpl_C7tFnJHAVj76zyyKJyZ7jBQAB7Tb`, target Preview, status READY.
+- Fresh HTTP checks: `/`, `/seluruh-layanan`, `/pricing/`, `/kebijakan-privasi`, and `/syarat-ketentuan` returned 200.
+- Fresh Stock validation: `https://stock.webzoka.com/demo` returned 200.
+- Desktop browser UAT at `1440 × 900`: rail width 244px; content starts at 244px; Beranda is active; mobile top bar is hidden; one `h1`; no horizontal overflow; zero missing image `alt`; exactly one `Lihat demo Stock` action inside the signature section; every sidebar anchor has a real target; pending Artikel and Hub are not fake links; zero captured console errors or warnings.
+- Mobile browser UAT at `390 × 844`: compact brand/menu bar; 336px drawer; focus moves to its close control; Escape closes the drawer and restores menu focus; navigation closes the drawer by touch; Store navigation reaches `/seluruh-layanan/`; link and button targets measure 44–48px high; no horizontal overflow; Website → Portal → Bundle order is preserved; FAQ expands with its answer visible; reduced-motion CSS is present; zero missing image `alt`; zero captured console errors or warnings.
+- Sticky CTA safety: while the final consultation card is visible, the sticky CTA is hidden with no pointer events and zero overlap.
+
+**Remaining:** No P0, P1, or P2 issue remains inside the approved structural-shell scope. Deferred dependencies remain Hub route approval, Artikel implementation, attributable proof, the final renewal/commercial source, unsupported demo repairs, Store/Hub implementation changes, and any unrelated architecture work.
+
+**Next review gate:** Chat decides whether this left-navigation shell is visually approved or needs another shell round. No merge, production deployment, or automatic next round is authorized by this entry.

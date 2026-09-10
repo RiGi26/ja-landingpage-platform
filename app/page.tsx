@@ -16,7 +16,6 @@ import {
   LayoutDashboard,
   Menu,
   MessageCircle,
-  Quote,
   ShieldCheck,
   Sparkles,
   X,
@@ -328,6 +327,10 @@ function OperationsFrame({ showDemoLink = true }: { showDemoLink?: boolean }) {
 function HeroEvidence() {
   return (
     <div className="v7-hero-evidence" aria-label="Contoh hubungan antara website publik dan sistem operasional">
+      <div className="v7-evidence-caption" aria-hidden="true">
+        <span><b>01</b> Ditemukan</span>
+        <span><b>02</b> Dikelola</span>
+      </div>
       <div className="v7-evidence-note v7-evidence-note-one"><Sparkles size={14} aria-hidden="true" /> pintu depan</div>
       <div className="v7-evidence-paper"><BrowserFrame /></div>
       <div className="v7-evidence-route"><span>ditemukan</span><i aria-hidden="true" /><span>dikelola</span></div>
@@ -342,8 +345,8 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
       <div className="v7-hero-grid v7-container">
         <div className="v7-hero-copy v7-reveal">
           <p className="v7-eyebrow"><span className="v7-eyebrow-line" />Untuk bisnis yang ingin terlihat profesional dan jalan lebih rapi</p>
-          <h1>Website untuk ditemukan. <em>Sistem untuk operasional jalan.</em></h1>
-          <p className="v7-hero-lede">Bangun kepercayaan di depan, rapikan kerja harian di belakang — mulai dari kebutuhan yang paling penting.</p>
+          <h1><span>Website untuk ditemukan.</span> <em>Sistem untuk operasional jalan.</em></h1>
+          <p className="v7-hero-lede">Bangun kepercayaan di depan, rapikan kerja harian di belakang. Mulai dari kebutuhan yang paling penting.</p>
           <div className="v7-proof-row" aria-label="Bukti awal Webzoka">
             <span><b>Mulai Rp600k</b><small>harga awal</small></span>
             <span><b>Siap tayang 3–5 hari</b><small>untuk scope siap review</small></span>
@@ -364,37 +367,75 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
 }
 
 function PainSection() {
-  const rows = [
-    ['Sulit ditemukan', 'Website yang menjelaskan bisnis dengan jelas dan terasa kredibel.'],
-    ['Pesanan dan status tercecer', 'Satu alur operasional dengan langkah berikutnya yang terlihat.'],
-    ['Semua keputusan berhenti di owner', 'Sistem yang bisa dipakai tim secara konsisten.'],
+  const moments = [
+    ['Pagi', 'Pertanyaan pelanggan mulai menumpuk.', 'Harga, stok, jadwal, dan detail layanan dibalas satu per satu dari chat.'],
+    ['Siang', 'Pekerjaan tersebar di banyak tempat.', 'Pesanan ada di WhatsApp, catatan ada di buku, rekap ada di spreadsheet. Tim harus bertanya sebelum bergerak.'],
+    ['Malam', 'Owner masih mencari dan merekap ulang.', 'Waktu untuk melihat arah bisnis habis untuk menyatukan informasi yang tercecer sepanjang hari.'],
   ]
   return (
     <section id="solusi" className="v7-section v7-paper-section">
-      <div className="v7-container v7-pain-grid">
-        <div className="v7-section-intro v7-reveal">
+      <div className="v7-container v7-pain-editorial">
+        <div className="v7-section-intro v7-pain-intro v7-reveal">
           <p className="v7-eyebrow v7-eyebrow-blue">Masalah yang terasa setiap hari</p>
           <h2>Berhenti Jadi Admin di Bisnis Kamu Sendiri.</h2>
-          <p>Bisnis tidak selalu butuh lebih banyak fitur. Sering kali yang dibutuhkan adalah jalur yang lebih jelas, untuk pelanggan dan untuk tim.</p>
+          <p>Bisnis sudah berjalan. Pelanggan sudah datang. Namun terlalu banyak hal masih bergantung pada satu orang yang harus mengingat, membalas, mengecek, lalu merekap semuanya.</p>
+          <p className="v7-pain-pullquote">Yang melelahkan bukan satu pekerjaan besar. Yang melelahkan adalah puluhan pekerjaan kecil yang selalu kembali ke owner.</p>
         </div>
-        <div className="v7-pain-list v7-reveal v7-reveal-delay-1">
-          {rows.map(([pain, outcome], index) => (
-            <div className="v7-pain-row" key={pain}>
-              <span className="v7-pain-index">0{index + 1}</span>
-              <div><strong>{pain}</strong><ArrowRight size={16} aria-hidden="true" /><p>{outcome}</p></div>
-            </div>
+        <div className="v7-day-story v7-reveal v7-reveal-delay-1">
+          <div className="v7-day-story-head"><span>Satu hari dalam alur manual</span><span>WhatsApp · catatan · spreadsheet</span></div>
+          <ol>
+          {moments.map(([moment, title, copy]) => (
+            <li key={moment}>
+              <span className="v7-day-time">{moment}</span>
+              <div><strong>{title}</strong><p>{copy}</p></div>
+            </li>
           ))}
+          </ol>
+          <div className="v7-pain-transition">
+            <span><small>Sebelum</small>Informasi menunggu owner</span>
+            <ArrowRight size={18} aria-hidden="true" />
+            <span><small>Sesudah</small>Pelanggan paham, tim tahu langkah berikut</span>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
+type OfferKind = 'website' | 'portal' | 'bundle'
+
+function OfferProof({ kind }: { kind: OfferKind }) {
+  const flows: Record<OfferKind, { label: string; steps: string[] }> = {
+    website: { label: 'Alur pelanggan', steps: ['Dicari', 'Dipahami', 'Dihubungi'] },
+    portal: { label: 'Alur tim', steps: ['Masuk', 'Terlihat', 'Dilanjutkan'] },
+    bundle: { label: 'Alur utuh', steps: ['Ditemukan', 'Bertanya', 'Ditangani'] },
+  }
+  const flow = flows[kind]
+
+  return (
+    <div className={`v7-offer-proof is-${kind}`} aria-label={`${flow.label}: ${flow.steps.join(', ')}`}>
+      <div className="v7-offer-proof-head">
+        <span>{flow.label}</span>
+        <span>{kind === 'website' ? 'Pintu publik' : kind === 'portal' ? 'Kerja harian' : 'Depan + belakang'}</span>
+      </div>
+      <div className="v7-offer-proof-flow">
+        {flow.steps.map((step, index) => (
+          <div key={step}>
+            <span>{`0${index + 1}`}</span>
+            <strong>{step}</strong>
+            {index < flow.steps.length - 1 && <ArrowRight size={16} aria-hidden="true" />}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function OfferSection() {
   const offers = [
-    { id: 'website', label: 'Website', tag: 'Web publik', title: 'Untuk ditemukan dan dipercaya.', copy: 'Halaman publik, penjelasan posisi bisnis, jalur pertanyaan, portofolio, dan konten yang menjawab pertanyaan pelanggan.', cta: 'Saya butuh website', icon: Globe2 },
-    { id: 'portal', label: 'Portal', tag: 'Alur operasional', title: 'Untuk kerja harian yang lebih rapi.', copy: 'Alur kerja, status yang terlihat, penggunaan tim, dan jalur dukungan yang mengikuti kebutuhan bisnis.', cta: 'Saya butuh sistem', icon: LayoutDashboard },
-    { id: 'bundle', label: 'Bundle', tag: 'Saat keduanya dibutuhkan', title: 'Website dan sistem dalam satu arah.', copy: 'Hubungkan cara pelanggan menemukan bisnis dengan cara tim menyelesaikan pekerjaan setiap hari.', cta: 'Saya butuh keduanya', icon: Boxes },
+    { id: 'website' as const, label: 'Website', stage: 'Ditemukan', title: 'Beri pelanggan pintu depan yang meyakinkan.', copy: 'Jelaskan siapa kamu, apa yang ditawarkan, dan bagaimana pelanggan bisa mulai bertanya. Bisnis terasa serius sebelum percakapan pertama dimulai.', outcomes: ['Penawaran mudah dipahami', 'Jalur kontak tidak membuat pelanggan mencari-cari'], cta: 'Saya butuh website', icon: Globe2 },
+    { id: 'portal' as const, label: 'Portal', stage: 'Dijalankan', title: 'Beri tim alur kerja yang bisa diikuti.', copy: 'Pesanan, status, stok, atau pekerjaan harian mendapat tempat yang jelas. Tim melihat langkah berikut tanpa semua keputusan kembali ke owner.', outcomes: ['Status kerja terlihat', 'Informasi harian tidak berhenti di chat'], cta: 'Saya butuh sistem', icon: LayoutDashboard },
+    { id: 'bundle' as const, label: 'Bundle', stage: 'Disambungkan', title: 'Hubungkan pelanggan yang datang dengan kerja yang berjalan.', copy: 'Website membuka percakapan. Portal membantu tim menanganinya. Bundle menyatukan arah keduanya sejak awal tanpa memaksa bisnis mengambil fitur yang belum dibutuhkan.', outcomes: ['Satu arah dari depan ke belakang', 'Scope tetap mengikuti kebutuhan bisnis'], cta: 'Saya butuh keduanya', icon: Boxes },
   ]
   return (
     <section id="penawaran" className="v7-section v7-surface-section">
@@ -403,16 +444,19 @@ function OfferSection() {
           <div><p className="v7-eyebrow v7-eyebrow-blue">Pilih fondasi</p><h2>Mulai dari yang paling penting.</h2></div>
           <p>Website, Portal, atau Bundle. Keputusan ini dibuat dari kebutuhan bisnis, bukan dari banyaknya fitur yang tersedia.</p>
         </div>
-        <div className="v7-offer-grid">
+        <div className="v7-offer-progression">
           {offers.map((offer, index) => {
             const Icon = offer.icon
             return (
-              <article key={offer.id} className={`v7-offer-card v7-reveal v7-reveal-delay-${index + 1} ${offer.id === 'bundle' ? 'is-featured' : ''}`}>
-                <div className="v7-offer-top"><span className="v7-offer-icon"><Icon size={21} aria-hidden="true" /></span><span className="v7-offer-tag">{offer.tag}</span></div>
-                <p className="v7-offer-label">{offer.label}</p>
-                <h3>{offer.title}</h3>
-                <p>{offer.copy}</p>
-                <a href={STORE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
+              <article key={offer.id} className={`v7-offer-chapter is-${offer.id} v7-reveal v7-reveal-delay-${index + 1}`}>
+                <div className="v7-offer-chapter-copy">
+                  <div className="v7-offer-kicker"><span>{`0${index + 1}`}</span><Icon size={18} aria-hidden="true" /><strong>{offer.label}</strong><i>{offer.stage}</i></div>
+                  <h3>{offer.title}</h3>
+                  <p>{offer.copy}</p>
+                  <ul>{offer.outcomes.map((outcome) => <li key={outcome}><Check size={15} aria-hidden="true" />{outcome}</li>)}</ul>
+                  <a href={STORE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
+                </div>
+                <OfferProof kind={offer.id} />
               </article>
             )
           })}
@@ -444,15 +488,17 @@ function PortfolioSection() {
     <section id="karya" className="v7-section v7-paper-section">
       <div className="v7-container">
         <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Karya dan bukti</p><h2>Yang nyata diberi status. Yang belum, kami sebut preview.</h2></div><p>Kepercayaan dibangun dari detail yang bisa ditelusuri, bukan dari klaim yang terdengar besar.</p></div>
-        <div className="v7-portfolio-grid">
+        <div className="v7-selected-work">
           <article className="v7-portfolio-feature v7-reveal">
-            <div className="v7-portfolio-visual v7-portfolio-live"><div className="v7-portfolio-browser"><div className="v7-browser-bar"><span className="v7-browser-dots" aria-hidden="true"><i /><i /><i /></span><span className="v7-browser-url">japanarena.id</span><ExternalLink size={12} aria-hidden="true" /></div><div className="v7-live-site-preview"><span className="v7-micro-label">PRODUK WEBZOKA</span><strong>Japan Arena</strong><span>Website + Portal belajar yang kami gunakan sendiri.</span><span className="v7-preview-button">Buka situs <ArrowUpRight size={12} aria-hidden="true" /></span></div></div><div className="v7-portfolio-stamp"><StatusBadge status="Live" /><span>Produk Webzoka sendiri</span></div></div>
-            <div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Live" /><span>Website + Portal belajar</span></div><h3>Japan Arena</h3><p>Contoh internal yang bisa dibuka dan ditelusuri: website publik di depan, portal belajar di belakang, dipakai setiap hari oleh bisnis kami sendiri.</p><a href={JAPAN_ARENA_URL} target="_blank" rel="noopener noreferrer" className="v7-card-link">Buka japanarena.id <ExternalLink size={15} aria-hidden="true" /></a></div>
+            <div className="v7-portfolio-visual v7-portfolio-live"><div className="v7-portfolio-browser"><div className="v7-browser-bar"><span className="v7-browser-dots" aria-hidden="true"><i /><i /><i /></span><span className="v7-browser-url">japanarena.id</span><ExternalLink size={12} aria-hidden="true" /></div><div className="v7-live-site-preview"><span className="v7-micro-label">PRODUK WEBZOKA</span><strong>Japan Arena</strong><span>Website + Portal belajar yang kami gunakan sendiri.</span><span className="v7-preview-button"><CheckCircle2 size={12} aria-hidden="true" /> Situs aktif</span></div></div><div className="v7-portfolio-stamp"><span>01 · Produk Webzoka sendiri</span></div></div>
+            <div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Live" /><span>Website + Portal belajar</span></div><h3>Japan Arena</h3><p>Contoh internal yang bisa dibuka dan ditelusuri: website publik di depan, Portal belajar di belakang, digunakan setiap hari oleh bisnis kami sendiri.</p><div className="v7-work-facts"><span><small>Peran</small>Public Web + Portal</span><span><small>Status</small>Route dapat dibuka</span></div><a href={JAPAN_ARENA_URL} target="_blank" rel="noopener noreferrer" className="v7-card-link">Buka japanarena.id <ExternalLink size={15} aria-hidden="true" /></a></div>
           </article>
-          <article className="v7-portfolio-small v7-reveal v7-reveal-delay-1"><div className="v7-portfolio-image"><Image src="/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp" alt="Preview template Rumah Selaras" fill sizes="(max-width: 767px) 100vw, 33vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>Referensi template</span></div><h3>Rumah Selaras</h3><p>Preview visual untuk arah Website. Bukan sistem pelanggan aktif.</p><span className="v7-disabled-link">Hanya preview, bukan sistem pelanggan aktif.</span></div></article>
-          <article className="v7-portfolio-small v7-reveal v7-reveal-delay-2"><div className="v7-portfolio-image"><Image src="/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp" alt="Preview template Cafe Seduh" fill sizes="(max-width: 767px) 100vw, 33vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>Referensi template</span></div><h3>Cafe Seduh</h3><p>Preview visual untuk arah Website. Bukan sistem pelanggan aktif.</p><span className="v7-disabled-link">Hanya preview, bukan sistem pelanggan aktif.</span></div></article>
+          <div className="v7-portfolio-support">
+            <article className="v7-portfolio-small v7-reveal v7-reveal-delay-1"><div className="v7-portfolio-image"><Image src="/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp" alt="Preview template Rumah Selaras" fill sizes="(max-width: 767px) 100vw, 40vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>02 · Referensi template</span></div><h3>Rumah Selaras</h3><p>Arah visual Website untuk bisnis rumah dan interior. Bukan sistem pelanggan aktif.</p><span className="v7-disabled-link">Preview visual, tidak memiliki route live.</span></div></article>
+            <article className="v7-portfolio-small v7-reveal v7-reveal-delay-2"><div className="v7-portfolio-image"><Image src="/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp" alt="Preview template Cafe Seduh" fill sizes="(max-width: 767px) 100vw, 40vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>03 · Referensi template</span></div><h3>Cafe Seduh</h3><p>Arah visual Website untuk bisnis kafe. Bukan sistem pelanggan aktif.</p><span className="v7-disabled-link">Preview visual, tidak memiliki route live.</span></div></article>
+          </div>
         </div>
-        <div className="v7-proof-disclosure v7-reveal"><Quote size={18} aria-hidden="true" /><p>Testimoni, logo pelanggan, dan metrik studi kasus akan muncul setelah atribusi serta izin disetujui. Tidak ada angka atau nama yang diisi untuk mempercantik halaman.</p></div>
+        <div className="v7-proof-disclosure v7-reveal"><ShieldCheck size={18} aria-hidden="true" /><p>Setiap karya dibedakan antara Live dan Preview. Route, nama pelanggan, atau hasil bisnis hanya ditampilkan setelah bisa diverifikasi.</p></div>
       </div>
     </section>
   )
@@ -467,12 +513,14 @@ function ProcessSection() {
   ]
   return (
     <section id="cara-kerja" className="v7-section v7-surface-section">
-      <div className="v7-container">
-        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Cara kerja</p><h2>Jelas dari kebutuhan sampai peluncuran.</h2></div><p>Proses singkat supaya kamu tidak perlu menjadi pengelola proyek untuk website dan sistem sendiri.</p></div>
-        <div className="v7-process-list">
-          {steps.map(([number, title, copy], index) => <article className={`v7-process-step v7-reveal v7-reveal-delay-${index + 1}`} key={number}><span className="v7-process-number">{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}
+      <div className="v7-container v7-process-layout">
+        <div className="v7-process-intro v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Cara kerja</p><h2>Jelas dari kebutuhan sampai peluncuran.</h2><p>Kamu tetap memegang keputusan bisnis. Kami yang merapikan pekerjaan digitalnya.</p></div>
+        <div>
+          <div className="v7-process-list">
+            {steps.map(([number, title, copy], index) => <article className={`v7-process-step v7-reveal v7-reveal-delay-${index + 1}`} key={number}><span className="v7-process-number">{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}
+          </div>
+          <div className="v7-process-note"><Clock3 size={17} aria-hidden="true" /><span>Target peluncuran 3–5 hari hanya untuk scope Website yang siap direview.</span><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Mulai dari konsultasi <ArrowRight size={15} aria-hidden="true" /></a></div>
         </div>
-        <div className="v7-process-note"><Clock3 size={17} aria-hidden="true" /><span>Target peluncuran 3–5 hari untuk scope yang siap direview.</span><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Mulai dari konsultasi <ArrowRight size={15} aria-hidden="true" /></a></div>
       </div>
     </section>
   )
@@ -483,10 +531,14 @@ function PricingSection() {
     <section id="harga" className="v7-section v7-pricing-section">
       <div className="v7-container">
         <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Beranda memberi gambaran awal. Store memberi detail dan kalkulasi lengkap.</p></div>
-        <div className="v7-pricing-grid">
-          <article className="v7-price-card v7-price-featured v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Harga awal dari paket Website dasar. Scope final mengikuti halaman, konten, integrasi, dan level dukungan yang dipilih.</p><a href={STORE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
-          <article className="v7-price-card v7-reveal v7-reveal-delay-1"><span className="v7-micro-label">PERPANJANGAN</span><strong>Transparan sebelum bayar</strong><p>Hosting dan pemeliharaan dipisahkan dari harga awal. Detail final muncul di kalkulator sebelum kamu mengambil keputusan.</p><div className="v7-price-note"><CreditCard size={16} aria-hidden="true" /> Ketentuan perpanjangan perlu dikunci di satu sumber komersial.</div></article>
-          <article className="v7-price-card v7-reveal v7-reveal-delay-2"><span className="v7-micro-label">YANG MENGUBAH HARGA</span><strong>Scope, bukan kejutan.</strong><p>Jumlah halaman, integrasi, kesiapan konten, dan level dukungan menjadi faktor utama. Untuk kebutuhan khusus, tanya dulu.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Tanya dulu lewat WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></article>
+        <div className="v7-pricing-layout">
+          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={STORE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
+          <div className="v7-price-clarity v7-reveal v7-reveal-delay-1">
+            <div><span>01</span><div><small>Yang menjadi titik mulai</small><strong>Website dasar dan kebutuhan publik yang sudah jelas.</strong><p>Jumlah halaman serta kesiapan konten membentuk scope awal.</p></div></div>
+            <div><span>02</span><div><small>Yang menyesuaikan harga</small><strong>Integrasi, alur operasional, dan level dukungan.</strong><p>Portal dan Bundle dibicarakan dari pekerjaan nyata yang ingin dirapikan.</p></div></div>
+            <div><span>03</span><div><small>Yang dibuka sebelum keputusan</small><strong>Perpanjangan, hosting, dan pemeliharaan.</strong><p>Detail final ditampilkan sebelum pembayaran agar kamu bisa memeriksanya lebih dulu.</p></div></div>
+            <div className="v7-price-question"><CreditCard size={18} aria-hidden="true" /><p>Belum yakin masuk Website, Portal, atau Bundle?</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Tanya lewat WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></div>
+          </div>
         </div>
       </div>
     </section>
@@ -494,18 +546,19 @@ function PricingSection() {
 }
 
 function TrustSection() {
-  const placeholders = [
-    '[Testimoni dengan nama, peran, dan bisnis]',
-    '[Logo pelanggan yang disetujui]',
-    '[Metrik studi kasus + sumber]',
+  const commitments = [
+    ['Harga diberi konteks', 'Mulai Rp600k dijelaskan sebagai harga awal Website dasar, bukan janji harga untuk semua kebutuhan.'],
+    ['Scope dibicarakan sebelum mulai', 'Halaman, konten, integrasi, dan dukungan dirapikan menjadi keputusan yang bisa kamu periksa.'],
+    ['Status bukti dibuat terang', 'Live berarti route sudah dicek. Preview berarti referensi visual, bukan sistem pelanggan aktif.'],
+    ['Dukungan tidak disembunyikan', 'Hosting, pemeliharaan, dan jalur dukungan dibicarakan sebelum pembayaran.'],
   ]
   return (
     <section id="komitmen" className="v7-section v7-paper-section v7-trust-section">
-      <div className="v7-container">
-        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Bukti dan kepercayaan</p><h2>Bukti yang jujur lebih berguna dari hiasan.</h2></div><p>Bagian ini sengaja menahan diri sampai nama, izin, dan sumber bukti siap dipublikasikan.</p></div>
-        <div className="v7-trust-grid">{placeholders.map((text, index) => <div className="v7-trust-placeholder v7-reveal v7-reveal-delay-1" key={text}><span>0{index + 1}</span><p>{text}</p><small>Menunggu persetujuan dan atribusi.</small></div>)}</div>
-        <div className="v7-commitment-strip v7-reveal"><span><Check size={15} aria-hidden="true" /> Harga transparan</span><span><Check size={15} aria-hidden="true" /> Scope jelas</span><span><Check size={15} aria-hidden="true" /> Demo sesuai status</span><span><Check size={15} aria-hidden="true" /> Ada jalur dukungan</span></div>
-        <div className="v7-section-cta"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Baca studi kasus setelah bukti siap <ArrowRight size={16} aria-hidden="true" /></a></div>
+      <div className="v7-container v7-trust-layout">
+        <div className="v7-trust-intro v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Cara kami menjaga kepercayaan</p><h2>Kepercayaan dimulai dari hal yang bisa kamu periksa.</h2><p>Harga, scope, status demo, dan dukungan dijelaskan sesuai keadaannya. Kamu tahu apa yang didapat, apa yang bergantung pada kebutuhan, dan bukti mana yang benar-benar bisa dibuka.</p></div>
+        <div className="v7-trust-ledger">
+          {commitments.map(([title, copy], index) => <article className={`v7-trust-entry v7-reveal v7-reveal-delay-${Math.min(index + 1, 4)}`} key={title}><span>{`0${index + 1}`}</span><div><h3>{title}</h3><p>{copy}</p></div><CheckCircle2 size={20} aria-hidden="true" /></article>)}
+        </div>
       </div>
     </section>
   )
@@ -525,8 +578,9 @@ function FaqSection() {
 function FinalCta({ finalRef }: { finalRef: React.RefObject<HTMLElement> }) {
   return (
     <section ref={finalRef} className="v7-final-cta">
-      <div className="v7-container">
-        <div className="v7-final-card v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, bukan dari katalog yang membuat bingung.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-button v7-button-outline">Lihat paket di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
+      <div className="v7-container v7-final-layout v7-reveal">
+        <div><p className="v7-eyebrow v7-eyebrow-amber">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2></div>
+        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link">Lihat paket di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
       </div>
     </section>
   )

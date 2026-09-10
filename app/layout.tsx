@@ -20,7 +20,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
   description:
-    'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target launch 3–5 hari untuk scope yang siap direview, dengan renewal transparan.',
+    'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target peluncuran 3–5 hari untuk scope yang siap direview, dengan perpanjangan transparan.',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.webzoka.com' },
   openGraph: {
     title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
-    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target launch 3–5 hari untuk scope siap review.',
+    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target peluncuran 3–5 hari untuk scope siap review.',
     url: 'https://www.webzoka.com',
     siteName: 'Webzoka',
     locale: 'id_ID',
@@ -95,7 +95,7 @@ const homepageFaqSchema = {
       name: 'Apakah ada biaya setelah tahun pertama?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Ya, ada biaya renewal untuk hosting dan maintenance. Jumlahnya sudah tertera di kalkulator sejak awal — tidak ada biaya tersembunyi.',
+        text: 'Ya, ada biaya perpanjangan untuk hosting dan pemeliharaan. Jumlahnya sudah tertera di kalkulator sejak awal — tidak ada biaya tersembunyi.',
       },
     },
     {
@@ -111,7 +111,7 @@ const homepageFaqSchema = {
       name: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Tidak ada kontrak minimum. Untuk portal SaaS bisa cancel kapan saja. Untuk website, hosting berjalan per tahun dan bisa tidak diperpanjang saat jatuh tempo.',
+        text: 'Tidak ada kontrak minimum. Untuk portal SaaS bisa berhenti kapan saja. Untuk website, hosting berjalan per tahun dan bisa tidak diperpanjang saat jatuh tempo.',
       },
     },
   ],

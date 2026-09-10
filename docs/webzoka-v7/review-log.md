@@ -64,3 +64,27 @@
 **Unresolved:** P1/P2 polish remains pending approval; Hub URL, testimonials/logos/metrics, renewal terms, and unvalidated demo routes remain open. Existing worktree UI edits remain outside this documentation task and were not changed here.
 
 **Next review gate:** Review this project home in Chat. If approved, create a separate Work round for the focused visual polish, require fresh Preview/UAT evidence, and stop at the next Review Packet.
+
+## 2026-09-10 — Focused visual-polish round
+
+**Status:** Implemented, validated on a new Preview, and ready for Chat visual approval. No merge or production deployment performed.
+
+**Scope completed:** Restored mobile offer order to Website → Portal → Bundle; reduced the fixed mobile WhatsApp CTA to a centered `Chat WhatsApp` action with a 44px touch target; removed the duplicate Stock action from the signature operations frame; quieted pending Hub treatment to `Segera`; and localized the flagged buyer-facing mixed-language microcopy. Main section order and the existing shell were preserved.
+
+**Source changes:** `app/page.tsx`, `app/globals.css`, and `app/layout.tsx`. This round did not structurally convert the current header shell into a left rail; that remains a separate structural decision if Chat requires shell parity with the documented V6 sidebar direction.
+
+**Fresh validation evidence:**
+
+- Local `npx tsc --noEmit`: exit 0.
+- Local `npm run build`: exit 0; all static routes prerendered.
+- `git diff --check`: exit 0.
+- `npm run lint`: unavailable because `next lint` opens the repository's interactive ESLint setup prompt; no lint policy was added.
+- New Preview: `https://ja-landingpage-platform-d4r0hiye9-rigi26s-projects.vercel.app`.
+- Fresh HTTP checks on Preview: `/`, `/seluruh-layanan`, `/pricing/`, `/kebijakan-privasi`, and `/syarat-ketentuan` returned 200.
+- Fresh external Stock check: `https://stock.webzoka.com/demo` returned 200; Stock remains the only operational demo labelled Live.
+- Desktop browser UAT at `1440 × 900`: meaningful render, one `h1`, no horizontal overflow, zero captured console errors/warnings, no missing image `alt`, quiet Hub text, and exactly one `Lihat demo Stock` CTA inside the signature section.
+- Mobile browser UAT at `390 × 844`: no horizontal overflow; DOM and visual order Website → Portal → Bundle; menu target 44px; drawer links 48px; FAQ expands with answer visible; sticky CTA is `Chat WhatsApp`, 192×44px, and hidden near the final CTA; skip-link focus works; reduced-motion CSS rule is present; zero captured console errors/warnings; no missing image `alt`.
+
+**Remaining:** No P0/P1/P2 items remain within the approved polish scope. Deferred dependencies remain Hub route approval, attributable proof, renewal/commercial source approval, and route-by-route validation for unsupported demos. The documented left-navigation shell parity is deferred because implementing it would be a structural round outside this polish scope.
+
+**Next review gate:** Chat visual approval of this polish round, plus an explicit decision on whether the existing shell should receive a separate structural left-rail round. No merge or production deployment is authorized by this entry.

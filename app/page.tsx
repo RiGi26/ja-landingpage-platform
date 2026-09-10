@@ -1,850 +1,505 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import {
-  Users, MessageCircle, FileText, BookOpen, GraduationCap,
-  Lock, Check, ArrowRight, Zap, Clock,
-  X, ChevronRight, Video, HardDrive, Globe2, LogIn, Building2, WashingMachine, BarChart2, ExternalLink,
-  ShieldCheck, LayoutGrid, Rocket, MapPin, Mail, Phone,
-  Bus, Pill, Cross, Boxes
-} from 'lucide-react'
-import Navbar from '@/components/LmsNavbar'
-import AnimatedHeroMockup from '@/components/AnimatedHeroMockup'
-import PortfolioGallery from '@/components/PortfolioGallery'
-import Testimonials from '@/components/Testimonials'
-import MobileCardScroller from '@/components/MobileCardScroller'
-import DemoPickerModal from '@/components/DemoPickerModal'
-import PortalSystemsGrid from '@/components/PortalSystemsGrid'
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { WB_URL } from '@/constants/site'
-import { WEBSITE_PORTAL_COMBOS, WEBSITE_FROM_PRICE, PORTAL_START_PRICE } from '@/constants/combos'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Boxes,
+  Check,
+  CheckCircle2,
+  ChevronDown,
+  Clock3,
+  CreditCard,
+  ExternalLink,
+  Globe2,
+  LayoutDashboard,
+  Menu,
+  MessageCircle,
+  Quote,
+  ShieldCheck,
+  Sparkles,
+  X,
+} from 'lucide-react'
+import { waLink as buildWaLink } from '@/constants/site'
 
-const WA_NUMBER = (process.env.NEXT_PUBLIC_WA_NUMBER ?? '6281296917963').trim()
+const STORE_PATH = '/seluruh-layanan'
+const STOCK_DEMO_URL = 'https://stock.webzoka.com/demo'
+const JAPAN_ARENA_URL = 'https://www.japanarena.id'
+const HUB_URL = process.env.NEXT_PUBLIC_HUB_URL?.trim() || ''
+const WA_MESSAGE = 'Halo Webzoka, saya ingin konsultasi soal website dan sistem untuk bisnis saya.'
+const WHATSAPP_URL = buildWaLink(WA_MESSAGE)
 
-const waLink = (msg?: string): string => {
-  const base = `https://wa.me/${WA_NUMBER}`
-  return msg ? `${base}?text=${encodeURIComponent(msg)}` : base
-}
+type Status = 'Live' | 'Preview' | 'Case study'
 
-// Pesan WhatsApp generik "tanya dulu sebelum mulai" — satu kalimat konsisten
-// untuk semua CTA tanya-jawab umum (hero, FAQ, footer, CTA akhir).
-const WA_TANYA_UMUM = 'Halo Webzoka, saya ingin tanya soal layanan dulu sebelum mulai.'
+const navItems = [
+  { label: 'Solusi', href: '#solusi' },
+  { label: 'Cara kerja', href: '#cara-kerja' },
+  { label: 'Karya', href: '#karya' },
+  { label: 'Harga', href: '#harga' },
+]
 
-// ─── Sections ───────────────────────────────────────────────────────────────
+const faqItems = [
+  {
+    question: 'Apa bedanya Website, Portal, dan Bundle?',
+    answer:
+      'Website membantu bisnis ditemukan dan dipercaya. Portal merapikan kerja harian seperti order, status, stok, atau tim. Bundle menghubungkan keduanya dalam satu jalur mulai.',
+  },
+  {
+    question: 'Apa yang termasuk dalam harga mulai Rp600k?',
+    answer:
+      'Angka tersebut adalah harga awal Website dari paket dasar. Scope final mengikuti jumlah halaman, kesiapan konten, integrasi, dan level support. Detailnya bisa kamu cek di Store sebelum order.',
+  },
+  {
+    question: 'Apa yang dimaksud renewal?',
+    answer:
+      'Renewal mencakup kebutuhan hosting dan maintenance yang berjalan setelah periode awal. Detail renewal ditampilkan sebelum pembayaran; terms komersial final masih perlu dikunci di satu sumber resmi.',
+  },
+  {
+    question: 'Bagaimana target launch 3–5 hari bekerja?',
+    answer:
+      'Target berlaku untuk scope yang siap direview: brief, aset utama, dan keputusan konten sudah tersedia. Scope custom atau revisi besar bisa membutuhkan waktu berbeda dan akan dikonfirmasi sebelum mulai.',
+  },
+  {
+    question: 'Bisa mulai dari Website lalu menambah Portal?',
+    answer:
+      'Bisa menjadi jalur yang masuk akal. Kami cek kebutuhan tenant, data, dan alur kerja lebih dulu supaya Portal yang ditambahkan benar-benar membantu, bukan sekadar menambah dashboard.',
+  },
+  {
+    question: 'Demo mana yang live hari ini?',
+    answer:
+      'Stock saat ini tervalidasi merespons di route demo. Demo LMS, Clinic, Pharmacy, Travel/Rental, dan Laundry tidak diberi label Live di homepage sampai route masing-masing lolos validasi baru.',
+  },
+  {
+    question: 'Apa yang terjadi setelah saya order?',
+    answer:
+      'Kami rapikan scope, minta bahan yang masih kurang, bangun fondasi yang dipilih, lalu masuk ke satu focused review loop sebelum launch.',
+  },
+  {
+    question: 'Di mana saya melacak project atau support?',
+    answer:
+      'Store menjadi handoff untuk detail paket dan order. Route Masuk Hub untuk project, billing, dan support belum dikonfirmasi di surface publik ini, jadi kami tidak menautkan URL yang belum tervalidasi.',
+  },
+]
 
-function HeroSection({ onDemo }: { onDemo: () => void }) {
+function StatusBadge({ status }: { status: Status }) {
+  const className = status.toLowerCase().replace(' ', '-')
   return (
-    <section className="relative bg-[#F5F5F7] pt-24 pb-12 lg:pt-28 lg:pb-16 px-4 overflow-hidden">
-      {/* Dot grid pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #94a3b8 1px, transparent 1px)',
-          backgroundSize: '28px 28px',
-        }}
-      />
-      {/* Gradient mesh — blue bloom top-right */}
-      <div className="absolute top-0 right-0 w-[700px] h-[500px] opacity-40" style={{background: 'radial-gradient(ellipse 70% 60% at 80% 0%, #BFDBFE, transparent)'}} />
-      {/* Gradient mesh — subtle warm bottom-left */}
-      <div className="absolute bottom-0 left-0 w-[400px] h-[300px] opacity-20" style={{background: 'radial-gradient(ellipse 60% 60% at 0% 100%, #E0F2FE, transparent)'}} />
-      
-      <div className="max-w-6xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-
-          <div className="space-y-6 animate-fade-up">
-            <p className="text-[11px] text-gray-500 font-medium">🇮🇩 Platform Digital Buatan Indonesia · Untuk UKM Indonesia</p>
-            <div className="inline-flex items-center gap-2 bg-white border border-black/5 text-[#0071E3] text-[11px] font-bold px-4 py-1.5 rounded-full apple-shadow">
-              <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse" />
-              Untuk Rental, Klinik, Apotek, Kursus, dan Bisnis Lainnya
-            </div>
-
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 leading-[1.05] tracking-tight sf-display-heavy">
-              Berhenti Jadi Admin<br />
-              <span className="text-[#0071E3]">di Bisnis Kamu Sendiri.</span>
-            </h1>
-
-            <p className="text-base md:text-lg font-medium text-blue-600 mt-2 mb-4">
-              Belum punya website? Tampil di Google mulai{" "}
-              <span className="font-bold">Rp 600.000</span>{" "}
-              — siap dalam 3–5 hari kerja.
-            </p>
-
-            <p className="text-lg text-gray-500 leading-relaxed max-w-lg">
-              Buat pemilik bisnis yang udah capek ngurusin semua operasional sendirian. Tiap hari HP penuh chat nanya ketersediaan, catat booking manual, sampai rekap uang malam-malam. Kami buatin sistem otomatis supaya bisnis tetap jalan walau kamu lagi tidur.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a
-                  href="/seluruh-layanan"
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
-                >
-                  Rakit Website Sekarang <ArrowRight size={18} />
-                </a>
-                <button
-                  type="button"
-                  onClick={onDemo}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-gray-900 border border-black/5 font-bold rounded-full transition-all hover:bg-gray-50 active:scale-[0.96] apple-shadow"
-                >
-                  Coba Demo Sistem (Gratis)
-                </button>
-              </div>
-              <p className="text-[13px] text-gray-600 font-medium">Mulai dari <span className="text-gray-900 font-bold">Rp 600.000</span></p>
-            </div>
-
-            <div className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] text-gray-600 font-medium">
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Live 3–5 Hari Kerja</span>
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Tanpa Coding</span>
-              <span className="flex items-center gap-1.5"><Check size={14} className="text-green-500" /> Domain Sendiri</span>
-            </div>
-          </div>
-
-          {/* Device Mockup Visualization */}
-          <div className="relative z-20">
-            <AnimatedHeroMockup />
-          </div>
-
-        </div>
-      </div>
-    </section>
+    <span className={`v7-status v7-status-${className}`}>
+      <span className="v7-status-mark" aria-hidden="true" />
+      {status}
+    </span>
   )
 }
 
-function SocialProofBar() {
-  const STATS = [
-    { value: '6 Platform', label: 'Siap Pakai' },
-    { value: '3–5 hari', label: 'Waktu Live' },
-    { value: '24/7', label: 'Sistem Berjalan' },
-    { value: 'Mulai 600rb', label: 'Biaya Terjangkau' },
-  ]
+function HubEntry({ className = '' }: { className?: string }) {
+  if (HUB_URL) {
+    return (
+      <a href={HUB_URL} className={`v7-hub-entry ${className}`}>
+        Masuk Hub <ArrowUpRight size={15} aria-hidden="true" />
+      </a>
+    )
+  }
+
   return (
-    <section className="bg-white border-y border-black/5 py-6 px-4">
-      <div className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
-        {STATS.map(s => (
-          <div key={s.label} className="flex items-center gap-3">
-            <span className="text-lg font-extrabold text-gray-900 sf-display-heavy">{s.value}</span>
-            <span className="text-[12px] text-gray-600 font-medium border-l border-black/10 pl-3">{s.label}</span>
-          </div>
-        ))}
-      </div>
-    </section>
+    <span
+      className={`v7-hub-entry v7-hub-pending ${className}`}
+      title="Route Hub belum dikonfirmasi"
+      aria-label="Masuk Hub, route belum dikonfirmasi"
+    >
+      Masuk Hub <span className="v7-pending-dot">Route dikonfirmasi nanti</span>
+    </span>
   )
 }
 
-function ProofSection() {
-  const PILLARS = [
-    {
-      icon: Globe2,
-      title: 'Karya Bisa Dicek Langsung',
-      desc: 'japanarena.id tayang di domain nyata, bukan mockup — buka & cek sendiri.',
-      cta: 'Lihat karya ↓',
-      href: '#portofolio',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Integrasi Resmi, Bukan Tempelan',
-      desc: 'Bayar via Midtrans, notif via WhatsApp Gateway resmi — bukan plugin akalan.',
-    },
-    {
-      icon: BarChart2,
-      title: 'Biaya Jujur Sejak Awal',
-      desc: 'Estimasi & biaya renewal muncul sebelum kamu bayar — tanpa tagihan kejutan.',
-      cta: 'Hitung estimasi →',
-      href: '/seluruh-layanan',
-    },
-  ]
-
-  return (
-    <section className="bg-white py-12 lg:py-16 px-4 border-t border-black/5">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-6 lg:mb-8">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-2">Bukti, Bukan Janji</p>
-          <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy leading-tight">
-            Kami tunjukkan, bukan sekadar janji.
-          </h2>
-        </div>
-
-        {/* Strip padat: ikon + satu-baris (bukan kartu tinggi) — kurangi tinggi & monoton */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
-          {PILLARS.map((p, i) => (
-            <div key={p.title} className={`flex sm:flex-col gap-3.5 reveal reveal-delay-${i + 1}`}>
-              <div className="w-11 h-11 rounded-xl bg-[#F5F5F7] flex items-center justify-center text-[#0071E3] shrink-0">
-                <p.icon size={22} />
-              </div>
-              <div className="min-w-0">
-                <h3 className="text-[15px] font-bold text-gray-900 mb-1 sf-display">{p.title}</h3>
-                <p className="text-[13px] text-gray-500 leading-relaxed">{p.desc}</p>
-                {p.cta && p.href && (
-                  <a href={p.href} className="inline-flex items-center gap-1 text-[13px] font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors mt-1.5">
-                    {p.cta}
-                  </a>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function SegmenSection() {
-    const PORTALS = [
-      {
-        icon: Globe2,
-        label: 'Katalog Website',
-        description: 'Pelanggan kamu sedang cari bisnis seperti milik kamu di Google sekarang. Apakah kamu muncul? Website dengan sistem booking dan katalog — live dalam 3–5 hari. Mulai Rp 600.000.',
-        cta: 'Mulai Rakit Website',
-        href: '/seluruh-layanan',
-        color: 'text-blue-600',
-        bg: 'bg-blue-50',
-        isExternal: false,
-      },
-      {
-        icon: Bus,
-        label: 'Portal Travel, Rental & Venue',
-        short: 'Travel & Rental',
-        description: 'Sistem booking anti-bentrok 24 jam. Cocok untuk: rental kendaraan, lapangan futsal, villa, studio foto, agen travel — pelanggan cek ketersediaan & bayar dari HP.',
-        cta: 'Lihat Demo',
-        href: 'https://rent.webzoka.com/demo',
-        color: 'text-sky-600',
-        bg: 'bg-sky-50',
-        isExternal: true,
-      },
-      {
-        icon: GraduationCap,
-        label: 'Portal Belajar / LMS',
-        short: 'Belajar / LMS',
-        description: 'Untuk karyawan baru atau kursus publik — tinggal upload materi sekali. Sistem otomatis ngurus pendaftaran, ujian, sampai penerbitan sertifikat. Cocok untuk: LPK, bimbel, kursus online, sekolah.',
-        cta: 'Lihat Demo',
-        href: 'https://lms.webzoka.com/demo',
-        color: 'text-blue-600',
-        bg: 'bg-blue-50',
-        isExternal: true,
-      },
-      {
-        icon: Cross,
-        label: 'Portal Klinik',
-        short: 'Klinik',
-        description: 'Semua riwayat pasien rapi, aman, dan bisa diakses dalam sekali klik. Siap integrasi SATUSEHAT (sistem rekam medis resmi Kemenkes RI). Cocok untuk: klinik umum, klinik kecantikan & spa, puskesmas.',
-        cta: 'Lihat Demo',
-        href: 'https://clinic.webzoka.com/demo',
-        color: 'text-emerald-600',
-        bg: 'bg-emerald-50',
-        isExternal: true,
-      },
-      {
-        icon: Pill,
-        label: 'Portal Farmasi',
-        short: 'Farmasi',
-        description: 'Pantau stok obat & kelola resep digital tanpa pusing. Kasir terhubung ke gudang real-time. Cocok untuk: apotek mandiri, apotek jaringan, klinik dengan dispensing obat.',
-        cta: 'Lihat Demo',
-        href: 'https://pharmacy.webzoka.com/demo',
-        color: 'text-indigo-600',
-        bg: 'bg-indigo-50',
-        isExternal: true,
-      },
-      {
-        icon: Boxes,
-        label: 'Portal Stok & Operasi',
-        short: 'Stok & Operasi',
-        description: 'Kelola stok gudang, resep & produksi, pesanan, kasir, sampai laporan keuangan dalam satu portal. Kasir, dapur produksi & gudang tersinkron real-time. Cocok untuk: F&B, manufaktur UKM, retail & grosir.',
-        cta: 'Lihat Demo',
-        href: 'https://stock.webzoka.com/demo',
-        color: 'text-amber-600',
-        bg: 'bg-amber-50',
-        isExternal: true,
-      },
-      {
-        icon: WashingMachine,
-        label: 'Webzoka Laundry',
-        short: 'Laundry',
-        description: 'Kelola laundry kiloan dari satu portal — terima cucian & timbang, lacak proses cuci, antar-jemput, sampai notifikasi WA otomatis ke pelanggan. Label QR per kantong biar tidak ada cucian tertukar. Cocok untuk: laundry kiloan, laundry satuan, dry clean.',
-        cta: 'Lihat Demo',
-        href: 'https://laundry.webzoka.com/demo',
-        color: 'text-cyan-600',
-        bg: 'bg-cyan-50',
-        isExternal: true,
-      },
-    ]
-
-    return (
-        <section id="segmen" className="bg-white py-12 lg:py-24 px-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="reveal text-center mb-6 lg:mb-10">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Pilih Bisnis Kamu</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-                        Mulai dari Website.<br className="hidden md:block" /> Tambah Sistem Kalau Bisnis Sudah Butuh.
-                    </h2>
-                    <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                      Bukan template generik. Setiap sistem dibuat pas sesuai alur kerja bisnis kamu — mulai dari rental mobil, tempat kursus, sampai operasional klinik dan apotek.
-                    </p>
-                </div>
-
-                {(() => {
-                  const featured = PORTALS[0]
-                  const systems = PORTALS.slice(1)
-                  const FeaturedIcon = featured.icon
-                  return (
-                    <div className="flex flex-col items-center gap-6">
-                      {/* Kartu unggulan = banner full-width horizontal (semua viewport, BUKAN dropdown).
-                          Wrapper .reveal memegang entrance; <a> tetap punya hover-lift + active:scale. */}
-                      <div className="reveal w-full">
-                      <a
-                        href={featured.href}
-                        className="group w-full flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-7 sm:p-8 rounded-[32px] bg-[#0071E3] border border-[#005BB5] shadow-xl shadow-blue-200 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-300 hover:-translate-y-1 active:scale-[0.99]"
-                      >
-                        <div className="w-14 h-14 shrink-0 rounded-[12px] bg-white/20 text-white flex items-center justify-center group-hover:scale-110 transition-transform">
-                            <FeaturedIcon size={26} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                            <span className="text-[10px] font-black uppercase tracking-widest text-blue-100">Produk Unggulan</span>
-                            <h3 className="text-xl sm:text-2xl font-bold text-white sf-display mt-1 mb-2">{featured.label}</h3>
-                            <p className="text-sm leading-relaxed text-blue-50 max-w-2xl">{featured.description}</p>
-                        </div>
-                        <span className="shrink-0 inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-full text-sm font-bold bg-white text-[#0071E3] group-hover:bg-blue-50 transition-all">
-                            {featured.cta} <ArrowRight size={16} />
-                        </span>
-                      </a>
-                      </div>
-
-                      {/* Divider sebelum portal sistem */}
-                      <div className="w-full py-3 sm:py-2">
-                        <div className="hidden sm:flex items-center gap-4">
-                          <div className="flex-1 h-px bg-black/5" />
-                          <p className="text-[12px] font-bold text-gray-600 uppercase tracking-widest text-center whitespace-nowrap">
-                            Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
-                          </p>
-                          <div className="flex-1 h-px bg-black/5" />
-                        </div>
-                        <p className="sm:hidden text-[11px] font-bold text-gray-600 uppercase tracking-widest text-center leading-relaxed">
-                          Kami gak cuma bikin website pajangan. Dapatkan sistem komplit:
-                        </p>
-                      </div>
-
-                      {/* Desktop: grid kartu — entrance stagger (.reveal) + press depth.
-                          Wrapper .reveal memegang entrance (transform); kartu di dalam
-                          memegang hover-lift + active:scale agar transform tidak bentrok. */}
-                      <div className="hidden sm:flex flex-wrap justify-center gap-6 w-full">
-                        {systems.map((p, i) => {
-                          const IconComponent = p.icon
-                          return (
-                            <div
-                              key={p.label}
-                              className="reveal flex w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] max-w-sm"
-                              style={{ transitionDelay: `${i * 70}ms` }}
-                            >
-                              <div className="group flex flex-col w-full p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]">
-                                <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${p.bg} ${p.color}`}>
-                                    <IconComponent size={26} />
-                                </div>
-                                <h3 className="text-xl font-bold mb-3 sf-display text-gray-900">{p.label}</h3>
-                                <p className="text-sm leading-relaxed mb-8 flex-1 text-gray-500">{p.description}</p>
-                                <a
-                                  href={p.href}
-                                  {...(p.isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                                  className="w-full py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
-                                >
-                                    {p.cta}
-                                </a>
-                              </div>
-                            </div>
-                          )
-                        })}
-                      </div>
-
-                      {/* Mobile: grid kotak 3-kolom + bottom-sheet detail (skala saat portal bertambah) */}
-                      <div className="sm:hidden w-full">
-                        <PortalSystemsGrid portals={systems} />
-                      </div>
-                    </div>
-                  )
-                })()}
-            </div>
-        </section>
-    )
-}
-
-// Combo "Website + Portal" — jembatan tepat setelah SegmenSection (customer baru
-// lihat Website & Portal terpisah → di sini ditawari sekaligus). Harga jujur &
-// dipisah: Website sekali + Portal per bulan. Data: constants/combos.ts.
-function WebsitePortalPaketSection() {
-    const rp = (n: number) => `Rp ${n.toLocaleString('id-ID')}`
-    // Pesan WA khusus untuk portal yang belum jadi kartu unggulan.
-    const waComboLain = 'Halo Webzoka, saya mau tanya paket Website + Portal (bundling website & sistem).'
-
-    return (
-        <section id="paket-combo" className="bg-white py-12 lg:py-24 px-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="reveal text-center mb-6 lg:mb-10">
-                    <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3 inline-flex items-center gap-2">
-                        <LayoutGrid size={14} /> Paket Lengkap
-                    </p>
-                    <h2 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight sf-display-heavy">
-                        Butuh Dua-duanya?<br className="hidden md:block" /> Ambil Website + Portal Sekaligus.
-                    </h2>
-                    <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-                        Website biar pelanggan menemukan kamu, portal biar operasional jalan otomatis. Satu tim, satu proses onboarding, live bareng — nggak usah urus dua vendor.
-                    </p>
-                </div>
-
-                <MobileCardScroller desktopGrid="md:grid-cols-3" hint="Geser untuk lihat paket lain →">
-                    {WEBSITE_PORTAL_COMBOS.map((c) => {
-                        const ComboIcon = c.icon
-                        const portalFrom = PORTAL_START_PRICE[c.portalId] ?? 0
-                        return (
-                            <div key={c.id} className="flex w-full">
-                                <div className="group flex flex-col w-full p-6 rounded-[32px] bg-white border border-black/[0.03] apple-shadow transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl active:scale-[0.98]">
-                                    {/* Ikon combo: Website (Globe2) + Portal */}
-                                    <div className="flex items-center gap-2 mb-6">
-                                        <div className="w-14 h-14 rounded-[8px] bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                                            <Globe2 size={26} />
-                                        </div>
-                                        <span className="text-gray-300 font-black text-2xl">+</span>
-                                        <div className={`w-14 h-14 rounded-[8px] flex items-center justify-center group-hover:scale-110 transition-transform ${c.bg} ${c.color}`}>
-                                            <ComboIcon size={26} />
-                                        </div>
-                                    </div>
-
-                                    <h3 className="text-lg font-bold mb-3 sf-display text-gray-900 leading-snug">
-                                        Website + {c.portalLabel}
-                                    </h3>
-                                    <p className="text-sm leading-relaxed mb-6 flex-1 text-gray-500">{c.tagline}</p>
-
-                                    {/* Harga jujur & dipisah: sekali vs per bulan, plus estimasi
-                                        bulan pertama (website sekali + portal 1 bln) — biar pembeli
-                                        tak perlu menghitung sendiri. Murni penjumlahan, tanpa klaim hemat. */}
-                                    <div className="rounded-2xl bg-[#F5F5F7] p-4 mb-5 space-y-2.5">
-                                        <div className="flex items-baseline justify-between gap-2">
-                                            <span className="text-[13px] text-gray-500">Website <span className="text-gray-400">· sekali</span></span>
-                                            <span className="text-[15px] font-bold text-gray-900">mulai {rp(WEBSITE_FROM_PRICE)}</span>
-                                        </div>
-                                        <div className="h-px bg-black/5" />
-                                        <div className="flex items-baseline justify-between gap-2">
-                                            <span className="text-[13px] text-gray-500">Portal <span className="text-gray-400">· /bln</span></span>
-                                            <span className="text-[15px] font-bold text-gray-900">mulai {rp(portalFrom)}</span>
-                                        </div>
-                                        <div className="h-px bg-black/5" />
-                                        <div className="flex items-baseline justify-between gap-2">
-                                            <span className="text-[13px] font-semibold text-gray-600">Estimasi bulan pertama</span>
-                                            <span className="text-[15px] font-black text-[#0071E3]">mulai {rp(WEBSITE_FROM_PRICE + portalFrom)}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center gap-2">
-                                        <Link
-                                            href={c.pricingHref}
-                                            className="flex-1 py-3 rounded-full text-center text-sm font-bold transition-all bg-gray-900 text-white hover:bg-black"
-                                        >
-                                            Lihat Paket
-                                        </Link>
-                                        <a
-                                            href={c.demoHref}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="shrink-0 inline-flex items-center gap-1.5 px-4 py-3 rounded-full text-sm font-bold text-gray-700 border border-black/10 hover:bg-gray-50 transition-all"
-                                        >
-                                            Demo <ExternalLink size={14} />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </MobileCardScroller>
-
-                <p className="reveal text-center text-sm text-gray-500 mt-8">
-                    Portal Laundry juga bisa dipaketkan bareng website.{' '}
-                    <a
-                        href={waLink(waComboLain)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#0071E3] font-bold hover:underline"
-                    >
-                        Chat tim kami
-                    </a>
-                    .
-                </p>
-
-                {/* ROI anchor jujur: bandingkan biaya langganan dgn ongkos admin manual —
-                    membingkai portal sebagai penghematan, bukan pengeluaran. */}
-                <p className="reveal text-center text-[13px] text-gray-400 mt-3 max-w-lg mx-auto">
-                    Langganan portal mulai Rp 149.000/bln — kira-kira setara upah admin sehari, tapi jalan otomatis 24/7 sepanjang bulan.
-                </p>
-            </div>
-        </section>
-    )
-}
-
-function GlobalFeatures() {
-    const FEATURES = [
-        { title: 'Tidak Ada yang Lupa Bayar Lagi', desc: 'Sistem kirim reminder invoice dan konfirmasi jadwal ke WA pelanggan secara otomatis — tanpa kamu perlu ingat-ingat.', icon: MessageCircle },
-        { title: 'Lihat Angka, Bukan Tebak-tebakan', desc: 'Buka dashboard dari HP kapanpun. Pemasukan hari ini, tren minggu ini — semuanya langsung tersaji, tidak perlu tunggu rekap manual.', icon: BarChart2 },
-        { title: 'Pelanggan Pesan Sendiri, 24 Jam', desc: 'Booking dan order jalan otomatis lewat sistem — pelanggan bisa pesan & bayar kapan saja, walau kamu lagi tidur. Tanpa harus standby balas chat.', icon: Clock },
-    ]
-
-    return (
-        <section id="fitur" className="bg-[#F5F5F7] py-12 lg:py-24 px-4">
-            <div className="max-w-6xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-                    {FEATURES.map((f, i) => (
-                        <div key={f.title} className={`flex flex-col items-center text-center group reveal reveal-delay-${i + 1}`}>
-                            <div className="w-16 h-16 bg-white rounded-3xl apple-shadow flex items-center justify-center mb-6 text-[#0071E3] group-hover:scale-105 transition-transform">
-                                <f.icon size={28} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-3 sf-display">{f.title}</h3>
-                            <p className="text-gray-500 text-sm leading-relaxed">{f.desc}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    )
-}
-
-function TrustSection() {
-    const STEPS = [
-        { t: 'Hitung & Pesan Sendiri', d: 'Pilih industri di kalkulator, lihat estimasi biaya, lalu pesan dan bayar DP — langsung online. Tanpa harus nunggu sales.', i: LayoutGrid },
-        { t: 'Isi Data Bisnis kamu — Sekitar 5 Menit', d: 'Logo, konten, gaya website — isi lewat form data bisnis. Tersimpan otomatis, boleh dicicil.', extra: 'Belum punya logo atau foto? Tim kami siapkan draf awalnya — tidak perlu khawatir.', i: Zap },
-        { t: 'Tim Bangun, Live 3–5 Hari', d: 'Kamu tinggal terima beres. Pantau progressnya via Order ID sampai website tayang di domainmu sendiri.', extra: 'Setelah live, kamu bisa edit konten sendiri kapan saja — tanpa perlu hubungi tim kami.', i: Rocket },
-    ]
-
-    const BADGES = [
-        { t: 'Data Pembeli Aman', d: 'Nomor & transaksi pelanggan tersimpan terkunci — tidak bocor, tidak dijual', i: ShieldCheck },
-        { t: 'Tidak Akan Hilang', d: 'Mau se-error apa pun sistemnya nanti, data kamu tetap aman karena otomatis di-backup tiap hari', i: HardDrive },
-        { t: 'Anti-Ngadat Saat Rame', d: 'Pelanggan tetap bisa buka & pesan walau pengunjung membludak', i: Globe2 },
-        { t: 'Bayar & Notif Otomatis', d: 'Pelanggan bayar via QRIS/transfer, pesanan masuk WhatsApp kamu sendiri', i: Zap },
-    ]
-
-    return (
-        <section className="bg-[#F5F5F7] py-12 lg:py-20 px-4 border-t border-black/5">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-6 lg:mb-10">
-                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">Cara Kerja</p>
-                    <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">Pesan Senin, Website Rilis Jumat —<br className="hidden md:block" /> Tanpa Kamu Harus Ngerti Coding</h2>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8 mb-10 lg:mb-16">
-                    {STEPS.map((s, i) => (
-                        <div key={i} className={`relative p-6 rounded-[28px] bg-white border border-black/[0.03] apple-shadow overflow-hidden group reveal reveal-delay-${i + 1}`}>
-                            <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#0071E3]/5 rounded-full blur-2xl group-hover:bg-[#0071E3]/10 transition-colors" />
-                            <div className="w-12 h-12 bg-[#F5F5F7] rounded-lg flex items-center justify-center mb-4 text-[#0071E3] group-hover:scale-110 transition-transform">
-                                <s.i size={24} />
-                            </div>
-                            <h3 className="text-lg font-bold text-gray-900 mb-2">{s.t}</h3>
-                            <p className="text-sm text-gray-500 leading-relaxed">{s.d}</p>
-                            {'extra' in s && <p className="text-sm text-gray-500 mt-1">{(s as { extra: string }).extra}</p>}
-                        </div>
-                    ))}
-                </div>
-
-                <div className="pt-10 lg:pt-16 border-t border-black/5">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 lg:gap-8">
-                        {BADGES.map((b, i) => (
-                            <div key={i} className="flex flex-col items-center text-center">
-                                <div className="w-10 h-10 rounded-full bg-blue-50 text-[#0071E3] flex items-center justify-center mb-2.5">
-                                    <b.i size={20} />
-                                </div>
-                                <h4 className="text-[11px] font-bold text-gray-900 uppercase tracking-widest mb-1">{b.t}</h4>
-                                <p className="text-[10px] text-gray-600 font-medium">{b.d}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
-}
-
-function FaqSection() {
-  const FAQS = [
-    {
-      q: 'Berapa lama website saya selesai?',
-      a: '3–5 hari kerja setelah data bisnis dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
-    },
-    {
-      q: 'Apakah saya bisa pakai domain sendiri?',
-      a: 'Ya. Kami bantu pointing domain kamu ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis (nama.webzoka.com) atau kami bantu daftarkan domain baru.',
-    },
-    {
-      q: 'Apakah ada biaya setelah tahun pertama?',
-      a: 'Ya, ada biaya renewal untuk hosting dan maintenance. Jumlahnya sudah tertera di kalkulator sejak awal — tidak ada biaya tersembunyi yang muncul belakangan.',
-    },
-    {
-      q: 'Apakah saya bisa request revisi?',
-      a: 'Ya. Revisi konten dan layout minor termasuk dalam paket. Untuk perubahan besar seperti ganti template atau tambah fitur baru, kita obrolin bareng dulu estimasi biayanya.',
-    },
-    {
-      q: 'Apa bedanya website builder dengan portal (LMS, klinik, dll)?',
-      a: 'Website builder untuk tampilan online bisnis kamu — yang dilihat pelanggan. Portal adalah sistem operasional untuk jalankan bisnis dari dalam. Keduanya bisa dipakai terpisah atau bersamaan.',
-    },
-    {
-      q: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
-      a: 'Tidak ada kontrak minimum. Untuk portal SaaS, bisa cancel kapan saja. Untuk website, hosting berjalan per tahun dan bisa tidak diperpanjang saat jatuh tempo.',
-    },
-  ]
-
-  return (
-    <section className="bg-white py-12 lg:py-20 px-4 border-t border-black/5">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-6 lg:mb-10">
-          <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
-          <h2 className="text-2xl md:text-3xl font-black text-gray-900 tracking-tight sf-display-heavy">
-            Pertanyaan yang Sering Ditanya
-          </h2>
-        </div>
-        {/* Accordion (tertutup default) — hemat scroll besar di mobile & desktop */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-4">
-          {FAQS.map((faq, i) => (
-            <details
-              key={i}
-              className="group bg-[#F5F5F7] rounded-2xl border border-black/[0.03] [&_summary::-webkit-details-marker]:hidden"
-            >
-              <summary className="flex items-center justify-between gap-3 cursor-pointer list-none p-5 lg:p-6">
-                <h3 className="text-[15px] font-bold text-gray-900">{faq.q}</h3>
-                <ChevronRight
-                  size={18}
-                  className="shrink-0 text-gray-400 transition-transform duration-300 group-open:rotate-90"
-                />
-              </summary>
-              <p className="px-5 lg:px-6 pb-5 lg:pb-6 -mt-1 text-sm text-gray-500 leading-relaxed">{faq.a}</p>
-            </details>
-          ))}
-        </div>
-        <div className="text-center mt-8 lg:mt-10">
-          <p className="text-sm text-gray-600 font-medium">
-            Masih ada pertanyaan?{' '}
-            <a
-              href={waLink(WA_TANYA_UMUM)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#0071E3] font-bold hover:underline"
-            >
-              Chat tim kami
-            </a>
-          </p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// ─── Main Page ───────────────────────────────────────────────────────────────
-
-export default function LandingPage() {
-  const [demoOpen, setDemoOpen] = useState(false)
-  // Sticky CTA mobile muncul setelah user melewati hero (>700px) — jaga aksi utama
-  // selalu terjangkau tanpa scroll balik ke atas.
-  const [showSticky, setShowSticky] = useState(false)
+function PublicNav() {
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const els = document.querySelectorAll('.reveal')
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target) } }),
-      { threshold: 0.12 }
-    )
-    els.forEach(el => io.observe(el))
-    return () => io.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const onScroll = () => setShowSticky(window.scrollY > 700)
+    const onScroll = () => setScrolled(window.scrollY > 72)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const close = () => setOpen(false)
+
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      
-      <DemoPickerModal isOpen={demoOpen} onClose={() => setDemoOpen(false)} />
+    <header className={`v7-header ${scrolled ? 'is-scrolled' : ''}`}>
+      <div className="v7-container v7-header-inner">
+        <a href="#top" className="v7-brand" aria-label="Webzoka, kembali ke awal">
+          <Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} priority />
+        </a>
 
-      <main>
-        {/* WhatsApp Sticky Button (Mobile) — disembunyikan saat sticky CTA bar muncul
-            supaya tidak menumpuk di pojok yang sama. */}
-        <div className={`fixed bottom-6 right-6 z-50 md:hidden transition-opacity ${showSticky ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <a
-            href={waLink(WA_TANYA_UMUM)}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat via WhatsApp"
-            className="flex items-center justify-center w-14 h-14 bg-[#25D366] text-white rounded-full shadow-2xl active:scale-90 transition-transform"
-          >
-            <MessageCircle size={28} aria-hidden="true" />
+        <nav className="v7-desktop-nav" aria-label="Navigasi utama">
+          {navItems.map((item) => (
+            <a key={item.href} href={item.href}>
+              {item.label}
+            </a>
+          ))}
+          <a href={STORE_PATH} className="v7-nav-store">
+            Store <ArrowUpRight size={13} aria-hidden="true" />
           </a>
-        </div>
+        </nav>
 
-        {/* Sticky CTA bar (Mobile) — aksi utama selalu terjangkau setelah scroll. */}
-        <div
-          className={`fixed inset-x-0 bottom-0 z-50 md:hidden p-3 bg-white/95 backdrop-blur border-t border-black/10 flex items-center gap-2.5 transition-transform duration-300 ${showSticky ? 'translate-y-0' : 'translate-y-full'}`}
-          style={{ paddingBottom: 'calc(0.75rem + env(safe-area-inset-bottom))' }}
-        >
-          <Link
-            href="/seluruh-layanan"
-            className="flex-1 inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#0071E3] text-white font-bold text-sm active:scale-[0.97] transition-transform"
-          >
-            Rakit Website Sekarang <ArrowRight size={16} aria-hidden="true" />
-          </Link>
-          <a
-            href={waLink(WA_TANYA_UMUM)}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chat via WhatsApp"
-            className="shrink-0 flex items-center justify-center w-12 h-12 bg-[#25D366] text-white rounded-full active:scale-90 transition-transform"
-          >
-            <MessageCircle size={24} aria-hidden="true" />
+        <div className="v7-header-actions">
+          <HubEntry className="v7-desktop-hub" />
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-small v7-button-primary v7-desktop-cta">
+            Konsultasi WhatsApp <MessageCircle size={15} aria-hidden="true" />
           </a>
+          <button
+            type="button"
+            className="v7-menu-button"
+            aria-label={open ? 'Tutup menu' : 'Buka menu'}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+          </button>
         </div>
+      </div>
 
-        <HeroSection onDemo={() => setDemoOpen(true)} />
-        <SocialProofBar />
-        <GlobalFeatures />
-        <SegmenSection />
-        <WebsitePortalPaketSection />
+      {open && (
+        <div className="v7-mobile-menu">
+          <nav aria-label="Navigasi mobile">
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href} onClick={close}>
+                {item.label} <ArrowRight size={16} aria-hidden="true" />
+              </a>
+            ))}
+            <a href={STORE_PATH} onClick={close}>
+              Store <ArrowUpRight size={15} aria-hidden="true" />
+            </a>
+          </nav>
+          <div className="v7-mobile-menu-footer">
+            <HubEntry />
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary" onClick={close}>
+              Konsultasi WhatsApp <MessageCircle size={16} aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      )}
+    </header>
+  )
+}
+
+function BrowserFrame({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={`v7-browser-frame ${compact ? 'is-compact' : ''}`}>
+      <div className="v7-browser-bar">
+        <span className="v7-browser-dots" aria-hidden="true"><i /><i /><i /></span>
+        <span className="v7-browser-url">namabisnismu.id</span>
+        <Globe2 size={12} aria-hidden="true" />
+      </div>
+      <div className="v7-browser-canvas">
+        <div className="v7-browser-nav"><span>Nama Bisnis</span><span className="v7-browser-nav-links">Tentang &nbsp; Layanan &nbsp; Kontak</span></div>
+        <div className="v7-browser-hero">
+          <div>
+            <span className="v7-micro-label">PUBLIC WEB</span>
+            <strong>Bisnis yang mudah ditemukan, mudah dipercaya.</strong>
+            <span className="v7-browser-copy">Penawaran jelas. Jalur inquiry jelas. Tampilan yang terasa milik bisnis sendiri.</span>
+            <span className="v7-browser-cta">Mulai percakapan <ArrowRight size={11} aria-hidden="true" /></span>
+          </div>
+          <div className="v7-browser-art" aria-hidden="true"><span /><span /><span /></div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function OperationsFrame() {
+  return (
+    <div className="v7-operations-frame">
+      <div className="v7-ops-topline">
+        <span className="v7-ops-logo"><Boxes size={15} aria-hidden="true" /> Stock</span>
+        <StatusBadge status="Live" />
+      </div>
+      <div className="v7-ops-intro">
+        <span className="v7-micro-label">DAILY OPERATIONS</span>
+        <strong>Kerja berikutnya terlihat.</strong>
+        <span>Order, stok, dan langkah tim berada di satu alur kerja.</span>
+      </div>
+      <div className="v7-ops-list">
+        <div><CheckCircle2 size={16} aria-hidden="true" /><span>Order masuk<small>siap ditindaklanjuti</small></span><ArrowRight size={14} aria-hidden="true" /></div>
+        <div><LayoutDashboard size={16} aria-hidden="true" /><span>Status kerja<small>tidak tercecer di chat</small></span><ArrowRight size={14} aria-hidden="true" /></div>
+      </div>
+      <a href={STOCK_DEMO_URL} target="_blank" rel="noopener noreferrer" className="v7-ops-link">
+        Lihat demo Stock <ExternalLink size={14} aria-hidden="true" />
+      </a>
+    </div>
+  )
+}
+
+function HeroEvidence() {
+  return (
+    <div className="v7-hero-evidence" aria-label="Contoh hubungan antara website publik dan sistem operasional">
+      <div className="v7-evidence-note v7-evidence-note-one"><Sparkles size={14} aria-hidden="true" /> front door</div>
+      <div className="v7-evidence-paper"><BrowserFrame /></div>
+      <div className="v7-evidence-route"><span>ditemukan</span><i aria-hidden="true" /><span>dikelola</span></div>
+      <div className="v7-evidence-mini"><OperationsFrame /></div>
+    </div>
+  )
+}
+
+function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
+  return (
+    <section id="top" ref={heroRef} className="v7-hero">
+      <div className="v7-hero-grid v7-container">
+        <div className="v7-hero-copy v7-reveal">
+          <p className="v7-eyebrow"><span className="v7-eyebrow-line" />Untuk bisnis yang ingin terlihat profesional dan jalan lebih rapi</p>
+          <h1>Website untuk ditemukan. <em>Sistem untuk operasional jalan.</em></h1>
+          <p className="v7-hero-lede">Bangun kepercayaan di depan, rapikan kerja harian di belakang — mulai dari kebutuhan yang paling penting.</p>
+          <div className="v7-proof-row" aria-label="Bukti awal Webzoka">
+            <span><b>Mulai Rp600k</b><small>harga awal</small></span>
+            <span><b>Launch 3–5 hari</b><small>untuk scope siap review</small></span>
+            <span><b>Renewal transparan</b><small>detail sebelum bayar</small></span>
+          </div>
+          <div className="v7-hero-actions">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
+              Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
+            </a>
+            <a href={STORE_PATH} className="v7-text-link">Lihat paket dan harga <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+          <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
+        </div>
+        <div className="v7-reveal v7-reveal-delay-1"><HeroEvidence /></div>
+      </div>
+    </section>
+  )
+}
+
+function PainSection() {
+  const rows = [
+    ['Sulit ditemukan', 'Website yang menjelaskan bisnis dengan jelas dan terasa kredibel.'],
+    ['Order dan status tercecer', 'Satu alur operasional dengan langkah berikutnya yang terlihat.'],
+    ['Semua keputusan berhenti di owner', 'Sistem yang bisa dipakai tim secara konsisten.'],
+  ]
+  return (
+    <section id="solusi" className="v7-section v7-paper-section">
+      <div className="v7-container v7-pain-grid">
+        <div className="v7-section-intro v7-reveal">
+          <p className="v7-eyebrow v7-eyebrow-blue">Masalah yang terasa setiap hari</p>
+          <h2>Berhenti Jadi Admin di Bisnis Kamu Sendiri.</h2>
+          <p>Bisnis tidak selalu butuh lebih banyak fitur. Sering kali yang dibutuhkan adalah jalur yang lebih jelas, untuk pelanggan dan untuk tim.</p>
+        </div>
+        <div className="v7-pain-list v7-reveal v7-reveal-delay-1">
+          {rows.map(([pain, outcome], index) => (
+            <div className="v7-pain-row" key={pain}>
+              <span className="v7-pain-index">0{index + 1}</span>
+              <div><strong>{pain}</strong><ArrowRight size={16} aria-hidden="true" /><p>{outcome}</p></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function OfferSection() {
+  const offers = [
+    { id: 'website', label: 'Website', tag: 'Public Web', title: 'Untuk ditemukan dan dipercaya.', copy: 'Public pages, positioning, inquiry path, portfolio, dan content blocks yang menjawab pertanyaan pelanggan.', cta: 'Saya butuh website', icon: Globe2 },
+    { id: 'portal', label: 'Portal', tag: 'Operational flow', title: 'Untuk kerja harian yang lebih rapi.', copy: 'Alur operasional, status visibility, penggunaan tim, dan support path yang mengikuti kebutuhan bisnis.', cta: 'Saya butuh sistem', icon: LayoutDashboard },
+    { id: 'bundle', label: 'Bundle', tag: 'Recommended when both matter', title: 'Website dan sistem dalam satu arah.', copy: 'Hubungkan cara pelanggan menemukan bisnis dengan cara tim menyelesaikan pekerjaan setiap hari.', cta: 'Saya butuh keduanya', icon: Boxes },
+  ]
+  return (
+    <section id="penawaran" className="v7-section v7-surface-section">
+      <div className="v7-container">
+        <div className="v7-section-heading v7-reveal">
+          <div><p className="v7-eyebrow v7-eyebrow-blue">Pilih fondasi</p><h2>Mulai dari yang paling penting.</h2></div>
+          <p>Website, Portal, atau Bundle. Keputusan ini dibuat dari kebutuhan bisnis, bukan dari banyaknya fitur yang tersedia.</p>
+        </div>
+        <div className="v7-offer-grid">
+          {offers.map((offer, index) => {
+            const Icon = offer.icon
+            return (
+              <article key={offer.id} className={`v7-offer-card v7-reveal v7-reveal-delay-${index + 1} ${offer.id === 'bundle' ? 'is-featured' : ''}`}>
+                <div className="v7-offer-top"><span className="v7-offer-icon"><Icon size={21} aria-hidden="true" /></span><span className="v7-offer-tag">{offer.tag}</span></div>
+                <p className="v7-offer-label">{offer.label}</p>
+                <h3>{offer.title}</h3>
+                <p>{offer.copy}</p>
+                <a href={STORE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
+              </article>
+            )
+          })}
+        </div>
+        <div className="v7-section-cta"><a href={STORE_PATH} className="v7-text-link">Bandingkan paket <ArrowRight size={16} aria-hidden="true" /></a></div>
+      </div>
+    </section>
+  )
+}
+
+function SignatureSection() {
+  return (
+    <section className="v7-signature">
+      <div className="v7-container">
+        <div className="v7-signature-heading v7-reveal"><p className="v7-eyebrow v7-eyebrow-amber">Dari pintu depan sampai kerja harian</p><h2>Yang pelanggan lihat, tersambung dengan cara tim bekerja.</h2><p>Mulai dari cara pelanggan menemukanmu. Lanjutkan dengan cara tim menyelesaikan pekerjaan.</p></div>
+        <div className="v7-signature-flow v7-reveal v7-reveal-delay-1">
+          <div className="v7-signature-browser"><StatusBadge status="Preview" /><BrowserFrame compact /></div>
+          <div className="v7-signature-connector"><span>ditemukan → dipahami → dikelola</span><i aria-hidden="true" /></div>
+          <div className="v7-signature-ops"><OperationsFrame /></div>
+        </div>
+        <div className="v7-signature-foot"><span><ShieldCheck size={16} aria-hidden="true" /> Status selalu diberi label: Live, Preview, atau Case study.</span><a href={STOCK_DEMO_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Lihat demo Stock <ExternalLink size={15} aria-hidden="true" /></a></div>
+      </div>
+    </section>
+  )
+}
+
+function PortfolioSection() {
+  return (
+    <section id="karya" className="v7-section v7-paper-section">
+      <div className="v7-container">
+        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Karya dan bukti</p><h2>Yang nyata diberi status. Yang belum, kami sebut preview.</h2></div><p>Trust dibangun dari detail yang bisa ditelusuri, bukan dari klaim yang terdengar besar.</p></div>
+        <div className="v7-portfolio-grid">
+          <article className="v7-portfolio-feature v7-reveal">
+            <div className="v7-portfolio-visual v7-portfolio-live"><div className="v7-portfolio-browser"><div className="v7-browser-bar"><span className="v7-browser-dots" aria-hidden="true"><i /><i /><i /></span><span className="v7-browser-url">japanarena.id</span><ExternalLink size={12} aria-hidden="true" /></div><div className="v7-live-site-preview"><span className="v7-micro-label">WEBZOKA PRODUCT</span><strong>Japan Arena</strong><span>Website + Portal belajar yang kami gunakan sendiri.</span><span className="v7-preview-button">Buka situs <ArrowUpRight size={12} aria-hidden="true" /></span></div></div><div className="v7-portfolio-stamp"><StatusBadge status="Live" /><span>Produk Webzoka sendiri</span></div></div>
+            <div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Live" /><span>Website + Portal belajar</span></div><h3>Japan Arena</h3><p>Contoh internal yang bisa dibuka dan ditelusuri: website publik di depan, portal belajar di belakang, dipakai setiap hari oleh bisnis kami sendiri.</p><a href={JAPAN_ARENA_URL} target="_blank" rel="noopener noreferrer" className="v7-card-link">Buka japanarena.id <ExternalLink size={15} aria-hidden="true" /></a></div>
+          </article>
+          <article className="v7-portfolio-small v7-reveal v7-reveal-delay-1"><div className="v7-portfolio-image"><Image src="/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp" alt="Preview template Rumah Selaras" fill sizes="(max-width: 767px) 100vw, 33vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>Template reference</span></div><h3>Rumah Selaras</h3><p>Preview visual untuk arah Website. Bukan route customer aktif.</p><span className="v7-disabled-link">Preview only — not an active customer system</span></div></article>
+          <article className="v7-portfolio-small v7-reveal v7-reveal-delay-2"><div className="v7-portfolio-image"><Image src="/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp" alt="Preview template Cafe Seduh" fill sizes="(max-width: 767px) 100vw, 33vw" /></div><div className="v7-portfolio-copy"><div className="v7-portfolio-meta"><StatusBadge status="Preview" /><span>Template reference</span></div><h3>Cafe Seduh</h3><p>Preview visual untuk arah Website. Bukan route customer aktif.</p><span className="v7-disabled-link">Preview only — not an active customer system</span></div></article>
+        </div>
+        <div className="v7-proof-disclosure v7-reveal"><Quote size={18} aria-hidden="true" /><p>Testimonial, logo pelanggan, dan case-study metrics akan muncul setelah ada attribution serta permission yang disetujui. Tidak ada angka atau nama yang diisi untuk mempercantik halaman.</p></div>
+      </div>
+    </section>
+  )
+}
+
+function ProcessSection() {
+  const steps = [
+    ['01', 'Ceritakan kebutuhan', 'Business, offer, audience, dan operational friction yang paling mengganggu.'],
+    ['02', 'Pilih fondasi', 'Website, Portal, atau Bundle sesuai keputusan yang ingin kamu buat.'],
+    ['03', 'Kami bangun dan rapikan', 'Structure, content, design, dan system setup berjalan dalam satu arah.'],
+    ['04', 'Review lalu launch', 'Satu focused review loop dan target 3–5 hari untuk scope yang siap direview.'],
+  ]
+  return (
+    <section id="cara-kerja" className="v7-section v7-surface-section">
+      <div className="v7-container">
+        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Cara kerja</p><h2>Jelas dari brief sampai launch.</h2></div><p>Proses singkat supaya kamu tidak perlu menjadi project manager untuk website dan sistem sendiri.</p></div>
+        <div className="v7-process-list">
+          {steps.map(([number, title, copy], index) => <article className={`v7-process-step v7-reveal v7-reveal-delay-${index + 1}`} key={number}><span className="v7-process-number">{number}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}
+        </div>
+        <div className="v7-process-note"><Clock3 size={17} aria-hidden="true" /><span>Target launch 3–5 hari untuk scope yang siap direview.</span><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Mulai dari konsultasi <ArrowRight size={15} aria-hidden="true" /></a></div>
+      </div>
+    </section>
+  )
+}
+
+function PricingSection() {
+  return (
+    <section id="harga" className="v7-section v7-pricing-section">
+      <div className="v7-container">
+        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Homepage memberi anchor. Store memberi detail dan kalkulasi lengkap.</p></div>
+        <div className="v7-pricing-grid">
+          <article className="v7-price-card v7-price-featured v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Harga awal dari paket Website dasar. Scope final mengikuti halaman, konten, integrasi, dan support yang dipilih.</p><a href={STORE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
+          <article className="v7-price-card v7-reveal v7-reveal-delay-1"><span className="v7-micro-label">RENEWAL</span><strong>Transparan sebelum bayar</strong><p>Hosting dan maintenance dipisahkan dari harga awal. Detail final muncul di kalkulator sebelum kamu mengambil keputusan.</p><div className="v7-price-note"><CreditCard size={16} aria-hidden="true" /> Renewal terms perlu dikunci di satu sumber komersial.</div></article>
+          <article className="v7-price-card v7-reveal v7-reveal-delay-2"><span className="v7-micro-label">YANG MENGUBAH HARGA</span><strong>Scope, bukan kejutan.</strong><p>Jumlah halaman, integrasi, kesiapan konten, dan level support menjadi faktor utama. Untuk kebutuhan khusus, tanya dulu.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Tanya dulu lewat WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></article>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function TrustSection() {
+  const placeholders = [
+    '[Attributable testimonial: name, role, business]',
+    '[Approved customer logo]',
+    '[Case-study metric + source]',
+  ]
+  return (
+    <section className="v7-section v7-paper-section v7-trust-section">
+      <div className="v7-container">
+        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Trust layer</p><h2>Bukti yang jujur lebih berguna dari hiasan.</h2></div><p>Bagian ini sengaja menahan diri sampai nama, permission, dan sumber bukti siap dipublikasikan.</p></div>
+        <div className="v7-trust-grid">{placeholders.map((text, index) => <div className="v7-trust-placeholder v7-reveal v7-reveal-delay-1" key={text}><span>0{index + 1}</span><p>{text}</p><small>Menunggu approval dan attribution.</small></div>)}</div>
+        <div className="v7-commitment-strip v7-reveal"><span><Check size={15} aria-hidden="true" /> Harga transparan</span><span><Check size={15} aria-hidden="true" /> Scope jelas</span><span><Check size={15} aria-hidden="true" /> Demo sesuai status</span><span><Check size={15} aria-hidden="true" /> Ada jalur support</span></div>
+        <div className="v7-section-cta"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Baca studi kasus setelah proof siap <ArrowRight size={16} aria-hidden="true" /></a></div>
+      </div>
+    </section>
+  )
+}
+
+function FaqSection() {
+  return (
+    <section id="faq" className="v7-section v7-surface-section">
+      <div className="v7-container v7-faq-grid">
+        <div className="v7-faq-intro v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Pertanyaan praktis</p><h2>Kalau masih ragu, mulai dari pertanyaan yang paling dekat.</h2><p>Jawaban singkat di sini. Detail produk dan scope tetap berada di Store atau Hub sesuai konteksnya.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Masih ragu? Chat via WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></div>
+        <div className="v7-faq-list v7-reveal v7-reveal-delay-1">{faqItems.map((item) => <details key={item.question}><summary>{item.question}<ChevronDown size={18} aria-hidden="true" /></summary><p>{item.answer}</p></details>)}</div>
+      </div>
+    </section>
+  )
+}
+
+function FinalCta({ finalRef }: { finalRef: React.RefObject<HTMLElement> }) {
+  return (
+    <section ref={finalRef} className="v7-final-cta">
+      <div className="v7-container">
+        <div className="v7-final-card v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, bukan dari katalog yang membuat bingung.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-button v7-button-outline">Lihat paket di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
+      </div>
+    </section>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="v7-footer" id="footer-hub">
+      <div className="v7-container">
+        <div className="v7-footer-grid">
+          <div><a href="#top" className="v7-brand"><Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} /></a><p>Website untuk ditemukan. Sistem untuk operasional jalan.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-footer-contact">Chat tim kami di WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
+          <div><strong>Public Web</strong><a href="#solusi">Solusi</a><a href="#cara-kerja">Cara kerja</a><a href="#karya">Karya</a><a href="#harga">Harga</a><a href="#faq">FAQ</a></div>
+          <div><strong>Store</strong><a href={STORE_PATH}>Lihat paket dan harga</a><a href={STORE_PATH}>Hitung kebutuhanmu</a><a href={STORE_PATH}>Track order</a></div>
+          <div><strong>Hub</strong><HubEntry /><span className="v7-footer-muted">{HUB_URL ? 'Project, billing, support.' : 'Route Hub belum dikonfirmasi; tidak ada URL placeholder.'}</span></div>
+        </div>
+        <div className="v7-footer-bottom"><span>© {new Date().getFullYear()} Webzoka</span><span>Harga transparan · target launch 3–5 hari · demo diberi label sesuai status</span><span><a href="/kebijakan-privasi">Kebijakan Privasi</a> · <a href="/syarat-ketentuan">Syarat & Ketentuan</a></span></div>
+      </div>
+    </footer>
+  )
+}
+
+export default function LandingPage() {
+  const heroRef = useRef<HTMLElement>(null)
+  const finalRef = useRef<HTMLElement>(null)
+  const [heroPassed, setHeroPassed] = useState(false)
+  const [finalVisible, setFinalVisible] = useState(false)
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll('.v7-reveal')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12 })
+    revealElements.forEach((element) => observer.observe(element))
+
+    const heroObserver = new IntersectionObserver(([entry]) => setHeroPassed(!entry.isIntersecting), { threshold: 0.05 })
+    if (heroRef.current) heroObserver.observe(heroRef.current)
+    const finalObserver = new IntersectionObserver(([entry]) => setFinalVisible(entry.isIntersecting), { threshold: 0.1 })
+    if (finalRef.current) finalObserver.observe(finalRef.current)
+
+    return () => { observer.disconnect(); heroObserver.disconnect(); finalObserver.disconnect() }
+  }, [])
+
+  return (
+    <div className="v7-page">
+      <a className="v7-skip-link" href="#main">Lewati ke konten</a>
+      <PublicNav />
+      <main id="main" tabIndex={-1}>
+        <HeroSection heroRef={heroRef} />
+        <PainSection />
+        <OfferSection />
+        <SignatureSection />
+        <PortfolioSection />
+        <ProcessSection />
+        <PricingSection />
         <TrustSection />
-        <ProofSection />
-        <PortfolioGallery />
-        <Testimonials />
         <FaqSection />
-
-        <section id="harga" className="py-14 lg:py-24 bg-[#070B14] relative overflow-hidden">
-          {/* Background mesh */}
-          <div className="absolute inset-0 opacity-30" style={{backgroundImage: 'radial-gradient(ellipse 80% 50% at 50% -20%, #0071E3, transparent)'}} />
-          <div className="absolute inset-0 opacity-10" style={{backgroundImage: 'radial-gradient(ellipse 60% 60% at 80% 80%, #3B82F6, transparent)'}} />
-          <div className="max-w-4xl mx-auto text-center px-4 relative z-10">
-              <p className="text-[12px] font-bold uppercase tracking-widest text-blue-400 mb-6">Mulai Sekarang</p>
-              <h2 className="text-3xl md:text-4xl font-black mb-6 tracking-tight text-white sf-display-heavy leading-[1.1]">
-                Berhenti Ngurus Manual.<br className="hidden md:block" /> <span className="text-[#0071E3]">Mulai Hari Ini.</span>
-              </h2>
-              <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto leading-relaxed">
-                Pilih industri kamu di kalkulator, lihat estimasinya, langsung pesan — tanpa nunggu sales.
-                Masih ragu?{' '}
-                <a
-                  href={waLink(WA_TANYA_UMUM)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#0071E3] font-bold hover:underline"
-                >
-                  Chat tim kami dulu
-                </a>
-                , gratis, tanpa script jualan.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a
-                  href="/seluruh-layanan"
-                  className="inline-flex items-center justify-center gap-2 bg-[#0071E3] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:scale-105 hover:bg-[#005BB5] transition-all glow-button"
-                >
-                  Rakit Website Sekarang <ArrowRight size={18} />
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setDemoOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-bold hover:bg-white/20 active:scale-[0.96] transition-all backdrop-blur-sm"
-                >
-                  Lihat Demo Sistem
-                </button>
-              </div>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
-                <p className="text-gray-500 text-sm font-medium">Tidak ada komitmen. Tidak ada biaya konsultasi.</p>
-              </div>
-          </div>
-        </section>
+        <FinalCta finalRef={finalRef} />
       </main>
-
-      <footer className="bg-[#F5F5F7] border-t border-black/5 pt-20 pb-10 px-4">
-          <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-2 md:grid-cols-12 gap-12 mb-16">
-                  {/* Brand Column */}
-                  <div className="col-span-full md:col-span-4 space-y-6">
-                      <div className="flex items-center gap-3">
-                          <Image src="/images/logo-wide-clean.png" alt="Webzoka — Part of Japan Arena Corp" width={170} height={56} className="h-11 w-auto object-contain" />
-                      </div>
-                      <p className="text-sm text-gray-600 leading-relaxed max-w-xs">
-                          Untuk bisnis yang sudah capek ngurus semuanya sendiri — dari website profesional sampai operasional yang berjalan otomatis. Tanpa ribet, tanpa drama.
-                      </p>
-                      <a
-                          href={waLink(WA_TANYA_UMUM)}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors"
-                      >
-                          <Phone size={16} /> Chat tim kami di WhatsApp
-                      </a>
-                  </div>
-
-                  {/* Product Links */}
-                  <div className="col-span-1 md:col-span-2 space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Platform</p>
-                      <ul className="space-y-3 text-sm text-gray-500">
-                          <li><a href="https://lms.webzoka.com" className="hover:text-[#0071E3] transition-colors">LMS Portal</a></li>
-                          <li><a href="https://clinic.webzoka.com" className="hover:text-[#0071E3] transition-colors">Clinic Management</a></li>
-                          <li><a href="https://pharmacy.webzoka.com" className="hover:text-[#0071E3] transition-colors">Pharmacy System</a></li>
-                          <li><a href="https://laundry.webzoka.com" className="hover:text-[#0071E3] transition-colors">Laundry Kiloan</a></li>
-                          <li><a href="https://stock.webzoka.com" className="hover:text-[#0071E3] transition-colors">Stok & Operasi</a></li>
-                          <li><Link href="/seluruh-layanan" className="hover:text-[#0071E3] transition-colors">Rakit Website Custom</Link></li>
-                      </ul>
-                  </div>
-
-                  {/* Company Links */}
-                  <div className="col-span-1 md:col-span-2 space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Perusahaan</p>
-                      <ul className="space-y-3 text-sm text-gray-500">
-                          <li><Link href="/tentang-kami" className="hover:text-[#0071E3] transition-colors">Tentang Kami</Link></li>
-                          <li><Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link></li>
-                          <li><Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link></li>
-                          <li>
-                            <a
-                              href={`${WB_URL}/track`}
-                              className="hover:text-[#0071E3] transition-colors"
-                            >
-                              Lacak Pesanan
-                            </a>
-                          </li>
-                      </ul>
-                  </div>
-
-                  {/* Contact Info */}
-                  <div className="col-span-full md:col-span-4 space-y-5">
-                      <p className="text-xs font-bold uppercase tracking-widest text-gray-900">Hubungi Kami</p>
-                      <ul className="space-y-4 text-sm text-gray-500">
-                          <li className="flex gap-3">
-                              <MapPin size={18} className="text-[#0071E3] shrink-0" />
-                              <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>                          </li>
-                          <li className="flex gap-3">
-                              <Mail size={18} className="text-[#0071E3] shrink-0" />
-                              <span>contact@webzoka.com</span>
-                          </li>
-                          <li className="flex gap-3">
-                              <Phone size={18} className="text-[#0071E3] shrink-0" />
-                              <span>+62 812-9691-7963</span>
-                          </li>
-                          <li className="flex gap-3">
-                              <MessageCircle size={18} className="text-[#0071E3] shrink-0" />
-                              <span>Support WA: Senin–Sabtu, 08.00–17.00 WIB</span>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-
-              {/* Bottom Copyright */}
-              <div className="pt-10 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
-                  <div>
-                    <p className="text-[12px] text-gray-600 font-medium">
-                        &copy; {new Date().getFullYear()} Webzoka. All rights reserved.
-                    </p>
-                    <p className="text-xs text-gray-500 mt-1">
-                      Webzoka adalah nama usaha terdaftar yang beroperasi di bawah hukum Republik Indonesia.
-                    </p>
-                  </div>
-                  <div className="flex gap-8 text-[12px] text-gray-600 font-medium">
-                      <Link href="/kebijakan-privasi" className="hover:text-[#0071E3] transition-colors">Kebijakan Privasi</Link>
-                      <Link href="/syarat-ketentuan" className="hover:text-[#0071E3] transition-colors">Syarat &amp; Ketentuan</Link>
-                  </div>
-              </div>
-          </div>
-      </footer>
+      <Footer />
+      <div className={`v7-mobile-cta ${heroPassed && !finalVisible ? 'is-visible' : ''}`} aria-hidden={!(heroPassed && !finalVisible)}>
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">Konsultasi WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
+      </div>
     </div>
   )
 }

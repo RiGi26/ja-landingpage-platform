@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Syne, Plus_Jakarta_Sans } from 'next/font/google'
+import { Plus_Jakarta_Sans, Syne } from 'next/font/google'
 import './globals.css'
 import RefCapture from './RefCapture'
 
@@ -18,9 +18,9 @@ const jakarta = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
+  title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
   description:
-    'Bikin website bisnis siap pakai (Klinik, LMS, Farmasi, Travel) mulai Rp 600rb. Proses 3–5 hari kerja, terima beres tanpa coding. Cek demonya di sini!',
+    'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target launch 3–5 hari untuk scope yang siap direview, dengan renewal transparan.',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
@@ -32,8 +32,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.webzoka.com'),
   alternates: { canonical: 'https://www.webzoka.com' },
   openGraph: {
-    title: 'Webzoka — Website & Sistem Bisnis untuk UKM Indonesia',
-    description: 'Website bisnis dalam 3–5 hari kerja. Portal klinik, LMS, farmasi, travel siap pakai. Mulai Rp 600.000.',
+    title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
+    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target launch 3–5 hari untuk scope siap review.',
     url: 'https://www.webzoka.com',
     siteName: 'Webzoka',
     locale: 'id_ID',
@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Webzoka — Website & Sistem Bisnis UKM Indonesia',
-    description: 'Website bisnis dalam 3–5 hari kerja. Mulai Rp 600.000.',
+    title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
+    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k.',
     images: ['/images/logo-light.jpg'],
   },
   robots: { index: true, follow: true },

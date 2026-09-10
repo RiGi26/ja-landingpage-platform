@@ -116,3 +116,36 @@
 **Remaining:** No P0, P1, or P2 issue remains inside the approved structural-shell scope. Deferred dependencies remain Hub route approval, Artikel implementation, attributable proof, the final renewal/commercial source, unsupported demo repairs, Store/Hub implementation changes, and any unrelated architecture work.
 
 **Next review gate:** Chat decides whether this left-navigation shell is visually approved or needs another shell round. No merge, production deployment, or automatic next round is authorized by this entry.
+
+## 2026-09-10 — Content and visual richness round, resumed and completed
+
+**Status:** Existing implementation recovered intact, committed, validated on a new Preview, and ready for Chat visual approval. No merge or production deployment performed.
+
+**Resume state:** The worktree was on `codex/webzoka-v7-public-homepage` at the approved structural-shell baseline. Only the expected uncommitted changes in `app/page.tsx` and `app/globals.css` were present. The 244px desktop rail, mobile drawer behavior, honest unavailable states, and approved homepage order were intact. No implementation redo was required.
+
+**Code commit:** `69d3c377e29e90b00183d5864d3daf0e8521a0d6` (`polish: enrich Webzoka V7 public homepage`).
+
+**Scope completed:** Strengthened the hero hierarchy and evidence composition; turned the business-pain section into a morning-to-evening editorial story; presented Website → Portal → Bundle as an explicit business progression with outcome flows; reshaped selected work into one featured proof case plus two clearly labelled previews; clarified the four-step process and qualified launch promise; separated starting price, scope factors, and renewal clarity; replaced empty trust placeholders with verifiable commitments; and gave the final consultation section a stronger closing composition.
+
+**Preserved guardrails:** The approved V6-style left-navigation shell, Beranda default, section order, dark signature moment, mobile drawer accessibility, compact sticky WhatsApp behavior, subdued Hub `Segera` treatment, Website → Portal → Bundle order, and honest Live/Preview labels remain unchanged in intent. No Hub URL, testimonial, logo, metric, unsupported demo, or new commercial term was invented. `docs/webzoka-v7/visual-blueprint.md` did not require clarification.
+
+**Fresh validation evidence:**
+
+- Local `npx tsc --noEmit`: exit 0.
+- Local `npm run build`: exit 0; 14 static pages generated.
+- `git diff --check`: exit 0 before staging and after the code commit.
+- `npm run lint`: still opens the repository's interactive ESLint setup prompt. The prompt was cancelled and no lint configuration or file change was created.
+- New Preview: `https://ja-landingpage-platform-nzixgv6fi-rigi26s-projects.vercel.app`.
+- Deployment: `dpl_3L6RRcy2T3JXte5rTzgPfiBf4hKD`, target Preview, status READY.
+- Fresh Preview HTTP checks: `/`, `/seluruh-layanan`, `/pricing/`, `/kebijakan-privasi`, and `/syarat-ketentuan` returned 200.
+- Fresh external Stock check: `https://stock.webzoka.com/demo` returned 200.
+
+**Desktop browser UAT at `1440 × 900`:** The browser reported the exact requested viewport. The fixed rail measured 244px and the content canvas began at 244px; the mobile header was hidden, so no top-navigation regression appeared. The hero rendered one 75.6px `h1` with stronger split-line hierarchy and a composed evidence frame. The pain section rendered as a two-column editorial story; the offers appeared in Website → Portal → Bundle progression; selected work used one featured case plus two supporting previews; the four-step process, pricing breakdown, and four-entry trust ledger were visibly distinct and readable. The dark signature section contained exactly one `Lihat demo Stock` action. Hub remained a non-link `Segera` entry. The document had one `h1`, no horizontal overflow, no images missing `alt`, and no captured console errors or warnings.
+
+**Mobile browser UAT at `390 × 844`:** The browser reported the exact requested viewport and no horizontal overflow. The desktop rail was hidden and the compact header was visible. The menu target measured 44×44px; the drawer measured 336px; its close control measured 44×44px; navigation links measured 48px high. Opening the drawer moved focus to its close control, Escape closed it and restored focus to the menu button, navigation closed it and released body scroll lock. Editorial layouts stacked to one column. Website → Portal → Bundle remained both DOM and visual order. The hero primary CTA measured 50px high; FAQ summaries measured 64px and the first answer expanded visibly. The sticky WhatsApp action measured 192×44px when active; while the final consultation section was visible it moved fully off-screen, had no pointer events, and had zero overlap. Keyboard Tab exposed a visible skip link with a blue focus outline. Deployed CSS contained the reduced-motion rule that shortens animation/transition duration and removes reveal transforms. No images were missing `alt`, and no captured console errors or warnings remained.
+
+**Remaining severity:** P0 none. P1 none. P2 none within the approved content-and-visual-richness scope.
+
+**Deferred items:** Hub route approval; Artikel implementation; attributable customer proof, permissions, and measurable outcomes; one approved renewal/commercial source; route-by-route repair and validation for unsupported demos; Store/Hub implementation work; final typography licensing/hosting confirmation; and final WhatsApp operating details. These are factual/product dependencies, not authorization for another visual round.
+
+**Next review gate:** Chat decides whether the enriched homepage is visually approved. Exact decision needed: approve this richness round for the next separately authorized integration step, or identify one concrete visual issue that requires a bounded revision. Do not merge, deploy production, or automatically begin another round from this entry.

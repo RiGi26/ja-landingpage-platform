@@ -22,7 +22,8 @@ import {
 } from 'lucide-react'
 import { waLink as buildWaLink } from '@/constants/site'
 
-const STORE_PATH = '/seluruh-layanan'
+const STORE_PATH = '/store'
+const PACKAGE_PATH = '/seluruh-layanan'
 const STOCK_DEMO_URL = 'https://stock.webzoka.com/demo'
 const JAPAN_ARENA_URL = 'https://www.japanarena.id'
 const HUB_URL = process.env.NEXT_PUBLIC_HUB_URL?.trim() || ''
@@ -356,7 +357,7 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
               Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
             </a>
-            <a href={STORE_PATH} className="v7-text-link">Lihat paket dan harga <ArrowRight size={16} aria-hidden="true" /></a>
+            <a href={PACKAGE_PATH} className="v7-text-link">Lihat paket dan harga <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
         </div>
@@ -454,14 +455,14 @@ function OfferSection() {
                   <h3>{offer.title}</h3>
                   <p>{offer.copy}</p>
                   <ul>{offer.outcomes.map((outcome) => <li key={outcome}><Check size={15} aria-hidden="true" />{outcome}</li>)}</ul>
-                  <a href={STORE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
+                  <a href={PACKAGE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
                 </div>
                 <OfferProof kind={offer.id} />
               </article>
             )
           })}
         </div>
-        <div className="v7-section-cta"><a href={STORE_PATH} className="v7-text-link">Bandingkan paket <ArrowRight size={16} aria-hidden="true" /></a></div>
+        <div className="v7-section-cta"><a href={PACKAGE_PATH} className="v7-text-link">Bandingkan paket <ArrowRight size={16} aria-hidden="true" /></a></div>
       </div>
     </section>
   )
@@ -532,7 +533,7 @@ function PricingSection() {
       <div className="v7-container">
         <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Beranda memberi gambaran awal. Store memberi detail dan kalkulasi lengkap.</p></div>
         <div className="v7-pricing-layout">
-          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={STORE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
+          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={PACKAGE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
           <div className="v7-price-clarity v7-reveal v7-reveal-delay-1">
             <div><span>01</span><div><small>Yang menjadi titik mulai</small><strong>Website dasar dan kebutuhan publik yang sudah jelas.</strong><p>Jumlah halaman serta kesiapan konten membentuk scope awal.</p></div></div>
             <div><span>02</span><div><small>Yang menyesuaikan harga</small><strong>Integrasi, alur operasional, dan level dukungan.</strong><p>Portal dan Bundle dibicarakan dari pekerjaan nyata yang ingin dirapikan.</p></div></div>
@@ -580,7 +581,7 @@ function FinalCta({ finalRef }: { finalRef: React.RefObject<HTMLElement> }) {
     <section ref={finalRef} className="v7-final-cta">
       <div className="v7-container v7-final-layout v7-reveal">
         <div><p className="v7-eyebrow v7-eyebrow-amber">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2></div>
-        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link">Lihat paket di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
+        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link">Lihat template di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
       </div>
     </section>
   )
@@ -593,7 +594,7 @@ function Footer() {
         <div className="v7-footer-grid">
           <div><a href="#top" className="v7-brand"><Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} /></a><p>Website untuk ditemukan. Sistem untuk operasional jalan.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-footer-contact">Chat tim kami di WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
           <div><strong>Public Web</strong><a href="#solusi">Solusi</a><a href="#cara-kerja">Cara kerja</a><a href="#karya">Karya</a><a href="#harga">Harga</a><a href="#faq">FAQ</a></div>
-          <div><strong>Store</strong><a href={STORE_PATH}>Lihat paket dan harga</a><a href={STORE_PATH}>Hitung kebutuhanmu</a><a href={STORE_PATH}>Lacak pesanan</a></div>
+          <div><strong>Store</strong><a href={STORE_PATH}>Lihat template</a><a href={PACKAGE_PATH}>Hitung kebutuhanmu</a><a href={PACKAGE_PATH}>Lacak pesanan</a></div>
           <div><strong>Hub</strong><HubEntry /><span className="v7-footer-muted">{HUB_URL ? 'Proyek, tagihan, dukungan.' : 'Route Hub belum dikonfirmasi; tidak ada URL placeholder.'}</span></div>
         </div>
         <div className="v7-footer-bottom"><span>© {new Date().getFullYear()} Webzoka</span><span>Harga transparan · target peluncuran 3–5 hari · demo diberi label sesuai status</span><span><a href="/kebijakan-privasi">Kebijakan Privasi</a> · <a href="/syarat-ketentuan">Syarat & Ketentuan</a></span></div>

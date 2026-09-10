@@ -32,11 +32,17 @@ const WHATSAPP_URL = buildWaLink(WA_MESSAGE)
 
 type Status = 'Live' | 'Preview' | 'Case study'
 
-const navItems = [
+const exploreNavItems = [
   { label: 'Solusi', href: '#solusi' },
-  { label: 'Cara kerja', href: '#cara-kerja' },
+  { label: 'Webzoka Store', href: STORE_PATH, external: true },
   { label: 'Karya', href: '#karya' },
   { label: 'Harga', href: '#harga' },
+]
+
+const learnNavItems = [
+  { label: 'Artikel', href: '' },
+  { label: 'FAQ', href: '#faq' },
+  { label: 'Komitmen Kami', href: '#komitmen' },
 ]
 
 const faqItems = [
@@ -92,11 +98,11 @@ function StatusBadge({ status }: { status: Status }) {
   )
 }
 
-function HubEntry({ className = '' }: { className?: string }) {
+function HubEntry({ className = '', label = 'Masuk Hub' }: { className?: string; label?: string }) {
   if (HUB_URL) {
     return (
       <a href={HUB_URL} className={`v7-hub-entry ${className}`}>
-        Masuk Hub <ArrowUpRight size={15} aria-hidden="true" />
+        {label} <ArrowUpRight size={15} aria-hidden="true" />
       </a>
     )
   }
@@ -105,82 +111,168 @@ function HubEntry({ className = '' }: { className?: string }) {
     <span
       className={`v7-hub-entry v7-hub-pending ${className}`}
       title="Route Hub belum dikonfirmasi"
-      aria-label="Masuk Hub, route belum dikonfirmasi"
+      aria-label={`${label}, route belum dikonfirmasi`}
     >
-      Masuk Hub <span className="v7-pending-dot">Segera</span>
+      {label} <span className="v7-pending-dot">Segera</span>
     </span>
   )
 }
 
-function PublicNav() {
+function NavGroup({ label, items, onNavigate }: {
+  label?: string
+  items: { label: string; href: string; external?: boolean }[]
+  onNavigate?: () => void
+}) {
+  return (
+    <div className="v7-nav-group">
+      {label && <p className="v7-nav-group-label">{label}</p>}
+      <nav aria-label={label || 'Navigasi utama'}>
+        {items.map((item) => item.href ? (
+          <a key={item.label} href={item.href} onClick={onNavigate}>
+            <span>{item.label}</span>
+            {item.external && <ArrowUpRight size={14} aria-hidden="true" />}
+          </a>
+        ) : (
+          <span key={item.label} className="v7-nav-unavailable" aria-disabled="true" aria-label={`${item.label}, belum tersedia`}>
+            {item.label}
+          </span>
+        ))}
+      </nav>
+    </div>
+  )
+}
+
+function NavigationBody({ onNavigate }: { onNavigate?: () => void }) {
+  return (
+    <div className="v7-navigation-body">
+      <div className="v7-nav-primary">
+        <a href="#top" aria-current="page" onClick={onNavigate}>
+          <span>Beranda</span>
+          <span className="v7-active-mark" aria-hidden="true" />
+        </a>
+      </div>
+      <NavGroup label="Jelajahi" items={exploreNavItems} onNavigate={onNavigate} />
+      <NavGroup label="Pelajari" items={learnNavItems} onNavigate={onNavigate} />
+    </div>
+  )
+}
+
+function BrandLockup() {
+  return (
+    <div className="v7-brand-lockup">
+      <a href="#top" className="v7-brand" aria-label="Webzoka, kembali ke Beranda">
+        <Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} priority />
+      </a>
+      <p>Website dan sistem kerja untuk bisnis Indonesia.</p>
+    </div>
+  )
+}
+
+function PublicShell() {
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const drawerRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 72)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    if (!open) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus())
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false)
+        window.requestAnimationFrame(() => menuButtonRef.current?.focus())
+        return
+      }
+
+      if (event.key !== 'Tab' || !drawerRef.current) return
+      const focusable = Array.from(drawerRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ))
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+      window.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [open])
 
   const close = () => setOpen(false)
+  const closeAndRestoreFocus = () => {
+    setOpen(false)
+    window.requestAnimationFrame(() => menuButtonRef.current?.focus())
+  }
 
   return (
-    <header className={`v7-header ${scrolled ? 'is-scrolled' : ''}`}>
-      <div className="v7-container v7-header-inner">
-        <a href="#top" className="v7-brand" aria-label="Webzoka, kembali ke awal">
-          <Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} priority />
-        </a>
-
-        <nav className="v7-desktop-nav" aria-label="Navigasi utama">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href}>
-              {item.label}
-            </a>
-          ))}
-          <a href={STORE_PATH} className="v7-nav-store">
-            Store <ArrowUpRight size={13} aria-hidden="true" />
+    <>
+      <aside className="v7-sidebar" aria-label="Navigasi Webzoka">
+        <BrandLockup />
+        <NavigationBody />
+        <div className="v7-sidebar-utility">
+          <HubEntry label="Webzoka Hub" />
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-sidebar-consultation">
+            Konsultasi WhatsApp <ArrowUpRight size={14} aria-hidden="true" />
           </a>
-        </nav>
-
-        <div className="v7-header-actions">
-          <HubEntry className="v7-desktop-hub" />
-          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-small v7-button-primary v7-desktop-cta">
-            Konsultasi WhatsApp <MessageCircle size={15} aria-hidden="true" />
-          </a>
-          <button
-            type="button"
-            className="v7-menu-button"
-            aria-label={open ? 'Tutup menu' : 'Buka menu'}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-          </button>
         </div>
-      </div>
+      </aside>
+
+      <header className="v7-mobile-header">
+        <div className="v7-mobile-header-inner">
+          <a href="#top" className="v7-brand" aria-label="Webzoka, kembali ke Beranda">
+            <Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} priority />
+          </a>
+          {!open && (
+            <button
+              ref={menuButtonRef}
+              type="button"
+              className="v7-menu-button"
+              aria-label="Buka menu"
+              aria-expanded="false"
+              aria-controls="v7-mobile-drawer"
+              onClick={() => setOpen(true)}
+            >
+              <Menu size={20} aria-hidden="true" />
+            </button>
+          )}
+        </div>
+      </header>
 
       {open && (
-        <div className="v7-mobile-menu">
-          <nav aria-label="Navigasi mobile">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href} onClick={close}>
-                {item.label} <ArrowRight size={16} aria-hidden="true" />
+        <div className="v7-drawer-layer">
+          <button type="button" className="v7-drawer-backdrop" aria-label="Tutup menu" onClick={closeAndRestoreFocus} />
+          <aside ref={drawerRef} id="v7-mobile-drawer" className="v7-mobile-drawer" role="dialog" aria-modal="true" aria-label="Menu Webzoka">
+            <div className="v7-drawer-head">
+              <BrandLockup />
+              <button ref={closeButtonRef} type="button" className="v7-menu-button" aria-label="Tutup menu" onClick={closeAndRestoreFocus}>
+                <X size={20} aria-hidden="true" />
+              </button>
+            </div>
+            <NavigationBody onNavigate={close} />
+            <div className="v7-sidebar-utility">
+              <HubEntry label="Webzoka Hub" />
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-sidebar-consultation" onClick={close}>
+                Konsultasi WhatsApp <ArrowUpRight size={14} aria-hidden="true" />
               </a>
-            ))}
-            <a href={STORE_PATH} onClick={close}>
-              Store <ArrowUpRight size={15} aria-hidden="true" />
-            </a>
-          </nav>
-          <div className="v7-mobile-menu-footer">
-            <HubEntry />
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary" onClick={close}>
-              Konsultasi WhatsApp <MessageCircle size={16} aria-hidden="true" />
-            </a>
-          </div>
+            </div>
+          </aside>
         </div>
       )}
-    </header>
+    </>
   )
 }
 
@@ -408,7 +500,7 @@ function TrustSection() {
     '[Metrik studi kasus + sumber]',
   ]
   return (
-    <section className="v7-section v7-paper-section v7-trust-section">
+    <section id="komitmen" className="v7-section v7-paper-section v7-trust-section">
       <div className="v7-container">
         <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Bukti dan kepercayaan</p><h2>Bukti yang jujur lebih berguna dari hiasan.</h2></div><p>Bagian ini sengaja menahan diri sampai nama, izin, dan sumber bukti siap dipublikasikan.</p></div>
         <div className="v7-trust-grid">{placeholders.map((text, index) => <div className="v7-trust-placeholder v7-reveal v7-reveal-delay-1" key={text}><span>0{index + 1}</span><p>{text}</p><small>Menunggu persetujuan dan atribusi.</small></div>)}</div>
@@ -485,20 +577,22 @@ export default function LandingPage() {
   return (
     <div className="v7-page">
       <a className="v7-skip-link" href="#main">Lewati ke konten</a>
-      <PublicNav />
-      <main id="main" tabIndex={-1}>
-        <HeroSection heroRef={heroRef} />
-        <PainSection />
-        <OfferSection />
-        <SignatureSection />
-        <PortfolioSection />
-        <ProcessSection />
-        <PricingSection />
-        <TrustSection />
-        <FaqSection />
-        <FinalCta finalRef={finalRef} />
-      </main>
-      <Footer />
+      <PublicShell />
+      <div className="v7-content-shell">
+        <main id="main" tabIndex={-1}>
+          <HeroSection heroRef={heroRef} />
+          <PainSection />
+          <OfferSection />
+          <SignatureSection />
+          <PortfolioSection />
+          <ProcessSection />
+          <PricingSection />
+          <TrustSection />
+          <FaqSection />
+          <FinalCta finalRef={finalRef} />
+        </main>
+        <Footer />
+      </div>
       <div className={`v7-mobile-cta ${heroPassed && !finalVisible ? 'is-visible' : ''}`} aria-hidden={!(heroPassed && !finalVisible)}>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" tabIndex={heroPassed && !finalVisible ? 0 : -1} className="v7-button v7-button-primary">Chat WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
       </div>

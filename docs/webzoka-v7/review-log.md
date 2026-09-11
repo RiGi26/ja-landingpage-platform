@@ -149,3 +149,17 @@
 **Deferred items:** Hub route approval; Artikel implementation; attributable customer proof, permissions, and measurable outcomes; one approved renewal/commercial source; route-by-route repair and validation for unsupported demos; Store/Hub implementation work; final typography licensing/hosting confirmation; and final WhatsApp operating details. These are factual/product dependencies, not authorization for another visual round.
 
 **Next review gate:** Chat decides whether the enriched homepage is visually approved. Exact decision needed: approve this richness round for the next separately authorized integration step, or identify one concrete visual issue that requires a bounded revision. Do not merge, deploy production, or automatically begin another round from this entry.
+
+## 2026-09-11 — Store V2 Warm Commerce prototype round
+
+**Status:** Implemented and validated on a new Preview; ready for Chat visual approval. No merge or production deployment performed.
+
+**Decision:** Keep Public V7's approved left-navigation shell intact. Introduce Store V2 as a separate, template-first browsing experience, with one scoped entry: **Warm Commerce** for owner-led Indonesian F&B businesses. The Store journey is Template → Preview → consultation for customization, not Service → Package → Buy. The prototype remains visibly `Preview` and is not indexed as a Live Store product.
+
+**Scope completed:** `/store`, `/store/template/warm-commerce`, and `/store/template/warm-commerce/preview`; a Store entry card, detail page, fictional Dapur Rona preview, responsive navigation, catalog filter, WhatsApp consultation hooks, original food visuals, and a small reusable template data/component layer. Public Store links now target `/store`; legacy package configuration remains at `/seluruh-layanan`.
+
+**Evidence / reference:** [Focused Warm Commerce review](warm-commerce-review.md). Code commit `d666f6c`; Preview `https://ja-landingpage-platform-krvlzqqqh-rigi26s-projects.vercel.app`; deployment `dpl_5ALpkhk4n1UhJbbXsPRgYyiN6xg4`, target Preview, status READY. Fresh typecheck, production build, diff check, route checks, desktop 1440 × 900 UAT, and mobile 390 × 844 UAT passed. The repository lint command remains interactive setup only and was left unchanged.
+
+**Remaining:** No P0/P1/P2 item within this approved prototype scope. Full Store implementation, Customize/configurator, payment/checkout, accounts, Portal features, real customer assets, production indexing, and all other templates remain deferred.
+
+**Next review gate:** Chat approves Warm Commerce as the reference standard for a future separately authorized template round, or names one concrete Warm Commerce revision. Do not start another template automatically.

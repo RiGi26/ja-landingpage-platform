@@ -22,7 +22,7 @@ import {
 } from 'lucide-react'
 import { waLink as buildWaLink } from '@/constants/site'
 
-const STORE_PATH = '/store'
+const STORE_PATH = 'https://store.webzoka.com/store'
 const PACKAGE_PATH = '/seluruh-layanan'
 const STOCK_DEMO_URL = 'https://stock.webzoka.com/demo'
 const JAPAN_ARENA_URL = 'https://www.japanarena.id'

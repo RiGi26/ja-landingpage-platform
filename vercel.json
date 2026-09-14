@@ -1,4 +1,61 @@
 {
+  "redirects": [
+    {
+      "source": "/store",
+      "destination": "https://store.webzoka.com/store",
+      "permanent": true
+    },
+    {
+      "source": "/store/",
+      "destination": "https://store.webzoka.com/store",
+      "permanent": true
+    },
+    {
+      "source": "/store/template/warm-commerce",
+      "destination": "https://store.webzoka.com/store/template/warm-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/store/template/warm-commerce/",
+      "destination": "https://store.webzoka.com/store/template/warm-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/store/template/warm-commerce/preview",
+      "destination": "https://store.webzoka.com/store/template/warm-commerce/preview",
+      "permanent": true
+    },
+    {
+      "source": "/store/template/warm-commerce/preview/",
+      "destination": "https://store.webzoka.com/store/template/warm-commerce/preview",
+      "permanent": true
+    },
+    {
+      "source": "/store/customize/warm-commerce",
+      "destination": "https://store.webzoka.com/store/customize/warm-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/store/customize/warm-commerce/",
+      "destination": "https://store.webzoka.com/store/customize/warm-commerce",
+      "permanent": true
+    },
+    {
+      "source": "/store/summary",
+      "destination": "https://store.webzoka.com/store/summary",
+      "permanent": true
+    },
+    {
+      "source": "/store/summary/",
+      "destination": "https://store.webzoka.com/store/summary",
+      "permanent": true
+    },
+    {
+      "source": "/store/:path*",
+      "destination": "https://store.webzoka.com/store/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

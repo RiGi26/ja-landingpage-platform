@@ -347,17 +347,17 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
         <div className="v7-hero-copy v7-reveal">
           <p className="v7-eyebrow"><span className="v7-eyebrow-line" />Untuk bisnis yang ingin terlihat profesional dan jalan lebih rapi</p>
           <h1><span>Website untuk ditemukan.</span> <em>Sistem untuk operasional jalan.</em></h1>
-          <p className="v7-hero-lede">Bangun kepercayaan di depan, rapikan kerja harian di belakang. Mulai dari kebutuhan yang paling penting.</p>
+          <p className="v7-hero-lede">Website dan sistem untuk bantu bisnis kamu tampil online dan lebih mudah dikelola.</p>
           <div className="v7-proof-row" aria-label="Bukti awal Webzoka">
             <span><b>Mulai Rp600k</b><small>harga awal</small></span>
-            <span><b>Siap tayang 3–5 hari</b><small>untuk scope siap review</small></span>
+            <span><b>Siap tayang 3–5 hari</b><small>untuk kebutuhan siap direview</small></span>
             <span><b>Perpanjangan transparan</b><small>detail sebelum bayar</small></span>
           </div>
           <div className="v7-hero-actions">
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
               Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
             </a>
-            <a href={PACKAGE_PATH} className="v7-text-link">Lihat paket dan harga <ArrowRight size={16} aria-hidden="true" /></a>
+            <a href={STORE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link">Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
         </div>

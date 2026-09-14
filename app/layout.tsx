@@ -20,7 +20,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
   description:
-    'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target peluncuran 3–5 hari untuk scope yang siap direview, dengan perpanjangan transparan.',
+    'Website dan sistem untuk bantu bisnis tampil online dan lebih mudah dikelola. Mulai Rp600k, target peluncuran 3–5 hari untuk kebutuhan yang siap direview, dengan perpanjangan transparan.',
   keywords: [
     'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
     'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.webzoka.com' },
   openGraph: {
     title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
-    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k, target peluncuran 3–5 hari untuk scope siap review.',
+    description: 'Website dan sistem untuk bantu bisnis tampil online dan lebih mudah dikelola. Mulai Rp600k, target peluncuran 3–5 hari untuk kebutuhan siap direview.',
     url: 'https://www.webzoka.com',
     siteName: 'Webzoka',
     locale: 'id_ID',

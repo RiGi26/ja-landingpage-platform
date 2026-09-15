@@ -1,8 +1,10 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google'
-import { Analytics } from '@vercel/analytics/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 import RefCapture from './RefCapture'
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
 
 const syne = Syne({
   subsets: ['latin'],
@@ -90,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <RefCapture />
         <div id="app-shell">{children}</div>
-        <Analytics mode={process.env.NODE_ENV === 'development' ? 'development' : 'production'} />
+        {GA_MEASUREMENT_ID ? <GoogleAnalytics gaId={GA_MEASUREMENT_ID} /> : null}
       </body>
     </html>
   )

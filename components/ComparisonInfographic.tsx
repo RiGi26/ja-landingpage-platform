@@ -1,6 +1,6 @@
 'use client'
 
-import { TrendingDown, Zap, ShieldCheck, XCircle, CheckCircle2 } from 'lucide-react'
+import { TrendingDown, Zap, XCircle, CheckCircle2 } from 'lucide-react'
 
 const COMPARISON_DATA = [
   { portal: 'LMS (Bisnis)', others: 1950000, ja: 499000, save: '74%' },

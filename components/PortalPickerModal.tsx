@@ -1,7 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { X, LayoutDashboard, GraduationCap, Building2, WashingMachine, ArrowRight, LogIn, Pill, Boxes } from 'lucide-react'
+import { X, LayoutDashboard, GraduationCap, Building2, WashingMachine, ArrowRight, Pill, Boxes } from 'lucide-react'
 
 export default function PortalPickerModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   if (!isOpen) return null

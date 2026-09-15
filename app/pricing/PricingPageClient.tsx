@@ -544,7 +544,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           className={`flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pt-5 md:pt-0 pb-2 md:pb-0 mb-4 md:mb-20 items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
             currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
           }`}>
-          {currentPlatform.plans.map((plan, idx) => {
+          {currentPlatform.plans.map((plan) => {
             // Tab Stock pakai harga statis (Rp) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
             // Fallback tahunan = priceYearly bila ada, else bulanan × 10 (2 bln gratis).

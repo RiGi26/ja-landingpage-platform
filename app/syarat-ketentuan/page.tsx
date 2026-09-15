@@ -1,10 +1,12 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/LmsNavbar'
 import Link from 'next/link'
 import { ArrowRight, Mail } from 'lucide-react'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Syarat & Ketentuan — Webzoka',
   description: 'Syarat & Ketentuan penggunaan layanan Webzoka: ruang lingkup layanan, pemesanan & pembayaran, revisi, langganan, serta tanggung jawab masing-masing pihak.',
+  alternates: { canonical: 'https://www.webzoka.com/syarat-ketentuan/' },
 }
 
 const SECTIONS: { h: string; body: string[] }[] = [

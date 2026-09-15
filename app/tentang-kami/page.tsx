@@ -1,12 +1,14 @@
+import type { Metadata } from 'next'
 import Navbar from '@/components/LmsNavbar'
 import Link from 'next/link'
 import { MapPin, Mail, Phone, ArrowRight, MessageCircle } from 'lucide-react'
 
 const WA_NUMBER = '6281296917963'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Tentang Kami — Webzoka',
   description: 'Webzoka adalah platform digital buatan Indonesia untuk UKM. Website builder, LMS, portal klinik, farmasi, dan travel — semuanya dalam satu ekosistem.',
+  alternates: { canonical: 'https://www.webzoka.com/tentang-kami/' },
 }
 
 export default function TentangKamiPage() {

@@ -70,53 +70,6 @@ const websiteSchema = {
   url: 'https://www.webzoka.com',
 }
 
-const homepageFaqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Berapa lama website saya selesai?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: '3–5 hari kerja setelah data bisnis dan DP diterima. Konten sederhana bisa selesai lebih cepat. Website dengan fitur custom bisa lebih lama — kami konfirmasi timeline pasti sebelum mulai.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Apakah saya bisa pakai domain sendiri?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Ya. Kami bantu pointing domain kamu ke sistem kami. Belum punya domain? Bisa pakai subdomain gratis atau kami bantu daftarkan domain baru.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Apakah ada biaya setelah tahun pertama?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Ya, ada biaya perpanjangan untuk hosting dan pemeliharaan. Jumlahnya sudah tertera di kalkulator sejak awal — tidak ada biaya tersembunyi.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Apakah saya bisa request revisi?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Ya. Revisi konten dan layout minor termasuk dalam paket. Untuk perubahan besar, kami diskusikan estimasi biayanya dulu.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Apakah ada kontrak minimum atau bisa cancel kapan saja?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Tidak ada kontrak minimum. Untuk portal SaaS bisa berhenti kapan saja. Untuk website, hosting berjalan per tahun dan bisa tidak diperpanjang saat jatuh tempo.',
-      },
-    },
-  ],
-}
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className={`${syne.variable} ${jakarta.variable}`}>
@@ -128,10 +81,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageFaqSchema) }}
         />
       </head>
       {/* #app-shell membungkus konten halaman. Dialog/sheet di-portal ke <body>

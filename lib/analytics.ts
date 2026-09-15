@@ -89,7 +89,11 @@ export function loadAnalytics(measurementId: string | undefined): boolean {
   }
 
   window.dataLayer = window.dataLayer || []
-  window.gtag = window.gtag || ((...args: unknown[]) => window.dataLayer?.push(args))
+  window.gtag = window.gtag || function gtag(this: void) {
+    // Google Analytics expects the native Arguments object in dataLayer.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments)
+  }
   window.gtag('js', new Date())
   window.gtag('config', measurementId)
 

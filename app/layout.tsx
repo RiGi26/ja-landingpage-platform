@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import RefCapture from './RefCapture'
 
@@ -86,7 +87,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* #app-shell membungkus konten halaman. Dialog/sheet di-portal ke <body>
           sehingga jadi sibling shell ini — useDialogA11y men-`inert` shell saat
           dialog terbuka tanpa ikut menonaktifkan dialog-nya. */}
-      <body className="antialiased"><RefCapture /><div id="app-shell">{children}</div></body>
+      <body className="antialiased">
+        <RefCapture />
+        <div id="app-shell">{children}</div>
+        <Analytics mode={process.env.NODE_ENV === 'development' ? 'development' : 'production'} />
+      </body>
     </html>
   )
 }

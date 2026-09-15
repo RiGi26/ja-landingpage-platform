@@ -21,6 +21,7 @@ import {
   X,
 } from 'lucide-react'
 import { waLink as buildWaLink } from '@/constants/site'
+import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
 
 const STORE_PATH = 'https://store.webzoka.com/store'
 const PACKAGE_PATH = '/seluruh-layanan'
@@ -29,6 +30,13 @@ const JAPAN_ARENA_URL = 'https://www.japanarena.id'
 const HUB_URL = process.env.NEXT_PUBLIC_HUB_URL?.trim() || ''
 const WA_MESSAGE = 'Halo Webzoka, saya ingin konsultasi soal website dan sistem untuk bisnis saya.'
 const WHATSAPP_URL = buildWaLink(WA_MESSAGE)
+
+function trackStoreEntry() {
+  trackEvent(ANALYTICS_EVENTS.publicCtaStoreClick, {
+    source_page: '/',
+    destination: '/store',
+  })
+}
 
 type Status = 'Live' | 'Preview' | 'Case study'
 
@@ -128,7 +136,14 @@ function NavGroup({ label, items, onNavigate }: {
       {label && <p className="v7-nav-group-label">{label}</p>}
       <nav aria-label={label || 'Navigasi utama'}>
         {items.map((item) => item.href ? (
-          <a key={item.label} href={item.href} onClick={onNavigate}>
+          <a
+            key={item.label}
+            href={item.href}
+            onClick={() => {
+              if (item.href === STORE_PATH) trackStoreEntry()
+              onNavigate?.()
+            }}
+          >
             <span>{item.label}</span>
             {item.external && <ArrowUpRight size={14} aria-hidden="true" />}
           </a>
@@ -356,7 +371,7 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
               Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
             </a>
-            <a href={STORE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link">Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
+            <a href={STORE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link" onClick={trackStoreEntry}>Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
         </div>
@@ -580,7 +595,7 @@ function FinalCta({ finalRef }: { finalRef: React.RefObject<HTMLElement> }) {
     <section ref={finalRef} className="v7-final-cta">
       <div className="v7-container v7-final-layout v7-reveal">
         <div><p className="v7-eyebrow v7-eyebrow-amber">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2></div>
-        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link">Lihat template di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
+        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link" onClick={trackStoreEntry}>Lihat template di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
       </div>
     </section>
   )
@@ -593,7 +608,7 @@ function Footer() {
         <div className="v7-footer-grid">
           <div><a href="#top" className="v7-brand"><Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} /></a><p>Website untuk ditemukan. Sistem untuk operasional jalan.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-footer-contact">Chat tim kami di WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
           <div><strong>Public Web</strong><a href="#solusi">Solusi</a><a href="#cara-kerja">Cara kerja</a><a href="#karya">Karya</a><a href="#harga">Harga</a><a href="#faq">FAQ</a></div>
-          <div><strong>Store</strong><a href={STORE_PATH}>Lihat template</a><a href={PACKAGE_PATH}>Hitung kebutuhanmu</a><a href={PACKAGE_PATH}>Lacak pesanan</a></div>
+          <div><strong>Store</strong><a href={STORE_PATH} onClick={trackStoreEntry}>Lihat template</a><a href={PACKAGE_PATH}>Hitung kebutuhanmu</a><a href={PACKAGE_PATH}>Lacak pesanan</a></div>
           <div><strong>Hub</strong><HubEntry /><span className="v7-footer-muted">{HUB_URL ? 'Proyek, tagihan, dukungan.' : 'Route Hub belum dikonfirmasi; tidak ada URL placeholder.'}</span></div>
         </div>
         <div className="v7-footer-bottom"><span>© {new Date().getFullYear()} Webzoka</span><span>Harga transparan · target peluncuran 3–5 hari · demo diberi label sesuai status</span><span><a href="/kebijakan-privasi">Kebijakan Privasi</a> · <a href="/syarat-ketentuan">Syarat & Ketentuan</a></span></div>

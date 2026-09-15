@@ -45,7 +45,7 @@ const SECTIONS: { h: string; body: string[] }[] = [
   {
     h: '5. Cookie',
     body: [
-      'Website kami memakai cookie secukupnya untuk menjaga sesi dan mengukur performa halaman. Kamu bisa mematikan cookie lewat pengaturan browser, namun sebagian fitur mungkin tidak berjalan optimal.',
+      'Website kami memakai cookie secukupnya untuk menjaga sesi dan, hanya setelah kamu menyetujuinya melalui pilihan analitik, menggunakan Google Analytics 4 untuk memahami penggunaan halaman dan alur template. Analitik ini tidak menerima isi draft, nama, nomor WhatsApp, pesan, token, atau user-ID. Kamu bisa mengubah pilihan analitik kapan saja melalui Pengaturan privasi atau mematikan cookie lewat pengaturan browser.',
     ],
   },
   {

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { WB_URL as STUDIO_URL } from '@/constants/site'
 
 const WA_NUMBER   = process.env.NEXT_PUBLIC_WA_NUMBER  ?? '6281296917963'
 const LMS_URL     = process.env.NEXT_PUBLIC_LMS_URL    ?? 'https://lms.webzoka.com'

@@ -36,7 +36,7 @@ export default function TentangKamiPage() {
             Webzoka adalah perusahaan teknologi Indonesia yang membangun perangkat lunak bisnis (SaaS) untuk usaha kecil dan menengah — dari website profesional hingga sistem operasional lengkap.
           </p>
           <p className="text-base text-gray-500 leading-relaxed max-w-2xl mt-4">
-            Nama "Webzoka" mencerminkan visi kami: platform digital yang kuat dan mudah, dibangun dengan hati untuk pelaku bisnis Indonesia.
+            Nama &quot;Webzoka&quot; mencerminkan visi kami: platform digital yang kuat dan mudah, dibangun dengan hati untuk pelaku bisnis Indonesia.
           </p>
         </div>
 

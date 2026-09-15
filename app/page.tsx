@@ -334,7 +334,6 @@ function HeroEvidence() {
       </div>
       <div className="v7-evidence-note v7-evidence-note-one"><Sparkles size={14} aria-hidden="true" /> pintu depan</div>
       <div className="v7-evidence-paper"><BrowserFrame /></div>
-      <div className="v7-evidence-route"><span>ditemukan</span><i aria-hidden="true" /><span>dikelola</span></div>
       <div className="v7-evidence-mini"><OperationsFrame /></div>
     </div>
   )

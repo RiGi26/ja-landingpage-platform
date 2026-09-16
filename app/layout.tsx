@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans, Syne } from 'next/font/google'
 import './globals.css'
 import RefCapture from './RefCapture'
+import AnalyticsConsent from '@/components/AnalyticsConsent'
 
 const syne = Syne({
   subsets: ['latin'],
@@ -86,7 +87,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {/* #app-shell membungkus konten halaman. Dialog/sheet di-portal ke <body>
           sehingga jadi sibling shell ini — useDialogA11y men-`inert` shell saat
           dialog terbuka tanpa ikut menonaktifkan dialog-nya. */}
-      <body className="antialiased"><RefCapture /><div id="app-shell">{children}</div></body>
+      <body className="antialiased">
+        <RefCapture />
+        <div id="app-shell">{children}</div>
+        <AnalyticsConsent />
+      </body>
     </html>
   )
 }

@@ -146,10 +146,10 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online', 'Notif WA otomatis', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notif WA otomatis', 'Tanpa kartu kredit'],
       },
       { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
       { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
     ],
     // Gating per-tier ditegakkan server (Travel — page guard + API guard).
@@ -162,7 +162,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         { label: 'Booking + konfirmasi bayar manual', tiers: [true, true, true] },
         { label: 'E-ticket & invoice PDF (QR)', tiers: [true, true, true] },
         { label: 'Driver roster + rating', tiers: [true, true, true] },
-        { label: 'Pembayaran online (Midtrans)', tiers: [false, true, true] },
+        { label: 'Pembayaran online (bergantung kesiapan & aktivasi)', tiers: [false, true, true] },
         { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
         { label: 'Laporan & analitik', tiers: [false, true, true] },
         { label: 'GPS live tracking', tiers: [false, false, true] },

@@ -362,9 +362,9 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
         <div className="v7-hero-copy v7-reveal">
           <p className="v7-eyebrow"><span className="v7-eyebrow-line" />Untuk bisnis yang ingin terlihat profesional dan jalan lebih rapi</p>
           <h1><span>Website untuk ditemukan.</span> <em>Sistem untuk operasional jalan.</em></h1>
-          <p className="v7-hero-lede">Website dan sistem untuk bantu bisnis kamu tampil online dan lebih mudah dikelola.</p>
+          <p className="v7-hero-lede">Website dibuatkan oleh Webzoka, Portal SaaS merapikan operasional, dan Bundle menggabungkan keduanya sesuai kebutuhan.</p>
           <div className="v7-proof-row" aria-label="Bukti awal Webzoka">
-            <span><b>Mulai Rp600k</b><small>harga awal</small></span>
+            <span><b>Mulai Rp600k</b><small>harga awal Website</small></span>
             <span><b>Siap tayang 3–5 hari</b><small>untuk kebutuhan siap direview</small></span>
             <span><b>Perpanjangan transparan</b><small>detail sebelum bayar</small></span>
           </div>
@@ -372,7 +372,7 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
               Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
             </a>
-            <a href={WEBSITE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link" onClick={trackStoreEntry}>Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
+            <a href={WEBSITE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link" onClick={trackStoreEntry}>Lihat layanan Website <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
         </div>
@@ -477,7 +477,7 @@ function OfferSection() {
             )
           })}
         </div>
-        <div className="v7-section-cta"><a href={PACKAGE_PATH} className="v7-text-link">Bandingkan paket <ArrowRight size={16} aria-hidden="true" /></a></div>
+        <div className="v7-section-cta"><a href={PACKAGE_PATH} className="v7-text-link">Lihat layanan Website <ArrowRight size={16} aria-hidden="true" /></a></div>
       </div>
     </section>
   )
@@ -548,7 +548,7 @@ function PricingSection() {
       <div className="v7-container">
         <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Beranda memberi gambaran awal. Konsultasi membantu memastikan scope dan harga sebelum pengerjaan dimulai.</p></div>
         <div className="v7-pricing-layout">
-          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={PACKAGE_PATH} className="v7-button v7-button-primary">Diskusikan kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
+          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">Diskusikan kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
           <div className="v7-price-clarity v7-reveal v7-reveal-delay-1">
             <div><span>01</span><div><small>Yang menjadi titik mulai</small><strong>Website dasar dan kebutuhan publik yang sudah jelas.</strong><p>Jumlah halaman serta kesiapan konten membentuk scope awal.</p></div></div>
             <div><span>02</span><div><small>Yang menyesuaikan harga</small><strong>Integrasi, alur operasional, dan level dukungan.</strong><p>Portal dan Bundle dibicarakan dari pekerjaan nyata yang ingin dirapikan.</p></div></div>

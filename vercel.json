@@ -1,5 +1,9 @@
 {
   "redirects": [
+    { "source": "/kebijakan-privasi", "destination": "/privacy/", "permanent": true },
+    { "source": "/kebijakan-privasi/", "destination": "/privacy/", "permanent": true },
+    { "source": "/syarat-ketentuan", "destination": "/terms/", "permanent": true },
+    { "source": "/syarat-ketentuan/", "destination": "/terms/", "permanent": true },
     {
       "source": "/store",
       "destination": "https://store.webzoka.com/store",

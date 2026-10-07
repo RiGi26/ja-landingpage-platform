@@ -23,7 +23,7 @@ import {
 import { waLink as buildWaLink } from '@/constants/site'
 import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
 
-const STORE_PATH = 'https://store.webzoka.com/store'
+const WEBSITE_PATH = '/seluruh-layanan'
 const PACKAGE_PATH = '/seluruh-layanan'
 const STOCK_DEMO_URL = 'https://stock.webzoka.com/demo'
 const JAPAN_ARENA_URL = 'https://www.japanarena.id'
@@ -34,7 +34,7 @@ const WHATSAPP_URL = buildWaLink(WA_MESSAGE)
 function trackStoreEntry() {
   trackEvent(ANALYTICS_EVENTS.publicCtaStoreClick, {
     source_page: '/',
-    destination: '/store',
+    destination: '/seluruh-layanan',
   })
 }
 
@@ -42,7 +42,7 @@ type Status = 'Live' | 'Preview' | 'Case study'
 
 const exploreNavItems = [
   { label: 'Solusi', href: '#solusi' },
-  { label: 'Webzoka Store', href: STORE_PATH, external: true },
+  { label: 'Jasa Website', href: WEBSITE_PATH },
   { label: 'Karya', href: '#karya' },
   { label: 'Harga', href: '#harga' },
 ]
@@ -62,12 +62,12 @@ const faqItems = [
   {
     question: 'Apa yang termasuk dalam harga mulai Rp600k?',
     answer:
-      'Angka tersebut adalah harga awal Website dari paket dasar. Scope final mengikuti jumlah halaman, kesiapan konten, integrasi, dan level dukungan. Detailnya bisa kamu cek di Store sebelum memesan.',
+      'Angka tersebut adalah harga awal Website dari paket dasar. Scope final mengikuti jumlah halaman, kesiapan konten, integrasi, dan level dukungan. Scope dan harga final kami konfirmasi melalui konsultasi sebelum pengerjaan dimulai.',
   },
   {
     question: 'Apa yang dimaksud perpanjangan?',
     answer:
-      'Perpanjangan mencakup kebutuhan hosting dan pemeliharaan setelah periode awal. Detail perpanjangan ditampilkan sebelum pembayaran; ketentuan komersial final masih perlu dikunci di satu sumber resmi.',
+      'Ketentuan dan biaya hosting, pemeliharaan, serta perpanjangan disampaikan sebelum pesanan atau perpanjangan dikonfirmasi, agar kamu dapat memeriksa dan menyetujuinya lebih dulu.',
   },
   {
     question: 'Bagaimana target peluncuran 3–5 hari bekerja?',
@@ -92,7 +92,7 @@ const faqItems = [
   {
     question: 'Di mana saya melacak proyek atau dukungan?',
     answer:
-      'Store menjadi lanjutan untuk detail paket dan pesanan. Route Masuk Hub untuk proyek, tagihan, dan dukungan belum dikonfirmasi di halaman publik ini, jadi kami tidak menautkan URL yang belum tervalidasi.',
+      'Hubungi tim Webzoka melalui WhatsApp untuk informasi pesanan dan dukungan. Route Masuk Hub untuk proyek, tagihan, dan dukungan belum dikonfirmasi di halaman publik ini, jadi kami tidak menautkan URL yang belum tervalidasi.',
   },
 ]
 
@@ -140,7 +140,7 @@ function NavGroup({ label, items, onNavigate }: {
             key={item.label}
             href={item.href}
             onClick={() => {
-              if (item.href === STORE_PATH) trackStoreEntry()
+              if (item.href === WEBSITE_PATH) trackStoreEntry()
               onNavigate?.()
             }}
           >
@@ -371,7 +371,7 @@ function HeroSection({ heroRef }: { heroRef: React.RefObject<HTMLElement> }) {
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-primary">
               Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" />
             </a>
-            <a href={STORE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link" onClick={trackStoreEntry}>Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
+            <a href={WEBSITE_PATH} target="_blank" rel="noopener noreferrer" className="v7-text-link" onClick={trackStoreEntry}>Jelajahi Website &amp; Sistem <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
           <p className="v7-hero-note">Ceritakan kebutuhanmu. Kami bantu menentukan fondasi yang paling masuk akal.</p>
         </div>
@@ -469,7 +469,7 @@ function OfferSection() {
                   <h3>{offer.title}</h3>
                   <p>{offer.copy}</p>
                   <ul>{offer.outcomes.map((outcome) => <li key={outcome}><Check size={15} aria-hidden="true" />{outcome}</li>)}</ul>
-                  <a href={PACKAGE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
+                  <a href={offer.id === 'portal' ? '/pricing/' : offer.id === 'bundle' ? WHATSAPP_URL : PACKAGE_PATH} className="v7-card-link">{offer.cta} <ArrowRight size={15} aria-hidden="true" /></a>
                 </div>
                 <OfferProof kind={offer.id} />
               </article>
@@ -545,13 +545,13 @@ function PricingSection() {
   return (
     <section id="harga" className="v7-section v7-pricing-section">
       <div className="v7-container">
-        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Beranda memberi gambaran awal. Store memberi detail dan kalkulasi lengkap.</p></div>
+        <div className="v7-section-heading v7-reveal"><div><p className="v7-eyebrow v7-eyebrow-blue">Harga dan scope</p><h2>Mulai dari angka yang bisa dipahami.</h2></div><p>Beranda memberi gambaran awal. Konsultasi membantu memastikan scope dan harga sebelum pengerjaan dimulai.</p></div>
         <div className="v7-pricing-layout">
-          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={PACKAGE_PATH} className="v7-button v7-button-primary">Hitung kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
+          <article className="v7-price-lead v7-reveal"><span className="v7-micro-label">HARGA AWAL WEBSITE</span><strong>Mulai Rp600k</strong><p>Angka awal untuk paket Website dasar. Portal dan Bundle mengikuti alur kerja serta scope yang dibutuhkan, bukan memakai satu harga rata untuk semua bisnis.</p><a href={PACKAGE_PATH} className="v7-button v7-button-primary">Diskusikan kebutuhanmu <ArrowRight size={16} aria-hidden="true" /></a></article>
           <div className="v7-price-clarity v7-reveal v7-reveal-delay-1">
             <div><span>01</span><div><small>Yang menjadi titik mulai</small><strong>Website dasar dan kebutuhan publik yang sudah jelas.</strong><p>Jumlah halaman serta kesiapan konten membentuk scope awal.</p></div></div>
             <div><span>02</span><div><small>Yang menyesuaikan harga</small><strong>Integrasi, alur operasional, dan level dukungan.</strong><p>Portal dan Bundle dibicarakan dari pekerjaan nyata yang ingin dirapikan.</p></div></div>
-            <div><span>03</span><div><small>Yang dibuka sebelum keputusan</small><strong>Perpanjangan, hosting, dan pemeliharaan.</strong><p>Detail final ditampilkan sebelum pembayaran agar kamu bisa memeriksanya lebih dulu.</p></div></div>
+            <div><span>03</span><div><small>Yang dibuka sebelum keputusan</small><strong>Perpanjangan, hosting, dan pemeliharaan.</strong><p>Ketentuan dan biaya disampaikan sebelum pesanan atau perpanjangan dikonfirmasi.</p></div></div>
             <div className="v7-price-question"><CreditCard size={18} aria-hidden="true" /><p>Belum yakin masuk Website, Portal, atau Bundle?</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Tanya lewat WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></div>
           </div>
         </div>
@@ -583,7 +583,7 @@ function FaqSection() {
   return (
     <section id="faq" className="v7-section v7-surface-section">
       <div className="v7-container v7-faq-grid">
-        <div className="v7-faq-intro v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Pertanyaan praktis</p><h2>Kalau masih ragu, mulai dari pertanyaan yang paling dekat.</h2><p>Jawaban singkat di sini. Detail produk dan scope tetap berada di Store atau Hub sesuai konteksnya.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Masih ragu? Chat via WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></div>
+        <div className="v7-faq-intro v7-reveal"><p className="v7-eyebrow v7-eyebrow-blue">Pertanyaan praktis</p><h2>Kalau masih ragu, mulai dari pertanyaan yang paling dekat.</h2><p>Jawaban singkat di sini. Detail layanan, scope, dan harga dikonfirmasi melalui konsultasi sebelum kamu memesan.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">Masih ragu? Chat via WhatsApp <MessageCircle size={15} aria-hidden="true" /></a></div>
         <div className="v7-faq-list v7-reveal v7-reveal-delay-1">{faqItems.map((item) => <details key={item.question}><summary>{item.question}<ChevronDown size={18} aria-hidden="true" /></summary><p>{item.answer}</p></details>)}</div>
       </div>
     </section>
@@ -595,7 +595,7 @@ function FinalCta({ finalRef }: { finalRef: React.RefObject<HTMLElement> }) {
     <section ref={finalRef} className="v7-final-cta">
       <div className="v7-container v7-final-layout v7-reveal">
         <div><p className="v7-eyebrow v7-eyebrow-amber">Mulai dari kebutuhan yang paling penting</p><h2>Ceritakan bisnismu. Kita tentukan fondasinya.</h2></div>
-        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={STORE_PATH} className="v7-text-link" onClick={trackStoreEntry}>Lihat template di Store <ArrowRight size={16} aria-hidden="true" /></a></div></div>
+        <div className="v7-final-copy"><p>Website, Portal, atau Bundle. Mulai dari percakapan yang jelas, lalu pilih langkah yang memang dibutuhkan bisnis.</p><div className="v7-final-actions"><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-button v7-button-light">Konsultasi WhatsApp <MessageCircle size={17} aria-hidden="true" /></a><a href={WEBSITE_PATH} className="v7-text-link" onClick={trackStoreEntry}>Lihat layanan Website <ArrowRight size={16} aria-hidden="true" /></a></div></div>
       </div>
     </section>
   )
@@ -608,10 +608,10 @@ function Footer() {
         <div className="v7-footer-grid">
           <div><a href="#top" className="v7-brand"><Image src="/images/logo-wide-clean.png" alt="Webzoka" width={154} height={50} /></a><p>Website untuk ditemukan. Sistem untuk operasional jalan.</p><a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="v7-footer-contact">Chat tim kami di WhatsApp <ArrowUpRight size={14} aria-hidden="true" /></a></div>
           <div><strong>Public Web</strong><a href="#solusi">Solusi</a><a href="#cara-kerja">Cara kerja</a><a href="#karya">Karya</a><a href="#harga">Harga</a><a href="#faq">FAQ</a></div>
-          <div><strong>Store</strong><a href={STORE_PATH} onClick={trackStoreEntry}>Lihat template</a><a href={PACKAGE_PATH}>Hitung kebutuhanmu</a><a href={PACKAGE_PATH}>Lacak pesanan</a></div>
+          <div><strong>Layanan</strong><a href={WEBSITE_PATH} onClick={trackStoreEntry}>Jasa pembuatan Website</a><a href="/pricing/">Paket Portal SaaS</a><a href={WHATSAPP_URL}>Pesanan &amp; dukungan</a></div>
           <div><strong>Hub</strong><HubEntry /><span className="v7-footer-muted">{HUB_URL ? 'Proyek, tagihan, dukungan.' : 'Route Hub belum dikonfirmasi; tidak ada URL placeholder.'}</span></div>
         </div>
-        <div className="v7-footer-bottom"><span>© {new Date().getFullYear()} Webzoka</span><span>Harga transparan · target peluncuran 3–5 hari · demo diberi label sesuai status</span><span><a href="/kebijakan-privasi">Kebijakan Privasi</a> · <a href="/syarat-ketentuan">Syarat & Ketentuan</a></span></div>
+        <div className="v7-footer-bottom"><span>© {new Date().getFullYear()} Webzoka</span><span>Harga transparan · target peluncuran 3–5 hari · demo diberi label sesuai status</span><span><a href="/privacy/">Kebijakan Privasi</a> · <a href="/terms/">Syarat & Ketentuan</a></span></div>
       </div>
     </footer>
   )

@@ -13,7 +13,7 @@ type Plan = { tier: string; price: number; priceYearly?: number; feat: string[];
 type MatrixRow = { label: string; tiers: (boolean | string)[] }
 type FeatureMatrix = { cols: string[]; rows: MatrixRow[]; note?: string }
 
-const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: Plan[]; featureMatrix?: FeatureMatrix }[] = [
+const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon; demoUrl: string; registerUrl: string; plans: Plan[]; featureMatrix?: FeatureMatrix; trialVerified?: boolean }[] = [
   {
     id: 'lms',
     name: 'Portal Belajar / LMS',
@@ -146,10 +146,10 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       {
         tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
         desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online', 'Notif WA otomatis', 'Tanpa kartu kredit'],
+        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notif WA otomatis', 'Tanpa kartu kredit'],
       },
       { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (Midtrans)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
+      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
       { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
     ],
     // Gating per-tier ditegakkan server (Travel — page guard + API guard).
@@ -162,7 +162,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
         { label: 'Booking + konfirmasi bayar manual', tiers: [true, true, true] },
         { label: 'E-ticket & invoice PDF (QR)', tiers: [true, true, true] },
         { label: 'Driver roster + rating', tiers: [true, true, true] },
-        { label: 'Pembayaran online (Midtrans)', tiers: [false, true, true] },
+        { label: 'Pembayaran online (bergantung kesiapan & aktivasi)', tiers: [false, true, true] },
         { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
         { label: 'Laporan & analitik', tiers: [false, true, true] },
         { label: 'GPS live tracking', tiers: [false, false, true] },
@@ -244,8 +244,6 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     ],
     // Fitur laundry = jasa: modul stok/BOM/MRP/supplier warisan stock DISEMBUNYIKAN (tak diiklankan).
     // Diferensiasi jujur: Starter = semua operasi laundry · Growth = +laporan/keuangan · Pro = +SDM+white-label.
-    // Self-checkout WIRED 2026-07-05 (billing tag 'laundry' + paket laundry di Core) → laundry masuk
-    // subscribeReady → tier berbayar pakai CTA "Mulai berlangganan" (register?intent=subscribe).
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
       note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
@@ -553,32 +551,18 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             const yearlyPrice = isStock ? yearlyFallback : resolvePrice(currentPlatform.id, plan.tier, yearlyFallback, 'yearly', priceMap)
             // Kartu Trial selalu gratis (jangan kena map resolvePrice → harga live).
             const price = plan.isTrial ? 0 : (billingPeriod === 'yearly' ? yearlyPrice : monthlyPrice)
-            // Hanya Trial yang gratis → alur trial/register. Starter kini BERBAYAR.
-            const isFreeCta = plan.isTrial === true
+            // Unverified trial destinations use consultation until Preview verification is available.
+            const isFreeCta = plan.isTrial === true && currentPlatform.trialVerified === true
             // Tier tampilan → tier Core (enum), seragam semua portal:
             // Starter→starter, Growth→pro, Pro→enterprise.
             const coreTier = coreTierOf(plan.tier)
-            // Portal dgn alur checkout self-service yang sudah jadi (LMS + Stock + Klinik + Farmasi + Rental + Laundry).
-            // Rental: register→provision Core→direct-pay Snap→sync (UAT E2E PASS 2026-07-02, platform 'rental').
-            // Laundry: register→provision Core (platform 'laundry')→billing→Snap→sync (wired 2026-07-05).
-            const subscribeReady =
-              currentPlatform.id === 'lms' ||
-              currentPlatform.id === 'clinic' ||
-              currentPlatform.id === 'pharmacy' ||
-              currentPlatform.id === 'rental' ||
-              currentPlatform.id === 'laundry' ||
-              isStock
-            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(`Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
-            const ctaHref = isFreeCta
-              ? currentPlatform.registerUrl
-              : subscribeReady
-                ? `${currentPlatform.registerUrl}?intent=subscribe&tier=${coreTier}&period=${billingPeriod}`
-                : chatHref
-            const ctaLabel = plan.cta ?? (isFreeCta
-              ? 'Mulai trial 14 hari — gratis'
-              : subscribeReady
-                ? 'Mulai berlangganan'
-                : 'Chat untuk berlangganan')
+            const chatHref = `https://wa.me/6281296917963?text=${encodeURIComponent(plan.isTrial
+              ? `Halo Webzoka, saya ingin konsultasi trial ${currentPlatform.name}.`
+              : `Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
+            const ctaHref = isFreeCta ? currentPlatform.registerUrl : chatHref
+            const ctaLabel = isFreeCta
+              ? (plan.cta ?? 'Mulai Trial 14 Hari')
+              : plan.isTrial ? 'Chat untuk konsultasi trial' : 'Chat untuk berlangganan'
             return (
             <div
               key={plan.tier}
@@ -688,7 +672,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {activeTab === 'laundry' && (
             <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
               <WashingMachine size={15} className="mt-0.5 shrink-0 text-gray-500" />
-              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Coba dulu dari Demo atau langsung mulai trial; setelah trial, pilih Starter, Growth, atau Pro dan bayar aman via Midtrans.</span>
+              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Diskusikan akses trial dengan tim kami; setelah trial, pilih Starter, Growth, atau Pro dan hubungi tim kami untuk informasi pembayaran.</span>
             </p>
           )}
           <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
@@ -786,15 +770,15 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               },
               {
                 q: 'Bagaimana cara pembayaran langganan?',
-                a: 'Transfer bank, QRIS, kartu kredit, atau minimarket (Alfamart/Indomaret) via Midtrans. Konfirmasi pembayaran otomatis masuk via WA.',
+                a: 'Hubungi tim kami untuk memilih paket dan periode langganan. Metode serta instruksi pembayaran yang tersedia diinformasikan sebelum pembayaran dilakukan.',
               },
               {
                 q: 'Apakah data saya aman kalau berhenti berlangganan?',
                 a: 'Data kamu tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
               },
               {
-                q: 'Apakah portal ini bisa dipakai bersamaan dengan website builder?',
-                a: 'Ya. Keduanya terpisah tapi terintegrasi. Website untuk tampilan online, portal untuk operasional bisnis dari dalam.',
+                q: 'Apakah portal ini bisa dipakai bersamaan dengan website?',
+                a: 'Website Managed Service dan Portal SaaS dapat dibahas sebagai solusi gabungan. Kebutuhan integrasi dan scope dikonfirmasi melalui konsultasi.',
               },
               {
                 q: 'Apakah ada biaya setup per fitur?',
@@ -828,9 +812,9 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Footer Info */}
         <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
            {[
-             { t: 'Tanpa Biaya Setup', d: 'Langsung pakai hari ini — tidak ada biaya awal, tidak ada instalasi. Sistem aktif begitu kamu daftar.' },
+             { t: 'Tanpa Biaya Setup', d: 'Paket Portal SaaS tidak mengenakan biaya setup. Hubungi tim kami untuk memilih paket dan membahas langkah aktivasi.' },
              { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. kamu tidak perlu urus apapun.' },
-             { t: 'Data Tidak Bisa Diintip', d: 'Setiap bisnis punya ruang data sendiri yang terisolasi. Enkripsi aktif dari hari pertama, backup harian.' },
+             { t: 'Pengamanan Data', d: 'Webzoka menerapkan langkah pengamanan teknis dan organisasi yang wajar sesuai jenis layanan yang digunakan.' },
            ].map(item => (
              <div key={item.t} className="group">
                <h4 className="font-black text-gray-900 mb-3 uppercase text-xs tracking-widest border-l-4 border-blue-600 pl-4">{item.t}</h4>

@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import {
   ArrowRight,
@@ -21,7 +22,7 @@ import {
   X,
 } from 'lucide-react'
 import { waLink as buildWaLink } from '@/constants/site'
-import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
+import { ANALYTICS_EVENTS, getAnalyticsConsent, subscribeAnalyticsConsent, trackEvent } from '@/lib/analytics'
 
 const WEBSITE_PATH = '/seluruh-layanan'
 const PACKAGE_PATH = '/seluruh-layanan'
@@ -622,8 +623,13 @@ export default function LandingPage() {
   const finalRef = useRef<HTMLElement>(null)
   const [heroPassed, setHeroPassed] = useState(false)
   const [finalVisible, setFinalVisible] = useState(false)
+  const consent = useSyncExternalStore(subscribeAnalyticsConsent, getAnalyticsConsent, () => null)
+  const [consultationSlot, setConsultationSlot] = useState<HTMLElement | null>(null)
+  // Keep consultation reachable while the first-visit consent panel occupies the bottom of the screen.
+  const mobileCtaVisible = consent === null || (heroPassed && !finalVisible)
 
   useEffect(() => {
+    setConsultationSlot(document.getElementById('mobile-consultation-slot'))
     const revealElements = document.querySelectorAll('.v7-reveal')
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -662,9 +668,12 @@ export default function LandingPage() {
         </main>
         <Footer />
       </div>
-      <div className={`v7-mobile-cta ${heroPassed && !finalVisible ? 'is-visible' : ''}`} aria-hidden={!(heroPassed && !finalVisible)}>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" tabIndex={heroPassed && !finalVisible ? 0 : -1} className="v7-button v7-button-primary">Chat WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
-      </div>
+      {consultationSlot && createPortal(
+        <div className={`v7-mobile-cta ${mobileCtaVisible ? 'is-visible' : ''}`} aria-hidden={!mobileCtaVisible}>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" tabIndex={mobileCtaVisible ? 0 : -1} className="v7-button v7-button-primary">Chat WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
+        </div>,
+        consultationSlot,
+      )}
     </div>
   )
 }

@@ -235,7 +235,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ── Webzoka V7 public homepage ─────────────────────────────────────────── */
-.v7-page {
+.v7-page, .v7-mobile-cta {
   --font-v7-display: Georgia;
   --font-v7-body: var(--font-body);
   /* Mirror Webzoka Store's public shell tokens. */
@@ -257,6 +257,9 @@ h1, h2, h3, h4, h5, h6 {
   --v7-shadow-lg: 0 18px 40px rgba(23, 35, 42, .12);
   --v7-ease: cubic-bezier(.16, 1, .3, 1);
   --v7-sidebar-width: 244px;
+}
+
+.v7-page {
   min-height: 100vh;
   overflow-x: clip;
   background: var(--v7-paper);
@@ -272,12 +275,12 @@ h1, h2, h3, h4, h5, h6 {
 .v7-page h1, .v7-page h2, .v7-page h3 { font-family: var(--font-v7-display), Georgia, serif; text-wrap: balance; }
 .v7-page p { text-wrap: pretty; }
 .v7-page a { color: inherit; text-decoration: none; }
-.v7-page a, .v7-page button, .v7-page summary { touch-action: manipulation; }
+.v7-page a, .v7-page button, .v7-page summary, .v7-mobile-cta a { touch-action: manipulation; }
 .v7-page section[id] { scroll-margin-top: 24px; }
 .v7-container { width: min(1248px, calc(100% - 48px)); margin-inline: auto; }
 .v7-skip-link { position: fixed; top: 8px; left: calc(var(--v7-sidebar-width) + 16px); z-index: 1000; transform: translateY(-150%); padding: 10px 16px; border-radius: 12px; background: var(--v7-ink); color: #fff; font-weight: 700; }
 .v7-skip-link:focus { transform: none; }
-.v7-page a:focus-visible, .v7-page button:focus-visible, .v7-page summary:focus-visible { outline: 3px solid var(--v7-blue); outline-offset: 4px; }
+.v7-page a:focus-visible, .v7-page button:focus-visible, .v7-page summary:focus-visible, .v7-mobile-cta a:focus-visible { outline: 3px solid var(--v7-blue); outline-offset: 4px; }
 
 .v7-content-shell { min-width: 0; margin-left: var(--v7-sidebar-width); }
 .v7-sidebar { position: fixed; inset: 0 auto 0 0; z-index: 60; width: var(--v7-sidebar-width); height: 100dvh; display: flex; flex-direction: column; overflow-y: auto; overscroll-behavior: contain; padding: 32px 24px 24px; border-right: 1px solid rgba(23,35,42,.1); background: var(--v7-surface); }
@@ -550,6 +553,7 @@ h1, h2, h3, h4, h5, h6 {
 .v7-footer-bottom a { min-height: 44px; display: inline-flex; align-items: center; }
 .v7-footer-bottom a:hover { color: #fff; }
 .v7-mobile-cta { display: none; }
+.analytics-controls, .analytics-consultation-slot { display: contents; }
 
 .v7-reveal { opacity: 0; transform: translateY(18px); transition: opacity .4s var(--v7-ease), transform .4s var(--v7-ease); }
 .v7-reveal.is-visible { opacity: 1; transform: none; }
@@ -816,8 +820,14 @@ h1, h2, h3, h4, h5, h6 {
   .v7-footer-grid { grid-template-columns: 1fr 1fr; gap: 36px 24px; }
   .v7-footer-grid > div:first-child { grid-column: 1 / -1; }
   .v7-footer-bottom { align-items: start; flex-direction: column; gap: 10px; margin-top: 44px; }
-  .v7-mobile-cta { position: fixed; inset: auto 0 0; z-index: 40; display: flex; justify-content: center; padding: 8px 16px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid var(--v7-line); box-shadow: 0 -8px 24px rgba(23,35,42,.08); transform: translateY(100%); pointer-events: none; transition: transform .25s var(--v7-ease); }
-  .v7-mobile-cta.is-visible { transform: translateY(0); pointer-events: auto; }
+  /* One dock uses intrinsic control heights, so consent, privacy and consultation never share a hit area. */
+  .analytics-controls { position: fixed; inset: auto 0 0; z-index: 90; display: flex; flex-direction: column; align-items: stretch; max-height: calc(100dvh - 88px - env(safe-area-inset-top)); padding-bottom: env(safe-area-inset-bottom); pointer-events: none; }
+  .analytics-consent-panel { position: static; flex: 0 1 auto; min-height: 0; width: calc(100% - 32px); margin: 0 auto 8px; overflow-y: auto; overscroll-behavior: contain; pointer-events: auto; }
+  .analytics-consent-panel button { min-height: 44px; }
+  .analytics-privacy-reopen { position: static; flex: none; align-self: flex-start; min-height: 44px; margin: 0 16px 16px; font-size: 14px; pointer-events: auto; }
+  .analytics-controls:has(.v7-mobile-cta.is-visible) .analytics-privacy-reopen { margin-bottom: 8px; }
+  .v7-mobile-cta { flex: none; display: none; justify-content: center; padding: 8px 16px; background: rgba(255,255,255,.96); border-top: 1px solid var(--v7-line); box-shadow: 0 -8px 24px rgba(23,35,42,.08); }
+  .v7-mobile-cta.is-visible { display: flex; pointer-events: auto; }
   .v7-mobile-cta .v7-button { width: auto; min-width: 192px; min-height: 44px; padding: 10px 18px; font-size: 13px; box-shadow: 0 6px 18px rgba(0,113,227,.18); }
 }
 

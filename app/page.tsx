@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import {
   ArrowRight,
@@ -622,8 +623,18 @@ export default function LandingPage() {
   const finalRef = useRef<HTMLElement>(null)
   const [heroPassed, setHeroPassed] = useState(false)
   const [finalVisible, setFinalVisible] = useState(false)
+  const [consultationSlot, setConsultationSlot] = useState<HTMLElement | null>(null)
+  const [consentPanelVisible, setConsentPanelVisible] = useState(false)
+  // Keep consultation reachable whenever the consent panel occupies the bottom of the screen.
+  const mobileCtaVisible = consentPanelVisible || (heroPassed && !finalVisible)
 
   useEffect(() => {
+    const slot = document.getElementById('mobile-consultation-slot')
+    setConsultationSlot(slot)
+    const syncConsentPanel = () => setConsentPanelVisible(slot?.dataset.consentPanelVisible === 'true')
+    syncConsentPanel()
+    const consentPanelObserver = new MutationObserver(syncConsentPanel)
+    if (slot) consentPanelObserver.observe(slot, { attributes: true, attributeFilter: ['data-consent-panel-visible'] })
     const revealElements = document.querySelectorAll('.v7-reveal')
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -640,7 +651,7 @@ export default function LandingPage() {
     const finalObserver = new IntersectionObserver(([entry]) => setFinalVisible(entry.isIntersecting), { threshold: 0.1 })
     if (finalRef.current) finalObserver.observe(finalRef.current)
 
-    return () => { observer.disconnect(); heroObserver.disconnect(); finalObserver.disconnect() }
+    return () => { observer.disconnect(); heroObserver.disconnect(); finalObserver.disconnect(); consentPanelObserver.disconnect() }
   }, [])
 
   return (
@@ -662,9 +673,12 @@ export default function LandingPage() {
         </main>
         <Footer />
       </div>
-      <div className={`v7-mobile-cta ${heroPassed && !finalVisible ? 'is-visible' : ''}`} aria-hidden={!(heroPassed && !finalVisible)}>
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" tabIndex={heroPassed && !finalVisible ? 0 : -1} className="v7-button v7-button-primary">Chat WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
-      </div>
+      {consultationSlot && createPortal(
+        <div className={`v7-mobile-cta ${mobileCtaVisible ? 'is-visible' : ''}`} aria-hidden={!mobileCtaVisible}>
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" tabIndex={mobileCtaVisible ? 0 : -1} className="v7-button v7-button-primary">Chat WhatsApp <MessageCircle size={16} aria-hidden="true" /></a>
+        </div>,
+        consultationSlot,
+      )}
     </div>
   )
 }

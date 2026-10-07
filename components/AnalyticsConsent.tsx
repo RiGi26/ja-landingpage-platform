@@ -27,12 +27,12 @@ export default function AnalyticsConsent() {
   const visible = consent === null || showPreferences
 
   return (
-    <>
+    <div className="analytics-controls">
       {visible ? (
         <section
           role="dialog"
           aria-labelledby="analytics-consent-title"
-          className="fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-black/10 bg-white p-5 shadow-2xl md:inset-x-auto md:right-6 md:w-[min(42rem,calc(100vw-3rem))]"
+          className="analytics-consent-panel fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-black/10 bg-white p-5 shadow-2xl md:inset-x-auto md:right-6 md:w-[min(42rem,calc(100vw-3rem))]"
         >
           <h2 id="analytics-consent-title" className="text-base font-bold text-gray-900">
             Pilihan analitik
@@ -56,11 +56,12 @@ export default function AnalyticsConsent() {
         <button
           type="button"
           onClick={() => setShowPreferences(true)}
-          className="fixed bottom-4 left-4 z-[90] rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold text-gray-700 shadow-lg hover:bg-gray-50"
+          className="analytics-privacy-reopen fixed bottom-4 left-4 z-[90] rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold text-gray-700 shadow-lg hover:bg-gray-50"
         >
           Pengaturan privasi
         </button>
       )}
-    </>
+      <div id="mobile-consultation-slot" className="analytics-consultation-slot" data-consent-panel-visible={visible} />
+    </div>
   )
 }

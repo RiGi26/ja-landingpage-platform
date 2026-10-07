@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import {
@@ -22,7 +22,7 @@ import {
   X,
 } from 'lucide-react'
 import { waLink as buildWaLink } from '@/constants/site'
-import { ANALYTICS_EVENTS, getAnalyticsConsent, subscribeAnalyticsConsent, trackEvent } from '@/lib/analytics'
+import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
 
 const WEBSITE_PATH = '/seluruh-layanan'
 const PACKAGE_PATH = '/seluruh-layanan'
@@ -623,13 +623,18 @@ export default function LandingPage() {
   const finalRef = useRef<HTMLElement>(null)
   const [heroPassed, setHeroPassed] = useState(false)
   const [finalVisible, setFinalVisible] = useState(false)
-  const consent = useSyncExternalStore(subscribeAnalyticsConsent, getAnalyticsConsent, () => null)
   const [consultationSlot, setConsultationSlot] = useState<HTMLElement | null>(null)
-  // Keep consultation reachable while the first-visit consent panel occupies the bottom of the screen.
-  const mobileCtaVisible = consent === null || (heroPassed && !finalVisible)
+  const [consentPanelVisible, setConsentPanelVisible] = useState(false)
+  // Keep consultation reachable whenever the consent panel occupies the bottom of the screen.
+  const mobileCtaVisible = consentPanelVisible || (heroPassed && !finalVisible)
 
   useEffect(() => {
-    setConsultationSlot(document.getElementById('mobile-consultation-slot'))
+    const slot = document.getElementById('mobile-consultation-slot')
+    setConsultationSlot(slot)
+    const syncConsentPanel = () => setConsentPanelVisible(slot?.dataset.consentPanelVisible === 'true')
+    syncConsentPanel()
+    const consentPanelObserver = new MutationObserver(syncConsentPanel)
+    if (slot) consentPanelObserver.observe(slot, { attributes: true, attributeFilter: ['data-consent-panel-visible'] })
     const revealElements = document.querySelectorAll('.v7-reveal')
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -646,7 +651,7 @@ export default function LandingPage() {
     const finalObserver = new IntersectionObserver(([entry]) => setFinalVisible(entry.isIntersecting), { threshold: 0.1 })
     if (finalRef.current) finalObserver.observe(finalRef.current)
 
-    return () => { observer.disconnect(); heroObserver.disconnect(); finalObserver.disconnect() }
+    return () => { observer.disconnect(); heroObserver.disconnect(); finalObserver.disconnect(); consentPanelObserver.disconnect() }
   }, [])
 
   return (

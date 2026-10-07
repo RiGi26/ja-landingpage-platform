@@ -61,7 +61,7 @@ export default function AnalyticsConsent() {
           Pengaturan privasi
         </button>
       )}
-      <div id="mobile-consultation-slot" className="analytics-consultation-slot" />
+      <div id="mobile-consultation-slot" className="analytics-consultation-slot" data-consent-panel-visible={visible} />
     </div>
   )
 }

@@ -414,6 +414,17 @@ function PainSection() {
           </div>
         </div>
       </div>
+      <aside className="v7-container" aria-label="Japan Arena, produk Webzoka sendiri">
+        <div className="v7-process-note v7-reveal">
+          <div className="min-w-0 text-sm">
+            <div className="v7-portfolio-meta"><StatusBadge status="Live" /><span>Produk Webzoka sendiri</span></div>
+            <p><strong>Japan Arena</strong>: Website + Portal belajar yang kami gunakan sendiri.</p>
+          </div>
+          <a href={JAPAN_ARENA_URL} target="_blank" rel="noopener noreferrer" className="v7-text-link">
+            Buka japanarena.id <ExternalLink size={15} aria-hidden="true" />
+          </a>
+        </div>
+      </aside>
     </section>
   )
 }

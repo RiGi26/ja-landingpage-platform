@@ -34,7 +34,6 @@ export default function HomePage() {
             <PreviewProject project="rumah" heading="h3" />
             <PreviewProject project="kopi" heading="h3" />
           </div>
-          <p className="gallery-note">Preview merupakan contoh tampilan template, bukan website pelanggan aktif.</p>
         </section>
         <section className="home-services container" aria-labelledby="home-services-title">
           <p className="section-kicker">Layanan Webzoka</p>

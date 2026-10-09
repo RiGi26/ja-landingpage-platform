@@ -10,24 +10,35 @@ const portalSlides = [
     src: '/images/portfolio/portal-stock-dashboard-demo.jpg',
     alt: 'Dashboard utama Portal Stock untuk Toko Roti Bahagia dalam mode demo.',
     caption: 'Dashboard stok dan pesanan.',
+    status: 'Demo',
   },
   {
     name: 'Portal Clinic',
     src: '/images/portfolio/portal-clinic-dashboard-demo.jpg',
     alt: 'Dashboard admin Portal Clinic dalam mode demo dengan data contoh.',
     caption: 'Dashboard administrasi klinik.',
+    status: 'Demo',
   },
   {
     name: 'Portal Pharmacy',
     src: '/images/portfolio/portal-pharmacy-dashboard-demo.jpg',
     alt: 'Dashboard utama Portal Pharmacy dengan ringkasan apotek demo.',
     caption: 'Dashboard operasional apotek.',
+    status: 'Demo',
   },
   {
     name: 'Portal Laundry',
     src: '/images/portfolio/portal-laundry-dashboard-demo.jpg',
     alt: 'Dashboard utama Portal Laundry untuk Laundry Bersih Ceria dalam mode demo.',
     caption: 'Dashboard operasional laundry.',
+    status: 'Demo',
+  },
+  {
+    name: 'Portal LMS',
+    src: '/images/portfolio/japan-arena-student-dashboard-desktop.jpg',
+    alt: 'Dashboard belajar siswa Japan Arena versi desktop dengan navigasi samping.',
+    caption: 'Japan Arena · Dashboard belajar siswa. Tangkapan layar tampilan produk.',
+    status: 'Live',
   },
 ] as const
 
@@ -112,7 +123,8 @@ export default function PortalDemoCarousel() {
               src={slide.src}
               alt={slide.alt}
               width={1440}
-              height={720}
+              height={slide.status === 'Live' ? 900 : 720}
+              style={slide.status === 'Live' ? { objectFit: 'contain' } : undefined}
               sizes="(max-width: 1023px) 100vw, 45vw"
               loading="lazy"
             />
@@ -164,8 +176,11 @@ export default function PortalDemoCarousel() {
       </div>
 
       <figcaption className="portal-carousel-caption">
-        <span className="status">Demo</span>
-        <span>{activeSlide.caption} Data pada gambar hanya contoh untuk demonstrasi.</span>
+        <span className="status">{activeSlide.status}</span>
+        <span>
+          {activeSlide.caption}
+          {activeSlide.status === 'Demo' && ' Data pada gambar hanya contoh untuk demonstrasi.'}
+        </span>
       </figcaption>
     </>
   )

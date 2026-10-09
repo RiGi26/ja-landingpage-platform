@@ -44,21 +44,15 @@ export default function AnalyticsConsent() {
 
   useEffect(() => {
     if (!isV43) return
-    const surface = document.querySelector<HTMLElement>('.v43-shell .page-surface')
-    const wasVisible = document.body.classList.contains('v43-consent-visible')
-    const scrollPosition = wasVisible ? surface?.scrollTop ?? 0 : window.scrollY
-    const measure = () => document.body.style.setProperty('--consent-space', `${visible && panelRef.current ? panelRef.current.getBoundingClientRect().height + 32 : 0}px`)
+    const measure = () => {
+      const panel = visible ? panelRef.current : null
+      const computedBottom = panel ? Number.parseFloat(window.getComputedStyle(panel).bottom) : 16
+      const bottomOffset = Number.isFinite(computedBottom) ? computedBottom : 16
+      const space = panel ? panel.getBoundingClientRect().height + bottomOffset + 16 : 0
+      document.body.style.setProperty('--consent-space', `${space}px`)
+    }
     document.body.classList.toggle('v43-consent-visible', visible)
     measure()
-    if (surface && wasVisible !== visible) {
-      if (visible) {
-        surface.scrollTop = scrollPosition
-        window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-      } else {
-        window.scrollTo({ top: scrollPosition, behavior: 'instant' as ScrollBehavior })
-        surface.scrollTop = 0
-      }
-    }
     const observer = new ResizeObserver(measure)
     if (panelRef.current) observer.observe(panelRef.current)
     window.addEventListener('resize', measure)
@@ -67,16 +61,9 @@ export default function AnalyticsConsent() {
 
   useEffect(() => {
     if (!isV43) return
-    const surface = document.querySelector<HTMLElement>('.v43-shell .page-surface')
     return () => {
-      const scrollPosition = surface?.scrollTop ?? 0
-      const wasVisible = document.body.classList.contains('v43-consent-visible')
       document.body.classList.remove('v43-consent-visible')
       document.body.style.removeProperty('--consent-space')
-      if (wasVisible && surface?.isConnected) {
-        window.scrollTo({ top: scrollPosition, behavior: 'instant' as ScrollBehavior })
-        surface.scrollTop = 0
-      }
     }
   }, [isV43])
 
@@ -102,7 +89,7 @@ export default function AnalyticsConsent() {
         <section ref={panelRef} id="cookie-panel" role="dialog" aria-labelledby="analytics-consent-title" className="cookie-panel analytics-consent-panel">
           <h2 id="analytics-consent-title" className="sr-only">Pilihan analitik</h2>
           <div className="cookie-copy">
-            <p>Kami memakai analitik untuk memahami penggunaan halaman dan alur template agar pengalaman Webzoka dapat diperbaiki. Analitik tidak menerima isi draft, nama, nomor WhatsApp, pesan, token, atau user-ID. Pilihan ini dapat diubah kapan saja.</p>
+            <p>Kami memakai analitik untuk memperbaiki Webzoka. Pilihan ini bisa diubah kapan saja.</p>
             <a href="/privacy/">Kebijakan Privasi</a>
           </div>
           <div className="cookie-actions">

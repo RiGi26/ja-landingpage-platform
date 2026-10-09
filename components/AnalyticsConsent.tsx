@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState, useSyncExternalStore } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import {
   getAnalyticsConsent,
   loadAnalytics,
@@ -12,24 +13,99 @@ import {
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
 
 export default function AnalyticsConsent() {
+  const pathname = usePathname()
+  const isV43 = pathname === '/' || pathname === '/layanan' || pathname === '/layanan/' || pathname === '/karya' || pathname === '/karya/'
   const consent = useSyncExternalStore(subscribeAnalyticsConsent, getAnalyticsConsent, () => null)
   const [showPreferences, setShowPreferences] = useState(false)
+  const [overlayOpen, setOverlayOpen] = useState(false)
+  const panelRef = useRef<HTMLElement>(null)
+  const preferencesOpener = useRef<HTMLElement | null>(null)
+  const visible = (consent === null || showPreferences) && (!isV43 || !overlayOpen)
 
   useEffect(() => {
     if (consent === 'granted') loadAnalytics(GA_MEASUREMENT_ID)
   }, [consent])
 
+  useEffect(() => {
+    const onReopen = (event: Event) => {
+      const detail = (event as CustomEvent<{ opener?: HTMLElement }>).detail
+      preferencesOpener.current = detail?.opener ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null)
+      setShowPreferences(true)
+    }
+    const onOverlay = () => setOverlayOpen(Boolean(document.body.dataset.v43Overlay))
+    onOverlay()
+    document.addEventListener('webzoka:privacy-preferences', onReopen)
+    document.addEventListener('webzoka:v43-overlay', onOverlay)
+    return () => {
+      document.removeEventListener('webzoka:privacy-preferences', onReopen)
+      document.removeEventListener('webzoka:v43-overlay', onOverlay)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isV43) return
+    const measure = () => {
+      const panel = visible ? panelRef.current : null
+      const computedBottom = panel ? Number.parseFloat(window.getComputedStyle(panel).bottom) : 16
+      const bottomOffset = Number.isFinite(computedBottom) ? computedBottom : 16
+      const space = panel ? panel.getBoundingClientRect().height + bottomOffset + 16 : 0
+      document.body.style.setProperty('--consent-space', `${space}px`)
+    }
+    document.body.classList.toggle('v43-consent-visible', visible)
+    measure()
+    const observer = new ResizeObserver(measure)
+    if (panelRef.current) observer.observe(panelRef.current)
+    window.addEventListener('resize', measure)
+    return () => { observer.disconnect(); window.removeEventListener('resize', measure) }
+  }, [isV43, pathname, visible])
+
+  useEffect(() => {
+    if (!isV43) return
+    return () => {
+      document.body.classList.remove('v43-consent-visible')
+      document.body.style.removeProperty('--consent-space')
+    }
+  }, [isV43])
+
+  useEffect(() => {
+    if (showPreferences && visible) panelRef.current?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true })
+  }, [showPreferences, visible])
+
   const saveConsent = (nextConsent: ConsentValue) => {
     setAnalyticsConsent(nextConsent)
     setShowPreferences(false)
+    if (isV43) {
+      const target = showPreferences && preferencesOpener.current?.isConnected ? preferencesOpener.current : document.getElementById('main-content')
+      requestAnimationFrame(() => target?.focus({ preventScroll: true }))
+      const status = document.getElementById('interaction-status')
+      if (status) status.textContent = nextConsent === 'granted' ? 'Analitik diterima.' : 'Analitik ditolak.'
+    }
+    preferencesOpener.current = null
   }
 
-  const visible = consent === null || showPreferences
+  if (isV43) return (
+    <div className="analytics-controls v43">
+      {visible ? (
+        <section ref={panelRef} id="cookie-panel" role="dialog" aria-labelledby="analytics-consent-title" className="cookie-panel analytics-consent-panel">
+          <h2 id="analytics-consent-title" className="sr-only">Pilihan analitik</h2>
+          <div className="cookie-copy">
+            <p>Kami memakai analitik untuk memperbaiki Webzoka. Pilihan ini bisa diubah kapan saja.</p>
+            <a href="/privacy/">Kebijakan Privasi</a>
+          </div>
+          <div className="cookie-actions">
+            <button type="button" className="cookie-choice" onClick={() => saveConsent('granted')}>Terima analitik</button>
+            <button type="button" className="cookie-choice" onClick={() => saveConsent('denied')}>Tolak</button>
+          </div>
+        </section>
+      ) : null}
+    </div>
+  )
 
   return (
     <div className="analytics-controls">
       {visible ? (
         <section
+          ref={panelRef}
           role="dialog"
           aria-labelledby="analytics-consent-title"
           className="analytics-consent-panel fixed inset-x-4 bottom-4 z-[100] mx-auto max-w-2xl rounded-2xl border border-black/10 bg-white p-5 shadow-2xl md:inset-x-auto md:right-6 md:w-[min(42rem,calc(100vw-3rem))]"
@@ -55,7 +131,7 @@ export default function AnalyticsConsent() {
       ) : (
         <button
           type="button"
-          onClick={() => setShowPreferences(true)}
+          onClick={(event) => { preferencesOpener.current = event.currentTarget; setShowPreferences(true) }}
           className="analytics-privacy-reopen fixed bottom-4 left-4 z-[90] rounded-full border border-black/10 bg-white px-3 py-2 text-xs font-semibold text-gray-700 shadow-lg hover:bg-gray-50"
         >
           Pengaturan privasi

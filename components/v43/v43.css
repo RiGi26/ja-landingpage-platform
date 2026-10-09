@@ -663,7 +663,8 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .bundle-strip .button:hover { background: var(--ink); }
 
 /* Legacy content reuses V4.3 type, color, action, and spacing tokens. */
-:where(.v43) .legacy-page.container { max-width: 1280px; padding-block: 32px 64px; }
+:where(.v43) .legacy-page { padding-block: 32px 64px; }
+:where(.v43) .legacy-page.container { max-width: 1280px; }
 :where(.v43) .legacy-page h1 { max-width: 24ch; font-size: clamp(32px, 4.5vw, 64px); font-weight: 500; color: var(--navy); }
 :where(.v43) .legacy-back { gap: 8px; margin-bottom: 32px; }
 :where(.v43) .legacy-back-icon { transform: rotate(180deg); }

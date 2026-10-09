@@ -676,6 +676,20 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .service-media img { width: 100%; height: auto; border-radius: 4px; }
 :where(.v43) .service-media figcaption { max-width: 65ch; margin-top: 16px; color: var(--dark-muted); font-size: 15px; line-height: 1.5; }
 :where(.v43) .service-media .status { margin-right: 8px; color: var(--paper); }
+
+/* Real website and student Portal proof, scoped to the bundle example. */
+:where(.v43) #bundle .bundle-preview-stage { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; }
+:where(.v43) #bundle .bundle-preview-website { grid-area: 1 / 1; min-width: 0; padding-right: 12%; }
+:where(.v43) #bundle .bundle-preview-portal { grid-area: 1 / 1; justify-self: end; width: min(46%, 196px); margin-top: 34%; }
+:where(.v43) #bundle .bundle-preview-label { display: block; margin-bottom: 10px; color: var(--dark-muted); font-size: 14px; font-weight: 600; line-height: 1.4; }
+:where(.v43) #bundle .bundle-preview-portal .bundle-preview-label { padding: 8px 10px; margin: 0; border-radius: 12px 12px 0 0; background: var(--navy); color: var(--paper); text-align: center; }
+:where(.v43) #bundle .bundle-preview-phone { overflow: hidden; padding: 4px; border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 0 0 18px 18px; background: var(--navy); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24); }
+:where(.v43) #bundle .bundle-preview-phone img { display: block; border-radius: 0 0 13px 13px; }
+
+@media (min-width: 640px) {
+  :where(.v43) #bundle .bundle-preview-website { padding-right: 10%; }
+  :where(.v43) #bundle .bundle-preview-portal { width: min(32%, 216px); margin-top: 28%; }
+}
 :where(.v43) .bundle-strip { margin-top: 8px; background: var(--blue); color: var(--paper); }
 :where(.v43) .bundle-strip > .container { display: grid; gap: 24px; padding-block: 40px; }
 :where(.v43) .bundle-strip h2 { max-width: 22ch; font-size: clamp(30px, 3vw, 44px); font-weight: 500; }

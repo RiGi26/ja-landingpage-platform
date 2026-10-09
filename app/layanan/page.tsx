@@ -122,14 +122,25 @@ export default function ServicesPage() {
                 <summary>Merencanakan keduanya <span aria-hidden="true">+</span></summary>
                 <div className="details-content">
                   <p>Fitur dan integrasi mengikuti kesiapan produk serta lingkup kerja yang disepakati. Biaya Website, Portal, dan dukungan dibahas sebelum mulai.</p>
-                  <p>Preview di bagian ini memperlihatkan sisi website. Integrasi Portal pada preview tersebut belum tersedia.</p>
+                  <p>Contoh Japan Arena menampilkan website publik dan dashboard belajar siswa. Gambar dashboard diambil dari tampilan akun siswa.</p>
                 </div>
               </details>
             </div>
             <div className="service-examples">
-              <figure className="service-media">
-                <Image unoptimized src="/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp" alt="Preview sisi website Kopi Senja, tanpa integrasi Portal aktif" width="1000" height="625" loading="lazy" />
-                <figcaption><span className="status">Preview</span>Kopi Senja · Contoh sisi website. Integrasi Portal pada preview ini belum tersedia.</figcaption>
+              <figure className="service-media bundle-preview">
+                <div className="bundle-preview-stage">
+                  <div className="bundle-preview-website">
+                    <span className="bundle-preview-label">Website publik</span>
+                    <Image unoptimized src="/images/portfolio/japan-arena-desktop.png" alt="Website publik Japan Arena" width="1440" height="1000" loading="lazy" />
+                  </div>
+                  <div className="bundle-preview-portal">
+                    <span className="bundle-preview-label">Dashboard siswa</span>
+                    <div className="bundle-preview-phone">
+                      <Image unoptimized src="/images/portfolio/japan-arena-student-dashboard.jpg" alt="Dashboard belajar siswa Japan Arena pada akun Siswa" width="385" height="832" loading="lazy" />
+                    </div>
+                  </div>
+                </div>
+                <figcaption><span className="status status-live">Live</span>Japan Arena · Website publik dan dashboard siswa. Tangkapan layar tampilan produk.</figcaption>
               </figure>
             </div>
           </section>

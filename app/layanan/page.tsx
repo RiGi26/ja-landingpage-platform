@@ -97,8 +97,8 @@ export default function ServicesPage() {
             </div>
             <div className="service-examples">
               <figure className="service-media">
-                <Image unoptimized src="/images/portfolio/japan-arena-desktop.png" alt="Situs publik Japan Arena, produk Webzoka yang memiliki Portal belajar" width="1440" height="1000" loading="lazy" />
-                <figcaption><span className="status status-live">Live</span>Japan Arena · Situs publik produk Website + Portal belajar. Gambar ini bukan dashboard Portal.</figcaption>
+                <Image unoptimized src="/images/portfolio/japan-arena-student-dashboard-desktop.jpg" alt="Dashboard belajar siswa Japan Arena versi desktop dengan navigasi samping" width="1440" height="900" loading="lazy" />
+                <figcaption><span className="status status-live">Live</span>Japan Arena · Dashboard belajar siswa. Tangkapan layar tampilan produk.</figcaption>
               </figure>
             </div>
           </section>
@@ -135,8 +135,8 @@ export default function ServicesPage() {
                   </div>
                   <div className="bundle-preview-portal">
                     <span className="bundle-preview-label">Dashboard siswa</span>
-                    <div className="bundle-preview-phone">
-                      <Image unoptimized src="/images/portfolio/japan-arena-student-dashboard.jpg" alt="Dashboard belajar siswa Japan Arena pada akun Siswa" width="385" height="832" loading="lazy" />
+                    <div className="bundle-preview-dashboard">
+                      <Image unoptimized src="/images/portfolio/japan-arena-student-dashboard-desktop.jpg" alt="Dashboard belajar siswa Japan Arena versi desktop" width="1440" height="900" loading="lazy" />
                     </div>
                   </div>
                 </div>

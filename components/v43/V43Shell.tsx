@@ -7,7 +7,11 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import { waLink } from '@/constants/site'
 import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
 
-type Page = 'home' | 'services' | 'work'
+type Page = 'home' | 'services' | 'work' | 'managed' | 'about' | 'privacy' | 'terms'
+const PAGE_PATHS: Record<Page, string> = {
+  home: '/', services: '/layanan/', work: '/karya/', managed: '/seluruh-layanan/',
+  about: '/tentang-kami/', privacy: '/privacy/', terms: '/terms/',
+}
 type Dialog = 'about' | 'consultation' | 'rumah' | 'kopi'
 type DialogContextValue = (dialog: Dialog, opener: HTMLElement) => void
 const DialogContext = createContext<DialogContextValue | null>(null)
@@ -220,7 +224,7 @@ export default function V43Shell({ page, children }: { page: Page; children: Rea
   }, [desktopFocusTarget, scheduleFrame, setMobile, setSubmenu])
 
   const trackStoreEntry = () => trackEvent(ANALYTICS_EVENTS.publicCtaStoreClick, {
-    source_page: page === 'home' ? '/' : page === 'services' ? '/layanan/' : '/karya/',
+    source_page: PAGE_PATHS[page],
     destination: '/seluruh-layanan',
   })
   const preview = activeDialog === 'kopi' ? PREVIEWS.kopi : PREVIEWS.rumah

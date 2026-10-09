@@ -1,4 +1,4 @@
-/* The approved V4.3 stylesheet, scoped to the three candidate pages. */
+/* The approved V4.3 stylesheet, scoped to pages using V43Shell. */
 @font-face {
   font-family: "Libre Franklin";
   src: url("/fonts/v43/libre-franklin-latin.woff2") format("woff2");
@@ -661,6 +661,63 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .bundle-strip p { max-width: 45ch; font-size: 18px; }
 :where(.v43) .bundle-strip .button { justify-self: start; }
 :where(.v43) .bundle-strip .button:hover { background: var(--ink); }
+
+/* Legacy content reuses V4.3 type, color, action, and spacing tokens. */
+:where(.v43) .legacy-page.container { max-width: 1280px; padding-block: 32px 64px; }
+:where(.v43) .legacy-page h1 { max-width: 24ch; font-size: clamp(32px, 4.5vw, 64px); font-weight: 500; color: var(--navy); }
+:where(.v43) .legacy-back { gap: 8px; margin-bottom: 32px; }
+:where(.v43) .legacy-back-icon { transform: rotate(180deg); }
+:where(.v43) .legacy-kicker { color: var(--blue); }
+:where(.v43) .legacy-intro { margin-bottom: 48px; }
+:where(.v43) .legacy-lead { max-width: 60ch; margin-top: 24px; color: var(--muted); font-size: 20px; line-height: 1.55; }
+:where(.v43) .legacy-body { max-width: 68ch; color: var(--muted); font-size: 18px; line-height: 1.6; }
+:where(.v43) .legacy-followup { margin-top: 24px; }
+:where(.v43) .legacy-section { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--navy-line); }
+:where(.v43) .legacy-section-title { margin-bottom: 24px; color: var(--navy); font-size: clamp(24px, 2.8vw, 36px); }
+:where(.v43) .legacy-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 32px; }
+:where(.v43) .legacy-item { min-width: 0; padding-top: 20px; border-top: 1px solid var(--navy-line); }
+:where(.v43) .legacy-item-title { margin-bottom: 12px; color: var(--navy); font-family: var(--heading-font); font-size: 20px; font-weight: 550; line-height: 1.4; }
+:where(.v43) .legacy-managed-hero, :where(.v43) .legacy-columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+:where(.v43) .legacy-managed-hero > div, :where(.v43) .legacy-columns > div { min-width: 0; }
+:where(.v43) .legacy-price-panel { padding: 24px; border: 1px solid var(--navy-line); border-radius: 4px; background: var(--blue-tint); }
+:where(.v43) .legacy-price { margin-block: 16px; color: var(--blue); font-family: var(--heading-font); font-size: clamp(36px, 3.8vw, 48px); font-weight: 550; font-variant-numeric: tabular-nums; line-height: 1.2; }
+:where(.v43) .legacy-price-note { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--navy-line); color: var(--muted); font-size: 16px; line-height: 1.6; }
+:where(.v43) .legacy-button { gap: 8px; }
+:where(.v43) .legacy-intro .legacy-button { margin-top: 24px; }
+:where(.v43) .legacy-scope-list, :where(.v43) .legacy-process-list, :where(.v43) .legacy-contact-list { display: grid; gap: 24px; margin: 0; padding: 0; list-style: none; }
+:where(.v43) .legacy-scope-item, :where(.v43) .legacy-contact-row { display: flex; align-items: flex-start; gap: 12px; color: var(--muted); }
+:where(.v43) .legacy-contact-icon { flex-shrink: 0; margin-top: 4px; color: var(--blue); }
+:where(.v43) .legacy-process-step { display: flex; gap: 16px; }
+:where(.v43) .legacy-process-step > div { min-width: 0; }
+:where(.v43) .legacy-process-step .legacy-item-title { margin-bottom: 8px; }
+:where(.v43) .legacy-step-number { display: flex; flex-shrink: 0; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 100px; background: var(--blue-tint); color: var(--navy); font-weight: 600; font-variant-numeric: tabular-nums; }
+:where(.v43) .legacy-bundle { padding: 32px 24px; border: 0; border-radius: 4px; background: var(--navy); color: var(--paper); }
+:where(.v43) .legacy-bundle .legacy-section-title, :where(.v43) .legacy-bundle .legacy-body, :where(.v43) .legacy-bundle .text-link { color: var(--paper); }
+:where(.v43) .legacy-bundle :where(a, button):focus-visible { outline-color: var(--paper); }
+:where(.v43) .legacy-bundle .text-link:hover { text-decoration-thickness: 2px; }
+:where(.v43) .legacy-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; margin-top: 24px; }
+:where(.v43) .legacy-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 32px; }
+:where(.v43) .legacy-email { max-width: 100%; overflow-wrap: anywhere; }
+:where(.v43) .legacy-contact-row .legacy-email { display: block; min-height: 44px; margin-top: -8px; }
+:where(.v43) .legacy-page.legacy-legal { max-width: 960px; }
+:where(.v43) .legacy-legal-sections { margin-top: 40px; }
+:where(.v43) .legacy-legal-section { padding-block: 32px; border-top: 1px solid var(--navy-line); }
+:where(.v43) .legacy-legal-section .legacy-section-title { font-size: clamp(22px, 2.2vw, 28px); }
+:where(.v43) .legacy-paragraphs { display: grid; gap: 16px; }
+:where(.v43) .legacy-legal-section > .legacy-email { margin-top: 16px; }
+@media (min-width: 640px) {
+  :where(.v43) .legacy-page { padding-block: 48px 80px; }
+  :where(.v43) .legacy-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  :where(.v43) .legacy-actions { flex-direction: row; flex-wrap: wrap; align-items: center; }
+  :where(.v43) .legacy-price-panel, :where(.v43) .legacy-bundle { padding: 32px; }
+}
+@media (min-width: 1024px) {
+  :where(.v43) .legacy-page { padding-block: 48px 96px; }
+  :where(.v43) .legacy-managed-hero { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: start; gap: 64px; }
+  :where(.v43) .legacy-section { margin-top: 64px; padding-top: 48px; }
+  :where(.v43) .legacy-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px; }
+  :where(.v43) .legacy-bundle { padding: 48px; }
+}
 
 /* The document remains scrollable; bottom clearance keeps the footer above consent. */
 :where(.v43) .site-footer { border-top: 1px solid var(--navy-line); background: var(--paper); color: var(--navy); }

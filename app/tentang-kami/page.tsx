@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import Navbar from '@/components/LmsNavbar'
+import V43Shell from '@/components/v43/V43Shell'
+import '@/components/v43/v43.css'
 import Link from 'next/link'
 import { MapPin, Mail, Phone, ArrowRight, MessageCircle } from 'lucide-react'
 
@@ -13,89 +14,88 @@ export const metadata: Metadata = {
 
 export default function TentangKamiPage() {
   return (
-    <div className="min-h-screen bg-[#F5F5F7]">
-      <Navbar />
+    <V43Shell page="about">
 
-      <main className="max-w-4xl mx-auto pt-36 pb-24 px-4">
+      <main id="main-content" tabIndex={-1} className="legacy-page legacy-about container">
 
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-bold text-gray-400 hover:text-blue-600 transition-colors mb-10"
+          className="text-link legacy-back"
         >
-          <ArrowRight size={14} className="rotate-180" /> Kembali ke Beranda
+          <ArrowRight aria-hidden="true" size={14} className="legacy-back-icon" /> Kembali ke Beranda
         </Link>
 
         {/* Hero */}
-        <div className="mb-14">
-          <p className="text-[11px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">
-            🇮🇩 Platform Digital Buatan Indonesia
+        <div className="legacy-intro">
+          <p className="section-kicker legacy-kicker">
+            <span aria-hidden="true">🇮🇩</span> Platform Digital Buatan Indonesia
           </p>
-          <h1 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight tracking-tight sf-display-heavy mb-6">
+          <h1 className="legacy-title">
             Tentang Webzoka
           </h1>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
+          <p className="legacy-lead">
             Webzoka adalah perusahaan teknologi Indonesia yang membangun perangkat lunak bisnis (SaaS) untuk usaha kecil dan menengah — dari website profesional hingga sistem operasional lengkap.
           </p>
-          <p className="text-base text-gray-500 leading-relaxed max-w-2xl mt-4">
+          <p className="legacy-body legacy-followup">
             Nama &quot;Webzoka&quot; mencerminkan visi kami: platform digital yang kuat dan mudah, dibangun dengan hati untuk pelaku bisnis Indonesia.
           </p>
         </div>
 
         {/* Misi */}
-        <div className="bg-white rounded-[32px] p-8 md:p-10 apple-shadow border border-black/[0.03] mb-8">
-          <h2 className="text-2xl font-black text-gray-900 mb-4">Misi Kami</h2>
-          <p className="text-gray-600 leading-relaxed">
+        <div className="legacy-section">
+          <h2 className="legacy-section-title">Misi Kami</h2>
+          <p className="legacy-body">
             Membantu pemilik usaha kecil dan menengah di seluruh Indonesia untuk tampil profesional secara digital, mengotomasi operasional bisnis mereka, dan berkembang — tanpa harus jadi ahli teknologi.
           </p>
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="legacy-grid legacy-values">
             {[
               { t: 'Jujur', d: 'Harga transparan sejak awal. Tidak ada biaya tersembunyi, tidak ada kontrak paksa.' },
               { t: 'Bisa Dibuktikan', d: 'Semua klaim bisa dicek — demo nyata, portofolio live, harga transparan.' },
               { t: 'Untuk Indonesia', d: 'Bahasa Indonesia, metode bayar Indonesia, support WA dalam bahasa Indonesia.' },
             ].map(v => (
-              <div key={v.t} className="bg-[#F5F5F7] rounded-[20px] p-5">
-                <p className="font-black text-gray-900 mb-2">{v.t}</p>
-                <p className="text-sm text-gray-500 leading-relaxed">{v.d}</p>
+              <div key={v.t} className="legacy-item">
+                <p className="legacy-item-title">{v.t}</p>
+                <p className="legacy-body">{v.d}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* Contact */}
-        <div className="bg-white rounded-[32px] p-8 md:p-10 apple-shadow border border-black/[0.03]">
-          <h2 className="text-2xl font-black text-gray-900 mb-6">Hubungi Kami</h2>
-          <ul className="space-y-4 text-gray-600">
-            <li className="flex items-start gap-3">
-              <MapPin size={20} className="text-[#0071E3] shrink-0 mt-0.5" />
+        <div className="legacy-section legacy-contact">
+          <h2 className="legacy-section-title">Hubungi Kami</h2>
+          <ul className="legacy-contact-list">
+            <li className="legacy-contact-row">
+              <MapPin aria-hidden="true" size={20} className="legacy-contact-icon" />
               <span>Jakarta Selatan, DKI Jakarta, Indonesia</span>
             </li>
-            <li className="flex items-start gap-3">
-              <Mail size={20} className="text-[#0071E3] shrink-0 mt-0.5" />
-              <a href="mailto:webzokacompany@gmail.com" className="hover:text-[#0071E3] transition-colors">webzokacompany@gmail.com</a>
+            <li className="legacy-contact-row">
+              <Mail aria-hidden="true" size={20} className="legacy-contact-icon" />
+              <a href="mailto:webzokacompany@gmail.com" className="text-link legacy-email">webzokacompany@gmail.com</a>
             </li>
-            <li className="flex items-start gap-3">
-              <Phone size={20} className="text-[#0071E3] shrink-0 mt-0.5" />
+            <li className="legacy-contact-row">
+              <Phone aria-hidden="true" size={20} className="legacy-contact-icon" />
               <span>+62 812-9691-7963</span>
             </li>
-            <li className="flex items-start gap-3">
-              <MessageCircle size={20} className="text-[#0071E3] shrink-0 mt-0.5" />
+            <li className="legacy-contact-row">
+              <MessageCircle aria-hidden="true" size={20} className="legacy-contact-icon" />
               <span>Support WA: Senin–Sabtu, 08.00–17.00 WIB</span>
             </li>
           </ul>
-          <div className="mt-8">
+          <div className="legacy-actions">
             <a
               href={`https://wa.me/${WA_NUMBER}?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20perusahaan.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#0071E3] text-white font-bold rounded-full hover:bg-[#005BB5] transition-all"
+              className="button button-blue legacy-button"
             >
-              <MessageCircle size={16} /> Chat Tim Kami
+              <MessageCircle aria-hidden="true" size={16} /> Chat Tim Kami
             </a>
           </div>
         </div>
 
       </main>
-    </div>
+    </V43Shell>
   )
 }

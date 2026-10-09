@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import V43Shell, { DialogButton } from '@/components/v43/V43Shell'
+import PortalDemoCarousel from '@/components/v43/PortalDemoCarousel'
 import '@/components/v43/v43.css'
 
 export const metadata: Metadata = {
@@ -84,7 +85,7 @@ export default function ServicesPage() {
                 <li>Kesiapan produk, dukungan, dan ketentuan langganan.</li>
               </ul>
               <dl className="service-facts">
-                <div><dt>Contoh kebutuhan</dt><dd>Pesanan, stok, atau kegiatan belajar, sesuai produk.</dd></div>
+                <div><dt>Contoh kebutuhan</dt><dd>Stok dan pesanan, kegiatan belajar, administrasi klinik dan apotek, serta operasional laundry.</dd></div>
                 <div><dt>Biaya</dt><dd>Mengikuti produk, kebutuhan, dan dukungan.</dd></div>
               </dl>
               <details className="service-details">
@@ -96,9 +97,8 @@ export default function ServicesPage() {
               </details>
             </div>
             <div className="service-examples">
-              <figure className="service-media">
-                <Image unoptimized src="/images/portfolio/japan-arena-student-dashboard-desktop.jpg" alt="Dashboard belajar siswa Japan Arena versi desktop dengan navigasi samping" width="1440" height="900" loading="lazy" />
-                <figcaption><span className="status status-live">Live</span>Japan Arena · Dashboard belajar siswa. Tangkapan layar tampilan produk.</figcaption>
+              <figure className="service-media portal-demo-media">
+                <PortalDemoCarousel />
               </figure>
             </div>
           </section>

@@ -677,6 +677,60 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .service-media figcaption { max-width: 65ch; margin-top: 16px; color: var(--dark-muted); font-size: 15px; line-height: 1.5; }
 :where(.v43) .service-media .status { margin-right: 8px; color: var(--paper); }
 
+/* Compact, swipeable demo portal proof for the Services page. */
+:where(.v43) #portal .portal-demo-media { min-width: 0; }
+:where(.v43) #portal .portal-carousel-viewport {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 8px;
+  background: #eef3f8;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 16%);
+}
+:where(.v43) #portal .portal-carousel-viewport::-webkit-scrollbar { display: none; }
+:where(.v43) #portal .portal-carousel-viewport:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+:where(.v43) #portal .portal-carousel-slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; scroll-snap-stop: always; }
+:where(.v43) #portal .portal-carousel-slide img { display: block; width: 100%; height: 100%; border-radius: 0; object-fit: cover; }
+:where(.v43) #portal .portal-carousel-controls {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 10px 12px 8px;
+}
+:where(.v43) #portal .portal-carousel-arrow {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid var(--dark-line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--paper);
+  cursor: pointer;
+  transition: color var(--motion-short) ease, background var(--motion-short) ease, border-color var(--motion-short) ease;
+}
+:where(.v43) #portal .portal-carousel-arrow:hover:not(:disabled) { border-color: var(--blue); background: var(--blue); }
+:where(.v43) #portal .portal-carousel-arrow:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+:where(.v43) #portal .portal-carousel-arrow:disabled { opacity: 0.42; cursor: not-allowed; }
+:where(.v43) #portal .portal-carousel-center { display: grid; min-width: 0; gap: 8px; }
+:where(.v43) #portal .portal-carousel-position { display: flex; align-items: baseline; gap: 4px; min-width: 0; margin: 0; color: var(--dark-muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+:where(.v43) #portal .portal-carousel-current { color: var(--paper); font-weight: 600; }
+:where(.v43) #portal .portal-carousel-title { overflow: hidden; margin-left: 8px; color: var(--paper); font-size: 14px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+:where(.v43) #portal .portal-carousel-progress { display: flex; gap: 4px; }
+:where(.v43) #portal .portal-carousel-progress span { height: 3px; flex: 1; border-radius: 99px; background: var(--dark-line); }
+:where(.v43) #portal .portal-carousel-progress span.is-active { background: var(--blue); }
+:where(.v43) #portal .portal-carousel-caption { display: flex; align-items: flex-start; gap: 8px; margin-top: 8px; color: var(--dark-muted); font-size: 14px; line-height: 1.5; }
+:where(.v43) #portal .portal-carousel-caption .status { flex-shrink: 0; margin: 1px 0 0; padding: 2px 8px; border: 1px solid rgb(0 113 227 / 35%); border-radius: 99px; background: rgb(0 113 227 / 12%); color: #9ccaff; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.4; text-transform: uppercase; }
+
 /* Real website and student Portal proof, scoped to the bundle example. */
 :where(.v43) #bundle .bundle-preview-stage { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; }
 :where(.v43) #bundle .bundle-preview-website { grid-area: 1 / 1; min-width: 0; }

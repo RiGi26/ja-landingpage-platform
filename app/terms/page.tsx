@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import Navbar from '@/components/LmsNavbar'
+import V43Shell from '@/components/v43/V43Shell'
+import '@/components/v43/v43.css'
 
 export const metadata: Metadata = {
   title: 'Syarat & Ketentuan — Webzoka',
@@ -63,30 +64,29 @@ const sections = [
 
 export default function LegalPage() {
   return (
-    <div className="min-h-screen bg-[#F5F5F7]">
-      <Navbar />
-      <main className="mx-auto max-w-3xl px-4 pb-28 pt-32 md:pt-40">
-        <Link href="/" className="mb-8 inline-flex min-h-11 items-center text-sm font-bold text-blue-700 hover:underline">Kembali ke Beranda</Link>
-        <h1 className="sf-display-heavy mb-8 text-3xl font-black leading-tight text-gray-900 md:text-5xl">Syarat &amp; Ketentuan</h1>
-        <div className="space-y-6">
+    <V43Shell page="terms">
+      <main id="main-content" tabIndex={-1} className="legacy-page legacy-legal container">
+        <Link href="/" className="text-link legacy-back">Kembali ke Beranda</Link>
+        <h1 className="legacy-title">Syarat &amp; Ketentuan</h1>
+        <div className="legacy-legal-sections">
           {sections.map(section => (
-            <section key={section.h} className="rounded-[24px] border border-black/5 bg-white p-6 apple-shadow md:p-8">
-              <h2 className="mb-4 text-xl font-bold text-gray-900">{section.h}</h2>
-              <div className="space-y-3">{section.body.map(paragraph => <p key={paragraph} className="text-base leading-relaxed text-gray-600">{paragraph}</p>)}</div>
+            <section key={section.h} className="legacy-legal-section">
+              <h2 className="legacy-section-title">{section.h}</h2>
+              <div className="legacy-paragraphs">{section.body.map(paragraph => <p key={paragraph} className="legacy-body">{paragraph}</p>)}</div>
             </section>
           ))}
-          <section className="rounded-[24px] border border-black/5 bg-white p-6 apple-shadow md:p-8">
-            <h2 className="mb-4 text-xl font-bold text-gray-900">Hubungi Webzoka</h2>
-            <p className="mb-3 text-base leading-relaxed text-gray-600">Pertanyaan terkait layanan, ketentuan, atau data pribadi dapat dikirim melalui email:</p>
-            <a href="mailto:webzokacompany@gmail.com" className="inline-flex min-h-11 max-w-full items-center break-all text-base font-bold text-blue-700 hover:underline">webzokacompany@gmail.com</a>
+          <section className="legacy-legal-section">
+            <h2 className="legacy-section-title">Hubungi Webzoka</h2>
+            <p className="legacy-body">Pertanyaan terkait layanan, ketentuan, atau data pribadi dapat dikirim melalui email:</p>
+            <a href="mailto:webzokacompany@gmail.com" className="text-link legacy-email">webzokacompany@gmail.com</a>
           </section>
         </div>
-        <nav aria-label="Informasi layanan dan legal" className="mt-8 flex flex-wrap gap-4 text-sm font-semibold text-blue-700">
-          <Link href="/seluruh-layanan/" className="inline-flex min-h-11 items-center hover:underline">Website Managed Service</Link>
-          <Link href="/pricing/" className="inline-flex min-h-11 items-center hover:underline">Portal SaaS</Link>
-          <Link href="/privacy/" className="inline-flex min-h-11 items-center hover:underline">Kebijakan Privasi</Link>
+        <nav aria-label="Informasi layanan dan legal" className="legacy-links">
+          <Link href="/seluruh-layanan/" className="text-link">Website Managed Service</Link>
+          <Link href="/pricing/" className="text-link">Portal SaaS</Link>
+          <Link href="/privacy/" className="text-link">Kebijakan Privasi</Link>
         </nav>
       </main>
-    </div>
+    </V43Shell>
   )
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import '@/components/v43/v43.css'
 
 export const metadata: Metadata = {
   title: 'Harga Langganan Portal LMS, Klinik, Farmasi, Travel, Operasi (Stock) & Laundry | Webzoka',

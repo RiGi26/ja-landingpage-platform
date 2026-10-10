@@ -7,10 +7,10 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState, ty
 import { waLink } from '@/constants/site'
 import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
 
-type Page = 'home' | 'services' | 'work' | 'managed' | 'about' | 'privacy' | 'terms'
+type Page = 'home' | 'services' | 'work' | 'managed' | 'about' | 'privacy' | 'terms' | 'pricing'
 const PAGE_PATHS: Record<Page, string> = {
   home: '/', services: '/layanan/', work: '/karya/', managed: '/seluruh-layanan/',
-  about: '/tentang-kami/', privacy: '/privacy/', terms: '/terms/',
+  about: '/tentang-kami/', privacy: '/privacy/', terms: '/terms/', pricing: '/pricing/',
 }
 type Dialog = 'about' | 'consultation' | 'rumah' | 'kopi'
 type DialogContextValue = (dialog: Dialog, opener: HTMLElement) => void
@@ -45,7 +45,7 @@ export function DialogButton({ dialog, onClick, children, ...props }: ButtonHTML
   }}>{children}</button>
 }
 
-export default function V43Shell({ page, children }: { page: Page; children: ReactNode }) {
+export default function V43Shell({ page, children, externalOverlayOpen = false }: { page: Page; children: ReactNode; externalOverlayOpen?: boolean }) {
   const [portalReady, setPortalReady] = useState(false)
   const [submenuOpen, setSubmenuOpen] = useState(false)
   const [submenuPresent, setSubmenuPresent] = useState(false)
@@ -159,7 +159,7 @@ export default function V43Shell({ page, children }: { page: Page; children: Rea
     regions.forEach((region) => { if (region) region.inert = mobileOpen })
     if (mobileMenuRef.current) mobileMenuRef.current.inert = !mobileOpen
     document.body.classList.toggle('v43-menu-open', mobileOpen)
-    document.body.dataset.v43Overlay = activeDialog ? 'dialog' : mobileOpen ? 'menu' : ''
+    document.body.dataset.v43Overlay = activeDialog || externalOverlayOpen ? 'dialog' : mobileOpen ? 'menu' : ''
     document.dispatchEvent(new CustomEvent('webzoka:v43-overlay'))
     if (mobileOpen) mobileMenuRef.current?.querySelector<HTMLElement>('.mobile-close')?.focus()
     else if (mobileRestore.current) {
@@ -167,7 +167,7 @@ export default function V43Shell({ page, children }: { page: Page; children: Rea
       if (canFocus(mobileToggleRef.current)) mobileToggleRef.current.focus({ preventScroll: true })
     }
     return () => regions.forEach((region) => { if (region) region.inert = false })
-  }, [activeDialog, mobileOpen, portalReady])
+  }, [activeDialog, externalOverlayOpen, mobileOpen, portalReady])
 
   useEffect(() => {
     if (!activeDialog || !portalReady) return

@@ -4,7 +4,9 @@ import { useState, useRef, useEffect } from 'react'
 import { Check, Sparkles, ArrowRight, ExternalLink, GraduationCap, Cross, Pill, Bus, Boxes, WashingMachine, FolderOpen, Package, Lightbulb, ChevronDown, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import Link from 'next/link'
-import Navbar from '@/components/LmsNavbar'
+import V43Shell from '@/components/v43/V43Shell'
+import PortalPickerModal from '@/components/PortalPickerModal'
+import { WB_URL, waLink } from '@/constants/site'
 
 type Plan = { tier: string; price: number; priceYearly?: number; feat: string[]; popular?: boolean; desc?: string; promo?: string; cta?: string; isTrial?: boolean }
 // Tabel banding fitur per-paket. Hanya isi untuk portal yang gating tier-nya
@@ -309,20 +311,31 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
     if (wanted && PLATFORMS.some(p => p.id === wanted)) setActiveTab(wanted)
   }, [])
 
-  // Mobile: pemilih portal jadi bottom-sheet (hemat ruang & scalable saat portal bertambah).
-  // Escape + scroll-lock body selama sheet terbuka — pola sama dgn DemoPickerModal.
+  // A native dialog keeps the mobile selector in the top layer, with keyboard
+  // focus containment, Escape handling and focus restoration.
   const [sheetOpen, setSheetOpen] = useState(false)
+  const [pickerOpen, setPickerOpen] = useState(false)
+  const sheetRef = useRef<HTMLDialogElement>(null)
+  const sheetTriggerRef = useRef<HTMLButtonElement>(null)
   useEffect(() => {
     if (!sheetOpen) return
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setSheetOpen(false) }
-    document.addEventListener('keydown', onKey)
+    const dialog = sheetRef.current
+    const trigger = sheetTriggerRef.current
+    dialog?.showModal()
+    dialog?.querySelector<HTMLButtonElement>('[aria-current="true"]')?.focus()
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+    const desktop = matchMedia('(min-width: 768px)')
+    const onDesktop = (event: MediaQueryListEvent) => { if (event.matches) setSheetOpen(false) }
+    desktop.addEventListener('change', onDesktop)
     return () => {
-      document.removeEventListener('keydown', onKey)
+      desktop.removeEventListener('change', onDesktop)
+      dialog?.close()
       document.body.style.overflow = prev
+      if (trigger?.getClientRects().length) trigger.focus({ preventScroll: true })
+      else document.getElementById(`tab-${activeTab}`)?.focus({ preventScroll: true })
     }
-  }, [sheetOpen])
+  }, [activeTab, sheetOpen])
 
   // Mobile: kartu jadi carousel snap-scroll. Lacak kartu aktif untuk dot indikator,
   // dan reset ke kartu pertama saat ganti tab/platform.
@@ -341,10 +354,15 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
   }, [activeTab])
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20">
-      <Navbar />
-
-      <div className="max-w-6xl mx-auto pt-24 md:pt-32 px-4">
+    <V43Shell page="pricing" externalOverlayOpen={sheetOpen || pickerOpen}>
+      <main id="main-content" tabIndex={-1} className="pricing-page">
+      <div className="container pricing-content">
+        <nav className="pricing-customer-access" aria-label="Akses pelanggan">
+          <button type="button" className="nav-pill" onClick={() => setPickerOpen(true)} aria-haspopup="dialog">Masuk Pelanggan</button>
+          <a className="nav-pill" href={`${WB_URL}/track`}>Lacak pesanan →</a>
+          <a className="nav-pill consultation" href={waLink('Halo Webzoka, saya ingin lihat demo sistem untuk bisnis saya.')} target="_blank" rel="noopener noreferrer">Konsultasi Gratis</a>
+        </nav>
+        <PortalPickerModal isOpen={pickerOpen} onClose={() => setPickerOpen(false)} />
         {/* Breadcrumb / Back Button */}
         <div className="mb-8 animate-fade-in">
           <Link 
@@ -359,7 +377,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         </div>
 
         {/* Header */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className="pricing-hero text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-5 border border-green-100">
             <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
           </div>
@@ -376,7 +394,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
         </div>
         {/* Desktop: grid penuh. Mobile: dirampingkan jadi tombol + bottom-sheet di bawah. */}
-        <div role="tablist" aria-label="Pilih platform" className="hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4">
+        <div role="tablist" aria-label="Pilih platform" className="pricing-tabs hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4">
           {PLATFORMS.map(p => {
             const isActive = activeTab === p.id
             return (
@@ -386,7 +404,16 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               role="tab"
               aria-selected={isActive}
               aria-controls={`tabpanel-${p.id}`}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveTab(p.id)}
+              onKeyDown={(event) => {
+                const index = PLATFORMS.findIndex(platform => platform.id === p.id)
+                const next = event.key === 'Home' ? 0 : event.key === 'End' ? PLATFORMS.length - 1 : event.key === 'ArrowRight' ? (index + 1) % PLATFORMS.length : event.key === 'ArrowLeft' ? (index - 1 + PLATFORMS.length) % PLATFORMS.length : null
+                if (next === null) return
+                event.preventDefault()
+                setActiveTab(PLATFORMS[next].id)
+                document.getElementById(`tab-${PLATFORMS[next].id}`)?.focus()
+              }}
               className={`flex flex-col items-start justify-center text-left h-full min-h-[64px] px-4 py-3 rounded-2xl border font-bold text-sm transition-all md:basis-[calc(33.333%-6px)] lg:basis-[calc(20%-6px)] md:grow-0 md:shrink-0 ${
                 isActive
                 ? 'bg-blue-600 text-white border-blue-600 shadow-lg ring-2 ring-blue-200'
@@ -404,11 +431,14 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
 
         {/* Mobile: tombol trigger menampilkan portal terpilih → buka bottom-sheet */}
         <button
+          ref={sheetTriggerRef}
+          id="pricing-portal-trigger"
           type="button"
           onClick={() => setSheetOpen(true)}
           aria-haspopup="dialog"
           aria-expanded={sheetOpen}
-          className="md:hidden w-full flex items-center gap-3 text-left px-4 py-3.5 mb-4 rounded-2xl border border-gray-200 bg-white shadow-sm font-bold text-sm active:scale-[0.98] transition-transform"
+          aria-controls="pricing-portal-sheet"
+          className="pricing-portal-trigger md:hidden w-full flex items-center gap-3 text-left px-4 py-3.5 mb-4 rounded-2xl border border-gray-200 bg-white shadow-sm font-bold text-sm active:scale-[0.98] transition-transform"
         >
           <span className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
             <currentPlatform.icon size={18} />
@@ -422,16 +452,16 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
 
         {/* Bottom-sheet pemilih portal (mobile only) */}
         {sheetOpen && (
-          <div className="md:hidden fixed inset-0 z-[100]">
-            <div
-              className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in"
-              onClick={() => setSheetOpen(false)}
-            />
-            <div
-              role="dialog"
-              aria-modal="true"
+            <dialog
+              ref={sheetRef}
+              id="pricing-portal-sheet"
               aria-label="Pilih platform"
-              className="absolute inset-x-0 bottom-0 bg-white rounded-t-3xl shadow-2xl animate-slide-up max-h-[80vh] flex flex-col pb-[env(safe-area-inset-bottom)]"
+              className="pricing-portal-sheet bg-white rounded-t-3xl pb-[env(safe-area-inset-bottom)]"
+              onCancel={(event) => { event.preventDefault(); setSheetOpen(false) }}
+              onClick={(event) => { if (event.target === event.currentTarget) {
+                const bounds = event.currentTarget.getBoundingClientRect()
+                if (event.clientY < bounds.top || event.clientY > bounds.bottom) setSheetOpen(false)
+              } }}
             >
               <div className="pt-3 flex justify-center shrink-0">
                 <span className="h-1.5 w-10 rounded-full bg-gray-200" />
@@ -442,7 +472,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                   type="button"
                   onClick={() => setSheetOpen(false)}
                   aria-label="Tutup"
-                  className="w-9 h-9 -mr-1 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
+                  className="w-11 h-11 -mr-1 rounded-full flex items-center justify-center text-gray-400 hover:bg-gray-100 transition-colors"
                 >
                   <X size={18} />
                 </button>
@@ -472,8 +502,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                   )
                 })}
               </div>
-            </div>
-          </div>
+            </dialog>
         )}
         <div className="text-center mb-12">
           <a
@@ -503,7 +532,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
 
         {/* Toggle Bulanan / Tahunan */}
         <div className="flex items-center justify-center mb-8">
-          <div className="inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
+          <div className="pricing-billing-toggle inline-flex items-center gap-1 rounded-full border border-gray-200 bg-white p-1 shadow-sm">
             <button
               type="button"
               onClick={() => setBillingPeriod('monthly')}
@@ -538,8 +567,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           onScroll={onCardsScroll}
           role="tabpanel"
           id={`tabpanel-${currentPlatform.id}`}
-          aria-labelledby={`tab-${currentPlatform.id}`}
-          className={`flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pt-5 md:pt-0 pb-2 md:pb-0 mb-4 md:mb-20 items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+          aria-label={`Paket ${currentPlatform.name}`}
+          className={`pricing-cards flex md:grid grid-cols-1 snap-x snap-mandatory overflow-x-auto md:overflow-visible scroll-px-4 gap-4 md:gap-6 lg:gap-8 -mx-4 px-4 md:mx-0 md:px-0 pt-5 md:pt-0 pb-2 md:pb-0 mb-4 md:mb-20 items-stretch [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
             currentPlatform.plans.length >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : 'md:grid-cols-3'
           }`}>
           {currentPlatform.plans.map((plan) => {
@@ -566,7 +595,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             return (
             <div
               key={plan.tier}
-              className={`relative bg-white rounded-3xl p-5 md:p-6 border-2 transition-all flex flex-col snap-start shrink-0 w-[80%] sm:w-[56%] md:w-auto ${
+              className={`pricing-card ${plan.popular ? 'is-popular' : ''} relative bg-white rounded-3xl p-5 md:p-6 border-2 transition-all flex flex-col snap-start shrink-0 w-[80%] sm:w-[56%] md:w-auto ${
                 plan.popular ? 'border-blue-600 shadow-2xl shadow-blue-100 ring-4 ring-blue-50' : 'border-black/[0.03] shadow-sm'
               }`}
             >
@@ -576,12 +605,12 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 </div>
               )}
               <div className="mb-5 md:mb-6">
-                <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
+                <p className="pricing-tier text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-3">{plan.tier}</p>
                 {plan.desc && (
                   <p className="text-sm text-gray-500 font-medium mb-3 leading-snug text-pretty">{plan.desc}</p>
                 )}
                 <div className="flex flex-wrap items-baseline gap-x-1.5">
-                  <span className="text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
+                  <span className="pricing-amount text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
                     {price === 0 ? 'Gratis' : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
@@ -621,7 +650,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               <div className="mt-auto">
                 <Link
                   href={ctaHref}
-                  className={`w-full py-3.5 md:py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
+                  className={`pricing-plan-cta w-full py-3.5 md:py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.96] text-sm ${
                     plan.popular
                     ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-200'
                     : isFreeCta
@@ -638,13 +667,21 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         </div>
 
         {/* Dot indikator + hint geser — mobile only */}
-        <div className="md:hidden flex flex-col items-center gap-2 mb-10 -mt-1">
+        <div className="pricing-carousel-controls md:hidden flex flex-col items-center gap-2 mb-10 -mt-1">
           <div className="flex items-center gap-1.5">
             {currentPlatform.plans.map((_, i) => (
-              <span
+              <button
                 key={i}
-                className={`h-1.5 rounded-full transition-all duration-300 ${i === activeCard ? 'w-5 bg-blue-600' : 'w-1.5 bg-gray-300'}`}
-              />
+                type="button"
+                aria-label={`Lihat paket ${currentPlatform.plans[i].tier}`}
+                aria-pressed={i === activeCard}
+                onClick={() => {
+                  const el = cardsRef.current
+                  const card = el?.children[i] as HTMLElement | undefined
+                  if (el && card) el.scrollTo({ left: card.offsetLeft - (el.firstElementChild as HTMLElement).offsetLeft, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+                }}
+                className="w-11 h-11 flex items-center justify-center"
+              ><span className={`h-1.5 rounded-full transition-all duration-300 ${i === activeCard ? 'w-5 bg-blue-600' : 'w-1.5 bg-gray-300'}`} /></button>
             ))}
           </div>
           <p className="text-[11px] font-medium text-gray-400">Geser untuk lihat paket lain →</p>
@@ -694,7 +731,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Feature comparison table — data-driven, hanya untuk portal yg punya featureMatrix
             (gating tier-nya sudah ditegakkan app; saat ini Stock). */}
         {currentPlatform.featureMatrix && (
-          <div className="mb-16 md:mb-20">
+          <div className="pricing-feature-matrix mb-16 md:mb-20">
             <div className="text-center mb-8 md:mb-10">
               <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
                 Fitur lengkap tiap paket
@@ -751,7 +788,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         )}
 
         {/* FAQ */}
-        <div className="py-14 md:py-20 border-t border-black/5">
+        <div className="pricing-faq py-14 md:py-20 border-t border-black/5">
           <div className="text-center mb-8 md:mb-12">
             <p className="text-[12px] font-bold uppercase tracking-widest text-[#0071E3] mb-3">FAQ</p>
             <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight sf-display-heavy text-balance">
@@ -817,12 +854,13 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
              { t: 'Pengamanan Data', d: 'Webzoka menerapkan langkah pengamanan teknis dan organisasi yang wajar sesuai jenis layanan yang digunakan.' },
            ].map(item => (
              <div key={item.t} className="group">
-               <h4 className="font-black text-gray-900 mb-3 uppercase text-xs tracking-widest border-l-4 border-blue-600 pl-4">{item.t}</h4>
+               <h2 className="pricing-assurance-title font-black text-gray-900 mb-3 uppercase text-xs tracking-widest border-l-4 border-blue-600 pl-4">{item.t}</h2>
                <p className="text-sm text-gray-500 leading-relaxed font-medium">{item.d}</p>
              </div>
            ))}
         </div>
       </div>
-    </div>
+      </main>
+    </V43Shell>
   )
 }

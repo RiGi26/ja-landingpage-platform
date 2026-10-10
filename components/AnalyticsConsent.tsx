@@ -14,7 +14,7 @@ const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim()
 
 export default function AnalyticsConsent() {
   const pathname = usePathname()
-  const isV43 = ['/', '/layanan', '/karya', '/seluruh-layanan', '/tentang-kami', '/privacy', '/terms'].includes(pathname === '/' ? pathname : pathname.replace(/\/$/, ''))
+  const isV43 = ['/', '/layanan', '/karya', '/seluruh-layanan', '/tentang-kami', '/privacy', '/terms', '/pricing'].includes(pathname === '/' ? pathname : pathname.replace(/\/$/, ''))
   const consent = useSyncExternalStore(subscribeAnalyticsConsent, getAnalyticsConsent, () => null)
   const [showPreferences, setShowPreferences] = useState(false)
   const [overlayOpen, setOverlayOpen] = useState(false)

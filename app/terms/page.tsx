@@ -7,6 +7,21 @@ export const metadata: Metadata = {
   title: 'Syarat & Ketentuan — Webzoka',
   description: 'Syarat & Ketentuan untuk Website Managed Service dan Portal SaaS Webzoka.',
   alternates: { canonical: 'https://www.webzoka.com/terms/' },
+  openGraph: {
+    title: 'Syarat & Ketentuan — Webzoka',
+    description: 'Syarat & Ketentuan untuk Website Managed Service dan Portal SaaS Webzoka.',
+    url: 'https://www.webzoka.com/terms/',
+    siteName: 'Webzoka',
+    locale: 'id_ID',
+    type: 'website',
+    images: [{ url: '/images/logo-light.jpg', width: 1200, height: 630, alt: 'Webzoka' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Syarat & Ketentuan — Webzoka',
+    description: 'Syarat & Ketentuan untuk Website Managed Service dan Portal SaaS Webzoka.',
+    images: ['/images/logo-light.jpg'],
+  },
 }
 
 const sections = [

@@ -21,10 +21,10 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
   description:
-    'Website dan sistem untuk bantu bisnis tampil online dan lebih mudah dikelola. Mulai Rp600k, target peluncuran 3–5 hari untuk kebutuhan yang siap direview, dengan perpanjangan transparan.',
+    'Website dan Portal SaaS untuk kebutuhan bisnis Indonesia. Website mulai Rp600k; scope, biaya, dan jadwal dikonfirmasi melalui konsultasi sebelum pengerjaan dimulai.',
   keywords: [
-    'website builder indonesia', 'buat website bisnis', 'sistem klinik digital',
-    'lms karyawan', 'sistem apotek', 'portal travel rental', 'website murah indonesia',
+    'jasa pembuatan website', 'website bisnis indonesia', 'website managed service',
+    'portal saas', 'sistem operasional bisnis', 'website dan portal',
   ],
   authors: [{ name: 'Webzoka' }],
   verification: {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.webzoka.com' },
   openGraph: {
     title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
-    description: 'Website dan sistem untuk bantu bisnis tampil online dan lebih mudah dikelola. Mulai Rp600k, target peluncuran 3–5 hari untuk kebutuhan siap direview.',
+    description: 'Website dan Portal SaaS untuk kebutuhan bisnis Indonesia. Website mulai Rp600k; scope, biaya, dan jadwal dikonfirmasi melalui konsultasi sebelum pengerjaan dimulai.',
     url: 'https://www.webzoka.com',
     siteName: 'Webzoka',
     locale: 'id_ID',
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Webzoka — Website untuk ditemukan. Sistem untuk operasional jalan.',
-    description: 'Website untuk ditemukan. Sistem untuk operasional jalan. Mulai Rp600k.',
+    description: 'Website dan Portal SaaS untuk kebutuhan bisnis Indonesia. Website mulai Rp600k; scope, biaya, dan jadwal dikonfirmasi melalui konsultasi sebelum pengerjaan dimulai.',
     images: ['/images/logo-light.jpg'],
   },
   robots: { index: true, follow: true },

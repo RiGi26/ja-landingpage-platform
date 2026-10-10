@@ -35,12 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${base}/kebijakan-privasi/`,
+      url: `${base}/privacy/`,
       changeFrequency: 'yearly',
       priority: 0.3,
     },
     {
-      url: `${base}/syarat-ketentuan/`,
+      url: `${base}/terms/`,
       changeFrequency: 'yearly',
       priority: 0.3,
     },

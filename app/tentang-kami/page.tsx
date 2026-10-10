@@ -8,8 +8,23 @@ const WA_NUMBER = '6281296917963'
 
 export const metadata: Metadata = {
   title: 'Tentang Kami — Webzoka',
-  description: 'Webzoka adalah platform digital buatan Indonesia untuk UKM. Website builder, LMS, portal klinik, farmasi, dan travel — semuanya dalam satu ekosistem.',
+  description: 'Kenali layanan Website Managed Service dan Portal SaaS Webzoka untuk kebutuhan bisnis, serta cara menghubungi tim kami.',
   alternates: { canonical: 'https://www.webzoka.com/tentang-kami/' },
+  openGraph: {
+    title: 'Tentang Kami — Webzoka',
+    description: 'Kenali layanan Website Managed Service dan Portal SaaS Webzoka untuk kebutuhan bisnis, serta cara menghubungi tim kami.',
+    url: 'https://www.webzoka.com/tentang-kami/',
+    siteName: 'Webzoka',
+    locale: 'id_ID',
+    type: 'website',
+    images: [{ url: '/images/logo-light.jpg', width: 1200, height: 630, alt: 'Webzoka' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Tentang Kami — Webzoka',
+    description: 'Kenali layanan Website Managed Service dan Portal SaaS Webzoka untuk kebutuhan bisnis, serta cara menghubungi tim kami.',
+    images: ['/images/logo-light.jpg'],
+  },
 }
 
 export default function TentangKamiPage() {
@@ -85,7 +100,7 @@ export default function TentangKamiPage() {
           </ul>
           <div className="legacy-actions">
             <a
-              href={`https://wa.me/${WA_NUMBER}?text=Halo%20Japan%20Arena%2C%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20perusahaan.`}
+              href={`https://wa.me/${WA_NUMBER}?text=Halo%20Webzoka%2C%20saya%20ingin%20konsultasi%20tentang%20layanan%20website%20dan%20Portal%20untuk%20bisnis%20saya.`}
               target="_blank"
               rel="noopener noreferrer"
               className="button button-blue legacy-button"

@@ -13,28 +13,28 @@ const portalSlides = [
     status: 'Showcase',
   },
   {
-    name: 'Portal Clinic',
+    name: 'Portal Klinik',
     src: '/images/portfolio/portal-clinic-dashboard.jpg',
     alt: 'Dashboard Portal Clinic pada akun showcase Webzoka dengan checklist persiapan klinik.',
-    caption: 'Portal Clinic - Dashboard Clinic Webzoka',
-    status: 'Showcase',
+    caption: 'Portal Klinik - Contoh dashboard dalam pengembangan',
+    status: 'Dalam Pengembangan',
   },
   {
-    name: 'Portal Pharmacy',
+    name: 'Portal Farmasi',
     src: '/images/portfolio/portal-pharmacy-dashboard.jpg',
     alt: 'Dashboard Portal Pharmacy pada akun showcase Webzoka dengan ringkasan operasional apotek.',
-    caption: 'Portal Pharmacy - Dashboard Apotek Webzoka',
-    status: 'Showcase',
+    caption: 'Portal Farmasi - Contoh dashboard dalam pengembangan',
+    status: 'Dalam Pengembangan',
   },
   {
     name: 'Portal Laundry',
     src: '/images/portfolio/portal-laundry-dashboard.jpg',
     alt: 'Dashboard Portal Laundry pada akun showcase Webzoka dengan ringkasan layanan dan pesanan.',
-    caption: 'Portal Laundry - Dashboard Laundry Webzoka',
-    status: 'Showcase',
+    caption: 'Portal Laundry - Contoh dashboard dalam pengembangan',
+    status: 'Dalam Pengembangan',
   },
   {
-    name: 'Portal LMS',
+    name: 'Japan Arena · LMS',
     src: '/images/portfolio/japan-arena-student-dashboard-desktop.jpg',
     alt: 'Dashboard belajar siswa Japan Arena versi desktop dengan navigasi samping.',
     caption: 'Japan Arena - Dashboard Belajar Siswa',
@@ -126,7 +126,7 @@ export default function PortalDemoCarousel() {
             className="portal-carousel-slide"
             role="group"
             aria-roledescription="slide"
-            aria-label={`Slide ${index + 1} dari ${portalSlides.length}: ${slide.name}`}
+            aria-label={`Slide ${index + 1} dari ${portalSlides.length}: ${slide.name}, ${slide.status}`}
             aria-hidden={index !== activeIndex}
             key={slide.name}
           >
@@ -160,7 +160,7 @@ export default function PortalDemoCarousel() {
           <p
             className="portal-carousel-position"
             role="status"
-            aria-label={`Slide ${activeIndex + 1} dari ${portalSlides.length}: ${activeSlide.name}`}
+            aria-label={`Slide ${activeIndex + 1} dari ${portalSlides.length}: ${activeSlide.name}, ${activeSlide.status}`}
             aria-live="polite"
             aria-atomic="true"
           >
@@ -174,7 +174,7 @@ export default function PortalDemoCarousel() {
                 className={index === activeIndex ? 'is-active' : ''}
                 type="button"
                 key={slide.name}
-                aria-label={`Tampilkan ${slide.name}`}
+                aria-label={`Tampilkan ${slide.name}, ${slide.status}`}
                 aria-pressed={index === activeIndex}
                 aria-controls={viewportId}
                 onClick={() => scrollToSlide(index)}
@@ -197,7 +197,7 @@ export default function PortalDemoCarousel() {
         </button>
       </div>
 
-      <figcaption className="portal-carousel-caption">
+      <figcaption className="portal-carousel-caption" style={{ flexWrap: 'wrap' }}>
         <span className="status">{activeSlide.status}</span>
         <span>
           {activeSlide.caption}

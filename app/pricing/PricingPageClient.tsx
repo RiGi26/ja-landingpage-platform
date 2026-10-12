@@ -398,7 +398,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             href="https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20tidak%20yakin%20platform%20mana%20yang%20cocok%20untuk%20bisnis%20saya."
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#0071E3] font-bold hover:underline"
+            className="inline-flex min-h-11 min-w-11 items-center text-sm text-[#0071E3] font-bold hover:underline"
           >
             Tidak yakin pilih yang mana? Chat tim kami →
           </a>
@@ -612,7 +612,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               href="https://wa.me/6281296917963?text=Saya%20ingin%20tanya%20soal%20paket%20multi-cabang%20Webzoka"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0071E3] font-bold hover:underline"
+              className="inline-flex min-h-11 min-w-11 items-center text-[#0071E3] font-bold hover:underline"
             >
               Tanyakan paket bundle →
             </a>
@@ -749,7 +749,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 href="https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20punya%20pertanyaan%20soal%20langganan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#0071E3] font-bold hover:underline"
+                className="inline-flex min-h-11 min-w-11 items-center text-[#0071E3] font-bold hover:underline"
               >
                 Chat tim kami
               </a>

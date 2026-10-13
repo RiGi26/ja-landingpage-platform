@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom'
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react'
 import { waLink } from '@/constants/site'
 import { ANALYTICS_EVENTS, trackEvent } from '@/lib/analytics'
+import useHeaderVisibility from './useHeaderVisibility'
 
 type Page = 'home' | 'services' | 'work' | 'managed' | 'about' | 'privacy' | 'terms' | 'pricing'
 const PAGE_PATHS: Record<Page, string> = {
@@ -73,6 +74,8 @@ export default function V43Shell({ page, children, externalOverlayOpen = false }
   const mobileTimer = useRef<ReturnType<typeof setTimeout>>()
   const frames = useRef(new Set<number>())
   const mounted = useRef(true)
+
+  useHeaderVisibility(headerRef, submenuPresent || mobilePresent || Boolean(activeDialog) || externalOverlayOpen, page)
 
   const scheduleFrame = useCallback((callback: () => void) => {
     const id = requestAnimationFrame(() => { frames.current.delete(id); callback() })
@@ -264,7 +267,7 @@ export default function V43Shell({ page, children, externalOverlayOpen = false }
         <div className="header-actions">
           <span className="hub-inactive" aria-disabled="true" title="Webzoka Hub belum tersedia">Webzoka Hub <small>Belum aktif</small></span>
           <DialogButton className="nav-pill consultation" dialog="consultation">Konsultasi</DialogButton>
-          <button ref={mobileToggleRef} className="mobile-toggle" type="button" aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'} aria-expanded={mobileOpen} aria-controls="mobile-menu" onClick={() => setMobile(!mobileOpen)}><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16" /></svg></button>
+          <button ref={mobileToggleRef} className="mobile-toggle" type="button" aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'} aria-expanded={mobileOpen} aria-controls="mobile-menu" onClick={() => setMobile(!mobileOpen)}><span>Menu</span><span className="menu-mark" aria-hidden="true" /></button>
         </div>
       </div></header>
       <div ref={surfaceRef} className="page-surface">{children}<footer className="site-footer"><div className="container">
@@ -277,8 +280,7 @@ export default function V43Shell({ page, children, externalOverlayOpen = false }
     {portalReady && createPortal(<div className="v43 v43-portals" data-page={page}>
       <div className="menu-backdrop" hidden={!mobileOpen} onClick={() => setMobile(false)} />
       <section ref={mobileMenuRef} id="mobile-menu" className={`mobile-menu${mobileAnimated ? ' is-open' : ''}`} role="dialog" aria-modal="true" aria-label="Menu utama" hidden={!mobilePresent}>
-        <div className="mobile-brand"><Image src="/images/logo-wide-clean.png" alt="Webzoka" width={462} height={151} unoptimized /></div>
-        <button className="dialog-close mobile-close" type="button" aria-label="Tutup menu mobile" onClick={() => setMobile(false)}><CloseIcon /></button>
+        <div className="mobile-menu-heading"><p className="section-kicker">Jelajahi Webzoka</p><button className="mobile-close" type="button" aria-label="Tutup menu mobile" onClick={() => setMobile(false)}><span>Tutup</span><CloseIcon /></button></div>
         <nav aria-label="Navigasi mobile">
           <Link href="/" aria-current={page === 'home' ? 'page' : undefined} onClick={() => setMobile(false, false)}>Beranda</Link><Link href="/karya/" aria-current={page === 'work' ? 'page' : undefined} onClick={() => setMobile(false, false)}>Karya</Link>
           <details className="mobile-services"><summary>Layanan <ChevronIcon /></summary><div><Link href="/layanan/" onClick={() => setMobile(false, false)}>Semua layanan</Link><Link href="/layanan/#website" onClick={() => setMobile(false, false)}>Website</Link><Link href="/layanan/#portal" onClick={() => setMobile(false, false)}>Portal SaaS</Link><Link href="/layanan/#bundle" onClick={() => setMobile(false, false)}>Website + Portal</Link></div></details>

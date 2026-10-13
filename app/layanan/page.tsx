@@ -77,7 +77,7 @@ export default function ServicesPage() {
             <div className="service-content">
               <p className="section-kicker">02 · Portal SaaS</p>
               <h2>Portal SaaS</h2>
-              <p className="service-lead">Bantu tim mencatat dan menangani pekerjaan harian. Pilihan Portal mengikuti alur usaha, pengguna, dan kebutuhan data.</p>
+              <p className="service-lead">LMS dan Stock menjadi fokus penawaran awal kami: kegiatan belajar serta pesanan dan stok. Kebutuhan tim dan kesiapan aktivasi dibahas sebelum mulai.</p>
               <p className="scope-label">Lingkup pembahasan</p>
               <ul className="service-scope">
                 <li>Alur kerja yang ingin dibantu.</li>
@@ -85,14 +85,24 @@ export default function ServicesPage() {
                 <li>Kesiapan produk, dukungan, dan ketentuan langganan.</li>
               </ul>
               <dl className="service-facts">
-                <div><dt>Contoh kebutuhan</dt><dd>Stok dan pesanan, kegiatan belajar, administrasi klinik dan apotek, serta operasional laundry.</dd></div>
+                <div><dt>Fokus awal</dt><dd>LMS untuk kegiatan belajar; Stock untuk pesanan dan stok, sesuai cakupan paket.</dd></div>
                 <div><dt>Biaya</dt><dd>Mengikuti produk, kebutuhan, dan dukungan.</dd></div>
               </dl>
+              <div className="mt-6 mb-6">
+                <h3 className="scope-label">Dalam Pengembangan</h3>
+                <ul className="service-scope">
+                  <li>Portal Klinik — Dalam Pengembangan.</li>
+                  <li>Portal Farmasi — Dalam Pengembangan.</li>
+                  <li>Portal Travel &amp; Rental — Dalam Pengembangan.</li>
+                  <li>Portal Laundry — Dalam Pengembangan.</li>
+                </ul>
+                <p>Keempat Portal ini belum ditawarkan untuk langganan baru. Harga, trial, dan pendaftaran belum tersedia di katalog publik.</p>
+              </div>
               <details className="service-details">
                 <summary>Memilih Portal yang sesuai <span aria-hidden="true">+</span></summary>
                 <div className="details-content">
                   <p>Kita mulai dari pekerjaan yang ingin dirapikan, siapa yang memakai sistem, dan data yang dibutuhkan. Kesiapan fitur, biaya, serta ketentuan langganan dijelaskan sebelum kamu memutuskan.</p>
-                  <Link className="text-link" href="/pricing/">Paket Portal</Link>
+                  <Link className="text-link" href="/pricing/">Paket LMS dan Stock</Link>
                 </div>
               </details>
             </div>

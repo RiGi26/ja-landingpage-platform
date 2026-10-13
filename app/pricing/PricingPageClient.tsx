@@ -25,9 +25,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     registerUrl: 'https://lms.webzoka.com/register',
     plans: [
       {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Siswa', 'Multi-Pengajar', 'Sertifikat Kelulusan', 'Priority Support', 'Tanpa kartu kredit'],
+        tier: 'Trial', price: 0, isTrial: true,
+        desc: 'Diskusikan ketersediaan dan ketentuan trial dengan tim kami.',
+        feat: ['Ketentuan trial dikonfirmasi sebelum aktivasi.'],
       },
       { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk kelas kecil yang baru mulai.', feat: ['100 Siswa', 'Materi & Sesi Belajar', 'Kuis & Ujian', 'Flashcard', 'Manajemen & Absensi Siswa', 'Portal Wali Murid'] },
       { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk lembaga yang sedang berkembang.', feat: ['500 Siswa', 'Keuangan & Invoice', 'Laporan + Ekspor CSV', 'Notifikasi WhatsApp', 'Jadwal Kelas Live', 'Remidial (Buku Salah)', 'Ranking & Streak', 'Quiz Dadakan'], popular: true },
@@ -40,7 +40,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     // lihat MIRROR_PLAYBOOK.md §7 di ja-lms-platform untuk prosedurnya.
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      note: 'Fitur mengikuti paket yang dipilih. Ketersediaan dan ketentuan trial dikonfirmasi sebelum aktivasi.',
       rows: [
         { label: 'Materi & sesi belajar (BAB)', tiers: [true, true, true] },
         { label: 'Kuis & ujian (mock test)', tiers: [true, true, true] },
@@ -63,116 +63,6 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     },
   },
   {
-    id: 'clinic',
-    name: 'Portal Klinik',
-    subtitle: 'Manajemen pasien digital',
-    icon: Cross,
-    demoUrl: 'https://clinic.webzoka.com/demo',
-    registerUrl: 'https://clinic.webzoka.com/register',
-    plans: [
-      {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Multi-Dokter', 'Custom Domain', 'Tanpa kartu kredit'],
-      },
-      { tier: 'Starter', price: 199000, priceYearly: 1990000, desc: 'Untuk praktik kecil yang baru mulai.', feat: ['25 Pasien/bulan', 'Antrian & Appointment', 'Rekam Medis Digital', 'Surat Keterangan', 'Booking Online'] },
-      { tier: 'Growth', price: 499000, priceYearly: 4990000, desc: 'Untuk klinik yang ramai harian.', feat: ['Unlimited Pasien', 'Siap integrasi SATUSEHAT¹', 'Antrian Otomatis', 'Notifikasi WhatsApp', 'Laporan Harian'], popular: true },
-      { tier: 'Pro', price: 1199000, priceYearly: 11990000, desc: 'Untuk klinik multi-dokter & cabang.', feat: ['Semua fitur Growth', 'Multi-Dokter', 'Custom Domain', 'API Integration', 'Priority Support'] },
-    ],
-    // Gating per-tier ditegakkan server (Klinik Fase A — page+API guard + seat dokter).
-    // Custom domain/white-label dikontrol superadmin → tak ditampilkan di sini.
-    featureMatrix: {
-      cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
-      rows: [
-        { label: 'Antrian & appointment', tiers: [true, true, true] },
-        { label: 'Database pasien', tiers: [true, true, true] },
-        { label: 'Rekam medis + resep (SOAP/ICD-10)', tiers: [true, true, true] },
-        { label: 'Surat keterangan (sakit/sehat/rujukan)', tiers: [true, true, true] },
-        { label: 'Billing & pembayaran (+ struk WA)', tiers: [false, true, true] },
-        { label: 'Apotek / stok obat', tiers: [false, true, true] },
-        { label: 'Laporan & analitik (+ ekspor)', tiers: [false, true, true] },
-        { label: 'Jadwal staf / shift', tiers: [false, true, true] },
-        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
-        { label: 'Booking link pasien + QR', tiers: [false, false, true] },
-        { label: 'Jumlah dokter', tiers: ['1', '3', 'Tanpa batas'] },
-      ],
-    },
-  },
-  {
-    id: 'pharmacy',
-    name: 'Portal Farmasi',
-    subtitle: 'Manajemen apotek digital',
-    icon: Pill,
-    demoUrl: 'https://pharmacy.webzoka.com/demo',
-    registerUrl: 'https://pharmacy.webzoka.com/register',
-    plans: [
-      {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'User/kasir tanpa batas', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware', 'Tanpa kartu kredit'],
-      },
-      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk apotek kecil yang baru mulai.', feat: ['POS + barcode', 'Master obat & inventory', 'Shift kasir + rekap', 'Logbook obat keras (BPOM)', '1 user'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk apotek dengan transaksi padat.', feat: ['Semua Starter', 'Stok opname + monitoring expiry', 'Laporan & analitik (Excel/PDF)', 'Notifikasi WhatsApp', '3 user'], popular: true },
-      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk apotek yang terintegrasi penuh.', feat: ['Semua Growth', 'Integrasi resep klinik', 'Mode offline (PWA)', 'Cetak struk hardware (QZ Tray)', 'User tanpa batas'] },
-    ],
-    // Gating per-tier ditegakkan server (Farmasi — page+API guard + seat kasir).
-    featureMatrix: {
-      cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
-      rows: [
-        { label: 'POS / kasir (+ barcode)', tiers: [true, true, true] },
-        { label: 'Master obat', tiers: [true, true, true] },
-        { label: 'Inventory & terima stok', tiers: [true, true, true] },
-        { label: 'Shift kasir + rekap', tiers: [true, true, true] },
-        { label: 'Logbook obat keras & psikotropika (BPOM)', tiers: [true, true, true] },
-        { label: 'Stok opname', tiers: [false, true, true] },
-        { label: 'Monitoring expiry + retur/musnah', tiers: [false, true, true] },
-        { label: 'Laporan & analitik (Excel/PDF)', tiers: [false, true, true] },
-        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
-        { label: 'Integrasi resep klinik (webhook)', tiers: [false, false, true] },
-        { label: 'Mode offline (PWA) + sinkron', tiers: [false, false, true] },
-        { label: 'Cetak struk hardware (QZ Tray)', tiers: [false, false, true] },
-        { label: 'Jumlah user/kasir', tiers: ['1', '3', 'Tanpa batas'] },
-      ],
-    },
-  },
-  {
-    id: 'rental',
-    name: 'Portal Travel & Rental',
-    subtitle: 'Booking & kelola aset online',
-    icon: Bus,
-    demoUrl: 'https://rent.webzoka.com/demo',
-    registerUrl: 'https://rent.webzoka.com/register',
-    plans: [
-      {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'GPS live tracking', 'Rental self-drive', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notif WA otomatis', 'Tanpa kartu kredit'],
-      },
-      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk armada kecil yang baru mulai.', feat: ['Armada + reminder servis', 'Rute & jadwal', 'Booking + bayar manual', 'E-ticket & invoice PDF', 'Driver roster + rating'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk rental yang sibuk.', feat: ['Semua Starter', 'Pembayaran online (bergantung kesiapan & aktivasi)', 'Notifikasi WhatsApp', 'Laporan & analitik'], popular: true },
-      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk operator yang terintegrasi penuh.', feat: ['Semua Growth', 'GPS live tracking', 'Rental self-drive (deposit)', 'Priority support'] },
-    ],
-    // Gating per-tier ditegakkan server (Travel — page guard + API guard).
-    featureMatrix: {
-      cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
-      rows: [
-        { label: 'Armada + reminder servis', tiers: [true, true, true] },
-        { label: 'Rute & jadwal', tiers: [true, true, true] },
-        { label: 'Booking + konfirmasi bayar manual', tiers: [true, true, true] },
-        { label: 'E-ticket & invoice PDF (QR)', tiers: [true, true, true] },
-        { label: 'Driver roster + rating', tiers: [true, true, true] },
-        { label: 'Pembayaran online (bergantung kesiapan & aktivasi)', tiers: [false, true, true] },
-        { label: 'Notifikasi WhatsApp otomatis', tiers: [false, true, true] },
-        { label: 'Laporan & analitik', tiers: [false, true, true] },
-        { label: 'GPS live tracking', tiers: [false, false, true] },
-        { label: 'Modul rental self-drive (deposit)', tiers: [false, false, true] },
-      ],
-    },
-  },
-  {
     id: 'stock',
     name: 'Portal Operasi (Stock)',
     subtitle: 'Stok, pesanan & operasi bisnis',
@@ -181,9 +71,9 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     registerUrl: 'https://stock.webzoka.com/register',
     plans: [
       {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'Resep / BOM & modul Produksi', 'Perencanaan produksi (MRP)', 'SDM & Penggajian tim', 'Akun & hak akses tim tanpa batas', 'Tanpa kartu kredit'],
+        tier: 'Trial', price: 0, isTrial: true,
+        desc: 'Diskusikan ketersediaan dan ketentuan trial dengan tim kami.',
+        feat: ['Ketentuan trial dikonfirmasi sebelum aktivasi.'],
       },
       {
         tier: 'Starter', price: 199000, priceYearly: 1990000,
@@ -203,7 +93,7 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
     ],
     featureMatrix: {
       cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
+      note: 'Fitur mengikuti paket yang dipilih. Ketersediaan dan ketentuan trial dikonfirmasi sebelum aktivasi.',
       rows: [
         { label: 'Dashboard & laporan ringkas', tiers: [true, true, true] },
         { label: 'Kelola pesanan & invoice/label', tiers: [true, true, true] },
@@ -227,49 +117,20 @@ const PLATFORMS: { id: string; name: string; subtitle: string; icon: LucideIcon;
       ],
     },
   },
-  {
-    id: 'laundry',
-    name: 'Portal Laundry',
-    subtitle: 'Manajemen laundry digital',
-    icon: WashingMachine,
-    demoUrl: 'https://laundry.webzoka.com/demo',
-    registerUrl: 'https://laundry.webzoka.com/register',
-    plans: [
-      {
-        tier: 'Trial', price: 0, isTrial: true, cta: 'Mulai Trial 14 Hari',
-        desc: 'Coba semua fitur paket Pro, 14 hari penuh.',
-        feat: ['Semua fitur paket Pro', 'SDM & Penggajian', 'Branding sendiri (white-label)', 'Staf tanpa batas', 'Antar-jemput & saldo pelanggan', 'Tanpa kartu kredit'],
-      },
-      { tier: 'Starter', price: 149000, priceYearly: 1490000, desc: 'Untuk laundry yang baru mulai rapikan order.', feat: ['Order laundry (kiloan & satuan) + timbang', 'Tier kecepatan + ETA (Reguler/Express/Kilat)', 'Status proses cuci (diterima → selesai)', 'Label & QR per kantong + scanner', 'Antar-jemput & saldo pelanggan', 'Notifikasi WhatsApp otomatis', '1 akun admin'] },
-      { tier: 'Growth', price: 399000, priceYearly: 3990000, desc: 'Untuk laundry yang butuh kontrol keuangan.', feat: ['Semua fitur Starter', 'Laporan & keuangan (omzet, arus kas, biaya)', 'Sampai 3 akun tim & hak akses'], popular: true },
-      { tier: 'Pro', price: 799000, priceYearly: 7990000, desc: 'Untuk laundry dengan tim & multi-staf.', feat: ['Semua fitur Growth', 'SDM & Penggajian', 'Branding sendiri (white-label)', 'Staf tanpa batas', 'Prioritas dukungan teknis'] },
-    ],
-    // Fitur laundry = jasa: modul stok/BOM/MRP/supplier warisan stock DISEMBUNYIKAN (tak diiklankan).
-    // Diferensiasi jujur: Starter = semua operasi laundry · Growth = +laporan/keuangan · Pro = +SDM+white-label.
-    featureMatrix: {
-      cols: ['Starter', 'Growth', 'Pro'],
-      note: 'Trial 14 hari = akses penuh setara Pro. Setelah trial, fitur menyesuaikan paket yang dipilih.',
-      rows: [
-        { label: 'Order laundry (kiloan & satuan) + timbang', tiers: [true, true, true] },
-        { label: 'Tier kecepatan + ETA (Reguler/Express/Kilat)', tiers: [true, true, true] },
-        { label: 'Status proses cuci (diterima → selesai)', tiers: [true, true, true] },
-        { label: 'Label & QR per kantong + scanner', tiers: [true, true, true] },
-        { label: 'Antar-jemput (pickup & delivery)', tiers: [true, true, true] },
-        { label: 'Pelanggan + saldo/deposit', tiers: [true, true, true] },
-        { label: 'Layanan & harga', tiers: [true, true, true] },
-        { label: 'Notifikasi WhatsApp otomatis', tiers: [true, true, true] },
-        { label: 'Laporan & keuangan (arus kas & biaya)', tiers: [false, true, true] },
-        { label: 'SDM & penggajian', tiers: [false, false, true] },
-        { label: 'Branding sendiri (white-label)', tiers: [false, false, true] },
-        { label: 'Jumlah akun tim', tiers: ['1', '3', 'Tanpa batas'] },
-      ],
-    },
-  }
+
 ]
+
+// Development products have no commercial URLs, prices, plans or trial offers.
+const DEVELOPMENT_PLATFORMS = [
+  { id: 'clinic', name: 'Portal Klinik', icon: Cross },
+  { id: 'pharmacy', name: 'Portal Farmasi', icon: Pill },
+  { id: 'rental', name: 'Portal Travel & Rental', icon: Bus },
+  { id: 'laundry', name: 'Portal Laundry', icon: WashingMachine },
+] as const
 
 // Harga otoritatif dari Core DB (lihat /api/public/plans). Key: `${platform}:${coreTier}`.
 // Tier tampilan → tier Core (enum): Starter→starter, Growth→pro, Pro→enterprise.
-// (Semua portal kini skema seragam Starter/Growth/Pro; semua berbayar, Trial gratis.)
+// Existing Starter/Growth/Pro mapping is preserved; trial availability is confirmed by consultation.
 export type PriceMap = Record<string, number>
 
 function coreTierOf(tier: string): 'starter' | 'pro' | 'enterprise' {
@@ -288,6 +149,10 @@ type CampaignStatus = { active: boolean; discountPct: number; tier: string; mont
 
 export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap }) {
   const [activeTab, setActiveTab] = useState('lms')
+  const [catalogReady, setCatalogReady] = useState(false)
+  const [unavailablePlatform, setUnavailablePlatform] = useState<string | null>(null)
+  const developmentPlatform = DEVELOPMENT_PLATFORMS.find(p => p.id === unavailablePlatform)
+  const showCommercialPlans = catalogReady && unavailablePlatform === null
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'yearly'>('monthly')
   const currentPlatform = PLATFORMS.find(p => p.id === activeTab) || PLATFORMS[0]
 
@@ -303,13 +168,33 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
     return () => { alive = false }
   }, [])
 
-  // Deep-link: /pricing?platform=lms langsung membuka tab portal terkait (mis. dari
-  // kartu combo "Website + Portal" di landing). Baca sekali saat mount — halaman ini
-  // static export, jadi ambil dari window.location (bukan useSearchParams/Suspense).
+  // Static export resolves deep links after mount and on history navigation.
+  // Keep purchases hidden until the requested product is known to be supported.
   useEffect(() => {
-    const wanted = new URLSearchParams(window.location.search).get('platform')
-    if (wanted && PLATFORMS.some(p => p.id === wanted)) setActiveTab(wanted)
+    const readPlatform = () => {
+      const wanted = new URLSearchParams(window.location.search).get('platform')
+      if (wanted && !PLATFORMS.some(p => p.id === wanted)) {
+        setUnavailablePlatform(wanted)
+      } else {
+        setUnavailablePlatform(null)
+        setActiveTab(wanted || 'lms')
+      }
+      setCatalogReady(true)
+    }
+    readPlatform()
+    window.addEventListener('popstate', readPlatform)
+    return () => window.removeEventListener('popstate', readPlatform)
   }, [])
+
+  function selectPlatform(id: string) {
+    if (!PLATFORMS.some(p => p.id === id)) return
+    setUnavailablePlatform(null)
+    setActiveTab(id)
+    setCatalogReady(true)
+    const url = new URL(window.location.href)
+    url.searchParams.set('platform', id)
+    window.history.replaceState(null, '', url)
+  }
 
   // A native dialog keeps the mobile selector in the top layer, with keyboard
   // focus containment, Escape handling and focus restoration.
@@ -322,7 +207,10 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
     const dialog = sheetRef.current
     const trigger = sheetTriggerRef.current
     dialog?.showModal()
-    dialog?.querySelector<HTMLButtonElement>('[aria-current="true"]')?.focus()
+    const selected = dialog?.querySelector<HTMLButtonElement>('[aria-current="true"]')
+    const firstOption = dialog?.querySelector<HTMLButtonElement>('[data-platform-option]')
+    const focusTarget = selected ?? firstOption
+    focusTarget?.focus()
     const prev = document.body.style.overflow
     document.body.style.overflow = 'hidden'
     const desktop = matchMedia('(min-width: 768px)')
@@ -351,7 +239,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
   useEffect(() => {
     cardsRef.current?.scrollTo({ left: 0 })
     setActiveCard(0)
-  }, [activeTab])
+  }, [activeTab, showCommercialPlans])
 
   return (
     <V43Shell page="pricing" externalOverlayOpen={sheetOpen || pickerOpen}>
@@ -379,39 +267,39 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Header */}
         <div className="pricing-hero text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 bg-green-50 text-green-700 text-[11px] font-bold px-4 py-1.5 rounded-full mb-5 border border-green-100">
-            <Check size={13} strokeWidth={3} /> Coba 14 hari gratis — tanpa kartu kredit
+            <Check size={13} strokeWidth={3} aria-hidden="true" /> Fokus awal: LMS dan Stock
           </div>
           <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight sf-display-heavy">
-            Sistem Portal Bisnis — <span className="text-blue-600">Satu Sistem</span> untuk Setiap Industri
+            Portal <span className="text-blue-600">LMS dan Stock</span> untuk Kerja Tim
           </h1>
           <p className="text-gray-500 text-lg max-w-2xl mx-auto font-medium">
-            Pilih portal sesuai bisnis kamu. Tanpa setup fee, tanpa kontrak minimum, tanpa biaya tersembunyi.
+            Fokus penawaran awal kami adalah LMS dan Stock. Pilih Portal untuk membahas paket, kebutuhan tim, dan kesiapan aktivasi.
           </p>
         </div>
 
         {/* Platform Switcher */}
         <div className="text-center mb-5">
-          <p className="text-sm font-bold text-gray-400">Bisnis saya bergerak di bidang:</p>
+          <p className="text-sm font-bold text-gray-400">Pilih LMS atau Stock:</p>
         </div>
         {/* Desktop: grid penuh. Mobile: dirampingkan jadi tombol + bottom-sheet di bawah. */}
-        <div role="tablist" aria-label="Pilih platform" className="pricing-tabs hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4">
+        <div role="tablist" aria-label="Pilih platform" className="pricing-tabs hidden md:flex md:flex-wrap md:justify-center gap-2 mb-4" style={{ gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' }}>
           {PLATFORMS.map(p => {
-            const isActive = activeTab === p.id
+            const isActive = showCommercialPlans && activeTab === p.id
             return (
             <button
               key={p.id}
               id={`tab-${p.id}`}
               role="tab"
               aria-selected={isActive}
-              aria-controls={`tabpanel-${p.id}`}
-              tabIndex={isActive ? 0 : -1}
-              onClick={() => setActiveTab(p.id)}
+              aria-controls={isActive ? `tabpanel-${p.id}` : undefined}
+              tabIndex={isActive || (!showCommercialPlans && p.id === 'lms') ? 0 : -1}
+              onClick={() => selectPlatform(p.id)}
               onKeyDown={(event) => {
                 const index = PLATFORMS.findIndex(platform => platform.id === p.id)
                 const next = event.key === 'Home' ? 0 : event.key === 'End' ? PLATFORMS.length - 1 : event.key === 'ArrowRight' ? (index + 1) % PLATFORMS.length : event.key === 'ArrowLeft' ? (index - 1 + PLATFORMS.length) % PLATFORMS.length : null
                 if (next === null) return
                 event.preventDefault()
-                setActiveTab(PLATFORMS[next].id)
+                selectPlatform(PLATFORMS[next].id)
                 document.getElementById(`tab-${PLATFORMS[next].id}`)?.focus()
               }}
               className={`flex flex-col items-start justify-center text-left h-full min-h-[64px] px-4 py-3 rounded-2xl border font-bold text-sm transition-all md:basis-[calc(33.333%-6px)] lg:basis-[calc(20%-6px)] md:grow-0 md:shrink-0 ${
@@ -444,8 +332,8 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             <currentPlatform.icon size={18} />
           </span>
           <span className="flex-1 min-w-0">
-            <span className="block text-gray-900 truncate">{currentPlatform.name}</span>
-            <span className="block text-xs font-medium text-gray-500 truncate">{currentPlatform.subtitle}</span>
+            <span className="block text-gray-900 truncate">{showCommercialPlans ? currentPlatform.name : 'Pilih LMS atau Stock'}</span>
+            <span className="block text-xs font-medium text-gray-500 truncate">{showCommercialPlans ? currentPlatform.subtitle : 'Fokus penawaran awal Webzoka'}</span>
           </span>
           <ChevronDown size={18} className={`shrink-0 text-gray-400 transition-transform duration-300 ${sheetOpen ? 'rotate-180' : ''}`} />
         </button>
@@ -479,13 +367,14 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               </div>
               <div className="overflow-y-auto px-3 pb-4 space-y-1.5">
                 {PLATFORMS.map(p => {
-                  const isActive = activeTab === p.id
+                  const isActive = showCommercialPlans && activeTab === p.id
                   return (
                     <button
                       key={p.id}
                       type="button"
                       aria-current={isActive ? 'true' : undefined}
-                      onClick={() => { setActiveTab(p.id); setSheetOpen(false) }}
+                      data-platform-option={p.id}
+                      onClick={() => { selectPlatform(p.id); setSheetOpen(false) }}
                       className={`w-full flex items-center gap-3 text-left px-3 py-3 rounded-2xl border transition-colors ${
                         isActive ? 'bg-blue-50 border-blue-200' : 'bg-white border-transparent hover:bg-gray-50'
                       }`}
@@ -509,12 +398,31 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
             href="https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20tidak%20yakin%20platform%20mana%20yang%20cocok%20untuk%20bisnis%20saya."
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-[#0071E3] font-bold hover:underline"
+            className="inline-flex min-h-11 min-w-11 items-center text-sm text-[#0071E3] font-bold hover:underline"
           >
             Tidak yakin pilih yang mana? Chat tim kami →
           </a>
         </div>
 
+        {!catalogReady && (
+          <p role="status" className="mb-8 text-center text-sm text-gray-600">Memuat pilihan Portal…</p>
+        )}
+        {unavailablePlatform !== null && (
+          <section aria-labelledby="unavailable-portal-title" role="status" className="mb-10 rounded-2xl border border-amber-200 bg-amber-50 p-5 md:p-6">
+            <h2 id="unavailable-portal-title" className="text-lg font-bold text-gray-900">
+              {developmentPlatform ? developmentPlatform.name + ' — Dalam Pengembangan' : 'Pilihan Portal tidak tersedia'}
+            </h2>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+              {developmentPlatform
+                ? 'Portal ini belum ditawarkan untuk langganan baru. Harga, trial, dan pendaftaran belum tersedia di katalog publik.'
+                : 'Pilih LMS atau Stock untuk melihat paket yang ditawarkan di katalog publik.'}
+            </p>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">Paket LMS atau Stock hanya tampil setelah kamu memilihnya. Pelanggan yang sudah memakai Portal tetap dapat masuk melalui Masuk Pelanggan.</p>
+          </section>
+        )}
+
+        {showCommercialPlans && (
+        <>
         {/* Demo link — once per platform */}
         {currentPlatform.demoUrl && (
           <div className="text-center mb-8">
@@ -552,11 +460,6 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               }`}
             >
               Tahunan
-              <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                billingPeriod === 'yearly' ? 'bg-white/20 text-white' : 'bg-green-50 text-green-700'
-              }`}>
-                2 bln gratis
-              </span>
             </button>
           </div>
         </div>
@@ -574,7 +477,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           {currentPlatform.plans.map((plan) => {
             // Tab Stock pakai harga statis (Rp) — bypass resolvePrice/priceMap Core.
             const isStock = currentPlatform.id === 'stock'
-            // Fallback tahunan = priceYearly bila ada, else bulanan × 10 (2 bln gratis).
+            // Preserve existing annual fallback: priceYearly, otherwise monthly price × 10.
             const yearlyFallback = plan.priceYearly ?? plan.price * 10
             const monthlyPrice = isStock ? plan.price : resolvePrice(currentPlatform.id, plan.tier, plan.price, 'monthly', priceMap)
             const yearlyPrice = isStock ? yearlyFallback : resolvePrice(currentPlatform.id, plan.tier, yearlyFallback, 'yearly', priceMap)
@@ -590,7 +493,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               : `Halo Webzoka, saya ingin berlangganan ${currentPlatform.name} paket ${plan.tier} (${billingPeriod === 'yearly' ? 'tahunan' : 'bulanan'}).`)}`
             const ctaHref = isFreeCta ? currentPlatform.registerUrl : chatHref
             const ctaLabel = isFreeCta
-              ? (plan.cta ?? 'Mulai Trial 14 Hari')
+              ? (plan.cta ?? 'Mulai Trial')
               : plan.isTrial ? 'Chat untuk konsultasi trial' : 'Chat untuk berlangganan'
             return (
             <div
@@ -611,7 +514,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 )}
                 <div className="flex flex-wrap items-baseline gap-x-1.5">
                   <span className="pricing-amount text-2xl md:text-3xl font-black text-gray-900 sf-display-heavy tabular-nums whitespace-nowrap">
-                    {price === 0 ? 'Gratis' : `Rp ${price.toLocaleString('id-ID')}`}
+                    {plan.isTrial && !isFreeCta ? 'Konsultasi trial' : price === 0 ? 'Gratis' : `Rp ${price.toLocaleString('id-ID')}`}
                   </span>
                   {price !== 0 && (
                     <span className="text-gray-400 text-sm font-medium">/{billingPeriod === 'yearly' ? 'tahun' : 'bulan'}</span>
@@ -619,7 +522,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 </div>
                 {billingPeriod === 'yearly' && price !== 0 && (
                   <p className="mt-1.5 text-xs font-bold text-green-600">
-                    ≈ Rp {Math.round(price / 12).toLocaleString('id-ID')}/bln · hemat 2 bulan
+                    ≈ Rp {Math.round(price / 12).toLocaleString('id-ID')}/bln
                   </p>
                 )}
                 {plan.promo && (
@@ -695,21 +598,10 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               <span><span className="font-semibold text-gray-700">Format konten yang didukung:</span> Video, PDF, Quiz, Tugas, Live Zoom — semua bisa diupload dari dashboard.</span>
             </p>
           )}
-          {activeTab === 'clinic' && (
-            <p className="text-xs text-gray-500">
-              ¹ SATUSEHAT = sistem rekam medis resmi Kementerian Kesehatan RI, wajib bagi klinik yang terdaftar di Kemkes.
-            </p>
-          )}
           {activeTab === 'stock' && (
             <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
               <Package size={15} className="mt-0.5 shrink-0 text-gray-500" />
-              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Setelah trial, pilih Starter, Growth, atau Pro. Cocok untuk warung & produksi: pesanan dari website langsung masuk ke stok, lengkap lacak lot kadaluarsa (FEFO) dan resep produksi.</span>
-            </p>
-          )}
-          {activeTab === 'laundry' && (
-            <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
-              <WashingMachine size={15} className="mt-0.5 shrink-0 text-gray-500" />
-              <span><span className="font-semibold text-gray-700">Trial 14 hari = akses penuh fitur Pro.</span> Diskusikan akses trial dengan tim kami; setelah trial, pilih Starter, Growth, atau Pro dan hubungi tim kami untuk informasi pembayaran.</span>
+              <span><span className="font-semibold text-gray-700">Fitur Stock mengikuti paket yang dipilih.</span> Bandingkan cakupan pesanan, stok, dan produksi pada tabel sebelum membahas langganan.</span>
             </p>
           )}
           <p className="inline-flex items-start justify-center gap-2 text-sm text-gray-500">
@@ -720,7 +612,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
               href="https://wa.me/6281296917963?text=Saya%20ingin%20tanya%20soal%20paket%20multi-cabang%20Webzoka"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#0071E3] font-bold hover:underline"
+              className="inline-flex min-h-11 min-w-11 items-center text-[#0071E3] font-bold hover:underline"
             >
               Tanyakan paket bundle →
             </a>
@@ -787,6 +679,25 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           </div>
         )}
 
+        </>
+        )}
+
+        <section aria-labelledby="development-portals-title" className="mb-12 rounded-2xl border border-gray-200 bg-gray-50 p-5 md:p-6">
+          <h2 id="development-portals-title" className="text-xl font-bold text-gray-900">Dalam Pengembangan</h2>
+          <p className="mt-3 text-sm text-gray-700 leading-relaxed">Portal berikut belum ditawarkan untuk langganan baru. Pelanggan yang sudah memakai layanan tetap dapat masuk melalui Masuk Pelanggan.</p>
+          <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {DEVELOPMENT_PLATFORMS.map(p => (
+              <li key={p.id} className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4">
+                <p.icon size={20} className="mt-0.5 shrink-0 text-gray-600" aria-hidden="true" />
+                <div className="min-w-0">
+                  <h3 className="text-base font-bold text-gray-900">{p.name}</h3>
+                  <p className="mt-1 text-sm text-gray-700">Dalam Pengembangan</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         {/* FAQ */}
         <div className="pricing-faq py-14 md:py-20 border-t border-black/5">
           <div className="text-center mb-8 md:mb-12">
@@ -798,28 +709,28 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 items-start">
             {[
               {
-                q: 'Apa yang terjadi setelah trial 14 hari habis?',
-                a: 'Untuk melanjutkan, pilih salah satu paket berbayar (Starter, Growth, atau Pro). Selama trial tidak ada charge otomatis dan tidak ada kartu kredit yang ditagih — kamu yang menentukan kapan mulai berlangganan.',
+                q: 'Bagaimana mengetahui ketentuan trial LMS atau Stock?',
+                a: 'Hubungi tim kami untuk membahas ketersediaan, durasi, dan cakupan trial sebelum aktivasi.',
               },
               {
                 q: 'Apakah bisa upgrade atau downgrade paket?',
-                a: 'Ya, kapan saja. Tidak ada penalti, tidak ada kontrak minimum. Cukup chat tim kami dan paket diubah di hari yang sama.',
+                a: 'Hubungi tim kami untuk membahas perubahan paket, cakupan fitur, dan ketentuan yang berlaku sebelum memberi konfirmasi.',
               },
               {
                 q: 'Bagaimana cara pembayaran langganan?',
                 a: 'Hubungi tim kami untuk memilih paket dan periode langganan. Metode serta instruksi pembayaran yang tersedia diinformasikan sebelum pembayaran dilakukan.',
               },
               {
-                q: 'Apakah data saya aman kalau berhenti berlangganan?',
-                a: 'Data kamu tetap tersimpan 30 hari setelah berhenti. Kami beri waktu untuk export sebelum data dihapus permanen.',
+                q: 'Apa yang perlu dibahas sebelum berhenti berlangganan?',
+                a: 'Hubungi tim kami untuk mengonfirmasi akses, ekspor data, dan ketentuan layanan yang berlaku.',
               },
               {
                 q: 'Apakah portal ini bisa dipakai bersamaan dengan website?',
                 a: 'Website Managed Service dan Portal SaaS dapat dibahas sebagai solusi gabungan. Kebutuhan integrasi dan scope dikonfirmasi melalui konsultasi.',
               },
               {
-                q: 'Apakah ada biaya setup per fitur?',
-                a: 'Tidak. Semua fitur dalam paket langsung aktif tanpa biaya setup tambahan. Yang ada hanya biaya langganan bulanan yang tercantum.',
+                q: 'Portal apa yang menjadi fokus penawaran awal?',
+                a: 'LMS dan Stock. Klinik, Farmasi, Travel & Rental, serta Laundry berstatus Dalam Pengembangan dan belum ditawarkan untuk langganan baru.',
               },
             ].map((faq, i) => (
               <details key={i} className="group bg-[#F5F5F7] rounded-2xl px-5 py-4 md:px-6 md:py-5 border border-black/[0.03] [&_summary::-webkit-details-marker]:hidden">
@@ -838,7 +749,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
                 href="https://wa.me/6281296917963?text=Halo%20Webzoka%2C%20saya%20punya%20pertanyaan%20soal%20langganan."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#0071E3] font-bold hover:underline"
+                className="inline-flex min-h-11 min-w-11 items-center text-[#0071E3] font-bold hover:underline"
               >
                 Chat tim kami
               </a>
@@ -849,7 +760,7 @@ export default function PricingPageClient({ priceMap }: { priceMap?: PriceMap })
         {/* Footer Info */}
         <div className="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center md:text-left">
            {[
-             { t: 'Tanpa Biaya Setup', d: 'Paket Portal SaaS tidak mengenakan biaya setup. Hubungi tim kami untuk memilih paket dan membahas langkah aktivasi.' },
+             { t: 'Konfirmasi Sebelum Aktivasi', d: 'Bahas kebutuhan, cakupan paket, biaya, dan kesiapan aktivasi LMS atau Stock bersama tim kami.' },
              { t: 'Update Otomatis', d: 'Sistem selalu ter-update — fitur baru dan patch keamanan masuk sendiri. kamu tidak perlu urus apapun.' },
              { t: 'Pengamanan Data', d: 'Webzoka menerapkan langkah pengamanan teknis dan organisasi yang wajar sesuai jenis layanan yang digunakan.' },
            ].map(item => (

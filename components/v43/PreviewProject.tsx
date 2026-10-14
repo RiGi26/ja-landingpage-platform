@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
 import { DialogButton } from './V43Shell'
 
 const projects = {
@@ -51,7 +50,7 @@ export default function PreviewProject({ project, heading: Heading = 'h3', hidde
         </div>
         <footer className="home-work-card-footer">
           <div className="home-work-card-meta"><span>{item.category}</span><span className="status status-preview">Konsep desain</span></div>
-          <DialogButton className="text-link home-work-card-action" type="button" dialog={project} aria-label={`Lihat preview ${item.name}`}>Lihat preview <ArrowUpRight size={16} aria-hidden="true" /></DialogButton>
+          <DialogButton className="text-link home-work-card-action" type="button" dialog={project} aria-label={`Lihat preview ${item.name}`}>Lihat preview</DialogButton>
         </footer>
       </article>
     )

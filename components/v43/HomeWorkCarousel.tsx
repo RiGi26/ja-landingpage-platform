@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Children, useEffect, useId, useRef, useState, type ReactNode } from 'react'
 
 type HomeWorkCarouselProps = {
@@ -100,7 +100,7 @@ export default function HomeWorkCarousel({ children, labels }: HomeWorkCarouselP
               <span className="home-work-arrow-label">Berikutnya</span> <ArrowRight size={16} aria-hidden="true" />
             </button>
           </div>
-          <Link className="text-link home-work-all" href="/karya/">Lihat semua karya <ArrowUpRight size={16} aria-hidden="true" /></Link>
+          <Link className="text-link home-work-all" href="/karya/">Lihat semua karya</Link>
         </div>
       </div>
       <div className="home-work-track-wrap" data-home-reveal>

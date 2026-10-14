@@ -48,7 +48,7 @@ export default function HomePage() {
                 <span>Website + Portal belajar</span>
                 <span className="status status-live">Live · Produk Webzoka</span>
               </div>
-              <a className="text-link home-work-card-action" href="https://www.japanarena.id/" target="_blank" rel="noopener noreferrer" aria-label="Buka website Japan Arena, tab baru">Buka website<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M14 4h6v6M20 4l-9 9M10 4H4v16h16v-6" /></svg></a>
+              <a className="text-link home-work-card-action" href="https://www.japanarena.id/" target="_blank" rel="noopener noreferrer" aria-label="Buka website Japan Arena, tab baru">Buka website</a>
             </footer>
           </article>
           <PreviewProject project="rumah" heading="h3" presentation="carousel" />

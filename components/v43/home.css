@@ -289,6 +289,8 @@
   white-space: nowrap;
 }
 .v43-shell[data-page="home"] .home-work-browser-frame {
+  position: absolute;
+  inset: 48px 16px 16px;
   display: flex;
   flex: 1;
   flex-direction: column;

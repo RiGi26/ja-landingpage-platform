@@ -331,6 +331,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 }
 :where(.v43) .site-header .mobile-toggle[aria-expanded="true"]::after { opacity: 1; transform: scaleX(1); }
 :where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle):is(:hover, :focus-visible),
+:where(.v43) .site-header .mobile-toggle[aria-expanded="true"],
 :where(.v43) .site-header .services-nav:is(:hover, :focus-within) > :is(.nav-pill, .submenu-toggle),
 :where(.v43) .site-header .services-nav:is(:hover, :focus-within) {
   background: var(--paper);

@@ -339,6 +339,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   transform: scaleX(var(--header-fill-scale));
   transition: transform 300ms ease;
 }
+:where(.v43) .site-header .nav-pill::before { inset: -1px; }
 :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after {
   z-index: 2;
   border-block: 1px solid var(--ink);

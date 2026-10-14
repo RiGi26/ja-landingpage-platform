@@ -302,11 +302,11 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .mobile-toggle:hover .menu-mark::after { transform: translateX(-6px); }
 :where(.v43) .mobile-toggle:active { transform: scale(0.98); }
 /* Reference #11: collapse the fill first, then extend the two border lines. */
-:where(.v43) .site-header .header-inner :is(.nav-pill, .mobile-toggle, .services-nav) {
-  --header-start-fill: var(--soft);
-  --header-start-text: var(--ink);
-  --header-end-fill: var(--ink);
-  --header-end-text: var(--paper);
+:where(.v43) .site-header .header-inner :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a) {
+  --header-start-fill: var(--ink);
+  --header-start-text: var(--paper);
+  --header-end-fill: var(--paper);
+  --header-end-text: var(--ink);
   --header-fill-scale: 1;
   --header-line-scale: 0;
   --header-line-delay: 0ms;
@@ -314,33 +314,27 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   isolation: isolate;
   background: var(--header-end-fill);
   background-clip: padding-box;
+  border-color: transparent;
   color: var(--header-start-text);
   transition: color 300ms ease;
 }
-:where(.v43) .site-header :is(.consultation, .mobile-toggle, .nav-pill[aria-current="page"], .nav-pill.is-active),
-:where(.v43) .site-header .services-nav:has(> .nav-pill[aria-current="page"]) {
-  --header-start-fill: var(--ink);
-  --header-start-text: var(--paper);
-  --header-end-fill: var(--paper);
-  --header-end-text: var(--ink);
-}
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::before,
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after {
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::before,
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after {
   position: absolute;
   inset: 0;
   content: "";
   pointer-events: none;
   transform-origin: center;
 }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::before {
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::before {
   z-index: -1;
   border-radius: inherit;
   background: var(--header-start-fill);
   transform: scaleX(var(--header-fill-scale));
   transition: transform 300ms ease;
 }
-:where(.v43) .site-header .nav-pill::before { inset: -1px; }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after {
+:where(.v43) .site-header :is(.nav-pill, .submenu a)::before { inset: -1px; }
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after {
   z-index: 2;
   border-block: 1px solid var(--ink);
   opacity: var(--header-line-scale);
@@ -348,7 +342,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   transition: transform 300ms ease, opacity 300ms ease;
   transition-delay: var(--header-line-delay);
 }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle):focus-visible,
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .submenu a):focus-visible,
 :where(.v43) .site-header .services-nav:has(:focus-visible) {
   --header-fill-scale: 0;
   --header-line-scale: 1;
@@ -356,7 +350,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   color: var(--header-end-text);
 }
 @media (hover: hover) and (pointer: fine) {
-  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav):hover {
+  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a):hover {
     --header-fill-scale: 0;
     --header-line-scale: 1;
     --header-line-delay: 200ms;
@@ -372,7 +366,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .site-header .services-nav > .nav-pill::before,
 :where(.v43) .site-header .services-nav > .nav-pill::after { content: none; }
 @media (prefers-reduced-motion: reduce) {
-  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after { transition-delay: 0ms; }
+  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after { transition-delay: 0ms; }
 }
 :where(.v43) .mobile-menu {
   position: fixed;

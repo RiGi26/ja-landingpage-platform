@@ -301,44 +301,79 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .mobile-toggle:hover, :where(.v43) .mobile-toggle[aria-expanded="true"] { background: var(--blue); }
 :where(.v43) .mobile-toggle:hover .menu-mark::after { transform: translateX(-6px); }
 :where(.v43) .mobile-toggle:active { transform: scale(0.98); }
-/* Purple border reveal for every interactive header control. */
-:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle),
-:where(.v43) .site-header .services-nav {
-  --header-hover-border: #716eef;
+/* Reference #11: collapse the fill first, then extend the two border lines. */
+:where(.v43) .site-header .header-inner :is(.nav-pill, .mobile-toggle, .services-nav) {
+  --header-start-fill: var(--soft);
+  --header-start-text: var(--ink);
+  --header-end-fill: var(--ink);
+  --header-end-text: var(--paper);
+  --header-fill-scale: 1;
+  --header-line-scale: 0;
+  --header-line-delay: 0ms;
   position: relative;
+  isolation: isolate;
+  background: var(--header-end-fill);
+  background-clip: padding-box;
+  color: var(--header-start-text);
+  transition: color 300ms ease;
 }
-:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle) {
-  transition: background-color var(--motion-short) ease, color var(--motion-short) ease;
+:where(.v43) .site-header :is(.consultation, .mobile-toggle, .nav-pill[aria-current="page"], .nav-pill.is-active),
+:where(.v43) .site-header .services-nav:has(> .nav-pill[aria-current="page"]) {
+  --header-start-fill: var(--ink);
+  --header-start-text: var(--paper);
+  --header-end-fill: var(--paper);
+  --header-end-text: var(--ink);
 }
-:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle)::after,
-:where(.v43) .site-header .services-nav::after {
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::before,
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after {
   position: absolute;
-  z-index: 2;
   inset: 0;
-  border: 2px solid var(--header-hover-border);
-  border-radius: inherit;
   content: "";
-  opacity: 0;
   pointer-events: none;
-  transform: scaleX(0.72);
   transform-origin: center;
-  transition: opacity var(--motion-short) ease, transform 280ms var(--ease-out);
 }
-:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle):is(:hover, :focus-visible)::after,
-:where(.v43) .site-header .services-nav:is(:hover, :focus-within)::after {
-  opacity: 1;
-  transform: scaleX(1);
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::before {
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--header-start-fill);
+  transform: scaleX(var(--header-fill-scale));
+  transition: transform 300ms ease;
 }
-:where(.v43) .site-header .mobile-toggle[aria-expanded="true"]::after { opacity: 1; transform: scaleX(1); }
-:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle):is(:hover, :focus-visible),
-:where(.v43) .site-header .mobile-toggle[aria-expanded="true"],
-:where(.v43) .site-header .services-nav:is(:hover, :focus-within) > :is(.nav-pill, .submenu-toggle),
-:where(.v43) .site-header .services-nav:is(:hover, :focus-within) {
-  background: var(--paper);
-  color: var(--header-hover-border);
+:where(.v43) .site-header .nav-pill::before { inset: -1px; }
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after {
+  z-index: 2;
+  border-block: 1px solid var(--ink);
+  opacity: var(--header-line-scale);
+  transform: scaleX(var(--header-line-scale));
+  transition: transform 300ms ease, opacity 300ms ease;
+  transition-delay: var(--header-line-delay);
 }
-:where(.v43) .site-header .services-nav > .nav-pill::after,
-:where(.v43) .site-header .services-nav > .submenu-toggle::after { content: none; }
+:where(.v43) .site-header :is(.nav-pill, .mobile-toggle):focus-visible,
+:where(.v43) .site-header .services-nav:has(:focus-visible) {
+  --header-fill-scale: 0;
+  --header-line-scale: 1;
+  --header-line-delay: 200ms;
+  color: var(--header-end-text);
+}
+@media (hover: hover) and (pointer: fine) {
+  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav):hover {
+    --header-fill-scale: 0;
+    --header-line-scale: 1;
+    --header-line-delay: 200ms;
+    color: var(--header-end-text);
+  }
+}
+:where(.v43) .site-header .services-nav > :is(.nav-pill, .submenu-toggle) {
+  position: relative;
+  background: transparent;
+  color: inherit;
+  transition: none;
+}
+:where(.v43) .site-header .services-nav > .nav-pill::before,
+:where(.v43) .site-header .services-nav > .nav-pill::after { content: none; }
+@media (prefers-reduced-motion: reduce) {
+  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav)::after { transition-delay: 0ms; }
+}
 :where(.v43) .mobile-menu {
   position: fixed;
   z-index: 100;

@@ -357,7 +357,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
     color: var(--header-end-text);
   }
 }
-:where(.v43) .site-header .services-nav > :is(.nav-pill, .submenu-toggle) {
+:where(.v43) .site-header .header-inner .services-nav > :is(.nav-pill, .submenu-toggle) {
   position: relative;
   background: transparent;
   color: inherit;

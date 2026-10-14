@@ -301,6 +301,33 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .mobile-toggle:hover, :where(.v43) .mobile-toggle[aria-expanded="true"] { background: var(--blue); }
 :where(.v43) .mobile-toggle:hover .menu-mark::after { transform: translateX(-6px); }
 :where(.v43) .mobile-toggle:active { transform: scale(0.98); }
+/* Purple border reveal for every interactive header control. */
+:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle),
+:where(.v43) .site-header .services-nav {
+  --header-hover-border: #716eef;
+  position: relative;
+}
+:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle)::after,
+:where(.v43) .site-header .services-nav::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border: 1px solid var(--header-hover-border);
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: opacity var(--motion-short) ease, transform 280ms var(--ease-out);
+}
+:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle):is(:hover, :focus-visible)::after,
+:where(.v43) .site-header .services-nav:is(:hover, :focus-within)::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+:where(.v43) .site-header .services-nav > .nav-pill::after,
+:where(.v43) .site-header .services-nav > .submenu-toggle::after { content: none; }
 :where(.v43) .mobile-menu {
   position: fixed;
   z-index: 100;

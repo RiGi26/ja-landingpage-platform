@@ -3,6 +3,7 @@ import Link from 'next/link'
 import V43Shell, { DialogButton } from '@/components/v43/V43Shell'
 import PreviewProject from '@/components/v43/PreviewProject'
 import HomeMotion from '@/components/v43/HomeMotion'
+import HomeWorkCarousel from '@/components/v43/HomeWorkCarousel'
 import '@/components/v43/v43.css'
 import '@/components/v43/home.css'
 
@@ -26,17 +27,33 @@ export default function HomePage() {
                 <div><strong>Japan Arena</strong><span>Website + Portal belajar · Produk Webzoka</span></div><span className="status status-live">Live</span></figcaption>
             </figure></div>
         </section>
-        <section className="home-work container section-space" aria-labelledby="home-work-title">
-          <div className="section-heading" data-home-reveal>
-            <div>
-              <p className="section-kicker">Arah tampilan lainnya</p>
-              <h2 id="home-work-title">Dua usaha, dua karakter.</h2></div>
-            <Link className="text-link" href="/karya/">Lihat semua karya</Link></div>
-          <div className="project-grid project-grid-home">
-            <div className="home-project" data-home-reveal><PreviewProject project="rumah" heading="h3" /></div>
-            <div className="home-project" data-home-reveal><PreviewProject project="kopi" heading="h3" /></div>
-          </div>
-        </section>
+        <HomeWorkCarousel labels={['Japan Arena', 'Rumah Selaras', 'Kopi Senja']}>
+          <article className="home-work-card" data-status="live">
+            <div className="home-work-media">
+              <span className="home-work-category">Pendidikan &amp; LMS</span>
+              <div className="home-work-browser-frame">
+                <div className="home-work-browser-bar" aria-hidden="true">
+                  <span className="home-work-browser-dots"><i /><i /><i /></span>
+                  <span>japanarena.id</span>
+                </div>
+                <Image unoptimized src="/images/portfolio/japan-arena-desktop.png" alt="Tampilan website Japan Arena, sekolah bahasa Jepang dengan Portal belajar" width={1440} height={1000} loading="lazy" />
+              </div>
+            </div>
+            <div className="home-work-card-copy">
+              <h3>Japan Arena</h3>
+              <p>Website sekolah bahasa Jepang dengan Portal untuk kegiatan belajar.</p>
+            </div>
+            <footer className="home-work-card-footer">
+              <div className="home-work-card-meta">
+                <span>Website + Portal belajar</span>
+                <span className="status status-live">Live · Produk Webzoka</span>
+              </div>
+              <a className="text-link home-work-card-action" href="https://www.japanarena.id/" target="_blank" rel="noopener noreferrer" aria-label="Buka website Japan Arena, tab baru">Buka website</a>
+            </footer>
+          </article>
+          <PreviewProject project="rumah" heading="h3" presentation="carousel" />
+          <PreviewProject project="kopi" heading="h3" presentation="carousel" />
+        </HomeWorkCarousel>
         <section className="home-services container" aria-labelledby="home-services-title">
           <p className="section-kicker" data-home-reveal>Layanan Webzoka</p>
           <div className="home-services-grid">

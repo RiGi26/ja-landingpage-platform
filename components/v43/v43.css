@@ -343,7 +343,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   transition-delay: var(--header-line-delay);
 }
 :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .submenu a):focus-visible,
-:where(.v43) .site-header .services-nav:has(:focus-visible) {
+:where(.v43) .site-header .header-inner .services-nav:has(:focus-visible) {
   --header-fill-scale: 0;
   --header-line-scale: 1;
   --header-line-delay: 200ms;

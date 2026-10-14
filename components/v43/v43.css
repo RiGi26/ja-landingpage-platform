@@ -307,17 +307,20 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   --header-hover-border: #716eef;
   position: relative;
 }
+:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle) {
+  transition: background-color var(--motion-short) ease, color var(--motion-short) ease;
+}
 :where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle)::after,
 :where(.v43) .site-header .services-nav::after {
   position: absolute;
   z-index: 2;
   inset: 0;
-  border: 1px solid var(--header-hover-border);
+  border: 2px solid var(--header-hover-border);
   border-radius: inherit;
   content: "";
   opacity: 0;
   pointer-events: none;
-  transform: scaleX(0);
+  transform: scaleX(0.72);
   transform-origin: center;
   transition: opacity var(--motion-short) ease, transform 280ms var(--ease-out);
 }
@@ -325,6 +328,13 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .site-header .services-nav:is(:hover, :focus-within)::after {
   opacity: 1;
   transform: scaleX(1);
+}
+:where(.v43) .site-header .mobile-toggle[aria-expanded="true"]::after { opacity: 1; transform: scaleX(1); }
+:where(.v43) .site-header :is(.nav-pill, .submenu-toggle, .mobile-toggle):is(:hover, :focus-visible),
+:where(.v43) .site-header .services-nav:is(:hover, :focus-within) > :is(.nav-pill, .submenu-toggle),
+:where(.v43) .site-header .services-nav:is(:hover, :focus-within) {
+  background: var(--paper);
+  color: var(--header-hover-border);
 }
 :where(.v43) .site-header .services-nav > .nav-pill::after,
 :where(.v43) .site-header .services-nav > .submenu-toggle::after { content: none; }

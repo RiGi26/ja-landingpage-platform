@@ -719,6 +719,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   padding: inherit;
   border-radius: inherit;
   background: var(--navy);

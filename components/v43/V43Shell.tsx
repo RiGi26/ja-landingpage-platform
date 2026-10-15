@@ -44,7 +44,7 @@ export function DialogButton({ dialog, onClick, children, className, ...props }:
   return <button {...props} className={isConsultation ? `${className ?? ''} consultation-cta`.trim() : className} type={props.type ?? 'button'} data-dialog={dialog} onClick={(event) => {
     onClick?.(event)
     if (!event.defaultPrevented) openDialog?.(dialog, event.currentTarget)
-  }}>{isConsultation ? <>{children}<span className="consultation-face" aria-hidden="true">{children}</span></> : children}</button>
+  }}>{isConsultation ? <>{children}<span className="consultation-face" aria-hidden="true">Click Me!</span></> : children}</button>
 }
 
 export default function V43Shell({ page, children, externalOverlayOpen = false }: { page: Page; children: ReactNode; externalOverlayOpen?: boolean }) {

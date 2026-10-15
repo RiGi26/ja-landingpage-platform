@@ -187,8 +187,6 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   color: var(--paper);
 }
 :where(.v43) .nav-pill:active, :where(.v43) .filter-pill:active { background: var(--blue-hover); color: var(--paper); }
-:where(.v43) .nav-pill.consultation { background: var(--ink); color: var(--paper); }
-:where(.v43) .nav-pill.consultation:hover { background: var(--blue); }
 :where(.v43) .services-nav {
   position: relative;
   display: flex;
@@ -302,7 +300,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .mobile-toggle:hover .menu-mark::after { transform: translateX(-6px); }
 :where(.v43) .mobile-toggle:active { transform: scale(0.98); }
 /* Reference #11: collapse the fill first, then extend the two border lines. */
-:where(.v43) .site-header .header-inner :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a) {
+:where(.v43) .site-header .header-inner :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a) {
   --header-start-fill: var(--ink);
   --header-start-text: var(--paper);
   --header-end-fill: var(--paper);
@@ -318,23 +316,23 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   color: var(--header-start-text);
   transition: color 300ms ease;
 }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::before,
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after {
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a)::before,
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a)::after {
   position: absolute;
   inset: 0;
   content: "";
   pointer-events: none;
   transform-origin: center;
 }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::before {
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a)::before {
   z-index: -1;
   border-radius: inherit;
   background: var(--header-start-fill);
   transform: scaleX(var(--header-fill-scale));
   transition: transform 300ms ease;
 }
-:where(.v43) .site-header :is(.nav-pill, .submenu a)::before { inset: -1px; }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after {
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .submenu a)::before { inset: -1px; }
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a)::after {
   z-index: 2;
   border-block: 1px solid var(--ink);
   opacity: var(--header-line-scale);
@@ -342,7 +340,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   transition: transform 300ms ease, opacity 300ms ease;
   transition-delay: var(--header-line-delay);
 }
-:where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .submenu a):focus-visible,
+:where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .submenu a):focus-visible,
 :where(.v43) .site-header .header-inner .services-nav:has(:focus-visible) {
   --header-fill-scale: 0;
   --header-line-scale: 1;
@@ -350,7 +348,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   color: var(--header-end-text);
 }
 @media (hover: hover) and (pointer: fine) {
-  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a):hover {
+  :where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a):hover {
     --header-fill-scale: 0;
     --header-line-scale: 1;
     --header-line-delay: 200ms;
@@ -366,7 +364,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .site-header .services-nav > .nav-pill::before,
 :where(.v43) .site-header .services-nav > .nav-pill::after { content: none; }
 @media (prefers-reduced-motion: reduce) {
-  :where(.v43) .site-header :is(.nav-pill, .mobile-toggle, .services-nav, .submenu a)::after { transition-delay: 0ms; }
+  :where(.v43) .site-header :is(.nav-pill:not(.consultation-cta), .mobile-toggle, .services-nav, .submenu a)::after { transition-delay: 0ms; }
 }
 :where(.v43) .mobile-menu {
   position: fixed;
@@ -435,7 +433,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   text-align: left;
   text-decoration: none;
 }
-:where(.v43) .mobile-menu nav > a:hover, :where(.v43) .mobile-menu nav > button:hover { background: var(--blue-tint); }
+:where(.v43) .mobile-menu nav > a:hover, :where(.v43) .mobile-menu nav > button:not(.consultation-cta):hover { background: var(--blue-tint); }
 :where(.v43) .mobile-menu nav > a[aria-current="page"] { color: var(--blue-hover); }
 :where(.v43) .mobile-menu nav > button[data-dialog="consultation"] {
   align-self: flex-start;
@@ -443,17 +441,12 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   margin: 32px 0 0;
   min-height: 52px;
   padding-inline: 24px;
-  border: 0;
   border-radius: 100px;
-  background: var(--blue);
-  color: var(--paper);
   font-family: var(--body-font);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: normal;
 }
-:where(.v43) .mobile-menu nav > button[data-dialog="consultation"]:hover,
-:where(.v43) .mobile-menu nav > button[data-dialog="consultation"]:active { background: var(--blue-hover); }
 :where(.v43) .mobile-services > summary {
   justify-content: space-between;
   gap: 16px;
@@ -707,9 +700,51 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   color: var(--paper);
 }
 :where(.v43) .contact-strip h2 { max-width: 23ch; font-size: clamp(28px, 3vw, 44px); font-weight: 500; }
-:where(.v43) .contact-strip .button-blue { background: var(--paper); color: var(--navy); transition: transform var(--motion-short) var(--ease-out); }
-:where(.v43) .contact-strip .button-blue:hover { background: var(--navy); color: var(--paper); }
-:where(.v43) .contact-strip .button-blue:active { background: #12314f; color: var(--paper); }
+
+/* Reference #11, Other: slide the second face down and grow its bottom line. */
+:where(.v43) button.consultation-cta[data-dialog="consultation"] {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--navy-line);
+  background: var(--paper);
+  color: var(--navy);
+  transition: transform var(--motion-short) var(--ease-out);
+}
+:where(.v43) .consultation-cta:active { transform: scale(0.98); }
+:where(.v43) .consultation-face {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: inherit;
+  border-radius: inherit;
+  background: var(--navy);
+  color: var(--paper);
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: transform 350ms ease;
+}
+:where(.v43) button.consultation-cta::before {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  height: 4px;
+  background: var(--ink);
+  content: "";
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms ease;
+}
+:where(.v43) .consultation-cta:focus-visible .consultation-face { transform: translateY(0); }
+:where(.v43) .consultation-cta:focus-visible::before { transform: scaleX(1); }
+@media (hover: hover) and (pointer: fine) {
+  :where(.v43) .consultation-cta:hover .consultation-face { transform: translateY(0); }
+  :where(.v43) .consultation-cta:hover::before { transform: scaleX(1); }
+}
 
 /* Work: compact context, one leading case, two supporting template previews. */
 :where(.v43) .hybrid-work { padding-top: 40px; padding-bottom: 24px; }
@@ -1200,7 +1235,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 @media (prefers-reduced-motion: reduce) {
   html:has(.v43-shell), :where(.v43) .page-surface { scroll-behavior: auto; }
   :where(.v43) *, :where(.v43) *::before, :where(.v43) *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0ms !important; scroll-behavior: auto !important; }
-  :where(.v43) .project-visual:hover img, :where(.v43) .project-visual:active img, :where(.v43) .button:active { transform: none; }
+  :where(.v43) .project-visual:hover img, :where(.v43) .project-visual:active img, :where(.v43) .button:active, :where(.v43) .consultation-cta:active { transform: none; }
 }
 
 

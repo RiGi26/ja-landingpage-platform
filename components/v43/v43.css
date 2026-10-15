@@ -724,7 +724,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   background: var(--navy);
   color: var(--paper);
   pointer-events: none;
-  transform: translateY(-100%);
+  transform: translateY(calc(-100% - 1px));
   transition: transform 350ms ease;
 }
 :where(.v43) button.consultation-cta::before {

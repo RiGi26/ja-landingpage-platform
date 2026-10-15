@@ -38,12 +38,13 @@ function focusable(scope: HTMLElement) {
   return Array.from(scope.querySelectorAll<HTMLElement>('a[href], button:not(:disabled), summary, [tabindex="0"]')).filter(canFocus)
 }
 
-export function DialogButton({ dialog, onClick, children, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { dialog: Dialog }) {
+export function DialogButton({ dialog, onClick, children, className, ...props }: ButtonHTMLAttributes<HTMLButtonElement> & { dialog: Dialog }) {
   const openDialog = useContext(DialogContext)
-  return <button {...props} type={props.type ?? 'button'} data-dialog={dialog} onClick={(event) => {
+  const isConsultation = dialog === 'consultation'
+  return <button {...props} className={isConsultation ? `${className ?? ''} consultation-cta`.trim() : className} type={props.type ?? 'button'} data-dialog={dialog} onClick={(event) => {
     onClick?.(event)
     if (!event.defaultPrevented) openDialog?.(dialog, event.currentTarget)
-  }}>{children}</button>
+  }}>{isConsultation ? <>{children}<span className="consultation-face" aria-hidden="true">{children}</span></> : children}</button>
 }
 
 export default function V43Shell({ page, children, externalOverlayOpen = false }: { page: Page; children: ReactNode; externalOverlayOpen?: boolean }) {

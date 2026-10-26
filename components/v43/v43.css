@@ -165,6 +165,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
 :where(.v43) .desktop-nav { display: none; }
 :where(.v43) .header-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
 :where(.v43) .header-actions > .consultation, :where(.v43) .header-actions > .hub-inactive { display: none; }
+:where(.v43) .header-actions > .customer-hub-link { display: none; }
 :where(.v43) .nav-pill, :where(.v43) .filter-pill {
   display: inline-flex;
   align-items: center;
@@ -1144,6 +1145,7 @@ body:has(.v43-shell).v43-consent-visible .page-surface {
   :where(.v43) .header-inner .brand img { width: 132px; }
   :where(.v43) .desktop-nav { display: flex; align-items: center; gap: 8px; background: transparent; }
   :where(.v43) .header-actions > .consultation { display: inline-flex; }
+  :where(.v43) .header-actions > .customer-hub-link { display: inline-flex; min-height: 44px; }
   :where(.v43) .mobile-toggle { display: none; }
   :where(.v43) .nav-pill { font-size: 15px; }
   :where(.v43) .hero-heading { grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr); align-items: end; gap: 64px; }

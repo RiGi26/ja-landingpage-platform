@@ -17,6 +17,7 @@ type Dialog = 'about' | 'consultation' | 'rumah' | 'kopi'
 type DialogContextValue = (dialog: Dialog, opener: HTMLElement) => void
 const DialogContext = createContext<DialogContextValue | null>(null)
 const WHATSAPP_URL = waLink('Halo Webzoka, saya ingin konsultasi soal website dan sistem untuk bisnis saya.')
+const CUSTOMER_HUB_URL = 'https://ja-superadmin-platform.vercel.app/hub/login?next=%2Fhub%2Fworkspace'
 const PREVIEWS = {
   rumah: { title: 'Rumah Selaras', src: '/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp', height: 750, description: 'Preview website rumah dan interior. Contoh visual template, bukan proyek pelanggan aktif.' },
   kopi: { title: 'Kopi Senja', src: '/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp', height: 625, description: 'Preview website kafe. Identitas Kopi Senja terlihat pada aset resmi template Cafe Seduh; bukan proyek pelanggan aktif.' },
@@ -266,7 +267,7 @@ export default function V43Shell({ page, children, externalOverlayOpen = false }
           <DialogButton className="nav-pill" dialog="about">Tentang</DialogButton>
         </nav>
         <div className="header-actions">
-          <span className="hub-inactive" aria-disabled="true" title="Webzoka Hub belum tersedia">Webzoka Hub <small>Belum aktif</small></span>
+          <a className="nav-pill customer-hub-link" href={CUSTOMER_HUB_URL}>Customer Hub</a>
           <DialogButton className="nav-pill consultation" dialog="consultation">Konsultasi</DialogButton>
           <button ref={mobileToggleRef} className="mobile-toggle" type="button" aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'} aria-expanded={mobileOpen} aria-controls="mobile-menu" onClick={() => setMobile(!mobileOpen)}><span>Menu</span><span className="menu-mark" aria-hidden="true" /></button>
         </div>
@@ -285,7 +286,7 @@ export default function V43Shell({ page, children, externalOverlayOpen = false }
         <nav aria-label="Navigasi mobile">
           <Link href="/" aria-current={page === 'home' ? 'page' : undefined} onClick={() => setMobile(false, false)}>Beranda</Link><Link href="/karya/" aria-current={page === 'work' ? 'page' : undefined} onClick={() => setMobile(false, false)}>Karya</Link>
           <details className="mobile-services"><summary>Layanan <ChevronIcon /></summary><div><Link href="/layanan/" onClick={() => setMobile(false, false)}>Semua layanan</Link><Link href="/layanan/#website" onClick={() => setMobile(false, false)}>Website</Link><Link href="/layanan/#portal" onClick={() => setMobile(false, false)}>Portal SaaS</Link><Link href="/layanan/#bundle" onClick={() => setMobile(false, false)}>Website + Portal</Link></div></details>
-          <DialogButton dialog="about">Tentang Webzoka</DialogButton><DialogButton dialog="consultation">Konsultasi</DialogButton><span className="hub-inactive" aria-disabled="true">Webzoka Hub <small>Belum aktif</small></span>
+          <DialogButton dialog="about">Tentang Webzoka</DialogButton><DialogButton dialog="consultation">Konsultasi</DialogButton><a href={CUSTOMER_HUB_URL} onClick={() => setMobile(false, false)}>Customer Hub</a>
         </nav>
       </section>
       <dialog ref={(element) => { if (element) dialogRefs.current.about = element }} id="about-dialog" className="mockup-dialog" aria-labelledby="about-title" onClick={closeBackdrop} onClose={restoreDialogFocus}><div className="dialog-panel">

@@ -1,5 +1,15 @@
 {
   "redirects": [
+    {
+      "source": "/oauth/consent",
+      "destination": "https://ja-superadmin-platform.vercel.app/oauth/consent",
+      "permanent": false
+    },
+    {
+      "source": "/oauth/consent/",
+      "destination": "https://ja-superadmin-platform.vercel.app/oauth/consent",
+      "permanent": false
+    },
     { "source": "/kebijakan-privasi", "destination": "/privacy/", "permanent": true },
     { "source": "/kebijakan-privasi/", "destination": "/privacy/", "permanent": true },
     { "source": "/syarat-ketentuan", "destination": "/terms/", "permanent": true },

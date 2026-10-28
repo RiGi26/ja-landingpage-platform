@@ -2,12 +2,12 @@
   "redirects": [
     {
       "source": "/oauth/consent",
-      "destination": "https://ja-superadmin-platform.vercel.app/oauth/consent",
+      "destination": "https://hub.webzoka.com/oauth/consent",
       "permanent": false
     },
     {
       "source": "/oauth/consent/",
-      "destination": "https://ja-superadmin-platform.vercel.app/oauth/consent",
+      "destination": "https://hub.webzoka.com/oauth/consent",
       "permanent": false
     },
     { "source": "/kebijakan-privasi", "destination": "/privacy/", "permanent": true },

@@ -120,7 +120,7 @@ export default function DemoPickerModal({ isOpen, onClose }: { isOpen: boolean; 
           <div className="mt-8 pt-6 border-t border-black/5 flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-xs text-gray-500">Cari contoh website, bukan sistem operasional?</p>
             <a
-              href="#portofolio"
+              href="/karya/"
               onClick={onClose}
               className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0071E3] hover:text-[#005BB5] transition-colors"
             >

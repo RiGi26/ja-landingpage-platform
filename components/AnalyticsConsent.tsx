@@ -117,7 +117,7 @@ export default function AnalyticsConsent() {
             Kami memakai analitik untuk memahami penggunaan halaman dan alur template agar pengalaman Webzoka dapat diperbaiki. Analitik tidak menerima isi draft, nama, nomor WhatsApp, pesan, token, atau user-ID. Pilihan ini dapat diubah kapan saja.
           </p>
           <p className="mt-2 text-sm text-gray-600">
-            Detailnya ada di <a className="font-semibold text-blue-700 underline" href="/kebijakan-privasi/">Kebijakan Privasi</a>.
+            Detailnya ada di <a className="font-semibold text-blue-700 underline" href="/privacy/">Kebijakan Privasi</a>.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" onClick={() => saveConsent('granted')} className="rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white hover:bg-gray-700">

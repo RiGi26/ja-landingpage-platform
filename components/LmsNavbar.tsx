@@ -14,7 +14,7 @@ const waLink = (msg?: string) => {
 }
 
 const NAV_LINKS = [
-  { label: 'Buat Website', href: '/seluruh-layanan' },
+  { label: 'Buat Website', href: '/seluruh-layanan/' },
   { label: 'Sistem Bisnis', href: '/pricing' },
 ]
 

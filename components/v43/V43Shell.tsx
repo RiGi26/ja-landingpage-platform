@@ -17,7 +17,7 @@ type Dialog = 'about' | 'consultation' | 'rumah' | 'kopi'
 type DialogContextValue = (dialog: Dialog, opener: HTMLElement) => void
 const DialogContext = createContext<DialogContextValue | null>(null)
 const WHATSAPP_URL = waLink('Halo Webzoka, saya ingin konsultasi soal website dan sistem untuk bisnis saya.')
-const CUSTOMER_HUB_URL = 'https://ja-superadmin-platform.vercel.app/hub/login?next=%2Fhub%2Fworkspace'
+const CUSTOMER_HUB_URL = 'https://hub.webzoka.com/login'
 const PREVIEWS = {
   rumah: { title: 'Rumah Selaras', src: '/theme-previews/toko_online/rumah/rumah-selaras-desktop.webp', height: 750, description: 'Preview website rumah dan interior. Contoh visual template, bukan proyek pelanggan aktif.' },
   kopi: { title: 'Kopi Senja', src: '/theme-previews/restaurant/cafe/cafe-seduh-desktop.webp', height: 625, description: 'Preview website kafe. Identitas Kopi Senja terlihat pada aset resmi template Cafe Seduh; bukan proyek pelanggan aktif.' },

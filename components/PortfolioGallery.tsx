@@ -202,7 +202,7 @@ function EmptyClientCard() {
       <p className="text-sm text-gray-600 mt-1.5 max-w-[15rem]">
         Mau lihat contoh yang sudah live sekarang? Lihat layanan kami.
       </p>
-      <a href="/seluruh-layanan" className="inline-flex items-center gap-1.5 text-[#0071E3] font-bold text-sm mt-4">
+      <a href="/seluruh-layanan/" className="inline-flex items-center gap-1.5 text-[#0071E3] font-bold text-sm mt-4">
         Lihat layanan <ArrowRight size={15} />
       </a>
     </div>
@@ -267,7 +267,7 @@ export default function PortfolioGallery() {
         {/* CTA */}
         <div className="text-center mt-10 lg:mt-14 space-y-3">
           <a
-            href="/seluruh-layanan"
+            href="/seluruh-layanan/"
             className="inline-flex items-center gap-2 px-8 py-4 bg-[#0071E3] text-white font-bold rounded-full transition-all hover:bg-[#005BB5] active:scale-[0.96] shadow-lg glow-button"
           >
             Website Saya Mau Seperti Ini <ArrowRight size={18} />
